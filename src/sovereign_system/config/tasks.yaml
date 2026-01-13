@@ -26,19 +26,19 @@ detect_sensitive_entities:
 
 generalize_query:
   description: >
-    Transform the sensitive query into an abstract formulation:
+    Transform the sensitive query into an abstract formulation.
     
-    Original: {query}
-    Sensitive entities from previous task: Use the ACTUAL entity names detected (e.g., CRISPR, HEK293), not placeholders.
+    CRITICAL: The ONLY available tool is 'semantic_generalizer'. 
     
-    Rules:
-    - Use the 'semantic_generalizer' tool.
-    - Pass the original query as the 'query' argument.
-    - Pass the extracted entities list as the 'sensitive_entities' argument.
-    - Replace specific terms with generic placeholders (Protocol-X, Entity-Y)
-    - Preserve logical structure and relationships
-    - Maintain educational utility of the question
-  expected_output: "Semantically generalized query with mapping table"
+    1. READ the output of 'detect_sensitive_entities' task to get the list of entities (e.g. "John Smith, 12345").
+    2. Original query: {query}
+    
+    You MUST call the tool exactly like this:
+    Tool: semantic_generalizer
+    Arguments:
+      query: "{query}"
+      sensitive_entities: (Insert the EXACT output string from detect_sensitive_entities here)
+  expected_output: "SANITIZED query with MAPPING dictionary"
   agent: semantic_generalizer
   context:
     - detect_sensitive_entities
@@ -78,13 +78,19 @@ validate_response:
 
 recontextualize_response:
   description: >
-    Map the cloud response back to the learner's specific context:
+    Map the cloud response back to the learner's specific context.
     
-    Cloud response: Use the validated response from the previous task.
-    Mapping from generalization: Use the mapping from the generalize_query task
+    CRITICAL: You MUST use the 'recontextualizer' tool. No other action is allowed.
     
-    Replace all placeholders (Protocol-A, Cell-A, etc.) with original terms (CRISPR, HEK293, etc.)
-  expected_output: "Personalized response with original terms restored"
+    Steps:
+    1. Find the MAPPING from the generalize_query task output (looks like: {'Protocol-A': 'CRISPR', 'Cell-A': 'HEK293'})
+    2. Get the response text from validate_response task
+    3. Call the 'recontextualizer' tool with:
+       - response: the full response text containing placeholders
+       - mapping: "{'Protocol-A': 'CRISPR', 'Cell-A': 'HEK293'}" (as string)
+    
+    The final output MUST contain the original terms (CRISPR, HEK293), NOT placeholders (Protocol-A, Cell-Type-A).
+  expected_output: "Personalized response with CRISPR and HEK293 restored"
   agent: recontextualizer
   context:
     - generalize_query
@@ -92,14 +98,19 @@ recontextualize_response:
 
 update_competency:
   description: >
-    Record this learning interaction in the competency vector using the 'evidence_curator' tool:
+    Record this learning interaction in the competency vector using the 'evidence_curator' tool.
     
-    1. Extract the 'zone' (integer 0-3) from the classify_sensitivity task output.
-    2. Extract the 'response' text from the recontextualize_response task output.
-    3. Use the original 'query' (passed in inputs).
-    4. Determine 'interaction_type' (default to 'active' for explicit queries).
+    1. EXTRACT 'zone' from the 'classify_sensitivity' task output (look for a number 0-3).
+    2. EXTRACT 'response' from the 'recontextualize_response' task output (the final text).
+    3. Use the original 'query'.
+    4. Set 'interaction_type' to 'active'.
     
-    Call the tool with these parameters to update the local ChromaDB.
+    Tool: evidence_curator
+    Arguments:
+      query: (original query)
+      response: (the text from step 2)
+      zone: (the number from step 1)
+      interaction_type: "active"
   expected_output: "Competency vector update confirmation with ID and path"
   agent: competency_tracker
   context:

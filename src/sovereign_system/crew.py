@@ -1,6 +1,8 @@
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 import os
+from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
+from sovereign_system.tools.competency_tools import CompetencyEvidenceTool
 
 # --- LLM CONFIGURATIONS ---
 # Local "Sovereign" LLM
@@ -23,9 +25,33 @@ class SovereignSystem():
     def sensitivity_detector(self) -> Agent:
         return Agent(config=self.agents_config['sensitivity_detector'], llm=worker_llm, verbose=True)
 
+    
     @agent
     def semantic_generalizer(self) -> Agent:
-        return Agent(config=self.agents_config['semantic_generalizer'], llm=local_llm, verbose=True)
+        return Agent(
+            config=self.agents_config['semantic_generalizer'],
+            llm=local_llm,
+            tools=[SemanticGeneralizationTool()],
+            verbose=True
+        )
+
+    @agent
+    def recontextualizer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['recontextualizer'],
+            llm=local_llm,
+            tools=[RecontextualizationTool()],
+            verbose=True
+        )
+
+    @agent
+    def competency_tracker(self) -> Agent:
+        return Agent(
+            config=self.agents_config['competency_tracker'],
+            llm=worker_llm,
+            tools=[CompetencyEvidenceTool()],
+            verbose=True
+        )
 
     @agent
     def cloud_researcher(self) -> Agent:
@@ -36,13 +62,6 @@ class SovereignSystem():
     def trust_enforcer(self) -> Agent:
         return Agent(config=self.agents_config['trust_enforcer'], llm=local_llm, verbose=True)
 
-    @agent
-    def recontextualizer(self) -> Agent:
-        return Agent(config=self.agents_config['recontextualizer'], llm=local_llm, verbose=True)
-
-    @agent
-    def competency_tracker(self) -> Agent:
-        return Agent(config=self.agents_config['competency_tracker'], llm=worker_llm, verbose=True)
 
     # --- TASKS ---
     @task
