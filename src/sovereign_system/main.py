@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 import sys
 import warnings
-
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 from sovereign_system.crew import SovereignSystem
 

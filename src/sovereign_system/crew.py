@@ -1,65 +1,50 @@
-"""
-Sovereign System Crew
-
-This module defines the SovereignSystem crew, a privacy-first multi-agent system
-designed to handle sensitive queries through a sovereign processing pipeline.
-It manages a team of agents responsible for sensitivity classification,
-entity detection, semantic generalization, trust enforcement, and competency tracking.
-"""
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
-from sovereign_system.tools.competency_tools import CompetencyEvidenceTool
+import os
+
+# --- LLM CONFIGURATIONS ---
+# Local "Sovereign" LLM
+local_llm = LLM(model="ollama/llama3.2", base_url="http://localhost:11434")
+# Faster Local "Worker" LLM (Optional: if you want to use Phi-3.5 for simpler tasks)
+worker_llm = LLM(model="ollama/phi3.5", base_url="http://localhost:11434")
+# Cloud LLM (The one causing your 404 - Ensure API KEY is in .env)
+cloud_llm = LLM(model="gemini/gemini-2.5-flash", api_key=os.getenv("GOOGLE_API_KEY"))
 
 @CrewBase
 class SovereignSystem():
-    """
-    SovereignSystem Crew
-
-    This class orchestrates the privacy-preserving agent workflow. It defines
-    the agents and tasks required to process queries according to their sensitivity
-    zones (0-3), ensuring that sensitive data is protected via semantic generalization
-    and local validation before (or instead of) interacting with cloud models.
-    """
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
     @agent
     def sovereign_manager(self) -> Agent:
-        return Agent(config=self.agents_config['sovereign_manager'], verbose=True)
+        return Agent(config=self.agents_config['sovereign_manager'], llm=local_llm, verbose=True)
 
     @agent
     def sensitivity_detector(self) -> Agent:
-        return Agent(config=self.agents_config['sensitivity_detector'], verbose=True)
+        return Agent(config=self.agents_config['sensitivity_detector'], llm=worker_llm, verbose=True)
 
     @agent
     def semantic_generalizer(self) -> Agent:
-        return Agent(
-            config=self.agents_config['semantic_generalizer'],
-            tools=[SemanticGeneralizationTool()],
-            verbose=True
-        )
+        return Agent(config=self.agents_config['semantic_generalizer'], llm=local_llm, verbose=True)
+
+    @agent
+    def cloud_researcher(self) -> Agent:
+        # This agent gets the Cloud LLM
+        return Agent(config=self.agents_config['cloud_researcher'], llm=cloud_llm, verbose=True)
 
     @agent
     def trust_enforcer(self) -> Agent:
-        return Agent(config=self.agents_config['trust_enforcer'], verbose=True)
+        return Agent(config=self.agents_config['trust_enforcer'], llm=local_llm, verbose=True)
 
     @agent
     def recontextualizer(self) -> Agent:
-        return Agent(
-            config=self.agents_config['recontextualizer'],
-            tools=[RecontextualizationTool()],
-            verbose=True
-        )
+        return Agent(config=self.agents_config['recontextualizer'], llm=local_llm, verbose=True)
 
     @agent
     def competency_tracker(self) -> Agent:
-        return Agent(
-            config=self.agents_config['competency_tracker'],
-            tools=[CompetencyEvidenceTool()],
-            verbose=True
-        )
+        return Agent(config=self.agents_config['competency_tracker'], llm=worker_llm, verbose=True)
 
+    # --- TASKS ---
     @task
     def classify_sensitivity(self) -> Task:
         return Task(config=self.tasks_config['classify_sensitivity'])
@@ -71,6 +56,10 @@ class SovereignSystem():
     @task
     def generalize_query(self) -> Task:
         return Task(config=self.tasks_config['generalize_query'])
+
+    @task
+    def execute_cloud_query(self) -> Task:
+        return Task(config=self.tasks_config['execute_cloud_query'])
 
     @task
     def validate_response(self) -> Task:
@@ -89,6 +78,6 @@ class SovereignSystem():
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
-            process=Process.sequential,  # CRITICAL: Sequential for privacy!
+            process=Process.sequential, # Correct: Privacy requires a strict pipe
             verbose=True,
         )

@@ -43,14 +43,28 @@ generalize_query:
   context:
     - detect_sensitive_entities
 
+execute_cloud_query:
+  description: >
+    Process the generalized query using the external cloud model:
+    
+    Generalized Query: Use the 'SANITIZED' query output from the generalize_query task.
+    
+    Provide a comprehensive, technical answer to the abstract question.
+    Do NOT attempt to guess the placeholders. Treat "Protocol-X" and "Cell-Type-A" as first-class scientific terms.
+  expected_output: "Detailed technical response using the abstract terminology"
+  agent: cloud_researcher
+  context:
+    - generalize_query
+
 validate_response:
   description: >
     Validate the cloud response against trust criteria:
     
     Original query: {query}
     Generalized query: From the generalize_query task
+    Cloud response: Use the output from the execute_cloud_query task.
     
-    Simulate a cloud response for the generalized query, then check:
+    Check:
     1. Does response leak any sanitized information?
     2. Is response consistent with educational best practices?
     3. Does response contain hallucinations?
@@ -60,6 +74,7 @@ validate_response:
   agent: trust_enforcer
   context:
     - generalize_query
+    - execute_cloud_query
 
 recontextualize_response:
   description: >
