@@ -1,0 +1,206 @@
+[
+  {
+    "query_id": "bio_01",
+    "domain": "biomedical",
+    "original_query": "How do I optimize my CRISPR protocol for HEK293 cells?",
+    "sensitive_entities": [
+      "CRISPR",
+      "HEK293"
+    ],
+    "sanitized_query": "How do I optimize my Protocol-A protocol for Cell-A cells?",
+    "mapping": {
+      "Protocol-A": "CRISPR",
+      "Cell-A": "HEK293"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.057220458984375,
+    "total_time_ms": 977.49924659729
+  },
+  {
+    "query_id": "bio_02",
+    "domain": "biomedical",
+    "original_query": "What's the best transfection method for CHO-K1 cells?",
+    "sensitive_entities": [
+      "CHO-K1"
+    ],
+    "sanitized_query": "What's the best transfection method for Cell-A cells?",
+    "mapping": {
+      "Cell-A": "CHO-K1"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.05507469177246094,
+    "total_time_ms": 282.34410285949707
+  },
+  {
+    "query_id": "bio_03",
+    "domain": "biomedical",
+    "original_query": "How do I increase EGFR expression in my HeLa experiment?",
+    "sensitive_entities": [
+      "EGFR",
+      "HeLa"
+    ],
+    "sanitized_query": "How do I increase Gene-A expression in my Cell-A experiment?",
+    "mapping": {
+      "Gene-A": "EGFR",
+      "Cell-A": "HeLa"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.2110004425048828,
+    "total_time_ms": 316.2240982055664
+  },
+  {
+    "query_id": "bio_04",
+    "domain": "biomedical",
+    "original_query": "What concentration of Lipofectamine 3000 works best for primary neurons?",
+    "sensitive_entities": [
+      "Lipofectamine 3000",
+      "primary neurons"
+    ],
+    "sanitized_query": "What concentration of Entity-A works best for Entity-B?",
+    "mapping": {
+      "Entity-A": "Lipofectamine 3000",
+      "Entity-B": "primary neurons"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.2467632293701172,
+    "total_time_ms": 298.10094833374023
+  },
+  {
+    "query_id": "bio_05",
+    "domain": "biomedical",
+    "original_query": "How do I validate BRCA1 knockout efficiency in MCF-7 cells?",
+    "sensitive_entities": [
+      "BRCA1",
+      "MCF-7"
+    ],
+    "sanitized_query": "How do I validate Gene-A knockout efficiency in Entity-A cells?",
+    "mapping": {
+      "Gene-A": "BRCA1",
+      "Entity-A": "MCF-7"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.08988380432128906,
+    "total_time_ms": 310.5790615081787
+  },
+  {
+    "query_id": "bio_06",
+    "domain": "biomedical",
+    "original_query": "What's the optimal MOI for AAV9 transduction in cardiomyocytes?",
+    "sensitive_entities": [
+      "AAV9",
+      "cardiomyocytes"
+    ],
+    "sanitized_query": "What's the optimal MOI for Entity-A transduction in Entity-B?",
+    "mapping": {
+      "Entity-A": "AAV9",
+      "Entity-B": "cardiomyocytes"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.09989738464355469,
+    "total_time_ms": 270.0181007385254
+  },
+  {
+    "query_id": "bio_07",
+    "domain": "biomedical",
+    "original_query": "How do I reduce off-target effects in my Cas9-based gene editing?",
+    "sensitive_entities": [
+      "Cas9"
+    ],
+    "sanitized_query": "How do I reduce off-target effects in my Entity-A-based gene editing?",
+    "mapping": {
+      "Entity-A": "Cas9"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.05030632019042969,
+    "total_time_ms": 261.2569332122803
+  },
+  {
+    "query_id": "bio_08",
+    "domain": "biomedical",
+    "original_query": "What's the best protocol for isolating exosomes from patient serum samples?",
+    "sensitive_entities": [
+      "exosomes",
+      "patient serum"
+    ],
+    "sanitized_query": "What's the best protocol for isolating Entity-A from Entity-B samples?",
+    "mapping": {
+      "Entity-A": "exosomes",
+      "Entity-B": "patient serum"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.08106231689453125,
+    "total_time_ms": 1092.8959846496582
+  },
+  {
+    "query_id": "bio_09",
+    "domain": "biomedical",
+    "original_query": "How do I maintain pluripotency in my iPSC differentiation protocol?",
+    "sensitive_entities": [
+      "iPSC"
+    ],
+    "sanitized_query": "How do I maintain pluripotency in my Entity-A differentiation protocol?",
+    "mapping": {
+      "Entity-A": "iPSC"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.09703636169433594,
+    "total_time_ms": 294.802188873291
+  },
+  {
+    "query_id": "bio_10",
+    "domain": "biomedical",
+    "original_query": "What antibody dilution works best for TP53 Western blot in A549 cells?",
+    "sensitive_entities": [
+      "TP53",
+      "A549"
+    ],
+    "sanitized_query": "What antibody dilution works best for Gene-A Western blot in Entity-A cells?",
+    "mapping": {
+      "Gene-A": "TP53",
+      "Entity-A": "A549"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nI can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.0,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.07677078247070312,
+    "total_time_ms": 296.04578018188477
+  }
+]

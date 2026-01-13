@@ -1,0 +1,1056 @@
+[
+  {
+    "query_id": "bio_01",
+    "domain": "biomedical",
+    "original_query": "How do I optimize my CRISPR protocol for HEK293 cells?",
+    "sensitive_entities": [
+      "CRISPR",
+      "HEK293"
+    ],
+    "sanitized_query": "How do I optimize my Protocol-A protocol for Cell-A cells?",
+    "mapping": {
+      "Protocol-A": "CRISPR",
+      "Cell-A": "HEK293"
+    },
+    "cloud_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.06103515625,
+    "total_time_ms": 0.14162063598632812
+  },
+  {
+    "query_id": "bio_02",
+    "domain": "biomedical",
+    "original_query": "What's the best transfection method for CHO-K1 cells?",
+    "sensitive_entities": [
+      "CHO-K1"
+    ],
+    "sanitized_query": "What's the best transfection method for Cell-A cells?",
+    "mapping": {
+      "Cell-A": "CHO-K1"
+    },
+    "cloud_response": "To optimize method, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize method, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.026702880859375,
+    "total_time_ms": 0.05507469177246094
+  },
+  {
+    "query_id": "bio_03",
+    "domain": "biomedical",
+    "original_query": "How do I increase EGFR expression in my HeLa experiment?",
+    "sensitive_entities": [
+      "EGFR",
+      "HeLa"
+    ],
+    "sanitized_query": "How do I increase Gene-A expression in my Cell-A experiment?",
+    "mapping": {
+      "Gene-A": "EGFR",
+      "Cell-A": "HeLa"
+    },
+    "cloud_response": "To optimize Gene-A, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize EGFR, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.035762786865234375,
+    "total_time_ms": 0.07987022399902344
+  },
+  {
+    "query_id": "bio_04",
+    "domain": "biomedical",
+    "original_query": "What concentration of Lipofectamine 3000 works best for primary neurons?",
+    "sensitive_entities": [
+      "Lipofectamine 3000",
+      "primary neurons"
+    ],
+    "sanitized_query": "What concentration of Entity-A works best for Entity-B?",
+    "mapping": {
+      "Entity-A": "Lipofectamine 3000",
+      "Entity-B": "primary neurons"
+    },
+    "cloud_response": "To optimize works, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize works, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.0591278076171875,
+    "total_time_ms": 0.11420249938964844
+  },
+  {
+    "query_id": "bio_05",
+    "domain": "biomedical",
+    "original_query": "How do I validate BRCA1 knockout efficiency in MCF-7 cells?",
+    "sensitive_entities": [
+      "BRCA1",
+      "MCF-7"
+    ],
+    "sanitized_query": "How do I validate Gene-A knockout efficiency in Entity-A cells?",
+    "mapping": {
+      "Gene-A": "BRCA1",
+      "Entity-A": "MCF-7"
+    },
+    "cloud_response": "To optimize Gene-A, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize BRCA1, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03695487976074219,
+    "total_time_ms": 0.0667572021484375
+  },
+  {
+    "query_id": "bio_06",
+    "domain": "biomedical",
+    "original_query": "What's the optimal MOI for AAV9 transduction in cardiomyocytes?",
+    "sensitive_entities": [
+      "AAV9",
+      "cardiomyocytes"
+    ],
+    "sanitized_query": "What's the optimal MOI for Entity-A transduction in Entity-B?",
+    "mapping": {
+      "Entity-A": "AAV9",
+      "Entity-B": "cardiomyocytes"
+    },
+    "cloud_response": "To optimize for, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize for, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04506111145019531,
+    "total_time_ms": 0.3719329833984375
+  },
+  {
+    "query_id": "bio_07",
+    "domain": "biomedical",
+    "original_query": "How do I reduce off-target effects in my Cas9-based gene editing?",
+    "sensitive_entities": [
+      "Cas9"
+    ],
+    "sanitized_query": "How do I reduce off-target effects in my Entity-A-based gene editing?",
+    "mapping": {
+      "Entity-A": "Cas9"
+    },
+    "cloud_response": "To optimize off-target, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize off-target, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.0247955322265625,
+    "total_time_ms": 0.04982948303222656
+  },
+  {
+    "query_id": "bio_08",
+    "domain": "biomedical",
+    "original_query": "What's the best protocol for isolating exosomes from patient serum samples?",
+    "sensitive_entities": [
+      "exosomes",
+      "patient serum"
+    ],
+    "sanitized_query": "What's the best protocol for isolating Entity-A from Entity-B samples?",
+    "mapping": {
+      "Entity-A": "exosomes",
+      "Entity-B": "patient serum"
+    },
+    "cloud_response": "To optimize for, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize for, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [
+      "patient serum"
+    ],
+    "sanitization_time_ms": 0.05125999450683594,
+    "total_time_ms": 0.08225440979003906
+  },
+  {
+    "query_id": "bio_09",
+    "domain": "biomedical",
+    "original_query": "How do I maintain pluripotency in my iPSC differentiation protocol?",
+    "sensitive_entities": [
+      "iPSC"
+    ],
+    "sanitized_query": "How do I maintain pluripotency in my Entity-A differentiation protocol?",
+    "mapping": {
+      "Entity-A": "iPSC"
+    },
+    "cloud_response": "To optimize pluripotency, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize pluripotency, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.02384185791015625,
+    "total_time_ms": 0.04673004150390625
+  },
+  {
+    "query_id": "bio_10",
+    "domain": "biomedical",
+    "original_query": "What antibody dilution works best for TP53 Western blot in A549 cells?",
+    "sensitive_entities": [
+      "TP53",
+      "A549"
+    ],
+    "sanitized_query": "What antibody dilution works best for Gene-A Western blot in Entity-A cells?",
+    "mapping": {
+      "Gene-A": "TP53",
+      "Entity-A": "A549"
+    },
+    "cloud_response": "To optimize best, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize best, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03695487976074219,
+    "total_time_ms": 0.06604194641113281
+  },
+  {
+    "query_id": "bio_11",
+    "domain": "biomedical",
+    "original_query": "How do I optimize my CAR-T construct for CD19 targeting?",
+    "sensitive_entities": [
+      "CAR-T",
+      "CD19"
+    ],
+    "sanitized_query": "How do I optimize my Entity-A construct for Entity-B targeting?",
+    "mapping": {
+      "Entity-A": "CAR-T",
+      "Entity-B": "CD19"
+    },
+    "cloud_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03814697265625,
+    "total_time_ms": 0.06604194641113281
+  },
+  {
+    "query_id": "bio_12",
+    "domain": "biomedical",
+    "original_query": "What's the best fixation method for confocal imaging of mitochondria?",
+    "sensitive_entities": [
+      "mitochondria",
+      "confocal"
+    ],
+    "sanitized_query": "What's the best fixation method for Entity-A imaging of Cell-A?",
+    "mapping": {
+      "Cell-A": "mitochondria",
+      "Entity-A": "confocal"
+    },
+    "cloud_response": "To optimize method, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize method, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.05316734313964844,
+    "total_time_ms": 0.09393692016601562
+  },
+  {
+    "query_id": "bio_13",
+    "domain": "biomedical",
+    "original_query": "How do I validate my shRNA knockdown of KRAS in pancreatic organoids?",
+    "sensitive_entities": [
+      "shRNA",
+      "KRAS",
+      "pancreatic organoids"
+    ],
+    "sanitized_query": "How do I validate my Entity-A knockdown of Gene-A in Entity-B?",
+    "mapping": {
+      "Entity-A": "shRNA",
+      "Gene-A": "KRAS",
+      "Entity-B": "pancreatic organoids"
+    },
+    "cloud_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.3333333333333333,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [
+      "pancreatic organoids"
+    ],
+    "sanitization_time_ms": 0.07581710815429688,
+    "total_time_ms": 0.11491775512695312
+  },
+  {
+    "query_id": "bio_14",
+    "domain": "biomedical",
+    "original_query": "What's the optimal passage number for maintaining SH-SY5Y neuroblastoma cells?",
+    "sensitive_entities": [
+      "SH-SY5Y",
+      "neuroblastoma"
+    ],
+    "sanitized_query": "What's the optimal passage number for maintaining Entity-A Entity-B cells?",
+    "mapping": {
+      "Entity-A": "SH-SY5Y",
+      "Entity-B": "neuroblastoma"
+    },
+    "cloud_response": "To optimize number, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize number, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.048160552978515625,
+    "total_time_ms": 0.07915496826171875
+  },
+  {
+    "query_id": "bio_15",
+    "domain": "biomedical",
+    "original_query": "How do I reduce immunogenicity in my mRNA vaccine formulation?",
+    "sensitive_entities": [
+      "mRNA vaccine"
+    ],
+    "sanitized_query": "How do I reduce immunogenicity in my Entity-A formulation?",
+    "mapping": {
+      "Entity-A": "mRNA vaccine"
+    },
+    "cloud_response": "To optimize immunogenicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize immunogenicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.028848648071289062,
+    "total_time_ms": 0.051975250244140625
+  },
+  {
+    "query_id": "cs_01",
+    "domain": "cs",
+    "original_query": "How do I fix the memory leak in my CUDA kernel for TensorRT inference?",
+    "sensitive_entities": [
+      "CUDA",
+      "TensorRT"
+    ],
+    "sanitized_query": "How do I fix the memory leak in my Entity-A kernel for Entity-B inference?",
+    "mapping": {
+      "Entity-A": "CUDA",
+      "Entity-B": "TensorRT"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04076957702636719,
+    "total_time_ms": 0.07390975952148438
+  },
+  {
+    "query_id": "cs_02",
+    "domain": "cs",
+    "original_query": "What's the best way to optimize my BERT fine-tuning on domain-specific data?",
+    "sensitive_entities": [
+      "BERT"
+    ],
+    "sanitized_query": "What's the best way to optimize my Entity-A fine-tuning on domain-specific data?",
+    "mapping": {
+      "Entity-A": "BERT"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.02193450927734375,
+    "total_time_ms": 0.04506111145019531
+  },
+  {
+    "query_id": "cs_03",
+    "domain": "cs",
+    "original_query": "How do I implement gradient checkpointing for my LLaMA fine-tuning?",
+    "sensitive_entities": [
+      "LLaMA"
+    ],
+    "sanitized_query": "How do I implement gradient checkpointing for my Entity-A fine-tuning?",
+    "mapping": {
+      "Entity-A": "LLaMA"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.02193450927734375,
+    "total_time_ms": 0.04410743713378906
+  },
+  {
+    "query_id": "cs_04",
+    "domain": "cs",
+    "original_query": "What's the optimal batch size for distributed training on 8x A100 GPUs?",
+    "sensitive_entities": [
+      "A100"
+    ],
+    "sanitized_query": "What's the optimal batch size for distributed training on 8x Entity-A GPUs?",
+    "mapping": {
+      "Entity-A": "A100"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.0209808349609375,
+    "total_time_ms": 0.04482269287109375
+  },
+  {
+    "query_id": "cs_05",
+    "domain": "cs",
+    "original_query": "How do I reduce hallucinations in my RAG pipeline using ChromaDB?",
+    "sensitive_entities": [
+      "RAG",
+      "ChromaDB"
+    ],
+    "sanitized_query": "How do I reduce hallucinations in my Entity-A pipeline using Entity-B?",
+    "mapping": {
+      "Entity-A": "RAG",
+      "Entity-B": "ChromaDB"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03910064697265625,
+    "total_time_ms": 0.08893013000488281
+  },
+  {
+    "query_id": "cs_06",
+    "domain": "cs",
+    "original_query": "What's the best tokenizer configuration for multilingual T5 training?",
+    "sensitive_entities": [
+      "T5"
+    ],
+    "sanitized_query": "What's the best tokenizer configuration for multilingual Entity-A training?",
+    "mapping": {
+      "Entity-A": "T5"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.032901763916015625,
+    "total_time_ms": 0.06818771362304688
+  },
+  {
+    "query_id": "cs_07",
+    "domain": "cs",
+    "original_query": "How do I implement LoRA adapters for Stable Diffusion XL?",
+    "sensitive_entities": [
+      "LoRA",
+      "Stable Diffusion XL"
+    ],
+    "sanitized_query": "How do I implement Entity-A adapters for Entity-B?",
+    "mapping": {
+      "Entity-A": "LoRA",
+      "Entity-B": "Stable Diffusion XL"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.0591278076171875,
+    "total_time_ms": 0.11205673217773438
+  },
+  {
+    "query_id": "cs_08",
+    "domain": "cs",
+    "original_query": "What's the optimal learning rate schedule for GPT-2 pretraining?",
+    "sensitive_entities": [
+      "GPT-2"
+    ],
+    "sanitized_query": "What's the optimal learning rate schedule for Entity-A pretraining?",
+    "mapping": {
+      "Entity-A": "GPT-2"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03695487976074219,
+    "total_time_ms": 0.06008148193359375
+  },
+  {
+    "query_id": "cs_09",
+    "domain": "cs",
+    "original_query": "How do I debug NaN losses in my PyTorch transformer implementation?",
+    "sensitive_entities": [
+      "PyTorch",
+      "transformer"
+    ],
+    "sanitized_query": "How do I debug NaN losses in my Entity-A Entity-B implementation?",
+    "mapping": {
+      "Entity-A": "PyTorch",
+      "Entity-B": "transformer"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.05507469177246094,
+    "total_time_ms": 0.09202957153320312
+  },
+  {
+    "query_id": "cs_10",
+    "domain": "cs",
+    "original_query": "What's the best way to quantize my Whisper model for edge deployment?",
+    "sensitive_entities": [
+      "Whisper"
+    ],
+    "sanitized_query": "What's the best way to quantize my Entity-A model for edge deployment?",
+    "mapping": {
+      "Entity-A": "Whisper"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.027894973754882812,
+    "total_time_ms": 0.05412101745605469
+  },
+  {
+    "query_id": "cs_11",
+    "domain": "cs",
+    "original_query": "How do I optimize vLLM inference for my Mistral-7B deployment?",
+    "sensitive_entities": [
+      "vLLM",
+      "Mistral-7B"
+    ],
+    "sanitized_query": "How do I optimize Entity-A inference for my Entity-B deployment?",
+    "mapping": {
+      "Entity-A": "vLLM",
+      "Entity-B": "Mistral-7B"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04887580871582031,
+    "total_time_ms": 0.07987022399902344
+  },
+  {
+    "query_id": "cs_12",
+    "domain": "cs",
+    "original_query": "What's the optimal chunk size for my LangChain document processing?",
+    "sensitive_entities": [
+      "LangChain"
+    ],
+    "sanitized_query": "What's the optimal chunk size for my Entity-A document processing?",
+    "mapping": {
+      "Entity-A": "LangChain"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.041961669921875,
+    "total_time_ms": 0.0667572021484375
+  },
+  {
+    "query_id": "cs_13",
+    "domain": "cs",
+    "original_query": "How do I implement flash attention in my custom CUDA kernel?",
+    "sensitive_entities": [
+      "flash attention",
+      "CUDA"
+    ],
+    "sanitized_query": "How do I implement Entity-A in my custom Entity-B kernel?",
+    "mapping": {
+      "Entity-A": "flash attention",
+      "Entity-B": "CUDA"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.5,
+    "entities_leaked": [
+      "flash attention"
+    ],
+    "sanitization_time_ms": 0.04124641418457031,
+    "total_time_ms": 0.07128715515136719
+  },
+  {
+    "query_id": "cs_14",
+    "domain": "cs",
+    "original_query": "What's the best embedding model for my Pinecone vector search?",
+    "sensitive_entities": [
+      "Pinecone"
+    ],
+    "sanitized_query": "What's the best embedding model for my Entity-A vector search?",
+    "mapping": {
+      "Entity-A": "Pinecone"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03266334533691406,
+    "total_time_ms": 0.055789947509765625
+  },
+  {
+    "query_id": "cs_15",
+    "domain": "cs",
+    "original_query": "How do I reduce inference latency in my ONNX Runtime deployment?",
+    "sensitive_entities": [
+      "ONNX Runtime"
+    ],
+    "sanitized_query": "How do I reduce inference latency in my Entity-A deployment?",
+    "mapping": {
+      "Entity-A": "ONNX Runtime"
+    },
+    "cloud_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03314018249511719,
+    "total_time_ms": 0.06008148193359375
+  },
+  {
+    "query_id": "legal_01",
+    "domain": "legal",
+    "original_query": "How should I structure the IP clause for our Series A with Sequoia?",
+    "sensitive_entities": [
+      "Series A",
+      "Sequoia"
+    ],
+    "sanitized_query": "How should I structure the IP clause for our Entity-A with Entity-B?",
+    "mapping": {
+      "Entity-A": "Series A",
+      "Entity-B": "Sequoia"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.6,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04601478576660156,
+    "total_time_ms": 0.07891654968261719
+  },
+  {
+    "query_id": "legal_02",
+    "domain": "legal",
+    "original_query": "What's the best way to negotiate the liquidation preference with Andreessen Horowitz?",
+    "sensitive_entities": [
+      "liquidation preference",
+      "Andreessen Horowitz"
+    ],
+    "sanitized_query": "What's the best way to negotiate the Entity-A with Entity-B?",
+    "mapping": {
+      "Entity-A": "liquidation preference",
+      "Entity-B": "Andreessen Horowitz"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.6,
+    "entities_leaked": [
+      "liquidation preference"
+    ],
+    "sanitization_time_ms": 0.09512901306152344,
+    "total_time_ms": 0.1862049102783203
+  },
+  {
+    "query_id": "legal_03",
+    "domain": "legal",
+    "original_query": "How do I structure employee stock options for my YCombinator startup?",
+    "sensitive_entities": [
+      "stock options",
+      "YCombinator"
+    ],
+    "sanitized_query": "How do I structure employee Entity-A for my Entity-B startup?",
+    "mapping": {
+      "Entity-A": "stock options",
+      "Entity-B": "YCombinator"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.6,
+    "entities_leaked": [
+      "stock options"
+    ],
+    "sanitization_time_ms": 0.07009506225585938,
+    "total_time_ms": 0.10585784912109375
+  },
+  {
+    "query_id": "legal_04",
+    "domain": "legal",
+    "original_query": "What indemnification clauses should I include in our Microsoft partnership?",
+    "sensitive_entities": [
+      "indemnification",
+      "Microsoft"
+    ],
+    "sanitized_query": "What Entity-A clauses should I include in our Entity-B partnership?",
+    "mapping": {
+      "Entity-A": "indemnification",
+      "Entity-B": "Microsoft"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.6,
+    "entities_leaked": [
+      "indemnification"
+    ],
+    "sanitization_time_ms": 0.050067901611328125,
+    "total_time_ms": 0.08106231689453125
+  },
+  {
+    "query_id": "legal_05",
+    "domain": "legal",
+    "original_query": "How do I protect our trade secrets when hiring from Google?",
+    "sensitive_entities": [
+      "trade secrets",
+      "Google"
+    ],
+    "sanitized_query": "How do I protect our Entity-A when hiring from Entity-B?",
+    "mapping": {
+      "Entity-A": "trade secrets",
+      "Entity-B": "Google"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.6,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.046253204345703125,
+    "total_time_ms": 0.07724761962890625
+  },
+  {
+    "query_id": "legal_06",
+    "domain": "legal",
+    "original_query": "What's the standard vesting schedule for co-founders at seed stage?",
+    "sensitive_entities": [
+      "vesting",
+      "seed stage"
+    ],
+    "sanitized_query": "What's the standard Entity-A schedule for co-founders at Entity-B?",
+    "mapping": {
+      "Entity-A": "vesting",
+      "Entity-B": "seed stage"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.6,
+    "entities_leaked": [
+      "seed stage"
+    ],
+    "sanitization_time_ms": 0.04410743713378906,
+    "total_time_ms": 0.07295608520507812
+  },
+  {
+    "query_id": "legal_07",
+    "domain": "legal",
+    "original_query": "How should I structure the data processing agreement for GDPR compliance?",
+    "sensitive_entities": [
+      "GDPR"
+    ],
+    "sanitized_query": "How should I structure the data processing agreement for Entity-A compliance?",
+    "mapping": {
+      "Entity-A": "GDPR"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.6,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.0209808349609375,
+    "total_time_ms": 0.04363059997558594
+  },
+  {
+    "query_id": "legal_08",
+    "domain": "legal",
+    "original_query": "What's the best approach to patent our novel algorithm before publishing?",
+    "sensitive_entities": [
+      "patent",
+      "algorithm"
+    ],
+    "sanitized_query": "What's the best approach to Entity-A our novel Entity-B before publishing?",
+    "mapping": {
+      "Entity-A": "patent",
+      "Entity-B": "algorithm"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.6,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03981590270996094,
+    "total_time_ms": 0.07009506225585938
+  },
+  {
+    "query_id": "legal_09",
+    "domain": "legal",
+    "original_query": "How do I negotiate exclusivity terms with our Salesforce integration?",
+    "sensitive_entities": [
+      "exclusivity",
+      "Salesforce"
+    ],
+    "sanitized_query": "How do I negotiate Entity-A terms with our Entity-B integration?",
+    "mapping": {
+      "Entity-A": "exclusivity",
+      "Entity-B": "Salesforce"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.6,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04410743713378906,
+    "total_time_ms": 0.07295608520507812
+  },
+  {
+    "query_id": "legal_10",
+    "domain": "legal",
+    "original_query": "What non-compete terms are enforceable for employees in California?",
+    "sensitive_entities": [
+      "non-compete",
+      "California"
+    ],
+    "sanitized_query": "What Entity-A terms are enforceable for employees in Entity-B?",
+    "mapping": {
+      "Entity-A": "non-compete",
+      "Entity-B": "California"
+    },
+    "cloud_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nRegarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.6,
+    "entities_leaked": [
+      "non-compete"
+    ],
+    "sanitization_time_ms": 0.04601478576660156,
+    "total_time_ms": 0.07486343383789062
+  },
+  {
+    "query_id": "med_01",
+    "domain": "medical",
+    "original_query": "I'm patient John Smith, ID 78432. How do I interpret my HbA1c results of 7.2%?",
+    "sensitive_entities": [
+      "John Smith",
+      "78432",
+      "HbA1c",
+      "7.2%"
+    ],
+    "sanitized_query": "I'm patient Entity-A, ID Entity-B. How do I interpret my Entity-C results of Entity-D?",
+    "mapping": {
+      "Entity-A": "John Smith",
+      "Entity-B": "78432",
+      "Entity-C": "HbA1c",
+      "Entity-D": "7.2%"
+    },
+    "cloud_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nBased on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.7,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.07486343383789062,
+    "total_time_ms": 0.14781951904296875
+  },
+  {
+    "query_id": "med_02",
+    "domain": "medical",
+    "original_query": "What are the contraindications for Metformin given my eGFR of 45?",
+    "sensitive_entities": [
+      "Metformin",
+      "eGFR",
+      "45"
+    ],
+    "sanitized_query": "What are the contraindications for Entity-A given my Gene-A of Entity-B?",
+    "mapping": {
+      "Entity-A": "Metformin",
+      "Gene-A": "eGFR",
+      "Entity-B": "45"
+    },
+    "cloud_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nBased on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.7,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.051975250244140625,
+    "total_time_ms": 0.08797645568847656
+  },
+  {
+    "query_id": "med_03",
+    "domain": "medical",
+    "original_query": "How should I adjust my Warfarin dose with an INR of 3.8?",
+    "sensitive_entities": [
+      "Warfarin",
+      "INR",
+      "3.8"
+    ],
+    "sanitized_query": "How should I adjust my Entity-A dose with an Entity-B of Entity-C?",
+    "mapping": {
+      "Entity-A": "Warfarin",
+      "Entity-B": "INR",
+      "Entity-C": "3.8"
+    },
+    "cloud_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nBased on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.7,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.052928924560546875,
+    "total_time_ms": 0.09179115295410156
+  },
+  {
+    "query_id": "med_04",
+    "domain": "medical",
+    "original_query": "What's the recommended Humira dosing for my Crohn's disease?",
+    "sensitive_entities": [
+      "Humira",
+      "Crohn's disease"
+    ],
+    "sanitized_query": "What's the recommended Entity-A dosing for my Compound-A?",
+    "mapping": {
+      "Entity-A": "Humira",
+      "Compound-A": "Crohn's disease"
+    },
+    "cloud_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nBased on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.7,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.07700920104980469,
+    "total_time_ms": 0.12803077697753906
+  },
+  {
+    "query_id": "med_05",
+    "domain": "medical",
+    "original_query": "How do I interpret my positive ANA test with 1:640 titer?",
+    "sensitive_entities": [
+      "ANA",
+      "1:640"
+    ],
+    "sanitized_query": "How do I interpret my positive Entity-A test with Entity-B titer?",
+    "mapping": {
+      "Entity-A": "ANA",
+      "Entity-B": "1:640"
+    },
+    "cloud_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nBased on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.7,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04506111145019531,
+    "total_time_ms": 0.08702278137207031
+  },
+  {
+    "query_id": "edu_01",
+    "domain": "academic",
+    "original_query": "How do I cite the unpublished findings from Professor Chen's lab at Stanford?",
+    "sensitive_entities": [
+      "Professor Chen",
+      "Stanford",
+      "unpublished"
+    ],
+    "sanitized_query": "How do I cite the Entity-C findings from Entity-A's lab at Entity-B?",
+    "mapping": {
+      "Entity-A": "Professor Chen",
+      "Entity-B": "Stanford",
+      "Entity-C": "unpublished"
+    },
+    "cloud_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "ip_leakage_score": 0.3333333333333333,
+    "utility_score": 0.5,
+    "entities_leaked": [
+      "unpublished"
+    ],
+    "sanitization_time_ms": 0.07009506225585938,
+    "total_time_ms": 0.10800361633300781
+  },
+  {
+    "query_id": "edu_02",
+    "domain": "academic",
+    "original_query": "What's the best way to structure my thesis chapter on MIT's quantum computing research?",
+    "sensitive_entities": [
+      "MIT",
+      "quantum computing"
+    ],
+    "sanitized_query": "What's the best way to structure my thesis chapter on Entity-A's Entity-B research?",
+    "mapping": {
+      "Entity-A": "MIT",
+      "Entity-B": "quantum computing"
+    },
+    "cloud_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "ip_leakage_score": 0.5,
+    "utility_score": 0.5,
+    "entities_leaked": [
+      "quantum computing"
+    ],
+    "sanitization_time_ms": 0.0476837158203125,
+    "total_time_ms": 0.07772445678710938
+  },
+  {
+    "query_id": "edu_03",
+    "domain": "academic",
+    "original_query": "How do I respond to Reviewer 2's criticism of our Nature submission?",
+    "sensitive_entities": [
+      "Reviewer 2",
+      "Nature"
+    ],
+    "sanitized_query": "How do I respond to Entity-A's criticism of our Entity-B submission?",
+    "mapping": {
+      "Entity-A": "Reviewer 2",
+      "Entity-B": "Nature"
+    },
+    "cloud_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04315376281738281,
+    "total_time_ms": 0.07200241088867188
+  },
+  {
+    "query_id": "edu_04",
+    "domain": "academic",
+    "original_query": "What statistical test should I use for my Oxford longitudinal study data?",
+    "sensitive_entities": [
+      "Oxford",
+      "longitudinal study"
+    ],
+    "sanitized_query": "What statistical test should I use for my Entity-A Entity-B data?",
+    "mapping": {
+      "Entity-A": "Oxford",
+      "Entity-B": "longitudinal study"
+    },
+    "cloud_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.051021575927734375,
+    "total_time_ms": 0.08106231689453125
+  },
+  {
+    "query_id": "edu_05",
+    "domain": "academic",
+    "original_query": "How do I acknowledge the NIH R01 grant in my publication?",
+    "sensitive_entities": [
+      "NIH",
+      "R01"
+    ],
+    "sanitized_query": "How do I acknowledge the Entity-A Entity-B grant in my publication?",
+    "mapping": {
+      "Entity-A": "NIH",
+      "Entity-B": "R01"
+    },
+    "cloud_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nFor academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03719329833984375,
+    "total_time_ms": 0.06723403930664062
+  }
+]

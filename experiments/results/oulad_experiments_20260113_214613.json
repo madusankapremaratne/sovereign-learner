@@ -1,0 +1,76 @@
+{
+  "experiment_1": {
+    "experiment": "Passive Struggle Detection",
+    "hypothesis": "Full local access outperforms sanitized cloud access",
+    "results": {
+      "full_local": {
+        "condition": "full_local",
+        "total_students": 8769,
+        "struggling_students": 4154,
+        "f1_score": 0.9100025068939583,
+        "precision": 0.9492677824267782,
+        "recall": 0.8738565238324506,
+        "accuracy": 0.9181206522978674,
+        "features_used": [
+          "total_clicks",
+          "avg_clicks_per_resource",
+          "std_clicks",
+          "resources_accessed",
+          "active_days",
+          "activity_span",
+          "clicks_per_day",
+          "avg_score",
+          "std_score",
+          "assessments_submitted",
+          "studied_credits",
+          "num_of_prev_attempts"
+        ]
+      },
+      "sanitized_cloud": {
+        "condition": "sanitized_cloud",
+        "total_students": 8769,
+        "struggling_students": 4154,
+        "f1_score": 0.8106653620352251,
+        "precision": 0.8239681750372949,
+        "recall": 0.7977852672123255,
+        "accuracy": 0.8234690386589121,
+        "features_used": [
+          "resources_accessed",
+          "assessments_submitted",
+          "studied_credits"
+        ]
+      }
+    },
+    "gaps": {
+      "f1_gap": 0.09933714485873324,
+      "f1_gap_percent": 12.253779365796664,
+      "accuracy_gap": 0.09465161363895536
+    },
+    "conclusion": "Local access achieves 0.099 higher F1 (12.3% improvement)"
+  },
+  "experiment_3": {
+    "experiment": "Competency Vector Portability",
+    "hypothesis": "Sovereign transfer reduces cold-start and improves prediction",
+    "results": {
+      "cold_start": {
+        "condition": "cold_start",
+        "total_students": 3538,
+        "avg_convergence_interactions": 258.8841153193895,
+        "prediction_accuracy": 0.5,
+        "mse": 105486.91817051469
+      },
+      "sovereign_transfer": {
+        "condition": "sovereign_transfer",
+        "total_students": 3538,
+        "avg_convergence_interactions": 133.61007885811193,
+        "prediction_accuracy": 0.6706755228942904,
+        "mse": 31562.433148126343
+      }
+    },
+    "improvements": {
+      "convergence_reduction_percent": 48.39000504404257,
+      "accuracy_improvement": 0.17067552289429044
+    },
+    "conclusion": "Sovereign transfer reduces convergence time by 48.4% and improves accuracy by 17.1%"
+  }
+}
