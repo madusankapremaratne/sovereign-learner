@@ -1,0 +1,36 @@
+{
+  "experiment": "Semantic Generalization Effectiveness",
+  "timestamp": "2026-01-13T21:34:07.343725",
+  "total_queries": 5,
+  "cloud_mode": "simulated",
+  "aggregate_metrics": {
+    "ip_leakage_rate": 0.0,
+    "ip_protection_rate": 1.0,
+    "utility_preservation": 0.32,
+    "zero_leakage_queries": 5,
+    "zero_leakage_rate": 1.0,
+    "avg_sanitization_time_ms": 0.04429817199707031
+  },
+  "by_domain": {
+    "biomedical": {
+      "count": 5,
+      "avg_ip_leakage": 0.0,
+      "avg_utility": 0.32,
+      "zero_leakage_rate": 1.0
+    }
+  },
+  "comparison_baseline": {
+    "no_protection": {
+      "ip_leakage_rate": 1.0,
+      "utility": 1.0
+    },
+    "full_redaction": {
+      "ip_leakage_rate": 0.0,
+      "utility": 0.2
+    },
+    "sovereign_learner": {
+      "ip_leakage_rate": 0.0,
+      "utility": 0.32
+    }
+  }
+}

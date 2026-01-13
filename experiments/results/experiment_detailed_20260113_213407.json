@@ -1,0 +1,105 @@
+[
+  {
+    "query_id": "bio_01",
+    "domain": "biomedical",
+    "original_query": "How do I optimize my CRISPR protocol for HEK293 cells?",
+    "sensitive_entities": [
+      "CRISPR",
+      "HEK293"
+    ],
+    "sanitized_query": "How do I optimize my Protocol-A protocol for Cell-A cells?",
+    "mapping": {
+      "Protocol-A": "CRISPR",
+      "Cell-A": "HEK293"
+    },
+    "cloud_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.057220458984375,
+    "total_time_ms": 0.39505958557128906
+  },
+  {
+    "query_id": "bio_02",
+    "domain": "biomedical",
+    "original_query": "What's the best transfection method for CHO-K1 cells?",
+    "sensitive_entities": [
+      "CHO-K1"
+    ],
+    "sanitized_query": "What's the best transfection method for Cell-A cells?",
+    "mapping": {
+      "Cell-A": "CHO-K1"
+    },
+    "cloud_response": "To optimize method, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize method, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.026941299438476562,
+    "total_time_ms": 0.05698204040527344
+  },
+  {
+    "query_id": "bio_03",
+    "domain": "biomedical",
+    "original_query": "How do I increase EGFR expression in my HeLa experiment?",
+    "sensitive_entities": [
+      "EGFR",
+      "HeLa"
+    ],
+    "sanitized_query": "How do I increase Gene-A expression in my Cell-A experiment?",
+    "mapping": {
+      "Gene-A": "EGFR",
+      "Cell-A": "HeLa"
+    },
+    "cloud_response": "To optimize Gene-A, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize EGFR, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03814697265625,
+    "total_time_ms": 0.08130073547363281
+  },
+  {
+    "query_id": "bio_04",
+    "domain": "biomedical",
+    "original_query": "What concentration of Lipofectamine 3000 works best for primary neurons?",
+    "sensitive_entities": [
+      "Lipofectamine 3000",
+      "primary neurons"
+    ],
+    "sanitized_query": "What concentration of Entity-A works best for Entity-B?",
+    "mapping": {
+      "Entity-A": "Lipofectamine 3000",
+      "Entity-B": "primary neurons"
+    },
+    "cloud_response": "To optimize works, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize works, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.06008148193359375,
+    "total_time_ms": 0.11515617370605469
+  },
+  {
+    "query_id": "bio_05",
+    "domain": "biomedical",
+    "original_query": "How do I validate BRCA1 knockout efficiency in MCF-7 cells?",
+    "sensitive_entities": [
+      "BRCA1",
+      "MCF-7"
+    ],
+    "sanitized_query": "How do I validate Gene-A knockout efficiency in Entity-A cells?",
+    "mapping": {
+      "Gene-A": "BRCA1",
+      "Entity-A": "MCF-7"
+    },
+    "cloud_response": "To optimize Gene-A, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "PERSONALIZED RESPONSE:\nTo optimize BRCA1, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.03910064697265625,
+    "total_time_ms": 0.06890296936035156
+  }
+]
