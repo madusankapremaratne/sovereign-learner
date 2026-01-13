@@ -1,0 +1,92 @@
+classify_sensitivity:
+  description: >
+    Analyze the following learner query and classify its privacy zone:
+    
+    Query: {query}
+    
+    Consider:
+    1. Does it contain PII? (names, IDs, locations)
+    2. Does it reveal proprietary research topics?
+    3. Could the intent be used to profile the learner?
+    
+    Output the zone (0-3) and detected sensitive elements.
+  expected_output: "Zone classification with sensitivity analysis"
+  agent: sovereign_manager
+
+detect_sensitive_entities:
+  description: >
+    Extract all sensitive entities from the query:
+    
+    Query: {query}
+    
+    Identify and list the ACTUAL sensitive terms (e.g., CRISPR, HEK293, patient names).
+    Output as comma-separated list of the original terms found.
+  expected_output: "Comma-separated list of actual sensitive entity names found in query"
+  agent: sensitivity_detector
+
+generalize_query:
+  description: >
+    Transform the sensitive query into an abstract formulation:
+    
+    Original: {query}
+    Sensitive entities from previous task: Use the ACTUAL entity names detected (e.g., CRISPR, HEK293), not placeholders.
+    
+    Rules:
+    - Use the 'semantic_generalizer' tool.
+    - Pass the original query as the 'query' argument.
+    - Pass the extracted entities list as the 'sensitive_entities' argument.
+    - Replace specific terms with generic placeholders (Protocol-X, Entity-Y)
+    - Preserve logical structure and relationships
+    - Maintain educational utility of the question
+  expected_output: "Semantically generalized query with mapping table"
+  agent: semantic_generalizer
+  context:
+    - detect_sensitive_entities
+
+validate_response:
+  description: >
+    Validate the cloud response against trust criteria:
+    
+    Original query: {query}
+    Generalized query: From the generalize_query task
+    
+    Simulate a cloud response for the generalized query, then check:
+    1. Does response leak any sanitized information?
+    2. Is response consistent with educational best practices?
+    3. Does response contain hallucinations?
+    
+    Output the validated cloud response text.
+  expected_output: "The validated cloud response text that is safe to re-contextualize"
+  agent: trust_enforcer
+  context:
+    - generalize_query
+
+recontextualize_response:
+  description: >
+    Map the cloud response back to the learner's specific context:
+    
+    Cloud response: Use the validated response from the previous task.
+    Mapping from generalization: Use the mapping from the generalize_query task
+    
+    Replace all placeholders (Protocol-A, Cell-A, etc.) with original terms (CRISPR, HEK293, etc.)
+  expected_output: "Personalized response with original terms restored"
+  agent: recontextualizer
+  context:
+    - generalize_query
+    - validate_response
+
+update_competency:
+  description: >
+    Record this learning interaction in the competency vector using the 'evidence_curator' tool:
+    
+    1. Extract the 'zone' (integer 0-3) from the classify_sensitivity task output.
+    2. Extract the 'response' text from the recontextualize_response task output.
+    3. Use the original 'query' (passed in inputs).
+    4. Determine 'interaction_type' (default to 'active' for explicit queries).
+    
+    Call the tool with these parameters to update the local ChromaDB.
+  expected_output: "Competency vector update confirmation with ID and path"
+  agent: competency_tracker
+  context:
+    - classify_sensitivity
+    - recontextualize_response
