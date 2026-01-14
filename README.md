@@ -69,6 +69,23 @@ The system is orchestrated by **CrewAI** and consists of a team of specialized a
     API_BASE=http://localhost:11434
     ```
 
+4.  **Dataset Setup (OULAD)**
+    The project uses the Open University Learning Analytics Dataset (OULAD). Since data files are gitignored, you must set them up manually:
+    
+    1.  Create the directory structure:
+        ```bash
+        mkdir -p data/oulad
+        ```
+    2.  Download the OULAD dataset (CSV files) and place them inside `data/oulad/`.
+    3.  Ensure the following files are present:
+        *   `studentInfo.csv`
+        *   `studentVle.csv`
+        *   `vle.csv`
+        *   `assessments.csv`
+        *   `studentAssessment.csv`
+        *   `courses.csv`
+        *   `studentRegistration.csv`
+
 ## 🏃‍♂️ How to Run
 
 Ensure Ollama is running (`ollama serve`), then execute the crew:
