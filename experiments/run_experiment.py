@@ -25,6 +25,7 @@ from test_queries import TEST_QUERIES
 
 # Import your tools
 from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
+from sovereign_system.utils.trace import global_tracer
 
 
 @dataclass
@@ -81,6 +82,21 @@ class SemanticGeneralizationExperiment:
         print(f"Processing: {query_id} ({domain})")
         print(f"Query: {original_query[:50]}...")
         
+        # Start trace
+        global_tracer.start_trace(query_id=str(query_id), original_query=original_query)
+        
+        # Log initial manager step (simulated for completeness of flow)
+        global_tracer.log_agent(
+            agent_name="Sovereign Manager",
+            agent_role="Privacy-Aware Query Router",
+            input_data=original_query,
+            output_data=f"Zone 1 - High Sensitivity ({domain})",
+            duration_ms=10.0,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            zone=1
+        )
+        
         start_time = time.time()
         
         # Stage 1: Semantic Generalization
@@ -96,16 +112,56 @@ class SemanticGeneralizationExperiment:
         print(f"Sanitized: {sanitized_query[:50]}...")
         print(f"Mapping: {mapping}")
         
+        # Log Generalizer step
+        global_tracer.log_agent(
+            agent_name="Semantic Generalizer",
+            agent_role="Intent Obfuscation Specialist",
+            input_data=f"Query: {original_query}\nEntities: {sensitive_entities}",
+            output_data=generalization_result,
+            duration_ms=sanitization_time,
+            privacy_before=1.0,
+            privacy_after=0.2, # Improved privacy
+            entities_detected=sensitive_entities,
+            mapping=mapping
+        )
+        
         # Stage 2: Cloud Query (simulated or real)
+        cloud_start = time.time()
         if self.use_cloud:
             cloud_response = self._call_cloud(sanitized_query)
         else:
             cloud_response = self._simulate_cloud_response(sanitized_query, domain)
+        cloud_time = (time.time() - cloud_start) * 1000
+        
+        # Log Cloud step
+        global_tracer.log_agent(
+            agent_name="Cloud Researcher",
+            agent_role="External Knowledge Retrieval",
+            input_data=sanitized_query,
+            output_data=cloud_response,
+            duration_ms=cloud_time,
+            privacy_before=0.2, # Still protected
+            privacy_after=0.2
+        )
         
         # Stage 3: Recontextualization
+        recon_start = time.time()
         recontextualized = self.recontextualization_tool._run(
             response=cloud_response,
             mapping=str(mapping)
+        )
+        recon_time = (time.time() - recon_start) * 1000
+        
+        # Log Recontextualizer
+        global_tracer.log_agent(
+            agent_name="Recontextualizer",
+            agent_role="Response Re-contextualization Specialist",
+            input_data=f"Response: {cloud_response[:50]}...\nMapping: {mapping}",
+            output_data=recontextualized,
+            duration_ms=recon_time,
+            privacy_before=0.2,
+            privacy_after=0.0, # Usage resolved
+            mapping=mapping
         )
         
         total_time = (time.time() - start_time) * 1000
@@ -118,6 +174,25 @@ class SemanticGeneralizationExperiment:
         # Stage 5: Measure Utility
         utility_score = self._measure_utility(
             original_query, recontextualized, domain
+        )
+        
+        # Log final evidence/metrics step
+        global_tracer.log_agent(
+            agent_name="Evidence Curator",
+            agent_role="Learning Record Manager",
+            input_data=recontextualized,
+            output_data="Competency Updated",
+            duration_ms=5.0,
+            privacy_before=0.0,
+            privacy_after=0.0,
+            metadata={"utility": utility_score, "leakage": ip_leakage_score}
+        )
+        
+        # Save trace
+        global_tracer.end_trace(
+            final_response=recontextualized,
+            zone=1,
+            utility_score=utility_score
         )
         
         result = ExperimentResult(

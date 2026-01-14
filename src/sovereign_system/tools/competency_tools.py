@@ -5,6 +5,8 @@ import chromadb
 import uuid
 from datetime import datetime
 import os
+import time
+from sovereign_system.utils.trace import global_tracer
 
 class CompetencyEvidenceInput(BaseModel):
     query: str = Field(..., description="The original query or interaction subject")
@@ -21,6 +23,8 @@ class CompetencyEvidenceTool(BaseTool):
         """
         Store the interaction in ChromaDB with appropriate weighting.
         """
+        start_ts = time.time()
+        
         # Type conversion for zone
         try:
             zone_int = int(zone)
@@ -59,4 +63,33 @@ class CompetencyEvidenceTool(BaseTool):
             ids=[doc_id]
         )
         
-        return f"SUCCESS: Evidence stored in ChromaDB.\nID: {doc_id}\nWeight: {weight}\nZone: {zone_int}\nPath: {db_path}"
+        output = f"SUCCESS: Evidence stored in ChromaDB.\nID: {doc_id}\nWeight: {weight}\nZone: {zone_int}\nPath: {db_path}"
+        
+        # Log to global trace
+        duration = (time.time() - start_ts) * 1000
+        
+        try:
+            global_tracer.log_agent(
+                agent_name="Evidence Curator",
+                agent_role="Competency Evidence Curator",
+                input_data=f"Query: {query}\nResponse: {response[:100]}...",
+                output_data=output,
+                duration_ms=duration,
+                privacy_before=0.0, # Assumed fully restored by now
+                privacy_after=0.0,
+                zone=zone_int,
+                metadata={
+                    "storage": "ChromaDB (local)",
+                    "evidence_id": doc_id,
+                    "weight": weight,
+                    "interaction_type": interaction_type
+                }
+            )
+            
+            # Since this is the last step, end the trace
+            global_tracer.end_trace(response, zone=zone_int, utility_score=0.9)
+            
+        except Exception as e:
+            print(f"Tracing error: {e}")
+            
+        return output

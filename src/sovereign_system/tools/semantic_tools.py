@@ -17,11 +17,7 @@ class SemanticGeneralizationTool(BaseTool):
     
     def _run(self, query: str, sensitive_entities: str) -> str:
         """
-        Core Semantic Generalization logic:
-        1. Parse sensitive entities
-        2. Create abstract placeholders
-        3. Build reverse mapping for re-contextualization
-        4. Return sanitized query
+        Core Semantic Generalization logic
         """
         entities = [e.strip() for e in sensitive_entities.split(",")]
         sanitized = query
@@ -63,7 +59,9 @@ class SemanticGeneralizationTool(BaseTool):
             # Replace in query
             sanitized = re.sub(re.escape(entity), placeholder, sanitized, flags=re.IGNORECASE)
         
-        return f"SANITIZED: {sanitized}\nMAPPING: {self.placeholder_map}"
+        output = f"SANITIZED: {sanitized}\nMAPPING: {self.placeholder_map}"
+        
+        return output
     
     def _is_type(self, entity: str, type_hint: str) -> bool:
         """Simple heuristic type detection"""
@@ -89,34 +87,21 @@ class RecontextualizationTool(BaseTool):
     
     def _run(self, response: str, mapping: str) -> str:
         """
-        Reverse the Semantic Generalization:
-        1. Parse the mapping
-        2. Replace placeholders with original terms
-        3. Return personalized response
+        Re-contextualize the response using the provided mapping.
         """
-        import ast
-        
-        # Parse mapping string to dict
+        # Parse mapping string back to dict if needed
         try:
-            # Handle string format: "{'Protocol-A': 'CRISPR', 'Cell-A': 'HEK293'}"
-            placeholder_map = ast.literal_eval(mapping)
+            mapping_dict = eval(mapping) if isinstance(mapping, str) else mapping
         except:
-            # Try to extract from formatted string
-            placeholder_map = {}
-            pairs = mapping.replace("{", "").replace("}", "").split(",")
-            for pair in pairs:
-                if ":" in pair:
-                    key, val = pair.split(":")
-                    placeholder_map[key.strip().strip("'")] = val.strip().strip("'")
+            return f"Error parsing mapping: {mapping}"
+            
+        restored_response = response
         
-        # Reverse the mapping and replace
-        recontextualized = response
-        for placeholder, original in placeholder_map.items():
-            recontextualized = re.sub(
-                re.escape(placeholder), 
-                original, 
-                recontextualized, 
-                flags=re.IGNORECASE
-            )
-        
-        return f"PERSONALIZED RESPONSE:\n{recontextualized}"
+        # Replace placeholders with original terms
+        for placeholder, original in mapping_dict.items():
+            restored_response = restored_response.replace(placeholder, original)
+            
+        return restored_response
+            
+
+            

@@ -1,0 +1,23 @@
+[
+  {
+    "query_id": "bio_01",
+    "domain": "biomedical",
+    "original_query": "How do I optimize my CRISPR protocol for HEK293 cells?",
+    "sensitive_entities": [
+      "CRISPR",
+      "HEK293"
+    ],
+    "sanitized_query": "How do I optimize my Protocol-A protocol for Cell-A cells?",
+    "mapping": {
+      "Protocol-A": "CRISPR",
+      "Cell-A": "HEK293"
+    },
+    "cloud_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "recontextualized_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.30000000000000004,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.09417533874511719,
+    "total_time_ms": 0.1881122589111328
+  }
+]
