@@ -25,7 +25,7 @@ from test_queries import TEST_QUERIES
 
 # Import your tools
 from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
-from sovereign_system.utils.trace import global_tracer
+from sovereign_system.utils.sovereign_trace_logger import global_tracer
 
 
 @dataclass

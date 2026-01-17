@@ -54,24 +54,65 @@ class SovereignTrace:
         self.total_duration_ms += step.duration_ms
     
     def calculate_privacy_score(self) -> float:
-        """Calculate overall privacy protection score"""
+        """
+        Calculate overall privacy protection score.
+        Logic: The protection score is determined by how protected the data was 
+        WHEN IT LEFT local custody (i.e., at the Cloud Researcher step).
+        It is NOT the final score, because the final score is 1.0 (restored for user).
+        """""
         if not self.steps:
             return 0.0
         
-        # Privacy score is based on how much sensitive info was protected
-        initial_exposure = 1.0  # 100% exposed initially
-        final_exposure = self.steps[-1].privacy_score_after if self.steps else 1.0
-        
-        self.privacy_protection_score = 1.0 - final_exposure
+        # Find the minimum privacy score (maximum protection) achieved during the flow
+        # This usually happens at the Cloud Researcher step
+        min_exposure = 1.0
+        for step in self.steps:
+            if step.privacy_score_after < min_exposure:
+                min_exposure = step.privacy_score_after
+                
+        # If we never reduced exposure, score is 0. If we reduced to 0.1, score is 0.9.
+        self.privacy_protection_score = 1.0 - min_exposure
         return self.privacy_protection_score
     
     def get_agent_contributions(self) -> Dict[str, float]:
-        """Get each agent's contribution to privacy protection"""
+        """
+        Get each agent's contribution to the Sovereign Privacy Workflow.
+        Calculates a score based on:
+        1. Privacy Delta: Active reduction of exposure (Primary)
+        2. Safe Custody: Maintaining protection during processing (Secondary)
+        3. Policy Decision: Strategic routing decisions (Base)
+        """
         contributions = {}
         
         for step in self.steps:
-            privacy_delta = step.privacy_score_before - step.privacy_score_after
-            contributions[step.agent_name] = max(0, privacy_delta)
+            # 1. Active Protection (Delta)
+            # How much did this agent strictly reduce exposure?
+            privacy_delta = max(0, step.privacy_score_before - step.privacy_score_after)
+            
+            # 2. Safe Custody (Maintenance)
+            # If data was protected (score < 0.9), keeping it safe helps.
+            # We give credit for operating on sensitive data without leaking.
+            custody_score = 0.0
+            if step.privacy_score_before < 0.9:
+                # Check if they maintained it (didn't increase exposure significantly)
+                if step.privacy_score_after <= step.privacy_score_before + 0.1:
+                    # Credit proportional to sensitivity (lower score = higher risk/credit)
+                    custody_score = 0.15 * (1.0 - step.privacy_score_before)
+            
+            # 3. Policy Decisions (Manager)
+            # The manager gets credit for identifying the zone correctly
+            policy_score = 0.0
+            if "Manager" in step.agent_name:
+                policy_score = 0.15
+            
+            # 4. Secure Re-integration (Recontextualizer)
+            # Restoring data safely to the user is a critical step
+            restoration_score = 0.0
+            if "Recontextualizer" in step.agent_name and step.privacy_score_after > step.privacy_score_before:
+                restoration_score = 0.2
+                
+            total_contribution = privacy_delta + custody_score + policy_score + restoration_score
+            contributions[step.agent_name] = total_contribution
         
         return contributions
     

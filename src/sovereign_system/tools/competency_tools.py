@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 import os
 import time
-from sovereign_system.utils.trace import global_tracer
+from sovereign_system.utils.sovereign_trace_logger import global_tracer
 
 class CompetencyEvidenceInput(BaseModel):
     query: str = Field(..., description="The original query or interaction subject")

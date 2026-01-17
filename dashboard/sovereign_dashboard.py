@@ -21,7 +21,7 @@ import json
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import from core system source of truth
-from src.sovereign_system.utils.trace import SovereignTrace, SovereignTracer, create_demo_trace, AgentStep
+from src.sovereign_system.utils.sovereign_trace_logger import SovereignTrace, SovereignTracer, create_demo_trace, AgentStep
 
 # Page config
 st.set_page_config(
@@ -82,49 +82,114 @@ st.markdown("""
 
 
 def create_privacy_waterfall(trace: SovereignTrace) -> go.Figure:
-    """Create SHAP-style waterfall chart for privacy protection"""
+    """create enhanced waterfall chart using go.Bar for custom coloring"""
     
-    agents = []
-    privacy_values = []
-    colors = []
+    # Data prep
+    x_data = ["Start"]
+    y_data = [1.0] # Height of bar
+    base_data = [0.0] # Start of bar
+    text_data = ["<b>100%</b><br>Initial"]
+    colors = ["#FF5252"] # Start Red
     
-    prev_privacy = 1.0
+    prev_exposure = 1.0
     
     for step in trace.steps:
-        agents.append(step.agent_name)
-        delta = step.privacy_score_after - prev_privacy
-        privacy_values.append(delta)
+        x_data.append(step.agent_name)
         
-        if delta < -0.1:
-            colors.append('#4CAF50')  # Green - privacy improved
-        elif delta > 0.1:
-            colors.append('#f44336')  # Red - privacy decreased
+        current_exposure = step.privacy_score_after
+        delta = current_exposure - prev_exposure
+        
+        # For Bar chart: 
+        # If decreasing (delta < 0): Base = Prev, Y = Delta (negative)
+        # If increasing (delta > 0): Base = Prev, Y = Delta (positive)
+        base_data.append(prev_exposure if delta > 0 else prev_exposure + delta)
+        # Actually go.Bar draws from 'base' up to 'base + y'.
+        # If y is negative, it draws down? Plotly handles it.
+        # Let's stick to: Base is always the bottom of the bar?
+        # No, 'base' is the reference line.
+        # If I want to draw from 1.0 down to 0.1:
+        # Base = 0.1, Y = 0.9? Or Base=1.0, Y=-0.9?
+        # Usually Base=1.0, Y=-0.9 works.
+        
+        base_data.append(prev_exposure)
+        y_data.append(delta)
+        
+        # Color Logic
+        if delta < -0.01:
+             colors.append("#00C853") # Green (Sanitization)
+             text_data.append(f"<b>{delta:+.0%}</b><br>Sanitized")
+        elif delta > 0.01:
+             if "Recontextualizer" in step.agent_name:
+                 colors.append("#448AFF") # Blue (Restored)
+                 text_data.append(f"<b>{delta:+.0%}</b><br>Restored")
+             else:
+                 colors.append("#FF5252") # Red (Leak)
+                 text_data.append(f"<b>{delta:+.0%}</b><br>Risk")
         else:
-            colors.append('#9E9E9E')  # Gray - no change
-        
-        prev_privacy = step.privacy_score_after
+             colors.append("rgba(0,0,0,0)") # Invisible/Grey
+             text_data.append("")
+             
+        prev_exposure = current_exposure
+
+    # Final Bar
+    x_data.append("Final")
+    y_data.append(prev_exposure)
+    base_data.append(0)
+    code = "#448AFF" if prev_exposure > 0.8 else "#00C853"
+    colors.append(code)
+    text_data.append(f"<b>{prev_exposure:.0%}</b><br>Final")
     
-    fig = go.Figure(go.Waterfall(
-        name="Privacy Score",
-        orientation="v",
-        x=agents,
-        y=privacy_values,
-        connector={"line": {"color": "#666"}},
-        decreasing={"marker": {"color": "#4CAF50"}},
-        increasing={"marker": {"color": "#f44336"}},
-        totals={"marker": {"color": "#2196F3"}},
-        text=[f"{v:+.0%}" if v != 0 else "0%" for v in privacy_values],
-        textposition="outside"
+    # Create Figure
+    fig = go.Figure(go.Bar(
+        x=x_data,
+        y=y_data,
+        base=base_data,
+        marker_color=colors,
+        text=text_data,
+        textposition="outside",
+        textfont=dict(size=11)
+    ))
+
+    # Add connector lines (simulation)
+    # We can add a line shape for each step
+    shapes = []
+    
+    # Safe Zone
+    shapes.append(dict(
+        type="rect",
+        xref="paper", yref="y",
+        x0=0, x1=1,
+        y0=-0.05, y1=0.2,
+        fillcolor="#00C853", opacity=0.1,
+        line_width=0, layer="below"
     ))
     
     fig.update_layout(
-        title="Privacy Protection Waterfall (Lower = Better Protection)",
+        title={
+            'text': "<b>Data Exposure Level</b><br><span style='font-size:12px;color:grey'>Values indicate % of visible sensitive data</span>",
+            'x': 0.5, 'xanchor': 'center'
+        },
         showlegend=False,
-        height=400,
-        yaxis_title="Privacy Score Change",
-        yaxis_tickformat=".0%"
+        height=450,
+        shapes=shapes,
+        yaxis=dict(
+            title="Exposure Level (0% = Safe)",
+            range=[-0.1, 1.25],
+            tickformat=".0%",
+            zeroline=True, gridcolor='rgba(0,0,0,0.1)'
+        ),
+        xaxis=dict(tickangle=-15),
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(family="Inter, sans-serif")
     )
     
+    fig.add_annotation(
+        x=0.02, y=0.1, xref="paper", yref="y",
+        text="<b>✅ Cloud Safe Zone</b>", showarrow=False,
+        font=dict(color="#00C853")
+    )
+
     return fig
 
 
