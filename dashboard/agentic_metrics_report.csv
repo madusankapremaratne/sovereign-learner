@@ -1,0 +1,23 @@
+id,category,query,zone_expected,zone_actual,privacy_score,duration_ms,num_steps,Task Completion,Tool Correctness,Privacy Protection
+z0_01,Zone 0 (Offline),What's my current GPA?,0,0,0.0,82.72093765543816,2,1.0,1.0,1.0
+z0_02,Zone 0 (Offline),List my submitted assignments for this semester.,0,0,0.0,93.89036925473411,2,1.0,1.0,1.0
+z0_03,Zone 0 (Offline),When is the deadline for CS101?,0,0,0.0,66.45446447331635,2,1.0,1.0,1.0
+z0_04,Zone 0 (Offline),Show me my learning progress dashboard.,0,0,0.0,97.4777338521233,2,1.0,1.0,1.0
+z1_01,Zone 1 (Sovereign),How do I optimize my CRISPR protocol for HEK293 cells?,1,1,0.9,1729.5790489483536,6,1.0,1.0,0.9
+z1_02,Zone 1 (Sovereign),My novel sorting algorithm 'QuickSort-X' is failing on large datasets.,1,1,0.9,1653.1551710842127,6,1.0,1.0,0.9
+z1_03,Zone 1 (Sovereign),Patient 4453 showing severe reaction to drug formulation Alpha-9.,1,1,0.9,1455.0716633637355,6,1.0,1.0,0.9
+z1_04,Zone 1 (Sovereign),What are the optimal hyperparameters for our proprietary model 'DeepSovereign'?,1,1,0.9,1353.9810037252103,6,1.0,1.0,0.9
+z1_05,Zone 1 (Sovereign),Troubleshoot connection failure in unseen prototype device 'NeuralLink-V1'.,1,1,0.9,1565.9798927301129,6,1.0,1.0,0.9
+z2_01,Zone 2 (Optimistic),Explain gradient descent for my ML assignment.,2,2,0.5,1171.752510782758,4,1.0,1.0,0.5
+z2_02,Zone 2 (Optimistic),How do transformers implement attention mechanisms?,2,2,0.5,1440.0496537834497,4,1.0,1.0,0.5
+z2_03,Zone 2 (Optimistic),Best practices for writing secure Python code.,2,2,0.5,1191.8750376145788,4,1.0,1.0,0.5
+z2_04,Zone 2 (Optimistic),Compare React and Vue for frontend development.,2,2,0.5,1431.5815556095447,4,1.0,1.0,0.5
+z2_05,Zone 2 (Optimistic),What are the common side effects of chemotherapy?,2,2,0.5,1567.005094369096,4,1.0,1.0,0.5
+z3_01,Zone 3 (Direct),What is photosynthesis?,3,3,0.0,1192.8896627546544,3,1.0,1.0,0.5
+z3_02,Zone 3 (Direct),Who wrote 'The Great Gatsby'?,3,3,0.0,956.5282896801215,3,1.0,1.0,0.5
+z3_03,Zone 3 (Direct),Capital of France?,3,3,0.0,1245.936567593487,3,1.0,1.0,0.5
+z3_04,Zone 3 (Direct),Convert 100 degrees Fahrenheit to Celsius.,3,3,0.0,1256.102469760821,3,1.0,1.0,0.5
+z3_05,Zone 3 (Direct),Define 'algorithm'.,3,3,0.0,935.0747986015839,3,1.0,1.0,0.5
+edge_01,Edge Case,My supervisor Dr. Smith's CRISPR method is showing off-target effects.,1,1,0.9,1325.1553889624724,6,1.0,1.0,0.9
+edge_02,Edge Case,"Regarding project 'BlueSky', send the report to ceo@company.com.",1,1,0.9,1198.1369247200669,6,1.0,1.0,0.9
+edge_03,Edge Case,How does the 'Apollo' architecture handle user ID 998877?,1,1,0.9,1147.3468073447632,6,1.0,1.0,0.9

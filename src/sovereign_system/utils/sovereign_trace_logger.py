@@ -12,6 +12,12 @@ from dataclasses import dataclass, field, asdict
 import json
 import os
 
+try:
+    from deepeval.test_case import LLMTestCase, ToolCall
+    DEEPEVAL_AVAILABLE = True
+except ImportError:
+    DEEPEVAL_AVAILABLE = False
+
 
 @dataclass
 class AgentStep:
@@ -147,6 +153,48 @@ class SovereignTrace:
             "agent_contributions": self.get_agent_contributions(),
             "timeline": self.get_timeline()
         }
+    
+    def to_deepeval_test_case(self) -> 'LLMTestCase':
+        """
+        Convert SovereignTrace to DeepEval LLMTestCase.
+        Enables use of DeepEval metrics:
+        - Task Completion
+        - Tool Correctness
+        - Step Efficiency
+        - Plan Adherence
+        """
+        if not DEEPEVAL_AVAILABLE:
+            raise ImportError("DeepEval is not installed. Please install it (pip install deepeval) to use this feature.")
+            
+        tool_calls = []
+        retrieval_context = []
+        
+        for step in self.steps:
+            # Construct ToolCall from AgentStep
+            # Ensure safe parsing of reasoning from metadata
+            reason = str(step.metadata.get("reason", step.agent_role))
+            
+            tool_call = ToolCall(
+                name=step.agent_name,
+                description=step.agent_role,
+                reasoning=reason,
+                output=str(step.output_data),
+                input_parameters={"input": str(step.input_data)}
+            )
+            tool_calls.append(tool_call)
+            
+            # Identify retrieval steps for context
+            if "Researcher" in step.agent_name or "Curator" in step.agent_name:
+                retrieval_context.append(str(step.output_data))
+        
+        return LLMTestCase(
+            input=self.original_query,
+            actual_output=self.final_response,
+            tools_called=tool_calls,
+            retrieval_context=retrieval_context if retrieval_context else None,
+            completion_time=self.total_duration_ms / 1000.0,
+            name=self.query_id
+        )
     
     def save(self, output_dir: str = "./traces"):
         """Save trace to JSON file"""

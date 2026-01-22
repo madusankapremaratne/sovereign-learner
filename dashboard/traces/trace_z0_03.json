@@ -1,0 +1,65 @@
+{
+  "query_id": "z0_03",
+  "original_query": "When is the deadline for CS101?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "When is the deadline for CS101?",
+      "output_data": "Zone 0",
+      "duration_ms": 43.17641283842025,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 0",
+        "reason": "Classified based on sensitivity"
+      },
+      "timestamp": "2026-01-17T22:01:52.451016",
+      "zone": 0,
+      "status": "success"
+    },
+    {
+      "agent_name": "Local Knowledge",
+      "agent_role": "Internal Database Access",
+      "input_data": "When is the deadline for CS101?",
+      "output_data": "[Local Data Retrieved]",
+      "duration_ms": 23.278051634896105,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.451020",
+      "zone": 0,
+      "status": "success"
+    }
+  ],
+  "final_response": "[Local Data Retrieved]",
+  "total_duration_ms": 66.45446447331635,
+  "zone_used": 0,
+  "privacy_protection_score": 0.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-17T22:01:52.451010",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Local Knowledge": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 43.17641283842025,
+      "end_ms": 43.17641283842025
+    },
+    {
+      "agent": "Local Knowledge",
+      "start_ms": 43.17641283842025,
+      "duration_ms": 23.278051634896105,
+      "end_ms": 66.45446447331635
+    }
+  ]
+}

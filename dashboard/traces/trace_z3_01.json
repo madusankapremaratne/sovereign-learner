@@ -1,0 +1,88 @@
+{
+  "query_id": "z3_01",
+  "original_query": "What is photosynthesis?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What is photosynthesis?",
+      "output_data": "Zone 3",
+      "duration_ms": 52.96854575546426,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 3",
+        "reason": "Classified based on sensitivity"
+      },
+      "timestamp": "2026-01-17T22:01:52.454495",
+      "zone": 3,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What is photosynthesis?",
+      "output_data": "[Cloud Response Content]",
+      "duration_ms": 1110.7133056100708,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.454498",
+      "zone": 3,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Final Answer",
+      "output_data": "Competency Updated",
+      "duration_ms": 29.20781138911934,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.454500",
+      "zone": 3,
+      "status": "success"
+    }
+  ],
+  "final_response": "Final Answer",
+  "total_duration_ms": 1192.8896627546544,
+  "zone_used": 3,
+  "privacy_protection_score": 0.0,
+  "utility_score": 0.95,
+  "created_at": "2026-01-17T22:01:52.454487",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Cloud Researcher": 0.0,
+    "Evidence Curator": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 52.96854575546426,
+      "end_ms": 52.96854575546426
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 52.96854575546426,
+      "duration_ms": 1110.7133056100708,
+      "end_ms": 1163.681851365535
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 1163.681851365535,
+      "duration_ms": 29.20781138911934,
+      "end_ms": 1192.8896627546544
+    }
+  ]
+}

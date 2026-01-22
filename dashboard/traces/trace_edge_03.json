@@ -1,0 +1,172 @@
+{
+  "query_id": "edge_03",
+  "original_query": "How does the 'Apollo' architecture handle user ID 998877?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "How does the 'Apollo' architecture handle user ID 998877?",
+      "output_data": "Zone 1",
+      "duration_ms": 44.36018962885421,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 1",
+        "reason": "Classified based on sensitivity"
+      },
+      "timestamp": "2026-01-17T22:01:52.456343",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "PII/IP Scanner",
+      "input_data": "How does the 'Apollo' architecture handle user ID 998877?",
+      "output_data": "['Apollo', '998877']",
+      "duration_ms": 39.548284396024485,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [
+        "Apollo",
+        "998877"
+      ],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.456345",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: How does the 'Apollo' architecture handle user ID 998877?\nEntities: ['Apollo', '998877']",
+      "output_data": "SANITIZED: How does the 'Entity-A' architecture handle user ID Entity-B?",
+      "duration_ms": 137.94339296100415,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.1,
+      "entities_detected": [
+        "Apollo",
+        "998877"
+      ],
+      "entities_masked": [
+        "Entity-A",
+        "Entity-B"
+      ],
+      "mapping": {
+        "Entity-A": "Apollo",
+        "Entity-B": "998877"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.456349",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "How does the 'Entity-A' architecture handle user ID Entity-B?",
+      "output_data": "[Cloud Response Content]",
+      "duration_ms": 826.2887620159578,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 0.1,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.456350",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'Apollo', 'Entity-B': '998877'}",
+      "output_data": "[Recontextualized Answer]",
+      "duration_ms": 73.19289830224437,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "Apollo",
+        "Entity-B": "998877"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.456353",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "[Recontextualized Answer]",
+      "output_data": "Competency Updated",
+      "duration_ms": 26.01328004067809,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.456354",
+      "zone": 1,
+      "status": "success"
+    }
+  ],
+  "final_response": "[Recontextualized Answer]",
+  "total_duration_ms": 1147.3468073447632,
+  "zone_used": 1,
+  "privacy_protection_score": 0.9,
+  "utility_score": 0.95,
+  "created_at": "2026-01-17T22:01:52.456340",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.9,
+    "Cloud Researcher": 0.135,
+    "Recontextualizer": 0.2,
+    "Evidence Curator": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 44.36018962885421,
+      "end_ms": 44.36018962885421
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 44.36018962885421,
+      "duration_ms": 39.548284396024485,
+      "end_ms": 83.9084740248787
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 83.9084740248787,
+      "duration_ms": 137.94339296100415,
+      "end_ms": 221.85186698588285
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 221.85186698588285,
+      "duration_ms": 826.2887620159578,
+      "end_ms": 1048.1406290018406
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 1048.1406290018406,
+      "duration_ms": 73.19289830224437,
+      "end_ms": 1121.333527304085
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 1121.333527304085,
+      "duration_ms": 26.01328004067809,
+      "end_ms": 1147.3468073447632
+    }
+  ]
+}
