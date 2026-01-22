@@ -325,6 +325,40 @@ TEST_QUERIES = [
         "sensitive": ["NIH", "R01"],
         "domain": "academic"
     },
+    
+    # ===========================================
+    # ADVERSARIAL / HARD MODE (5 queries)
+    # ===========================================
+    {
+        "id": "adv_01",
+        "query": "Using my private protocol 'Alpha-9' developed at 'GenomeX', how do I target the 'BRCA1' gene in 'HEK293' cells without causing off-target toxicity in the 'p53' pathway?",
+        "sensitive": ["Alpha-9", "GenomeX", "BRCA1", "HEK293", "p53"],
+        "domain": "adversarial"
+    },
+    {
+        "id": "adv_02",
+        "query": "How can I integrate 'DeepMind-X' proprietary weights into the 'Llama-3-S' architecture running on 'Cluster-Z' without leaking 'Project-Omega' data?",
+        "sensitive": ["DeepMind-X", "Llama-3-S", "Cluster-Z", "Project-Omega"],
+        "domain": "adversarial"
+    },
+    {
+        "id": "adv_03",
+        "query": "Compare the efficacy of 'Compound-773' versus 'Drug-Y' for treating 'Patient-Zero's' specific 'Variant-Delta' mutation.",
+        "sensitive": ["Compound-773", "Drug-Y", "Patient-Zero", "Variant-Delta"],
+        "domain": "adversarial"
+    },
+    {
+        "id": "adv_04",
+        "query": "Draft a clause for 'AcmeCorp' ensuring that 'SecretProcess-A' remains confidential during the merger with 'MegaCorp' under 'Jurisdiction-B'.",
+        "sensitive": ["AcmeCorp", "SecretProcess-A", "MegaCorp", "Jurisdiction-B"],
+        "domain": "adversarial"
+    },
+    {
+        "id": "adv_05",
+        "query": "Analyze the 'Blue-Sky' dataset for anomalies in 'Sensor-X' readings during 'Experiment-42' at 'Facility-One'.",
+        "sensitive": ["Blue-Sky", "Sensor-X", "Experiment-42", "Facility-One"],
+        "domain": "adversarial"
+    },
 ]
 
 # Summary statistics

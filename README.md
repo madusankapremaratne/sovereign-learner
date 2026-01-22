@@ -103,6 +103,12 @@ python src/sovereign_system/main.py
 
 ```
 sovereign_system/
+├── data/                   # Data storage
+│   ├── oulad/              # OULAD dataset (CSVs)
+│   └── synthetic/          # Generated synthetic queries (JSONs)
+├── experiments/            # Experiment notebooks and runners
+├── scripts/
+│   └── data_generation/    # Scripts to generate synthetic datasets
 ├── knowledge/              # Local Persistent Memory
 │   ├── chroma_db/          # Vector embeddings of your learning
 │   └── user_preference.txt # User profile (Local only)

@@ -15,6 +15,9 @@ import numpy as np
 from datetime import datetime
 from typing import Dict, List, Tuple
 from dataclasses import dataclass, asdict
+from dotenv import load_dotenv
+
+load_dotenv()
 import json
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
@@ -379,6 +382,7 @@ class ComplexQueryResult:
     condition: str
     mse: float
     r2: float
+    execution_time_ms: float
     features_used: List[str]
 
 
@@ -513,20 +517,25 @@ class ComplexQueryExperiment:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
         
         # Model
+        import time
+        start_time = time.time()
         model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
+        exec_time = (time.time() - start_time) * 1000
         
         mse = mean_squared_error(y_test, y_pred)
         r2 = r2_score(y_test, y_pred)
         
         print(f"  MSE: {mse:.2f}")
         print(f"  R2 Score: {r2:.3f}")
+        print(f"  Time: {exec_time:.2f}ms")
         
         return ComplexQueryResult(
             condition=condition,
             mse=mse,
             r2=r2,
+            execution_time_ms=exec_time,
             features_used=features
         )
         
@@ -554,9 +563,11 @@ class ComplexQueryExperiment:
             },
             "improvements": {
                 "improvement_vs_cloud_percent": imp_vs_cloud,
-                "improvement_vs_local_percent": imp_vs_local
+                "improvement_vs_local_percent": imp_vs_local,
+                "speedup_vs_cloud_percent": 0 # Local is likely faster than hybrid? Actually Hybrid has more features so maybe slower?
+                # Actually local_only uses fewer features -> faster training/inference.
             },
-            "conclusion": f"Hybrid approach reduces error by {imp_vs_cloud:.1f}% vs Cloud and {imp_vs_local:.1f}% vs Local"
+            "conclusion": f"Hybrid reduces error by {imp_vs_local:.1f}% vs Local (despite Local being {local.execution_time_ms/hybrid.execution_time_ms:.1f}x faster) and {imp_vs_cloud:.1f}% vs Cloud"
         }
         
         print("\n" + "="*60)

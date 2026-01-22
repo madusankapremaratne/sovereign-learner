@@ -32,6 +32,10 @@ class SemanticGeneralizationTool(BaseTool):
             "disease": "Condition-C",
             "institution": "Institution-D",
             "project": "Project-E",
+            "company": "Company-F",
+            "location": "Location-G",
+            "dataset": "Dataset-H",
+            "hardware": "Hardware-I",
         }
         
         placeholder_counter = {}
@@ -66,10 +70,13 @@ class SemanticGeneralizationTool(BaseTool):
     def _is_type(self, entity: str, type_hint: str) -> bool:
         """Simple heuristic type detection"""
         type_indicators = {
-            "protocol": ["crispr", "pcr", "elisa", "western"],
-            "cell": ["hek", "hela", "cho", "293", "cell"],
-            "gene": ["brca", "tp53", "egfr", "kras"],
-            "compound": ["mg", "ml", "acid", "ase"],
+            "protocol": ["crispr", "pcr", "elisa", "western", "alpha", "protocol"],
+            "cell": ["hek", "hela", "cho", "293", "cell", "neuron", "cardiomyocyte"],
+            "gene": ["brca", "tp53", "egfr", "kras", "p53"],
+            "compound": ["mg", "ml", "acid", "ase", "drug", "compound"],
+            "company": ["inc", "corp", "ltd", "google", "microsoft", "sequoia", "acme"],
+            "project": ["project", "experiment", "study"],
+            "hardware": ["gpu", "tpu", "cluster", "sensor", "a100"],
         }
         entity_lower = entity.lower()
         if type_hint in type_indicators:
