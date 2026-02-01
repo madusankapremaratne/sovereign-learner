@@ -9,6 +9,10 @@
 
 The Sovereign Learner system includes **5 comprehensive experiments** designed to validate different aspects of the privacy-preserving AI architecture. Each experiment tests specific hypotheses about the system's effectiveness, performance, and capabilities.
 
+> **Methodology Note:** For a deep dive into *why* we chose specific metrics (e.g., F1 over Accuracy) and algorithms (e.g., Random Forest over XGBoost), please see:
+> - 📘 [THEORETICAL_JUSTIFICATIONS.md](THEORETICAL_JUSTIFICATIONS.md) (Full Theoretical Defense)
+> - ⚡ [METHODOLOGICAL_CHOICES_QUICK_REF.md](METHODOLOGICAL_CHOICES_QUICK_REF.md) (Quick Design Cheat Sheet)
+
 ---
 
 ## 🔬 Experiment Catalog

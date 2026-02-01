@@ -484,6 +484,8 @@ While LLM-based privacy protection achieves 95%+ effectiveness in normal scenari
 |----------|-------------|
 | [README.md](README.md) | This file - project overview |
 | [EXPERIMENTS_SUMMARY.md](EXPERIMENTS_SUMMARY.md) | Detailed experiment documentation (5 experiments) |
+| [THEORETICAL_JUSTIFICATIONS.md](THEORETICAL_JUSTIFICATIONS.md) | **NEW!** Defense of metrics (F1, MSE) & algorithms (Random Forest vs XGBoost) |
+| [METHODOLOGICAL_CHOICES_QUICK_REF.md](METHODOLOGICAL_CHOICES_QUICK_REF.md) | **NEW!** Quick cheat sheet for design choices |
 | [TRACE_ANALYSIS_REPORT.md](TRACE_ANALYSIS_REPORT.md) | Analysis of 1,238 traces with metrics |
 | [PRESENTATION_RESULTS.md](PRESENTATION_RESULTS.md) | Key results for presentations |
 | [experiments/README.md](experiments/README.md) | Experiments quick reference |
