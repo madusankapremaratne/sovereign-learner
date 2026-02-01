@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "List my submitted assignments for this semester.",
       "output_data": "Zone 0",
-      "duration_ms": 58.11561445216654,
+      "duration_ms": 46.90633059159942,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 0",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.450666",
+      "timestamp": "2026-01-22T16:26:49.413885",
       "zone": 0,
       "status": "success"
     },
@@ -26,24 +26,24 @@
       "agent_role": "Internal Database Access",
       "input_data": "List my submitted assignments for this semester.",
       "output_data": "[Local Data Retrieved]",
-      "duration_ms": 35.774754802567564,
+      "duration_ms": 36.03825057300935,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.450670",
+      "timestamp": "2026-01-22T16:26:49.413888",
       "zone": 0,
       "status": "success"
     }
   ],
   "final_response": "[Local Data Retrieved]",
-  "total_duration_ms": 93.89036925473411,
+  "total_duration_ms": 82.94458116460876,
   "zone_used": 0,
   "privacy_protection_score": 0.0,
   "utility_score": 1.0,
-  "created_at": "2026-01-17T22:01:52.450656",
+  "created_at": "2026-01-22T16:26:49.413878",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Local Knowledge": 0.0
@@ -52,14 +52,14 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 58.11561445216654,
-      "end_ms": 58.11561445216654
+      "duration_ms": 46.90633059159942,
+      "end_ms": 46.90633059159942
     },
     {
       "agent": "Local Knowledge",
-      "start_ms": 58.11561445216654,
-      "duration_ms": 35.774754802567564,
-      "end_ms": 93.89036925473411
+      "start_ms": 46.90633059159942,
+      "duration_ms": 36.03825057300935,
+      "end_ms": 82.94458116460876
     }
   ]
 }

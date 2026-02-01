@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "Capital of France?",
       "output_data": "Zone 3",
-      "duration_ms": 42.10829376812434,
+      "duration_ms": 40.74837920862204,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 3",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.455057",
+      "timestamp": "2026-01-22T16:26:49.417574",
       "zone": 3,
       "status": "success"
     },
@@ -26,14 +26,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "Capital of France?",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1181.1844870465159,
+      "duration_ms": 819.1709147516552,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.455060",
+      "timestamp": "2026-01-22T16:26:49.417576",
       "zone": 3,
       "status": "success"
     },
@@ -42,24 +42,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "Final Answer",
       "output_data": "Competency Updated",
-      "duration_ms": 22.643786778846835,
+      "duration_ms": 39.96301715680376,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.455062",
+      "timestamp": "2026-01-22T16:26:49.417578",
       "zone": 3,
       "status": "success"
     }
   ],
   "final_response": "Final Answer",
-  "total_duration_ms": 1245.936567593487,
+  "total_duration_ms": 899.882311117081,
   "zone_used": 3,
   "privacy_protection_score": 0.0,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.455053",
+  "created_at": "2026-01-22T16:26:49.417571",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Cloud Researcher": 0.0,
@@ -69,20 +69,20 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 42.10829376812434,
-      "end_ms": 42.10829376812434
+      "duration_ms": 40.74837920862204,
+      "end_ms": 40.74837920862204
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 42.10829376812434,
-      "duration_ms": 1181.1844870465159,
-      "end_ms": 1223.2927808146403
+      "start_ms": 40.74837920862204,
+      "duration_ms": 819.1709147516552,
+      "end_ms": 859.9192939602773
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1223.2927808146403,
-      "duration_ms": 22.643786778846835,
-      "end_ms": 1245.936567593487
+      "start_ms": 859.9192939602773,
+      "duration_ms": 39.96301715680376,
+      "end_ms": 899.882311117081
     }
   ]
 }

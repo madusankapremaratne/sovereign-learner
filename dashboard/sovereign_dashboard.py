@@ -31,6 +31,10 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Compatibility for older Streamlit versions
+if not hasattr(st, "rerun"):
+    st.rerun = st.experimental_rerun
+
 # Custom CSS
 st.markdown("""
 <style>
@@ -52,6 +56,11 @@ st.markdown("""
         padding: 20px;
         border-radius: 10px;
         color: white;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .agent-box {
         border: 2px solid #e0e0e0;
@@ -394,6 +403,19 @@ def render_agent_step(step: AgentStep, index: int):
     }
     icon = icons.get(step.agent_name, "🤖")
     
+    # Model assignment based on agent
+    model_info = {
+        "Sovereign Manager": ("SLM", "Phi-3.5 (3.8B)"),
+        "Sensitivity Detector": ("SLM", "Phi-3.5 (3.8B)"),
+        "Semantic Generalizer": ("SLM", "Phi-3.5 (3.8B)"),
+        "Cloud Researcher": ("LLM", "Gemini 2.0 Flash"),
+        "Trust Enforcer": ("SLM", "Phi-3.5 (3.8B)"),
+        "Recontextualizer": ("SLM", "Phi-3.5 (3.8B)"),
+        "Evidence Curator": ("SLM", "Phi-3.5 (3.8B)")
+    }
+    model_type, model_name = model_info.get(step.agent_name, ("Unknown", "Unknown"))
+    model_badge_color = "#2196F3" if model_type == "LLM" else "#4CAF50"
+    
     # Privacy change indicator
     privacy_delta = step.privacy_score_before - step.privacy_score_after
     if privacy_delta > 0.1:
@@ -411,6 +433,14 @@ def render_agent_step(step: AgentStep, index: int):
         <div class="agent-box {box_class}">
             <h4>{icon} Step {index + 1}: {step.agent_name}</h4>
             <p><em>{step.agent_role}</em></p>
+            <p style="margin-top: 8px;">
+                <span style="background: {model_badge_color}; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+                    {model_type}
+                </span>
+                <span style="color: #666; margin-left: 8px; font-size: 0.9rem;">
+                    {model_name}
+                </span>
+            </p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -431,10 +461,19 @@ def render_agent_step(step: AgentStep, index: int):
         # Show mapping if present
         if step.mapping:
             with st.expander("🔀 Mapping Table"):
-                mapping_df = pd.DataFrame([
-                    {"Placeholder": k, "Original": v} for k, v in step.mapping.items()
-                ])
+                mapping_data = []
+                for k, v in step.mapping.items():
+                    mapping_data.append({
+                        "Placeholder": k,
+                        "Original": v if v else "⚠️ (empty - detection failed)",
+                        "Status": "✅ Mapped" if v else "❌ Not detected"
+                    })
+                mapping_df = pd.DataFrame(mapping_data)
                 st.table(mapping_df)
+                
+                # Show warning if any mappings are empty
+                if any(not v for v in step.mapping.values()):
+                    st.warning("⚠️ Some entities were not detected (empty mappings). This may indicate the Knowledge Base was disabled or the entity wasn't in the detection patterns.")
         
         # Show metadata if present
         if step.metadata:
@@ -444,6 +483,52 @@ def render_agent_step(step: AgentStep, index: int):
         st.markdown("---")
 
 
+def load_trace_callback(trace_file_path):
+    """Callback to load trace file"""
+    try:
+        with open(trace_file_path, 'r') as f:
+            data = json.load(f)
+        
+        # Reconstruct trace object from saved JSON
+        trace = SovereignTrace(
+            query_id=data.get('query_id', 'loaded'),
+            original_query=data.get('original_query', '')
+        )
+        
+        # Set all trace attributes
+        trace.final_response = data.get('final_response', '')
+        trace.total_duration_ms = data.get('total_duration_ms', 0)
+        trace.zone_used = data.get('zone_used', 1)
+        trace.privacy_protection_score = data.get('privacy_protection_score', 0)
+        trace.utility_score = data.get('utility_score', 0)
+        
+        # Reconstruct agent steps
+        for step_data in data.get('steps', []):
+            step = AgentStep(
+                agent_name=step_data.get('agent_name', ''),
+                agent_role=step_data.get('agent_role', ''),
+                input_data=step_data.get('input_data', ''),
+                output_data=step_data.get('output_data', ''),
+                duration_ms=step_data.get('duration_ms', 0),
+                privacy_score_before=step_data.get('privacy_score_before', 1.0),
+                privacy_score_after=step_data.get('privacy_score_after', 1.0),
+                entities_detected=step_data.get('entities_detected', []),
+                entities_masked=step_data.get('entities_masked', []),
+                mapping=step_data.get('mapping', {}),
+                metadata=step_data.get('metadata', {}),
+                timestamp=step_data.get('timestamp', ''),
+                zone=step_data.get('zone'),
+                status=step_data.get('status', 'success')
+            )
+            trace.add_step(step)
+        
+        st.session_state.current_trace = trace
+        st.session_state.trace_counter = st.session_state.get('trace_counter', 0) + 1
+        st.session_state.last_loaded_file = trace_file_path
+        
+    except Exception as e:
+        st.session_state.load_error = str(e)
+
 def main():
     # Header
     st.markdown('<p class="main-header">🛡️ Sovereign Learner</p>', unsafe_allow_html=True)
@@ -451,7 +536,14 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.image("https://via.placeholder.com/200x80?text=Sovereign+Learner", width=200)
+        # Replaced broken placeholder image with styled CSS header
+        st.markdown("""
+        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h1 style="color: white; margin: 0; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">🛡️ Sovereign</h1>
+            <p style="color: #b0c4de; margin: 5px 0 0 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Privacy-First AI</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
         st.markdown("### Query Input")
         
         # Preset queries
@@ -463,19 +555,227 @@ def main():
             "Custom": ""
         }
         
-        query_type = st.selectbox("Select Query Type", list(preset_queries.keys()))
+        # Check if we have a loaded trace to populate the query
+        default_query_type = "CRISPR Research"
+        default_query_text = preset_queries[default_query_type]
+        
+        if 'current_trace' in st.session_state:
+            # If trace is loaded, show its original query
+            default_query_text = st.session_state.current_trace.original_query
+            default_query_type = "Custom"
+        
+        query_type = st.selectbox("Select Query Type", list(preset_queries.keys()), 
+                                   index=list(preset_queries.keys()).index(default_query_type))
         
         if query_type == "Custom":
-            query = st.text_area("Enter your query:", height=100)
+            # Use trace_counter to force refresh when a new trace is loaded
+            trace_counter = st.session_state.get('trace_counter', 0)
+            query = st.text_area("Enter your query:", value=default_query_text, height=100, key=f"query_input_{trace_counter}")
+        else:
+            query = st.text_area("Query:", value=preset_queries[query_type], height=100)
+        
+def render_trace_view(trace):
+    """Render the full trace visualization (metrics + tabs)"""
+    
+    # Top metrics
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric(
+            "Privacy Protection",
+            f"{trace.privacy_protection_score:.0%}",
+            delta="Protected",
+            delta_color="normal"
+        )
+    
+    with col2:
+        st.metric(
+            "Zone Used",
+            f"Zone {trace.zone_used}",
+            delta="High Security" if trace.zone_used <= 1 else "Standard"
+        )
+    
+    with col3:
+        st.metric(
+            "Total Latency",
+            f"{trace.total_duration_ms:.0f}ms",
+            delta=f"{len(trace.steps)} agents"
+        )
+    
+    with col4:
+        st.metric(
+            "Utility Score",
+            f"{trace.utility_score:.0%}",
+            delta="Educational value"
+        )
+    
+    st.markdown("---")
+    
+    # Tabs for different views
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+        "📊 Privacy Waterfall",
+        "🎯 Agent Contributions", 
+        "⏱️ Timeline",
+        "🔀 Data Flow",
+        "📝 Step-by-Step"
+    ])
+    
+    with tab1:
+        st.markdown("### Privacy Protection Waterfall")
+        st.markdown("""
+        This chart shows how privacy protection changes at each stage of the pipeline.
+        **Green bars** indicate privacy improvement (sensitive data protected).
+        The Semantic Generalizer provides the most protection.
+        """)
+        st.plotly_chart(create_privacy_waterfall(trace), use_container_width=True)
+        
+        # Privacy score progression
+        st.markdown("#### Privacy Score Progression")
+        progression_data = []
+        for step in trace.steps:
+            progression_data.append({
+                "Agent": step.agent_name,
+                "Before": step.privacy_score_before,
+                "After": step.privacy_score_after
+            })
+        
+        prog_df = pd.DataFrame(progression_data)
+        st.dataframe(prog_df.style.format({"Before": "{:.0%}", "After": "{:.0%}"}), use_container_width=True)
+    
+    with tab2:
+        st.markdown("### Agent Contribution Analysis")
+        st.markdown("""
+        Similar to SHAP feature importance, this shows each agent's contribution to overall privacy protection.
+        The **Semantic Generalizer** is the core contributor - our novel contribution that differentiates from Preempt.
+        """)
+        st.plotly_chart(create_agent_contribution_chart(trace), use_container_width=True)
+        
+        # Contribution table
+        contributions = trace.get_agent_contributions()
+        contrib_df = pd.DataFrame([
+            {"Agent": k, "Contribution": v, "Role": "Core" if v > 0.3 else "Supporting"}
+            for k, v in sorted(contributions.items(), key=lambda x: x[1], reverse=True)
+        ])
+        st.dataframe(contrib_df.style.format({"Contribution": "{:.1%}"}), use_container_width=True)
+    
+    with tab3:
+        st.markdown("### Execution Timeline")
+        st.markdown("""
+        This shows the time spent in each agent. Note that **Cloud Researcher** takes the most time,
+        while local agents are extremely fast - proving edge AI feasibility.
+        """)
+        st.plotly_chart(create_timeline_chart(trace), use_container_width=True)
+        
+        # Timing breakdown
+        timing_data = []
+        local_time = 0
+        cloud_time = 0
+        for step in trace.steps:
+            timing_data.append({
+                "Agent": step.agent_name,
+                "Duration (ms)": step.duration_ms,
+                "Type": "Cloud" if "cloud" in step.agent_name.lower() else "Local"
+            })
+            if "cloud" in step.agent_name.lower():
+                cloud_time += step.duration_ms
+            else:
+                local_time += step.duration_ms
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Local Processing", f"{local_time:.1f}ms", delta=f"{local_time/trace.total_duration_ms:.0%} of total")
+        with col2:
+            st.metric("Cloud Processing", f"{cloud_time:.1f}ms", delta=f"{cloud_time/trace.total_duration_ms:.0%} of total")
+    
+    with tab4:
+        st.markdown("### Data Flow Visualization")
+        st.markdown("""
+        This Sankey diagram shows how data flows through the pipeline.
+        Notice how the flow **narrows** at the Cloud Researcher (only sanitized data sent),
+        then **widens** again after recontextualization.
+        """)
+        st.plotly_chart(create_sankey_diagram(trace), use_container_width=True)
+        
+        # Key insight
+        st.info("""
+        **🔒 Key Privacy Insight:** The cloud (Gemini) only receives 15% of the original 
+        information - abstract placeholders like "Protocol-A" and "Cell-A". 
+        It never sees "CRISPR" or "HEK293".
+        """)
+    
+    with tab5:
+        st.markdown("### Step-by-Step Agent Execution")
+        
+        if st.checkbox("Show detailed steps", value=True, key="show_detailed_steps"):
+            for i, step in enumerate(trace.steps):
+                render_agent_step(step, i)
+        else:
+            # Condensed view
+            for step in trace.steps:
+                with st.expander(f"{step.agent_name} ({step.duration_ms:.1f}ms)"):
+                    st.write(f"**Input:** {step.input_data[:100]}...")
+                    st.write(f"**Output:** {step.output_data[:100]}...")
+    
+    # Raw JSON (optional)
+    if st.checkbox("Show raw JSON", value=False, key="show_raw_json"):
+        st.markdown("---")
+        st.markdown("### Raw Trace JSON")
+        st.json(trace.to_dict())
+    
+    # Final response
+    st.markdown("---")
+    st.markdown("### 📤 Final Response to Learner")
+    st.success(trace.final_response)
+
+
+def main():
+    # Header
+    st.markdown('<p class="main-header">🛡️ Sovereign Learner</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">Explainability Dashboard - Understanding Privacy-Preserving Educational AI</p>', unsafe_allow_html=True)
+    
+    # Sidebar
+    with st.sidebar:
+        # Replaced broken placeholder image with styled CSS header
+        st.markdown("""
+        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h1 style="color: white; margin: 0; font-size: 24px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">🛡️ Sovereign</h1>
+            <p style="color: #b0c4de; margin: 5px 0 0 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Privacy-First AI</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("### Query Input")
+        
+        # Preset queries
+        preset_queries = {
+            "CRISPR Research": "How do I optimize my CRISPR protocol for HEK293 cells?",
+            "Medical PII": "I'm patient John Smith, ID 78432. How do I interpret my HbA1c results?",
+            "ML/AI": "How do I fix the memory leak in my CUDA kernel for TensorRT?",
+            "Legal": "How should I structure the IP clause for our Series A with Sequoia?",
+            "Custom": ""
+        }
+        
+        # Check if we have a loaded trace to populate the query
+        default_query_type = "CRISPR Research"
+        default_query_text = preset_queries[default_query_type]
+        
+        if 'current_trace' in st.session_state:
+            # If trace is loaded, show its original query
+            default_query_text = st.session_state.current_trace.original_query
+            default_query_type = "Custom"
+        
+        query_type = st.selectbox("Select Query Type", list(preset_queries.keys()), 
+                                   index=list(preset_queries.keys()).index(default_query_type))
+        
+        if query_type == "Custom":
+            # Use trace_counter to force refresh when a new trace is loaded
+            trace_counter = st.session_state.get('trace_counter', 0)
+            query = st.text_area("Enter your query:", value=default_query_text, height=100, key=f"query_input_{trace_counter}")
         else:
             query = st.text_area("Query:", value=preset_queries[query_type], height=100)
         
         run_button = st.button("🚀 Analyze Query", type="primary", use_container_width=True)
         
         st.markdown("---")
-        st.markdown("### Configuration")
-        show_detailed = st.checkbox("Show detailed steps", value=True)
-        show_raw_json = st.checkbox("Show raw JSON", value=False)
     
     # Main content
     if run_button and query:
@@ -491,221 +791,98 @@ def main():
     if os.path.exists(trace_dir):
         with st.sidebar:
             st.markdown("### 📂 Load Trace")
+            # Filter for JSON files
             trace_files = [f for f in os.listdir(trace_dir) if f.endswith('.json')]
             trace_files.sort(reverse=True)
             
-            selected_trace_file = st.selectbox("Select Trace", ["Current Run"] + trace_files)
-            
-            if selected_trace_file != "Current Run":
-                 if st.button("Load Trace"):
-                    try:
-                        with open(os.path.join(trace_dir, selected_trace_file), 'r') as f:
-                            data = json.load(f)
-                            # Reconstruct trace object (simplified)
-                            # Ideally would use from_dict but for now manual or just use dict if view supports it
-                            # But our view functions expect SovereignTrace object. 
-                            # Let's quick-fix by just creating a dummy object and filling it
-                            trace = SovereignTrace(
-                                query_id=data.get('query_id', 'loaded'),
-                                original_query=data.get('original_query', '')
-                            )
-                            trace.final_response = data.get('final_response', '')
-                            trace.total_duration_ms = data.get('total_duration_ms', 0)
-                            trace.zone_used = data.get('zone_used', 1)
-                            trace.privacy_protection_score = data.get('privacy_protection_score', 0)
-                            trace.utility_score = data.get('utility_score', 0)
-                            
-                            for s in data.get('steps', []):
-                                trace.add_step(AgentStep(**s))
-                                
-                            st.session_state.current_trace = trace
-                            st.success(f"Loaded {selected_trace_file}")
-                            st.rerun()
-                    except Exception as e:
-                        st.error(f"Error loading trace: {e}")
+            if not trace_files:
+                st.info("No trace files found.")
+            else:
+                selected_trace_file = st.selectbox("Select Trace", ["Current Run"] + trace_files, key="trace_selector")
+                
+                if selected_trace_file != "Current Run":
+                     trace_path = os.path.join(trace_dir, selected_trace_file)
+                     st.button("Load Trace", key="load_trace_btn", on_click=load_trace_callback, args=(trace_path,))
+                     
+                     if 'load_error' in st.session_state:
+                         st.error(f"❌ Error: {st.session_state.load_error}")
+                         del st.session_state.load_error
+                     
+                     if 'last_loaded_file' in st.session_state and st.session_state.last_loaded_file == trace_path:
+                         st.success(f"✅ Loaded")
 
     # Display current trace
     if 'current_trace' in st.session_state:
         trace = st.session_state.current_trace
         st.success(f"✅ Query processed successfully in {trace.total_duration_ms:.1f}ms")
-        
-        # Top metrics
-        col1, col2, col3, col4 = st.columns(4)
-        
-        with col1:
-            st.metric(
-                "Privacy Protection",
-                f"{trace.privacy_protection_score:.0%}",
-                delta="Protected",
-                delta_color="normal"
-            )
-        
-        with col2:
-            st.metric(
-                "Zone Used",
-                f"Zone {trace.zone_used}",
-                delta="High Security" if trace.zone_used <= 1 else "Standard"
-            )
-        
-        with col3:
-            st.metric(
-                "Total Latency",
-                f"{trace.total_duration_ms:.0f}ms",
-                delta=f"{len(trace.steps)} agents"
-            )
-        
-        with col4:
-            st.metric(
-                "Utility Score",
-                f"{trace.utility_score:.0%}",
-                delta="Educational value"
-            )
-        
-        st.markdown("---")
-        
-        # Tabs for different views
-        tab1, tab2, tab3, tab4, tab5 = st.tabs([
-            "📊 Privacy Waterfall",
-            "🎯 Agent Contributions", 
-            "⏱️ Timeline",
-            "🔀 Data Flow",
-            "📝 Step-by-Step"
-        ])
-        
-        with tab1:
-            st.markdown("### Privacy Protection Waterfall")
-            st.markdown("""
-            This chart shows how privacy protection changes at each stage of the pipeline.
-            **Green bars** indicate privacy improvement (sensitive data protected).
-            The Semantic Generalizer provides the most protection.
-            """)
-            st.plotly_chart(create_privacy_waterfall(trace), use_container_width=True)
-            
-            # Privacy score progression
-            st.markdown("#### Privacy Score Progression")
-            progression_data = []
-            for step in trace.steps:
-                progression_data.append({
-                    "Agent": step.agent_name,
-                    "Before": step.privacy_score_before,
-                    "After": step.privacy_score_after
-                })
-            
-            prog_df = pd.DataFrame(progression_data)
-            st.dataframe(prog_df.style.format({"Before": "{:.0%}", "After": "{:.0%}"}), use_container_width=True)
-        
-        with tab2:
-            st.markdown("### Agent Contribution Analysis")
-            st.markdown("""
-            Similar to SHAP feature importance, this shows each agent's contribution to overall privacy protection.
-            The **Semantic Generalizer** is the core contributor - our novel contribution that differentiates from Preempt.
-            """)
-            st.plotly_chart(create_agent_contribution_chart(trace), use_container_width=True)
-            
-            # Contribution table
-            contributions = trace.get_agent_contributions()
-            contrib_df = pd.DataFrame([
-                {"Agent": k, "Contribution": v, "Role": "Core" if v > 0.3 else "Supporting"}
-                for k, v in sorted(contributions.items(), key=lambda x: x[1], reverse=True)
-            ])
-            st.dataframe(contrib_df.style.format({"Contribution": "{:.1%}"}), use_container_width=True)
-        
-        with tab3:
-            st.markdown("### Execution Timeline")
-            st.markdown("""
-            This shows the time spent in each agent. Note that **Cloud Researcher** takes the most time,
-            while local agents are extremely fast - proving edge AI feasibility.
-            """)
-            st.plotly_chart(create_timeline_chart(trace), use_container_width=True)
-            
-            # Timing breakdown
-            timing_data = []
-            local_time = 0
-            cloud_time = 0
-            for step in trace.steps:
-                timing_data.append({
-                    "Agent": step.agent_name,
-                    "Duration (ms)": step.duration_ms,
-                    "Type": "Cloud" if "cloud" in step.agent_name.lower() else "Local"
-                })
-                if "cloud" in step.agent_name.lower():
-                    cloud_time += step.duration_ms
-                else:
-                    local_time += step.duration_ms
-            
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Local Processing", f"{local_time:.1f}ms", delta=f"{local_time/trace.total_duration_ms:.0%} of total")
-            with col2:
-                st.metric("Cloud Processing", f"{cloud_time:.1f}ms", delta=f"{cloud_time/trace.total_duration_ms:.0%} of total")
-        
-        with tab4:
-            st.markdown("### Data Flow Visualization")
-            st.markdown("""
-            This Sankey diagram shows how data flows through the pipeline.
-            Notice how the flow **narrows** at the Cloud Researcher (only sanitized data sent),
-            then **widens** again after recontextualization.
-            """)
-            st.plotly_chart(create_sankey_diagram(trace), use_container_width=True)
-            
-            # Key insight
-            st.info("""
-            **🔒 Key Privacy Insight:** The cloud (Gemini) only receives 15% of the original 
-            information - abstract placeholders like "Protocol-A" and "Cell-A". 
-            It never sees "CRISPR" or "HEK293".
-            """)
-        
-        with tab5:
-            st.markdown("### Step-by-Step Agent Execution")
-            
-            if show_detailed:
-                for i, step in enumerate(trace.steps):
-                    render_agent_step(step, i)
-            else:
-                # Condensed view
-                for step in trace.steps:
-                    with st.expander(f"{step.agent_name} ({step.duration_ms:.1f}ms)"):
-                        st.write(f"**Input:** {step.input_data[:100]}...")
-                        st.write(f"**Output:** {step.output_data[:100]}...")
-        
-        # Raw JSON (optional)
-        if show_raw_json:
-            st.markdown("---")
-            st.markdown("### Raw Trace JSON")
-            st.json(trace.to_dict())
-        
-        # Final response
-        st.markdown("---")
-        st.markdown("### 📤 Final Response to Learner")
-        st.success(trace.final_response)
+        render_trace_view(trace)
         
     else:
         # Welcome state
         st.markdown("""
-        ## Welcome to the Sovereign Learner Explainability Dashboard
+        <div style="text-align: center; padding: 40px 0 20px 0;">
+            <h1 style="font-size: 3rem; margin-bottom: 10px; background: linear-gradient(90deg, #1e3a5f 0%, #2d5a87 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sovereign Learner</h1>
+            <p style="font-size: 1.5rem; color: #666;">Explainable, Privacy-Preserving Agentic AI</p>
+        </div>
+        """, unsafe_allow_html=True)
         
-        This dashboard demonstrates how queries navigate through the privacy-preserving educational AI pipeline.
+        # Key Features Grid
+        col1, col2 = st.columns(2)
         
-        ### How to Use
-        1. Select a query type from the sidebar (or enter a custom query)
-        2. Click **Analyze Query**
-        3. Explore the visualizations to understand how privacy is protected
-        
-        ### Key Features
-        - **Privacy Waterfall**: See how sensitive information is progressively protected
-        - **Agent Contributions**: Understand which agents contribute most to privacy
-        - **Timeline**: View execution time breakdown (proving edge AI feasibility)
-        - **Data Flow**: Visualize how data moves through the pipeline
-        
-        ### For Prof. Daswin & Dr. Nishan
-        This dashboard provides **SHAP-like explainability** for agentic AI systems,
-        showing how each agent contributes to the overall privacy protection goal.
-        """)
+        with col1:
+            st.markdown("""
+            <div class="metric-card" style="margin-bottom: 20px;">
+                <h3>🛡️ Privacy Waterfall</h3>
+                <p>Visualize exactly how sensitive data is protected at each stage.</p>
+                <ul>
+                    <li><b>Red</b>: Exposed data</li>
+                    <li><b>Green</b>: Sanitized/Protected data</li>
+                    <li><b>Blue</b>: Recontextualized data</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class="metric-card" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);">
+                <h3>⏱️ Edge-First Performance</h3>
+                <p>Verify the feasibility of running on local devices.</p>
+                <ul>
+                    <li><b>Local Agents</b>: < 50ms latency</li>
+                    <li><b>Cloud Handoff</b>: Only when necessary</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        with col2:
+            st.markdown("""
+            <div class="metric-card" style="margin-bottom: 20px; background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);">
+                <h3>🎯 Agent Attribution</h3>
+                <p>Understand which agent is responsible for privacy.</p>
+                <ul>
+                    <li><b>Semantic Generalizer</b>: Core protection</li>
+                    <li><b>Sovereign Manager</b>: Policy enforcement</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class="metric-card" style="background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);">
+                <h3>🔀 Transparent Data Flow</h3>
+                <p>See what the cloud actually sees.</p>
+                <ul>
+                    <li><b>Sanitized</b>: "Protocol-A" instead of "CRISPR"</li>
+                    <li><b>Restored</b>: Full context for the user</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        st.markdown("---")
         
         # Sample visualization
-        st.markdown("### Sample: Agent Contribution (Click 'Analyze Query' for live data)")
+        st.markdown("### 📊 Interactive Demo")
+        st.info("Below is a sample trace. Select a query from the sidebar or load a trace file to see real data.")
         demo_trace = create_demo_trace()
-        st.plotly_chart(create_agent_contribution_chart(demo_trace), use_container_width=True)
+        render_trace_view(demo_trace)
 
 
 if __name__ == "__main__":

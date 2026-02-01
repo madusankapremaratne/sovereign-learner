@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "What are the common side effects of chemotherapy?",
       "output_data": "Zone 2",
-      "duration_ms": 40.26130302924573,
+      "duration_ms": 45.702466195508585,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 2",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.454215",
+      "timestamp": "2026-01-22T16:26:49.416959",
       "zone": 2,
       "status": "success"
     },
@@ -26,14 +26,14 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "What are the common side effects of chemotherapy?",
       "output_data": "[]",
-      "duration_ms": 37.498359721738524,
+      "duration_ms": 43.41276949103845,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454218",
+      "timestamp": "2026-01-22T16:26:49.416961",
       "zone": 2,
       "status": "success"
     },
@@ -42,14 +42,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "What are the common side effects of chemotherapy?",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1468.267838349053,
+      "duration_ms": 1467.1735707654993,
       "privacy_score_before": 0.5,
       "privacy_score_after": 0.5,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454219",
+      "timestamp": "2026-01-22T16:26:49.416963",
       "zone": 2,
       "status": "success"
     },
@@ -58,24 +58,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "Final Answer",
       "output_data": "Competency Updated",
-      "duration_ms": 20.977593269058886,
+      "duration_ms": 22.54402251054301,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454221",
+      "timestamp": "2026-01-22T16:26:49.416965",
       "zone": 2,
       "status": "success"
     }
   ],
   "final_response": "Final Answer",
-  "total_duration_ms": 1567.005094369096,
+  "total_duration_ms": 1578.8328289625895,
   "zone_used": 2,
   "privacy_protection_score": 0.5,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.454213",
+  "created_at": "2026-01-22T16:26:49.416956",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -86,26 +86,26 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 40.26130302924573,
-      "end_ms": 40.26130302924573
+      "duration_ms": 45.702466195508585,
+      "end_ms": 45.702466195508585
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 40.26130302924573,
-      "duration_ms": 37.498359721738524,
-      "end_ms": 77.75966275098426
+      "start_ms": 45.702466195508585,
+      "duration_ms": 43.41276949103845,
+      "end_ms": 89.11523568654704
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 77.75966275098426,
-      "duration_ms": 1468.267838349053,
-      "end_ms": 1546.0275011000372
+      "start_ms": 89.11523568654704,
+      "duration_ms": 1467.1735707654993,
+      "end_ms": 1556.2888064520464
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1546.0275011000372,
-      "duration_ms": 20.977593269058886,
-      "end_ms": 1567.005094369096
+      "start_ms": 1556.2888064520464,
+      "duration_ms": 22.54402251054301,
+      "end_ms": 1578.8328289625895
     }
   ]
 }

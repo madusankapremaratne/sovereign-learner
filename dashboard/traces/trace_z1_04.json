@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "What are the optimal hyperparameters for our proprietary model 'DeepSovereign'?",
       "output_data": "Zone 1",
-      "duration_ms": 53.31525628126083,
+      "duration_ms": 57.82003256676029,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 1",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.452684",
+      "timestamp": "2026-01-22T16:26:49.415510",
       "zone": 1,
       "status": "success"
     },
@@ -26,7 +26,7 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "What are the optimal hyperparameters for our proprietary model 'DeepSovereign'?",
       "output_data": "['DeepSovereign']",
-      "duration_ms": 32.22214353614639,
+      "duration_ms": 35.7646791530611,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [
@@ -35,7 +35,7 @@
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452686",
+      "timestamp": "2026-01-22T16:26:49.415513",
       "zone": 1,
       "status": "success"
     },
@@ -44,7 +44,7 @@
       "agent_role": "Intent Obfuscation Specialist",
       "input_data": "Query: What are the optimal hyperparameters for our proprietary model 'DeepSovereign'?\nEntities: ['DeepSovereign']",
       "output_data": "SANITIZED: What are the optimal hyperparameters for our proprietary model 'Entity-A'?",
-      "duration_ms": 122.41599827790438,
+      "duration_ms": 127.67051900781794,
       "privacy_score_before": 1.0,
       "privacy_score_after": 0.1,
       "entities_detected": [
@@ -57,7 +57,7 @@
         "Entity-A": "DeepSovereign"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452690",
+      "timestamp": "2026-01-22T16:26:49.415516",
       "zone": 1,
       "status": "success"
     },
@@ -66,14 +66,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "What are the optimal hyperparameters for our proprietary model 'Entity-A'?",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1051.20833508974,
+      "duration_ms": 928.108925620502,
       "privacy_score_before": 0.1,
       "privacy_score_after": 0.1,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452692",
+      "timestamp": "2026-01-22T16:26:49.415518",
       "zone": 1,
       "status": "success"
     },
@@ -82,7 +82,7 @@
       "agent_role": "Response Re-contextualization Specialist",
       "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'DeepSovereign'}",
       "output_data": "[Recontextualized Answer]",
-      "duration_ms": 58.22678794108087,
+      "duration_ms": 64.11529186263851,
       "privacy_score_before": 0.1,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -91,7 +91,7 @@
         "Entity-A": "DeepSovereign"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452694",
+      "timestamp": "2026-01-22T16:26:49.415521",
       "zone": 1,
       "status": "success"
     },
@@ -100,24 +100,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "[Recontextualized Answer]",
       "output_data": "Competency Updated",
-      "duration_ms": 36.5924825990778,
+      "duration_ms": 22.46372998747359,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452696",
+      "timestamp": "2026-01-22T16:26:49.415523",
       "zone": 1,
       "status": "success"
     }
   ],
   "final_response": "[Recontextualized Answer]",
-  "total_duration_ms": 1353.9810037252103,
+  "total_duration_ms": 1235.9431781982535,
   "zone_used": 1,
   "privacy_protection_score": 0.9,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.452679",
+  "created_at": "2026-01-22T16:26:49.415507",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -130,38 +130,38 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 53.31525628126083,
-      "end_ms": 53.31525628126083
+      "duration_ms": 57.82003256676029,
+      "end_ms": 57.82003256676029
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 53.31525628126083,
-      "duration_ms": 32.22214353614639,
-      "end_ms": 85.53739981740722
+      "start_ms": 57.82003256676029,
+      "duration_ms": 35.7646791530611,
+      "end_ms": 93.5847117198214
     },
     {
       "agent": "Semantic Generalizer",
-      "start_ms": 85.53739981740722,
-      "duration_ms": 122.41599827790438,
-      "end_ms": 207.9533980953116
+      "start_ms": 93.5847117198214,
+      "duration_ms": 127.67051900781794,
+      "end_ms": 221.25523072763934
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 207.9533980953116,
-      "duration_ms": 1051.20833508974,
-      "end_ms": 1259.1617331850516
+      "start_ms": 221.25523072763934,
+      "duration_ms": 928.108925620502,
+      "end_ms": 1149.3641563481413
     },
     {
       "agent": "Recontextualizer",
-      "start_ms": 1259.1617331850516,
-      "duration_ms": 58.22678794108087,
-      "end_ms": 1317.3885211261324
+      "start_ms": 1149.3641563481413,
+      "duration_ms": 64.11529186263851,
+      "end_ms": 1213.4794482107798
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1317.3885211261324,
-      "duration_ms": 36.5924825990778,
-      "end_ms": 1353.9810037252103
+      "start_ms": 1213.4794482107798,
+      "duration_ms": 22.46372998747359,
+      "end_ms": 1235.9431781982535
     }
   ]
 }

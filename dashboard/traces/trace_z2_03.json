@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "Best practices for writing secure Python code.",
       "output_data": "Zone 2",
-      "duration_ms": 51.94409026616266,
+      "duration_ms": 40.45206391995683,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 2",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.453786",
+      "timestamp": "2026-01-22T16:26:49.416540",
       "zone": 2,
       "status": "success"
     },
@@ -26,14 +26,14 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "Best practices for writing secure Python code.",
       "output_data": "[]",
-      "duration_ms": 39.788475232516646,
+      "duration_ms": 40.87986854005642,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453788",
+      "timestamp": "2026-01-22T16:26:49.416542",
       "zone": 2,
       "status": "success"
     },
@@ -42,14 +42,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "Best practices for writing secure Python code.",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1070.6814402681596,
+      "duration_ms": 1306.0774127156885,
       "privacy_score_before": 0.5,
       "privacy_score_after": 0.5,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453790",
+      "timestamp": "2026-01-22T16:26:49.416544",
       "zone": 2,
       "status": "success"
     },
@@ -58,24 +58,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "Final Answer",
       "output_data": "Competency Updated",
-      "duration_ms": 29.461031847739783,
+      "duration_ms": 35.356024426320985,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453792",
+      "timestamp": "2026-01-22T16:26:49.416546",
       "zone": 2,
       "status": "success"
     }
   ],
   "final_response": "Final Answer",
-  "total_duration_ms": 1191.8750376145788,
+  "total_duration_ms": 1422.7653696020227,
   "zone_used": 2,
   "privacy_protection_score": 0.5,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.453783",
+  "created_at": "2026-01-22T16:26:49.416538",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -86,26 +86,26 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 51.94409026616266,
-      "end_ms": 51.94409026616266
+      "duration_ms": 40.45206391995683,
+      "end_ms": 40.45206391995683
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 51.94409026616266,
-      "duration_ms": 39.788475232516646,
-      "end_ms": 91.7325654986793
+      "start_ms": 40.45206391995683,
+      "duration_ms": 40.87986854005642,
+      "end_ms": 81.33193246001325
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 91.7325654986793,
-      "duration_ms": 1070.6814402681596,
-      "end_ms": 1162.414005766839
+      "start_ms": 81.33193246001325,
+      "duration_ms": 1306.0774127156885,
+      "end_ms": 1387.4093451757017
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1162.414005766839,
-      "duration_ms": 29.461031847739783,
-      "end_ms": 1191.8750376145788
+      "start_ms": 1387.4093451757017,
+      "duration_ms": 35.356024426320985,
+      "end_ms": 1422.7653696020227
     }
   ]
 }

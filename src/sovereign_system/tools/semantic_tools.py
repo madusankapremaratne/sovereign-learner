@@ -41,6 +41,10 @@ class SemanticGeneralizationTool(BaseTool):
         placeholder_counter = {}
         
         for entity in entities:
+            # Skip empty entities (detection failures)
+            if not entity or entity.strip() == '':
+                continue
+                
             entity_lower = entity.lower()
             
             # Determine placeholder type
@@ -60,7 +64,7 @@ class SemanticGeneralizationTool(BaseTool):
             # Store mapping for re-contextualization
             self.placeholder_map[placeholder] = entity
             
-            # Replace in query
+            # Replace in query (only if entity is non-empty)
             sanitized = re.sub(re.escape(entity), placeholder, sanitized, flags=re.IGNORECASE)
         
         output = f"SANITIZED: {sanitized}\nMAPPING: {self.placeholder_map}"

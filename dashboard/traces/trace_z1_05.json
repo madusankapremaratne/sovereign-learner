@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "Troubleshoot connection failure in unseen prototype device 'NeuralLink-V1'.",
       "output_data": "Zone 1",
-      "duration_ms": 42.99455831683921,
+      "duration_ms": 52.38014911846598,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 1",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.453012",
+      "timestamp": "2026-01-22T16:26:49.415811",
       "zone": 1,
       "status": "success"
     },
@@ -26,7 +26,7 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "Troubleshoot connection failure in unseen prototype device 'NeuralLink-V1'.",
       "output_data": "['NeuralLink-V1']",
-      "duration_ms": 39.06999132037855,
+      "duration_ms": 39.706194778572026,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [
@@ -35,7 +35,7 @@
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453015",
+      "timestamp": "2026-01-22T16:26:49.415814",
       "zone": 1,
       "status": "success"
     },
@@ -44,7 +44,7 @@
       "agent_role": "Intent Obfuscation Specialist",
       "input_data": "Query: Troubleshoot connection failure in unseen prototype device 'NeuralLink-V1'.\nEntities: ['NeuralLink-V1']",
       "output_data": "SANITIZED: Troubleshoot connection failure in unseen prototype device 'Entity-A'.",
-      "duration_ms": 132.96101623536921,
+      "duration_ms": 133.1444887702304,
       "privacy_score_before": 1.0,
       "privacy_score_after": 0.1,
       "entities_detected": [
@@ -57,7 +57,7 @@
         "Entity-A": "NeuralLink-V1"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453019",
+      "timestamp": "2026-01-22T16:26:49.415817",
       "zone": 1,
       "status": "success"
     },
@@ -66,14 +66,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "Troubleshoot connection failure in unseen prototype device 'Entity-A'.",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1242.2862357211673,
+      "duration_ms": 1275.190027195885,
       "privacy_score_before": 0.1,
       "privacy_score_after": 0.1,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453020",
+      "timestamp": "2026-01-22T16:26:49.415819",
       "zone": 1,
       "status": "success"
     },
@@ -82,7 +82,7 @@
       "agent_role": "Response Re-contextualization Specialist",
       "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'NeuralLink-V1'}",
       "output_data": "[Recontextualized Answer]",
-      "duration_ms": 70.60376145102526,
+      "duration_ms": 54.331460690151346,
       "privacy_score_before": 0.1,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -91,7 +91,7 @@
         "Entity-A": "NeuralLink-V1"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453023",
+      "timestamp": "2026-01-22T16:26:49.415821",
       "zone": 1,
       "status": "success"
     },
@@ -100,24 +100,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "[Recontextualized Answer]",
       "output_data": "Competency Updated",
-      "duration_ms": 38.064329685333234,
+      "duration_ms": 24.86632626740131,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.453024",
+      "timestamp": "2026-01-22T16:26:49.415823",
       "zone": 1,
       "status": "success"
     }
   ],
   "final_response": "[Recontextualized Answer]",
-  "total_duration_ms": 1565.9798927301129,
+  "total_duration_ms": 1579.618646820706,
   "zone_used": 1,
   "privacy_protection_score": 0.9,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.453008",
+  "created_at": "2026-01-22T16:26:49.415809",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -130,38 +130,38 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 42.99455831683921,
-      "end_ms": 42.99455831683921
+      "duration_ms": 52.38014911846598,
+      "end_ms": 52.38014911846598
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 42.99455831683921,
-      "duration_ms": 39.06999132037855,
-      "end_ms": 82.06454963721777
+      "start_ms": 52.38014911846598,
+      "duration_ms": 39.706194778572026,
+      "end_ms": 92.086343897038
     },
     {
       "agent": "Semantic Generalizer",
-      "start_ms": 82.06454963721777,
-      "duration_ms": 132.96101623536921,
-      "end_ms": 215.02556587258698
+      "start_ms": 92.086343897038,
+      "duration_ms": 133.1444887702304,
+      "end_ms": 225.2308326672684
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 215.02556587258698,
-      "duration_ms": 1242.2862357211673,
-      "end_ms": 1457.3118015937544
+      "start_ms": 225.2308326672684,
+      "duration_ms": 1275.190027195885,
+      "end_ms": 1500.4208598631535
     },
     {
       "agent": "Recontextualizer",
-      "start_ms": 1457.3118015937544,
-      "duration_ms": 70.60376145102526,
-      "end_ms": 1527.9155630447797
+      "start_ms": 1500.4208598631535,
+      "duration_ms": 54.331460690151346,
+      "end_ms": 1554.7523205533048
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1527.9155630447797,
-      "duration_ms": 38.064329685333234,
-      "end_ms": 1565.9798927301129
+      "start_ms": 1554.7523205533048,
+      "duration_ms": 24.86632626740131,
+      "end_ms": 1579.618646820706
     }
   ]
 }

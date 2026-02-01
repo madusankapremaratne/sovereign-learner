@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "How does the 'Apollo' architecture handle user ID 998877?",
       "output_data": "Zone 1",
-      "duration_ms": 44.36018962885421,
+      "duration_ms": 53.61562970291865,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 1",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.456343",
+      "timestamp": "2026-01-22T16:26:49.419062",
       "zone": 1,
       "status": "success"
     },
@@ -26,7 +26,7 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "How does the 'Apollo' architecture handle user ID 998877?",
       "output_data": "['Apollo', '998877']",
-      "duration_ms": 39.548284396024485,
+      "duration_ms": 48.94151187854935,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [
@@ -36,7 +36,7 @@
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.456345",
+      "timestamp": "2026-01-22T16:26:49.419065",
       "zone": 1,
       "status": "success"
     },
@@ -45,7 +45,7 @@
       "agent_role": "Intent Obfuscation Specialist",
       "input_data": "Query: How does the 'Apollo' architecture handle user ID 998877?\nEntities: ['Apollo', '998877']",
       "output_data": "SANITIZED: How does the 'Entity-A' architecture handle user ID Entity-B?",
-      "duration_ms": 137.94339296100415,
+      "duration_ms": 101.25317046369666,
       "privacy_score_before": 1.0,
       "privacy_score_after": 0.1,
       "entities_detected": [
@@ -61,7 +61,7 @@
         "Entity-B": "998877"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.456349",
+      "timestamp": "2026-01-22T16:26:49.419070",
       "zone": 1,
       "status": "success"
     },
@@ -70,14 +70,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "How does the 'Entity-A' architecture handle user ID Entity-B?",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 826.2887620159578,
+      "duration_ms": 1036.9472633622918,
       "privacy_score_before": 0.1,
       "privacy_score_after": 0.1,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.456350",
+      "timestamp": "2026-01-22T16:26:49.419072",
       "zone": 1,
       "status": "success"
     },
@@ -86,7 +86,7 @@
       "agent_role": "Response Re-contextualization Specialist",
       "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'Apollo', 'Entity-B': '998877'}",
       "output_data": "[Recontextualized Answer]",
-      "duration_ms": 73.19289830224437,
+      "duration_ms": 63.166635625763,
       "privacy_score_before": 0.1,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -96,7 +96,7 @@
         "Entity-B": "998877"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.456353",
+      "timestamp": "2026-01-22T16:26:49.419075",
       "zone": 1,
       "status": "success"
     },
@@ -105,24 +105,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "[Recontextualized Answer]",
       "output_data": "Competency Updated",
-      "duration_ms": 26.01328004067809,
+      "duration_ms": 27.299806722307586,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.456354",
+      "timestamp": "2026-01-22T16:26:49.419076",
       "zone": 1,
       "status": "success"
     }
   ],
   "final_response": "[Recontextualized Answer]",
-  "total_duration_ms": 1147.3468073447632,
+  "total_duration_ms": 1331.224017755527,
   "zone_used": 1,
   "privacy_protection_score": 0.9,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.456340",
+  "created_at": "2026-01-22T16:26:49.419058",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -135,38 +135,38 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 44.36018962885421,
-      "end_ms": 44.36018962885421
+      "duration_ms": 53.61562970291865,
+      "end_ms": 53.61562970291865
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 44.36018962885421,
-      "duration_ms": 39.548284396024485,
-      "end_ms": 83.9084740248787
+      "start_ms": 53.61562970291865,
+      "duration_ms": 48.94151187854935,
+      "end_ms": 102.557141581468
     },
     {
       "agent": "Semantic Generalizer",
-      "start_ms": 83.9084740248787,
-      "duration_ms": 137.94339296100415,
-      "end_ms": 221.85186698588285
+      "start_ms": 102.557141581468,
+      "duration_ms": 101.25317046369666,
+      "end_ms": 203.81031204516466
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 221.85186698588285,
-      "duration_ms": 826.2887620159578,
-      "end_ms": 1048.1406290018406
+      "start_ms": 203.81031204516466,
+      "duration_ms": 1036.9472633622918,
+      "end_ms": 1240.7575754074564
     },
     {
       "agent": "Recontextualizer",
-      "start_ms": 1048.1406290018406,
-      "duration_ms": 73.19289830224437,
-      "end_ms": 1121.333527304085
+      "start_ms": 1240.7575754074564,
+      "duration_ms": 63.166635625763,
+      "end_ms": 1303.9242110332195
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1121.333527304085,
-      "duration_ms": 26.01328004067809,
-      "end_ms": 1147.3468073447632
+      "start_ms": 1303.9242110332195,
+      "duration_ms": 27.299806722307586,
+      "end_ms": 1331.224017755527
     }
   ]
 }

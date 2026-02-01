@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "Compare React and Vue for frontend development.",
       "output_data": "Zone 2",
-      "duration_ms": 47.8943962846595,
+      "duration_ms": 45.638340901004604,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 2",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.454010",
+      "timestamp": "2026-01-22T16:26:49.416760",
       "zone": 2,
       "status": "success"
     },
@@ -26,14 +26,14 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "Compare React and Vue for frontend development.",
       "output_data": "[]",
-      "duration_ms": 35.47483438402741,
+      "duration_ms": 39.05720183192894,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454011",
+      "timestamp": "2026-01-22T16:26:49.416762",
       "zone": 2,
       "status": "success"
     },
@@ -42,14 +42,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "Compare React and Vue for frontend development.",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1325.3374906951872,
+      "duration_ms": 1470.729786186223,
       "privacy_score_before": 0.5,
       "privacy_score_after": 0.5,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454013",
+      "timestamp": "2026-01-22T16:26:49.416764",
       "zone": 2,
       "status": "success"
     },
@@ -58,24 +58,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "Final Answer",
       "output_data": "Competency Updated",
-      "duration_ms": 22.874834245670517,
+      "duration_ms": 23.76790383306861,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454015",
+      "timestamp": "2026-01-22T16:26:49.416765",
       "zone": 2,
       "status": "success"
     }
   ],
   "final_response": "Final Answer",
-  "total_duration_ms": 1431.5815556095447,
+  "total_duration_ms": 1579.1932327522252,
   "zone_used": 2,
   "privacy_protection_score": 0.5,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.454007",
+  "created_at": "2026-01-22T16:26:49.416757",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -86,26 +86,26 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 47.8943962846595,
-      "end_ms": 47.8943962846595
+      "duration_ms": 45.638340901004604,
+      "end_ms": 45.638340901004604
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 47.8943962846595,
-      "duration_ms": 35.47483438402741,
-      "end_ms": 83.36923066868691
+      "start_ms": 45.638340901004604,
+      "duration_ms": 39.05720183192894,
+      "end_ms": 84.69554273293355
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 83.36923066868691,
-      "duration_ms": 1325.3374906951872,
-      "end_ms": 1408.706721363874
+      "start_ms": 84.69554273293355,
+      "duration_ms": 1470.729786186223,
+      "end_ms": 1555.4253289191565
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1408.706721363874,
-      "duration_ms": 22.874834245670517,
-      "end_ms": 1431.5815556095447
+      "start_ms": 1555.4253289191565,
+      "duration_ms": 23.76790383306861,
+      "end_ms": 1579.1932327522252
     }
   ]
 }

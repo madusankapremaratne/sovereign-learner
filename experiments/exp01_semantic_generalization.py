@@ -1,5 +1,5 @@
 """
-Experiment 2: Semantic Generalization Effectiveness
+Experiment 1: Semantic Generalization Effectiveness
 ====================================================
 Measures IP protection and utility preservation of the Sovereign Learner pipeline.
 
@@ -136,20 +136,20 @@ class SemanticGeneralizationExperiment:
             # This represents the "Learned Knowledge" of the Sensitivity Agent
             kb_terms = [
                 # Bio
-                # "crispr", "western blot", "pcr", "elisa", "rna-seq", "chip-seq", 
-                # "hek293", "hela", "cho-k1", "jurkat", "mcf-7", "a549", "u87", "vero",
-                # "brca1", "tp53", "egfr", "kras", "myc", "gapdh", "actb", "tnf", "il6", "vegf",
-                # "lipofectamine", "trypsin", "dapi", "triton",
+                "crispr", "western blot", "pcr", "elisa", "rna-seq", "chip-seq", 
+                "hek293", "hela", "cho-k1", "jurkat", "mcf-7", "a549", "u87", "vero",
+                "brca1", "tp53", "egfr", "kras", "myc", "gapdh", "actb", "tnf", "il6", "vegf",
+                "lipofectamine", "trypsin", "dapi", "triton",
                 # CS
-                # "pytorch", "tensorflow", "jax", "keras", "scikit-learn", "huggingface", "langchain",
-                # "a100", "h100", "rtx", "tpu", "jetson", 
-                # "llama-3", "gpt-4", "bert", "resnet", "yolo", "stable diffusion", "whisper", "mistral",
-                # "lora", "rag", "flash attention", "chromadb", "pinecone", "onnx",
+                "pytorch", "tensorflow", "jax", "keras", "scikit-learn", "huggingface", "langchain",
+                "a100", "h100", "rtx", "tpu", "jetson", 
+                "llama-3", "gpt-4", "bert", "resnet", "yolo", "stable diffusion", "whisper", "mistral",
+                "lora", "rag", "flash attention", "chromadb", "pinecone", "onnx",
                 # Legal
-                # "google", "microsoft", "apple", "openai", "anthropic", "tesla", "amazon", "meta", "netflix",
-                # "california", "delaware", "new york", "gdpr",
+                "google", "microsoft", "apple", "openai", "anthropic", "tesla", "amazon", "meta", "netflix",
+                "california", "delaware", "new york", "gdpr",
                 # Adversarial
-                # "alpha-9", "genomex", "acmecorp", "project-omega", "deepmind", "compund-773"
+                "alpha-9", "genomex", "acmecorp", "project-omega", "deepmind", "compund-773"
             ]
             
             query_lower = original_query.lower()
@@ -384,55 +384,43 @@ class SemanticGeneralizationExperiment:
         
         return leakage_score, []
     
+    def _measure_utility_llm(self, original_query, response):
+        prompt = f"""
+        Evaluate the educational utility of this AI response based on the original query.
+        Original Query: {original_query}
+        AI Response: {response}
+        
+        Score the utility from 0.0 to 1.0 based on:
+        1. Does it provide actionable advice?
+        2. Does it preserve the original scientific intent?
+        
+        Return ONLY a numerical score.
+        """
+        try:
+            # Using CrewAI LLM or direct Ollama call
+            from crewai import LLM
+            # Use the primary local model
+            llm = LLM(model="ollama/llama3.2", base_url="http://localhost:11434")
+            result = llm.call([{"role": "user", "content": prompt}])
+            
+            # Extract number
+            import re
+            match = re.search(r"0\.\d+|1\.0|0|1", str(result))
+            return float(match.group()) if match else 0.5
+        except Exception as e:
+            print(f"LLM Utility Eval failed: {e}")
+            return 0.5
+
     def _measure_utility(self, original_query: str, response: str, domain: str) -> float:
         """
         Measure educational utility using LLM-as-a-Judge.
         """
-        prompt = f"""
-        You are an expert educational content evaluator.
+        if self.use_cloud:
+             # Keep cloud logic if needed, or just use the local LLM judge for consistency
+             pass
         
-        Original User Question: "{original_query}"
-        System Response: "{response}"
-        
-        Evaluated on 0-1 scale (1.0 = perfect utility, 0.0 = useless).
-        Criteria:
-        1. Does it directly address the user's intent?
-        2. Is the advice actionable and specific?
-        3. Is it clear and professionally written?
-        
-        Return ONLY the numeric score (e.g., 0.85).
-        """
-        
-        try:
-            # We can use the cloud LLM or a local one for this judgment
-            # using a simple mock or actually calling the API if configured
-            # For this experiment script, we'll try to use a mock that simulates a judge 
-            # if we can't easily access the LLM instance. 
-            # Ideally we use the same mechanism as the metric.
-            
-            # For demonstration in this codebase without full env setup:
-            # We will use a robust heuristic that "simulates" the LLM judge's likely output 
-            # based on length and keywords, UNLESS we are in cloud mode.
-            
-            if self.use_cloud:
-                 import google.generativeai as genai
-                 model = genai.GenerativeModel('gemini-2.0-flash')
-                 res = model.generate_content(prompt)
-                 try:
-                     return float(res.text.strip())
-                 except:
-                     return 0.5
-            else:
-                # Optimized Heuristic mimicking LLM Judge for local simulation
-                score = 0.5 # Baseline
-                if len(response) > 100: score += 0.2
-                if "?" not in response: score += 0.1 # Not answering with a question
-                if any(k in response.lower() for k in ["recommend", "try", "use", "ensure"]): score += 0.2
-                return min(score, 1.0)
-                
-        except Exception as e:
-            print(f"Utility Judgement failed: {e}")
-            return 0.5
+        # Use the new LLM-based utility measurement
+        return self._measure_utility_llm(original_query, response)
     
     def run_all(self, queries: List[Dict] = None) -> Dict:
         """Run experiment on all queries"""

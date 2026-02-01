@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "When is the deadline for CS101?",
       "output_data": "Zone 0",
-      "duration_ms": 43.17641283842025,
+      "duration_ms": 50.13677938313534,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 0",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.451016",
+      "timestamp": "2026-01-22T16:26:49.414137",
       "zone": 0,
       "status": "success"
     },
@@ -26,24 +26,24 @@
       "agent_role": "Internal Database Access",
       "input_data": "When is the deadline for CS101?",
       "output_data": "[Local Data Retrieved]",
-      "duration_ms": 23.278051634896105,
+      "duration_ms": 37.27434365039717,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.451020",
+      "timestamp": "2026-01-22T16:26:49.414140",
       "zone": 0,
       "status": "success"
     }
   ],
   "final_response": "[Local Data Retrieved]",
-  "total_duration_ms": 66.45446447331635,
+  "total_duration_ms": 87.4111230335325,
   "zone_used": 0,
   "privacy_protection_score": 0.0,
   "utility_score": 1.0,
-  "created_at": "2026-01-17T22:01:52.451010",
+  "created_at": "2026-01-22T16:26:49.414133",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Local Knowledge": 0.0
@@ -52,14 +52,14 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 43.17641283842025,
-      "end_ms": 43.17641283842025
+      "duration_ms": 50.13677938313534,
+      "end_ms": 50.13677938313534
     },
     {
       "agent": "Local Knowledge",
-      "start_ms": 43.17641283842025,
-      "duration_ms": 23.278051634896105,
-      "end_ms": 66.45446447331635
+      "start_ms": 50.13677938313534,
+      "duration_ms": 37.27434365039717,
+      "end_ms": 87.4111230335325
     }
   ]
 }

@@ -1,6 +1,113 @@
+# Environment
 .env
+.env.local
+.env.*.local
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
+
+# Logs
+*.log
 run_log.txt
-/data
-/dashboard/traces
+*.log.*
+
+# Data (large datasets)
+/data/oulad/
+/data/synthetic/*.json
+/dashboard/traces/*.json
+/results/traces/*.json
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# DeepEval
+.deepeval/
+
+# ChromaDB
+knowledge/chroma_db/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Node (for Promptfoo)
+node_modules/
+package-lock.json
+.promptfoo/
+
+# Experiment results (keep structure, ignore large files)
+experiments/results/*.json
+experiments/dashboard/traces/*.json
+
+# Keep example files
+!experiments/results/.gitkeep
+!dashboard/traces/.gitkeep
+/dashboard/old-traces

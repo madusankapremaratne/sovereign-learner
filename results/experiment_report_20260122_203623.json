@@ -1,0 +1,54 @@
+{
+  "experiment": "Semantic Generalization Effectiveness",
+  "timestamp": "2026-01-22T20:36:23.572579",
+  "total_queries": 1200,
+  "cloud_mode": "simulated",
+  "aggregate_metrics": {
+    "ip_leakage_rate": 0.0,
+    "ip_protection_rate": 1.0,
+    "utility_preservation": 0.535925,
+    "zero_leakage_queries": 1200,
+    "zero_leakage_rate": 1.0,
+    "avg_sanitization_time_ms": 0.06728112697601318
+  },
+  "by_domain": {
+    "adversarial": {
+      "count": 300,
+      "avg_ip_leakage": 0.0,
+      "avg_utility": 0.3655,
+      "zero_leakage_rate": 1.0
+    },
+    "legal": {
+      "count": 300,
+      "avg_ip_leakage": 0.0,
+      "avg_utility": 0.46366666666666667,
+      "zero_leakage_rate": 1.0
+    },
+    "biomedical": {
+      "count": 300,
+      "avg_ip_leakage": 0.0,
+      "avg_utility": 0.6451,
+      "zero_leakage_rate": 1.0
+    },
+    "cs": {
+      "count": 300,
+      "avg_ip_leakage": 0.0,
+      "avg_utility": 0.6694333333333333,
+      "zero_leakage_rate": 1.0
+    }
+  },
+  "comparison_baseline": {
+    "no_protection": {
+      "ip_leakage_rate": 1.0,
+      "utility": 1.0
+    },
+    "full_redaction": {
+      "ip_leakage_rate": 0.0,
+      "utility": 0.2
+    },
+    "sovereign_learner": {
+      "ip_leakage_rate": 0.0,
+      "utility": 0.535925
+    }
+  }
+}

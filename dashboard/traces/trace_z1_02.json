@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "My novel sorting algorithm 'QuickSort-X' is failing on large datasets.",
       "output_data": "Zone 1",
-      "duration_ms": 41.83532268038404,
+      "duration_ms": 48.871936795740396,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 1",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.451924",
+      "timestamp": "2026-01-22T16:26:49.414898",
       "zone": 1,
       "status": "success"
     },
@@ -26,7 +26,7 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "My novel sorting algorithm 'QuickSort-X' is failing on large datasets.",
       "output_data": "['QuickSort-X']",
-      "duration_ms": 48.33009371504406,
+      "duration_ms": 47.94743681833988,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [
@@ -35,7 +35,7 @@
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.451928",
+      "timestamp": "2026-01-22T16:26:49.414901",
       "zone": 1,
       "status": "success"
     },
@@ -44,7 +44,7 @@
       "agent_role": "Intent Obfuscation Specialist",
       "input_data": "Query: My novel sorting algorithm 'QuickSort-X' is failing on large datasets.\nEntities: ['QuickSort-X']",
       "output_data": "SANITIZED: My novel sorting algorithm 'Entity-A' is failing on large datasets.",
-      "duration_ms": 139.11788500747008,
+      "duration_ms": 139.664029311448,
       "privacy_score_before": 1.0,
       "privacy_score_after": 0.1,
       "entities_detected": [
@@ -57,7 +57,7 @@
         "Entity-A": "QuickSort-X"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.451932",
+      "timestamp": "2026-01-22T16:26:49.414906",
       "zone": 1,
       "status": "success"
     },
@@ -66,14 +66,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "My novel sorting algorithm 'Entity-A' is failing on large datasets.",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1309.921898182888,
+      "duration_ms": 1352.5285459716156,
       "privacy_score_before": 0.1,
       "privacy_score_after": 0.1,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.451935",
+      "timestamp": "2026-01-22T16:26:49.414908",
       "zone": 1,
       "status": "success"
     },
@@ -82,7 +82,7 @@
       "agent_role": "Response Re-contextualization Specialist",
       "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'QuickSort-X'}",
       "output_data": "[Recontextualized Answer]",
-      "duration_ms": 78.02233213531858,
+      "duration_ms": 51.5514835659931,
       "privacy_score_before": 0.1,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -91,7 +91,7 @@
         "Entity-A": "QuickSort-X"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.451937",
+      "timestamp": "2026-01-22T16:26:49.414911",
       "zone": 1,
       "status": "success"
     },
@@ -100,24 +100,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "[Recontextualized Answer]",
       "output_data": "Competency Updated",
-      "duration_ms": 35.92763936310796,
+      "duration_ms": 30.644533797561245,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.451939",
+      "timestamp": "2026-01-22T16:26:49.414913",
       "zone": 1,
       "status": "success"
     }
   ],
   "final_response": "[Recontextualized Answer]",
-  "total_duration_ms": 1653.1551710842127,
+  "total_duration_ms": 1671.2079662606982,
   "zone_used": 1,
   "privacy_protection_score": 0.9,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.451921",
+  "created_at": "2026-01-22T16:26:49.414893",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -130,38 +130,38 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 41.83532268038404,
-      "end_ms": 41.83532268038404
+      "duration_ms": 48.871936795740396,
+      "end_ms": 48.871936795740396
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 41.83532268038404,
-      "duration_ms": 48.33009371504406,
-      "end_ms": 90.1654163954281
+      "start_ms": 48.871936795740396,
+      "duration_ms": 47.94743681833988,
+      "end_ms": 96.81937361408028
     },
     {
       "agent": "Semantic Generalizer",
-      "start_ms": 90.1654163954281,
-      "duration_ms": 139.11788500747008,
-      "end_ms": 229.2833014028982
+      "start_ms": 96.81937361408028,
+      "duration_ms": 139.664029311448,
+      "end_ms": 236.48340292552825
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 229.2833014028982,
-      "duration_ms": 1309.921898182888,
-      "end_ms": 1539.2051995857862
+      "start_ms": 236.48340292552825,
+      "duration_ms": 1352.5285459716156,
+      "end_ms": 1589.0119488971438
     },
     {
       "agent": "Recontextualizer",
-      "start_ms": 1539.2051995857862,
-      "duration_ms": 78.02233213531858,
-      "end_ms": 1617.2275317211047
+      "start_ms": 1589.0119488971438,
+      "duration_ms": 51.5514835659931,
+      "end_ms": 1640.563432463137
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1617.2275317211047,
-      "duration_ms": 35.92763936310796,
-      "end_ms": 1653.1551710842127
+      "start_ms": 1640.563432463137,
+      "duration_ms": 30.644533797561245,
+      "end_ms": 1671.2079662606982
     }
   ]
 }

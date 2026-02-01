@@ -1,12 +1,12 @@
 """
-OULAD Experiments for Sovereign Learner
-========================================
-Experiment 1: Passive Struggle Detection
-Experiment 3: Competency Vector Portability
+Experiment 2: OULAD Hybrid Learning & Struggle Detection
+========================================================
+Validates the Sovereign Learner's performance on the OULAD dataset.
 
-Dataset: Open University Learning Analytics Dataset (OULAD)
-- 32,593 students across 7 courses
-- 10M+ VLE interactions
+Sub-Experiments:
+2a. Passive Struggle Detection (Local vs Cloud)
+2b. Complex Query Resolution (Hybrid Effectiveness)
+2c. Competency Vector Portability
 """
 
 import os
@@ -206,7 +206,7 @@ class OULADDataLoader:
 
 class StruggleDetectionExperiment:
     """
-    Experiment 1: Passive Struggle Detection
+    Experiment 2a: Passive Struggle Detection
     
     Hypothesis: On-device models with full local data achieve higher
     struggle detection accuracy than cloud models with sanitized data.
@@ -220,7 +220,7 @@ class StruggleDetectionExperiment:
         """Run both conditions and compare"""
         
         print("\n" + "="*60)
-        print("EXPERIMENT 1: PASSIVE STRUGGLE DETECTION")
+        print("EXPERIMENT 2a: PASSIVE STRUGGLE DETECTION")
         print("="*60)
         
         # Condition 1: Full Local Access (Sovereign Learner)
@@ -366,7 +366,7 @@ class StruggleDetectionExperiment:
         }
         
         print("\n" + "="*60)
-        print("EXPERIMENT 1 RESULTS")
+        print("EXPERIMENT 2a RESULTS")
         print("="*60)
         print(f"  Full Local F1:     {local.f1_score:.3f}")
         print(f"  Sanitized Cloud F1: {sanitized.f1_score:.3f}")
@@ -388,7 +388,7 @@ class ComplexQueryResult:
 
 class ComplexQueryExperiment:
     """
-    Experiment 2: Complex Query Resolution (Hybrid Effectiveness)
+    Experiment 2b: Complex Query Resolution (Hybrid Effectiveness)
     
     Hypothesis: Hybrid approach (local context + cloud reasoning) 
     outperforms local-only or sanitized-cloud-only for complex concepts.
@@ -402,7 +402,7 @@ class ComplexQueryExperiment:
         """Run complex query experiment"""
         
         print("\n" + "="*60)
-        print("EXPERIMENT 2: COMPLEX QUERY RESOLUTION")
+        print("EXPERIMENT 2b: COMPLEX QUERY RESOLUTION")
         print("="*60)
         
         # 1. Build Dataset
@@ -571,7 +571,7 @@ class ComplexQueryExperiment:
         }
         
         print("\n" + "="*60)
-        print("EXPERIMENT 2 RESULTS")
+        print("EXPERIMENT 2b RESULTS")
         print("="*60)
         print(f"  Cloud MSE: {cloud.mse:.2f}")
         print(f"  Local MSE: {local.mse:.2f}")
@@ -583,7 +583,7 @@ class ComplexQueryExperiment:
 
 class CompetencyPortabilityExperiment:
     """
-    Experiment 3: Competency Vector Portability
+    Experiment 2c: Competency Vector Portability
     
     Hypothesis: Transferring competency vectors across courses
     reduces cold-start problem and improves early prediction.
@@ -597,7 +597,7 @@ class CompetencyPortabilityExperiment:
         """Run portability experiment"""
         
         print("\n" + "="*60)
-        print("EXPERIMENT 3: COMPETENCY VECTOR PORTABILITY")
+        print("EXPERIMENT 2c: COMPETENCY VECTOR PORTABILITY")
         print("="*60)
         
         # Find students with multiple courses
@@ -776,7 +776,7 @@ class CompetencyPortabilityExperiment:
         }
         
         print("\n" + "="*60)
-        print("EXPERIMENT 3 RESULTS")
+        print("EXPERIMENT 2c RESULTS")
         print("="*60)
         print(f"  Cold Start Convergence:     {cold.avg_convergence_interactions:.1f} interactions")
         print(f"  Sovereign Transfer:         {transfer.avg_convergence_interactions:.1f} interactions")

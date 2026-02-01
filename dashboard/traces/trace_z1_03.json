@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "Patient 4453 showing severe reaction to drug formulation Alpha-9.",
       "output_data": "Zone 1",
-      "duration_ms": 46.142994548137736,
+      "duration_ms": 58.8292615312309,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 1",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.452305",
+      "timestamp": "2026-01-22T16:26:49.415211",
       "zone": 1,
       "status": "success"
     },
@@ -26,7 +26,7 @@
       "agent_role": "PII/IP Scanner",
       "input_data": "Patient 4453 showing severe reaction to drug formulation Alpha-9.",
       "output_data": "['Patient 4453', 'Alpha-9']",
-      "duration_ms": 49.679873989444,
+      "duration_ms": 35.891242751284935,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [
@@ -36,7 +36,7 @@
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452308",
+      "timestamp": "2026-01-22T16:26:49.415214",
       "zone": 1,
       "status": "success"
     },
@@ -45,7 +45,7 @@
       "agent_role": "Intent Obfuscation Specialist",
       "input_data": "Query: Patient 4453 showing severe reaction to drug formulation Alpha-9.\nEntities: ['Patient 4453', 'Alpha-9']",
       "output_data": "SANITIZED: Entity-A showing severe reaction to drug formulation Entity-B.",
-      "duration_ms": 114.94443834665836,
+      "duration_ms": 121.7266534420445,
       "privacy_score_before": 1.0,
       "privacy_score_after": 0.1,
       "entities_detected": [
@@ -61,7 +61,7 @@
         "Entity-B": "Alpha-9"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452313",
+      "timestamp": "2026-01-22T16:26:49.415219",
       "zone": 1,
       "status": "success"
     },
@@ -70,14 +70,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "Entity-A showing severe reaction to drug formulation Entity-B.",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 1165.5723607861978,
+      "duration_ms": 877.3415226918461,
       "privacy_score_before": 0.1,
       "privacy_score_after": 0.1,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452315",
+      "timestamp": "2026-01-22T16:26:49.415221",
       "zone": 1,
       "status": "success"
     },
@@ -86,7 +86,7 @@
       "agent_role": "Response Re-contextualization Specialist",
       "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'Patient 4453', 'Entity-B': 'Alpha-9'}",
       "output_data": "[Recontextualized Answer]",
-      "duration_ms": 51.70474065099716,
+      "duration_ms": 59.00936572065395,
       "privacy_score_before": 0.1,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -96,7 +96,7 @@
         "Entity-B": "Alpha-9"
       },
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452317",
+      "timestamp": "2026-01-22T16:26:49.415224",
       "zone": 1,
       "status": "success"
     },
@@ -105,24 +105,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "[Recontextualized Answer]",
       "output_data": "Competency Updated",
-      "duration_ms": 27.027255042300467,
+      "duration_ms": 35.57288285552244,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.452319",
+      "timestamp": "2026-01-22T16:26:49.415225",
       "zone": 1,
       "status": "success"
     }
   ],
   "final_response": "[Recontextualized Answer]",
-  "total_duration_ms": 1455.0716633637355,
+  "total_duration_ms": 1188.3709289925828,
   "zone_used": 1,
   "privacy_protection_score": 0.9,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.452302",
+  "created_at": "2026-01-22T16:26:49.415208",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Sensitivity Detector": 0.0,
@@ -135,38 +135,38 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 46.142994548137736,
-      "end_ms": 46.142994548137736
+      "duration_ms": 58.8292615312309,
+      "end_ms": 58.8292615312309
     },
     {
       "agent": "Sensitivity Detector",
-      "start_ms": 46.142994548137736,
-      "duration_ms": 49.679873989444,
-      "end_ms": 95.82286853758174
+      "start_ms": 58.8292615312309,
+      "duration_ms": 35.891242751284935,
+      "end_ms": 94.72050428251583
     },
     {
       "agent": "Semantic Generalizer",
-      "start_ms": 95.82286853758174,
-      "duration_ms": 114.94443834665836,
-      "end_ms": 210.7673068842401
+      "start_ms": 94.72050428251583,
+      "duration_ms": 121.7266534420445,
+      "end_ms": 216.44715772456033
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 210.7673068842401,
-      "duration_ms": 1165.5723607861978,
-      "end_ms": 1376.3396676704378
+      "start_ms": 216.44715772456033,
+      "duration_ms": 877.3415226918461,
+      "end_ms": 1093.7886804164064
     },
     {
       "agent": "Recontextualizer",
-      "start_ms": 1376.3396676704378,
-      "duration_ms": 51.70474065099716,
-      "end_ms": 1428.044408321435
+      "start_ms": 1093.7886804164064,
+      "duration_ms": 59.00936572065395,
+      "end_ms": 1152.7980461370603
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 1428.044408321435,
-      "duration_ms": 27.027255042300467,
-      "end_ms": 1455.0716633637355
+      "start_ms": 1152.7980461370603,
+      "duration_ms": 35.57288285552244,
+      "end_ms": 1188.3709289925828
     }
   ]
 }

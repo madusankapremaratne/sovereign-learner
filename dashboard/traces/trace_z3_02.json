@@ -7,7 +7,7 @@
       "agent_role": "Privacy-Aware Query Router",
       "input_data": "Who wrote 'The Great Gatsby'?",
       "output_data": "Zone 3",
-      "duration_ms": 41.01646564211927,
+      "duration_ms": 57.460230266475676,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
@@ -17,7 +17,7 @@
         "decision": "Zone 3",
         "reason": "Classified based on sensitivity"
       },
-      "timestamp": "2026-01-17T22:01:52.454736",
+      "timestamp": "2026-01-22T16:26:49.417373",
       "zone": 3,
       "status": "success"
     },
@@ -26,14 +26,14 @@
       "agent_role": "External Knowledge Retrieval",
       "input_data": "Who wrote 'The Great Gatsby'?",
       "output_data": "[Cloud Response Content]",
-      "duration_ms": 889.0664534728836,
+      "duration_ms": 829.2581466601279,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454740",
+      "timestamp": "2026-01-22T16:26:49.417375",
       "zone": 3,
       "status": "success"
     },
@@ -42,24 +42,24 @@
       "agent_role": "Learning Record Manager",
       "input_data": "Final Answer",
       "output_data": "Competency Updated",
-      "duration_ms": 26.445370565118647,
+      "duration_ms": 29.973616978363204,
       "privacy_score_before": 1.0,
       "privacy_score_after": 1.0,
       "entities_detected": [],
       "entities_masked": [],
       "mapping": {},
       "metadata": {},
-      "timestamp": "2026-01-17T22:01:52.454743",
+      "timestamp": "2026-01-22T16:26:49.417377",
       "zone": 3,
       "status": "success"
     }
   ],
   "final_response": "Final Answer",
-  "total_duration_ms": 956.5282896801215,
+  "total_duration_ms": 916.6919939049668,
   "zone_used": 3,
   "privacy_protection_score": 0.0,
   "utility_score": 0.95,
-  "created_at": "2026-01-17T22:01:52.454722",
+  "created_at": "2026-01-22T16:26:49.417371",
   "agent_contributions": {
     "Sovereign Manager": 0.15,
     "Cloud Researcher": 0.0,
@@ -69,20 +69,20 @@
     {
       "agent": "Sovereign Manager",
       "start_ms": 0,
-      "duration_ms": 41.01646564211927,
-      "end_ms": 41.01646564211927
+      "duration_ms": 57.460230266475676,
+      "end_ms": 57.460230266475676
     },
     {
       "agent": "Cloud Researcher",
-      "start_ms": 41.01646564211927,
-      "duration_ms": 889.0664534728836,
-      "end_ms": 930.0829191150028
+      "start_ms": 57.460230266475676,
+      "duration_ms": 829.2581466601279,
+      "end_ms": 886.7183769266036
     },
     {
       "agent": "Evidence Curator",
-      "start_ms": 930.0829191150028,
-      "duration_ms": 26.445370565118647,
-      "end_ms": 956.5282896801215
+      "start_ms": 886.7183769266036,
+      "duration_ms": 29.973616978363204,
+      "end_ms": 916.6919939049668
     }
   ]
 }
