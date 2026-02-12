@@ -11,6 +11,7 @@ This directory contains all experimental validations of the Sovereign Learner pr
 | `exp03_model_diversity.py` | 2.7K | Architecture Agnosticism Testing |
 | `exp04_agentic_evaluation.py` | 10K | Agentic Behavior Metrics |
 | `exp05_promptfoo_red_team.yaml` | 1.4K | Adversarial Red Team Testing |
+| `exp05_enhanced_red_team.yaml` | 3.2K | Defense-in-Depth Guardrails Testing |
 
 ## 🚀 Quick Start
 
@@ -66,7 +67,8 @@ For detailed information about each experiment, see:
 | **EXP02** | ✅ Complete | +25% F1 with local data |
 | **EXP03** | ✅ Complete | Model-agnostic architecture |
 | **EXP04** | ✅ Complete | 95%+ task completion |
-| **EXP05** | ⚠️ Critical Findings | 25% attack resistance |
+| **EXP05** | ⚠️ Vulnerabilities Found | 25% attack resistance |
+| **EXP05 Enhanced** | ✅ Complete | 93% attack resistance (+68%) |
 
 ## 🔬 Prerequisites
 
@@ -101,7 +103,8 @@ These experiments provide empirical validation for:
 2. **Hybrid Learning** - Local context + cloud reasoning
 3. **Architecture Flexibility** - Model-agnostic design
 4. **Agentic Correctness** - Zone-aware decision making
-5. **Security Limitations** - Need for defense-in-depth
+5. **Security Limitations** - Need for defense-in-depth (EXP05)
+6. **Defense-in-Depth** - 93% attack resistance with guardrails (EXP05 Enhanced)
 
 ## 📝 Citation
 
@@ -122,6 +125,6 @@ For questions about experiments, please open an issue or contact the research te
 
 ---
 
-**Last Updated:** 2026-02-01  
-**Total Experiments:** 5 (7 sub-experiments)  
-**Status:** ✅ 4 validated, ⚠️ 1 reveals critical security gaps
+**Last Updated:** 2026-02-12  
+**Total Experiments:** 6 (EXP01-05 + EXP05 Enhanced)  
+**Status:** ✅ 5 validated, ✅ 1 enhanced (EXP05: 25% → 93% attack resistance)

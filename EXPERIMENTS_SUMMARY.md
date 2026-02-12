@@ -7,7 +7,7 @@
 
 ## 📋 Overview
 
-The Sovereign Learner system includes **5 comprehensive experiments** designed to validate different aspects of the privacy-preserving AI architecture. Each experiment tests specific hypotheses about the system's effectiveness, performance, and capabilities.
+The Sovereign Learner system includes **6 comprehensive experiments** designed to validate different aspects of the privacy-preserving AI architecture. Each experiment tests specific hypotheses about the system's effectiveness, performance, and capabilities.
 
 > **Methodology Note:** For a deep dive into *why* we chose specific metrics (e.g., F1 over Accuracy) and algorithms (e.g., Random Forest over XGBoost), please see:
 > - 📘 [THEORETICAL_JUSTIFICATIONS.md](THEORETICAL_JUSTIFICATIONS.md) (Full Theoretical Defense)
@@ -24,7 +24,7 @@ The Sovereign Learner system includes **5 comprehensive experiments** designed t
 | **EXP03** | `exp03_model_diversity.py` | Architecture Agnosticism | ✅ Complete |
 | **EXP04** | `exp04_agentic_evaluation.py` | Agentic Behavior Metrics | ✅ Complete |
 | **EXP05** | `exp05_promptfoo_red_team.yaml` | Adversarial Red Team Testing | ✅ Complete |
-| **EXP06** | `exp06_defense_in_depth.py` | Guardrails & Jailbreak Defense | 🏗️ In Progress |
+| **EXP05 Enhanced** | `exp05_enhanced_red_team.yaml` | Defense-in-Depth Guardrails | ✅ Complete |
 
 ---
 

@@ -5,6 +5,10 @@ sovereign_manager:
     You are the Sovereign Manager. You implement Privacy-Aware Planning by 
     analyzing query sensitivity. You route to Zone 0 (Offline), Zone 1 (Generalization), 
     Zone 2 (Optimistic Local), or Zone 3 (Direct Cloud).
+    
+    CRITICAL: After classifying a query, you MUST use the zone_validator tool to verify 
+    your classification is appropriate. This prevents roleplay attacks from manipulating 
+    zone assignment. If validation fails, adjust to the recommended zone.
   llm: ollama/phi3.5:latest
 
 sensitivity_detector:
@@ -41,6 +45,10 @@ trust_enforcer:
     You implement the Reflection pattern. You check if the cloud response 
     accidentally "guessed" the masked PII or if it contradicts local course materials. 
     You trigger retries if the response is hallucinated or unsafe.
+    
+    CRITICAL: Before finalizing any response to the user, you MUST use the output_sanitizer 
+    tool to remove Chain-of-Thought artifacts and internal reasoning patterns. This prevents 
+    information leakage about the system's internal workings.
   llm: ollama/phi3.5:latest
 
 recontextualizer:
@@ -59,6 +67,10 @@ competency_tracker:
     You are the mathematical heart of the portfolio. You implement: 
     V_Portfolio = Σ w_i · E_i. You assign weights (1.0 for active, 0.2 for passive) 
     and decide how this interaction improves the learner's local profile.
+    
+    CRITICAL: Before storing any text in the competency vector, you MUST use the pii_scrubber 
+    tool to remove or anonymize PII. This ensures that even local storage maintains privacy 
+    protection and prevents PII leakage through embeddings.
   llm: ollama/phi3.5:latest
 
 evidence_curator:
