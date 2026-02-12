@@ -1,118 +1,72 @@
-classify_sensitivity:
+routing_task:
   description: >
-    Analyze the following learner query and classify its privacy zone:
-    
-    Query: {query}
-    
-    Consider:
-    1. Does it contain PII? (names, IDs, locations)
-    2. Does it reveal proprietary research topics?
-    3. Could the intent be used to profile the learner?
-    
-    Output the zone (0-3) and detected sensitive elements.
-  expected_output: "Zone classification with sensitivity analysis"
+    Analyze the incoming user query: "{user_query}". 
+    Evaluate it against privacy levels: 0 (local-only) to 3 (direct cloud).
+    Identify if the query requires semantic generalization or if it can be 
+    processed by the local SLM immediately.
+  expected_output: "A routing decision (Zone 0-3) and a brief justification."
   agent: sovereign_manager
 
-detect_sensitive_entities:
+pii_detection_task:
   description: >
-    Extract all sensitive entities from the query:
-    
-    Query: {query}
-    
-    Identify and list the ACTUAL sensitive terms (e.g., CRISPR, HEK293, patient names).
-    Output as comma-separated list of the original terms found.
-  expected_output: "Comma-separated list of actual sensitive entity names found in query"
+    Scan the query: "{user_query}" for any Personally Identifiable Information (PII) 
+    or domain-sensitive entities (e.g., specific chemical compounds, proprietary 
+    research names, or medical conditions).
+  expected_output: "A list of sensitive entities that must be masked."
   agent: sensitivity_detector
+  context: [routing_task]
 
-generalize_query:
+generalization_task:
   description: >
-    Transform the sensitive query into an abstract formulation.
-    
-    CRITICAL: The ONLY available tool is 'semantic_generalizer'. 
-    
-    1. READ the output of 'detect_sensitive_entities' task to get the list of entities (e.g. "John Smith, 12345").
-    2. Original query: {query}
-    
-    You MUST call the tool exactly like this:
-    Tool: semantic_generalizer
-    Arguments:
-      query: "{query}"
-      sensitive_entities: (Insert the EXACT output string from detect_sensitive_entities here)
-  expected_output: "SANITIZED query with MAPPING dictionary"
+    Using the list of sensitive entities, rewrite the query: "{user_query}" 
+    into a generalized version. Replace specific terms with abstract placeholders 
+    (e.g., 'Protocol-X', 'Variable-A'). 
+    Create a private 'Mapping Key' to store these associations locally.
+  expected_output: "The generalized query and the hidden Mapping Key."
   agent: semantic_generalizer
-  context:
-    - detect_sensitive_entities
+  context: [pii_detection_task]
 
-execute_cloud_query:
+cloud_knowledge_task:
   description: >
-    Process the generalized query using the external cloud model:
-    
-    Generalized Query: Use the 'SANITIZED' query output from the generalize_query task.
-    
-    Provide a comprehensive, technical answer to the abstract question.
-    Do NOT attempt to guess the placeholders. Treat "Protocol-X" and "Cell-Type-A" as first-class scientific terms.
-  expected_output: "Detailed technical response using the abstract terminology"
+    Take the generalized query from the previous task and provide a 
+    comprehensive, high-quality technical response. Do not attempt to 
+    uncover the specific identities behind the placeholders.
+  expected_output: "A detailed technical guide based on the generalized terms."
   agent: cloud_researcher
-  context:
-    - generalize_query
+  context: [generalization_task]
 
-validate_response:
+privacy_audit_task:
   description: >
-    Validate the cloud response against trust criteria:
-    
-    Original query: {query}
-    Generalized query: From the generalize_query task
-    Cloud response: Use the output from the execute_cloud_query task.
-    
-    Check:
-    1. Does response leak any sanitized information?
-    2. Is response consistent with educational best practices?
-    3. Does response contain hallucinations?
-    
-    Output the validated cloud response text.
-  expected_output: "The validated cloud response text that is safe to re-contextualize"
+    Review the cloud researcher's response. Ensure that the cloud model 
+    has not inadvertently 'guessed' the user's specific context or leaked 
+    any information that maps back to the sensitive entities found in Stage 1.
+  expected_output: "A validation report (Pass/Fail) with corrective feedback."
   agent: trust_enforcer
-  context:
-    - generalize_query
-    - execute_cloud_query
+  context: [cloud_knowledge_task, pii_detection_task]
 
-recontextualize_response:
+recontextualization_task:
   description: >
-    Map the cloud response back to the learner's specific context.
-    
-    CRITICAL: You MUST use the 'recontextualizer' tool. No other action is allowed.
-    
-    Steps:
-    1. Find the MAPPING from the generalize_query task output (looks like: {'Protocol-A': 'CRISPR', 'Cell-A': 'HEK293'})
-    2. Get the response text from validate_response task
-    3. Call the 'recontextualizer' tool with:
-       - response: the full response text containing placeholders
-       - mapping: "{'Protocol-A': 'CRISPR', 'Cell-A': 'HEK293'}" (as string)
-    
-    The final output MUST contain the original terms (CRISPR, HEK293), NOT placeholders (Protocol-A, Cell-Type-A).
-  expected_output: "Personalized response with CRISPR and HEK293 restored"
+    Using the 'Mapping Key' from the generalization stage, take the validated 
+    technical guide and replace all placeholders with the original specific terms. 
+    Ensure the final tone is helpful and educational.
+  expected_output: "The final specific technical response for the user."
   agent: recontextualizer
-  context:
-    - generalize_query
-    - validate_response
+  context: [generalization_task, privacy_audit_task]
 
-update_competency:
+competency_logging_task:
   description: >
-    Record this learning interaction in the competency vector using the 'evidence_curator' tool.
-    
-    1. EXTRACT 'zone' from the 'classify_sensitivity' task output (look for a number 0-3).
-    2. EXTRACT 'response' from the 'recontextualize_response' task output (the final text).
-    3. Use the original 'query'.
-    4. Set 'interaction_type' to 'active'.
-    
-    Tool: evidence_curator
-    Arguments:
-      query: (original query)
-      response: (the text from step 2)
-      zone: (the number from step 1)
-      interaction_type: "active"
-  expected_output: "Competency vector update confirmation with ID and path"
+    Update the user's local profile. Calculate the learning weight (Active=1.0, Passive=0.2) 
+    for this interaction and update the competency vector V_Portfolio. 
+    Pass the interaction data to the Curator for storage.
+  expected_output: "Calculated weight and updated competency vector status."
   agent: competency_tracker
-  context:
-    - classify_sensitivity
-    - recontextualize_response
+  context: [recontextualization_task]
+
+data_sovereignty_task:
+  description: >
+    Securely store the raw query, the generalized query, and the final response 
+    in the local ChromaDB. Ensure no sensitive data has left the local environment 
+    unmasked.
+  expected_output: "Confirmation of successful local database entry."
+  agent: evidence_curator
+  context: [competency_logging_task]

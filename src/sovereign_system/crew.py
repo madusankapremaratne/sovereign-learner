@@ -4,6 +4,7 @@ import os
 from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
 from sovereign_system.tools.competency_tools import CompetencyEvidenceTool
 from sovereign_system.tools.privacy_tools import PrivacyScanTool
+from sovereign_system.tools.guardrail_tools import ZoneValidationTool, OutputSanitizerTool, PIIScrubberTool
 
 @CrewBase
 class SovereignSystem():
@@ -29,11 +30,23 @@ class SovereignSystem():
 
     @agent
     def sovereign_manager(self) -> Agent:
-        return Agent(config=self.agents_config['sovereign_manager'], llm=self.local_llm, verbose=True)
+        # Add zone validation tool to prevent roleplay attacks (EXP05)
+        return Agent(
+            config=self.agents_config['sovereign_manager'], 
+            llm=self.local_llm, 
+            tools=[ZoneValidationTool()],
+            verbose=True
+        )
 
     @agent
     def sensitivity_detector(self) -> Agent:
-        return Agent(config=self.agents_config['sensitivity_detector'], llm=self.worker_llm, verbose=True)
+        from sovereign_system.tools.presidio_tools import PresidioScanTool
+        return Agent(
+            config=self.agents_config['sensitivity_detector'], 
+            llm=self.worker_llm, 
+            tools=[PresidioScanTool()],
+            verbose=True
+        )
 
     
     @agent
@@ -56,10 +69,11 @@ class SovereignSystem():
 
     @agent
     def competency_tracker(self) -> Agent:
+        # Add PII scrubber to protect local storage (EXP05)
         return Agent(
             config=self.agents_config['competency_tracker'],
             llm=self.worker_llm,
-            tools=[CompetencyEvidenceTool()],
+            tools=[CompetencyEvidenceTool(), PIIScrubberTool()],
             verbose=True
         )
 
@@ -70,10 +84,11 @@ class SovereignSystem():
 
     @agent
     def trust_enforcer(self) -> Agent:
+        # Add output sanitizer to prevent CoT leakage (EXP05)
         return Agent(
             config=self.agents_config['trust_enforcer'], 
             llm=self.local_llm, 
-            tools=[PrivacyScanTool()],
+            tools=[PrivacyScanTool(), OutputSanitizerTool()],
             verbose=True
         )
 
