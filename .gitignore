@@ -111,3 +111,4 @@ experiments/dashboard/traces/*.json
 !experiments/results/.gitkeep
 !dashboard/traces/.gitkeep
 /dashboard/old-traces
+/dashboard/dashboard/traces

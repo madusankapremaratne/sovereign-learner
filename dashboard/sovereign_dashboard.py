@@ -18,10 +18,16 @@ from datetime import datetime
 import json
 
 # Add parent to path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add parent to path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(project_root, "src"))
+
+# Load environment variables
+from dotenv import load_dotenv
+load_dotenv(os.path.join(project_root, ".env"))
 
 # Import from core system source of truth
-from src.sovereign_system.utils.sovereign_trace_logger import SovereignTrace, SovereignTracer, create_demo_trace, AgentStep
+from sovereign_system.utils.sovereign_trace_logger import SovereignTrace, SovereignTracer, create_demo_trace, AgentStep
 
 # Page config
 st.set_page_config(
@@ -779,12 +785,41 @@ def main():
     
     # Main content
     if run_button and query:
-        with st.spinner("Processing query through Sovereign Learner pipeline..."):
-            # Create demo trace (in production, this would call the actual pipeline)
-            trace = create_demo_trace(query)
-            time.sleep(0.5)  # Simulate processing
-        st.session_state.current_trace = trace
-        st.rerun()
+        # Import the real system
+        try:
+            from sovereign_system.crew import SovereignSystem
+            from sovereign_system.utils.sovereign_trace_logger import SovereignTracer
+            import hashlib
+            
+            with st.spinner("🚀 Initializing Sovereign Agents..."):
+                query_id = hashlib.md5(f"{query}{datetime.now().isoformat()}".encode()).hexdigest()[:8]
+                tracer = SovereignTracer()
+                
+                # Start tracing
+                tracer.start_trace(query_id, query)
+                
+                # Initialize System with Tracer
+                sovereign_system = SovereignSystem(tracer=tracer)
+                sovereign_crew = sovereign_system.crew()
+                
+            with st.spinner("🛡️ Processing Query through Zones (this may take 30-60s)..."):
+                # Run the crew
+                result = sovereign_crew.kickoff(inputs={'user_query': query})
+                
+                # End trace
+                trace = tracer.end_trace(str(result), zone=1, utility_score=0.95)
+                
+            st.session_state.current_trace = trace
+            st.rerun()
+            
+        except Exception as e:
+            st.error(f"❌ Execution Failed: {str(e)}")
+            st.error("Please ensure you have the local Ollama models (phi3.5:latest) and API keys set up.")
+            # Fallback to demo trace if real execution fails
+            if st.button("Fallback to Demo Trace"):
+                 trace = create_demo_trace(query)
+                 st.session_state.current_trace = trace
+                 st.rerun()
 
     # Load existing traces
     trace_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "traces")

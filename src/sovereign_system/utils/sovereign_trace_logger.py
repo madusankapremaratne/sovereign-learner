@@ -313,89 +313,187 @@ def create_demo_trace(query: str = "How do I optimize my CRISPR protocol for HEK
     tracer = SovereignTracer()
     trace = tracer.start_trace(query_id, query)
     
-    # 1. Sovereign Manager
-    tracer.log_agent(
-        agent_name="Sovereign Manager",
-        agent_role="Privacy-Aware Query Router",
-        input_data=query,
-        output_data="Zone 1 - High Sensitivity Research Query",
-        duration_ms=45.2,
-        privacy_before=1.0,
-        privacy_after=1.0,  # No modification yet
-        zone=1,
-        metadata={
-            "decision": "Zone 1",
-            "confidence": 0.98,
-            "reason": "Detected proprietary research terms (CRISPR, HEK293)"
-        }
-    )
+    # Simple keyword detection for demo purposes
+    # In production, this logic lives in the SovereignManager agent
+    sensitive_terms = ["crispr", "hek293", "ip", "confidential", "proprietary", "secret", "private", "medical", "patient", "diagnosis", "ssn", "password", "series a", "sequoia", "cuda", "tensorrt"]
+    is_sensitive = any(term in query.lower() for term in sensitive_terms)
     
-    # 2. Semantic Generalizer
-    mapping = {'Protocol-Alpha': 'CRISPR', 'Cell-Beta': 'HEK293'}
-    sanitized_query = "How do I optimize my Protocol-Alpha protocol for Cell-Beta cells?"
-    
-    tracer.log_agent(
-        agent_name="Semantic Generalizer",
-        agent_role="Intent Obfuscation Specialist",
-        input_data=f"Query: {query}\nEntities: ['CRISPR', 'HEK293']",
-        output_data=f"SANITIZED: {sanitized_query}\nMAPPING: {mapping}",
-        duration_ms=120.5,
-        privacy_before=1.0,
-        privacy_after=0.1,  # High privacy protection
-        entities_detected=["CRISPR", "HEK293"],
-        entities_masked=["Protocol-Alpha", "Cell-Beta"],
-        mapping=mapping,
-        zone=1,
-        metadata={"strategy": "generalization_substitution"}
-    )
-    
-    # 3. Cloud Researcher (Simulated)
-    cloud_response = "Optimizing Protocol-Alpha for Cell-Beta typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls."
-    
-    tracer.log_agent(
-        agent_name="Cloud Researcher",
-        agent_role="External Knowledge Retrieval",
-        input_data=sanitized_query,
-        output_data=cloud_response,
-        duration_ms=1540.2,  # Simulated network latency
-        privacy_before=0.1,
-        privacy_after=0.1,
-        zone=1,
-        metadata={"model": "gemini-pro", "source": "external_api"}
-    )
-    
-    # 4. Recontextualizer
-    final_response = "Optimizing CRISPR for HEK293 typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls."
-    
-    tracer.log_agent(
-        agent_name="Recontextualizer",
-        agent_role="Response Re-contextualization Specialist",
-        input_data=f"Response: {cloud_response}\nMapping: {mapping}",
-        output_data=final_response,
-        duration_ms=85.6,
-        privacy_before=0.1,
-        privacy_after=1.0,  # Restored for user
-        mapping=mapping,
-        zone=1,
-        metadata={"replacements_made": 2}
-    )
-    
-    # 5. Evidence Curator
-    tracer.log_agent(
-        agent_name="Evidence Curator",
-        agent_role="Learning Record Manager",
-        input_data=final_response,
-        output_data="Competency Updated: vector_db_id_8823",
-        duration_ms=32.1,
-        privacy_before=1.0,
-        privacy_after=1.0,
-        zone=1,
-        metadata={
-            "utility": 0.95,
-            "leakage": 0.0,
-            "persisted": True
-        }
-    )
-    
-    tracer.end_trace(final_response, zone=1, utility_score=0.95)
+    if is_sensitive:
+        # Zone 1 Trace (Simulated High Sensitivity)
+        
+        # 1. Sovereign Manager
+        tracer.log_agent(
+            agent_name="Sovereign Manager",
+            agent_role="Privacy-Aware Query Router",
+            input_data=query,
+            output_data="Zone 1 - High Sensitivity Research Query",
+            duration_ms=45.2,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            zone=1,
+            metadata={
+                "decision": "Zone 1",
+                "confidence": 0.98,
+                "reason": f"Detected proprietary/sensitive terms in query"
+            }
+        )
+        
+        # 2. Semantic Generalizer
+        # For demo, we default to the CRISPR mapping if detected, otherwise a generic mapping
+        if "crispr" in query.lower() or "hek" in query.lower():
+            mapping = {'Protocol-Alpha': 'CRISPR', 'Cell-Beta': 'HEK293'}
+            sanitized_query = query.replace("CRISPR", "Protocol-Alpha").replace("HEK293", "Cell-Beta")
+            detected = ["CRISPR", "HEK293"]
+            masked = ["Protocol-Alpha", "Cell-Beta"]
+        else:
+            # Generic sensitive mapping
+            mapping = {'Entity-X': 'Sensitive-Term'}
+            sanitized_query = f"Query about Entity-X [Redacted Details] based on input: {query[:20]}..."
+            detected = ["Sensitive-Term"]
+            masked = ["Entity-X"]
+        
+        tracer.log_agent(
+            agent_name="Semantic Generalizer",
+            agent_role="Intent Obfuscation Specialist",
+            input_data=f"Query: {query}\nEntities: {detected}",
+            output_data=f"SANITIZED: {sanitized_query}\nMAPPING: {mapping}",
+            duration_ms=120.5,
+            privacy_before=1.0,
+            privacy_after=0.1,  # High privacy protection
+            entities_detected=detected,
+            entities_masked=masked,
+            mapping=mapping,
+            zone=1,
+            metadata={"strategy": "generalization_substitution"}
+        )
+        
+        # 3. Cloud Researcher
+        cloud_response = "Optimizing parameters for Entity-X typically requires careful calibration and adherence to standard protocols."
+        if "crispr" in query.lower():
+             cloud_response = "Optimizing Protocol-Alpha for Cell-Beta typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls."
+        
+        tracer.log_agent(
+            agent_name="Cloud Researcher",
+            agent_role="External Knowledge Retrieval",
+            input_data=sanitized_query,
+            output_data=cloud_response,
+            duration_ms=1540.2,
+            privacy_before=0.1,
+            privacy_after=0.1,
+            zone=1,
+            metadata={"model": "gemini-pro", "source": "external_api"}
+        )
+        
+        # 4. Recontextualizer
+        final_response = cloud_response.replace("Protocol-Alpha", "CRISPR").replace("Cell-Beta", "HEK293").replace("Entity-X", "Sensitive-Term")
+        
+        tracer.log_agent(
+            agent_name="Recontextualizer",
+            agent_role="Response Re-contextualization Specialist",
+            input_data=f"Response: {cloud_response}\nMapping: {mapping}",
+            output_data=final_response,
+            duration_ms=85.6,
+            privacy_before=0.1,
+            privacy_after=1.0,
+            mapping=mapping,
+            zone=1,
+            metadata={"replacements_made": len(mapping)}
+        )
+        
+        # 5. Evidence Curator
+        tracer.log_agent(
+            agent_name="Evidence Curator",
+            agent_role="Learning Record Manager",
+            input_data=final_response,
+            output_data="Competency Updated: vector_db_id_8823",
+            duration_ms=32.1,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            zone=1,
+            metadata={"utility": 0.95, "leakage": 0.0, "persisted": True}
+        )
+        
+        tracer.end_trace(final_response, zone=1, utility_score=0.95)
+        
+    else:
+        # Zone 3 Trace (Public/General)
+        
+        # 1. Sovereign Manager
+        tracer.log_agent(
+            agent_name="Sovereign Manager",
+            agent_role="Privacy-Aware Query Router",
+            input_data=query,
+            output_data="Zone 3 - Public/General Query",
+            duration_ms=35.0,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            zone=3,
+            metadata={
+                "decision": "Zone 3",
+                "confidence": 0.99,
+                "reason": "No sensitive entities detected in query"
+            }
+        )
+        
+        # 2. Semantic Generalizer (Pass-through)
+        tracer.log_agent(
+            agent_name="Semantic Generalizer",
+            agent_role="Intent Obfuscation Specialist",
+            input_data=f"Query: {query}",
+            output_data=f"PASSTHROUGH: {query}",
+            duration_ms=15.0,
+            privacy_before=1.0,
+            privacy_after=1.0, # No protection needed
+            entities_detected=[],
+            entities_masked=[],
+            mapping={},
+            zone=3,
+            metadata={"strategy": "passthrough"}
+        )
+        
+        # 3. Cloud Researcher
+        # Simulate a generic response
+        cloud_response = f"This is a simulated response from the Cloud Researcher for the public query: '{query}'. In a production environment, this would contain retrieved public knowledge."
+        
+        tracer.log_agent(
+            agent_name="Cloud Researcher",
+            agent_role="External Knowledge Retrieval",
+            input_data=query,
+            output_data=cloud_response,
+            duration_ms=850.5,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            zone=3,
+            metadata={"model": "gemini-pro", "source": "external_api"}
+        )
+        
+        # 4. Recontextualizer (Pass-through)
+        tracer.log_agent(
+            agent_name="Recontextualizer",
+            agent_role="Response Re-contextualization Specialist",
+            input_data=f"Response: {cloud_response}",
+            output_data=cloud_response,
+            duration_ms=12.0,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            mapping={},
+            zone=3,
+            metadata={"replacements_made": 0}
+        )
+        
+        # 5. Evidence Curator
+        tracer.log_agent(
+            agent_name="Evidence Curator",
+            agent_role="Learning Record Manager",
+            input_data=cloud_response,
+            output_data="Competency Updated: vector_db_id_public",
+            duration_ms=28.5,
+            privacy_before=1.0,
+            privacy_after=1.0,
+            zone=3,
+            metadata={"utility": 1.0, "leakage": 0.0, "persisted": True}
+        )
+        
+        tracer.end_trace(cloud_response, zone=3, utility_score=1.0)
+        
     return tracer.traces[0]
