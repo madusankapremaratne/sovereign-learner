@@ -125,7 +125,7 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 | **Sovereign Manager** | Privacy-aware routing | All | Local (Llama 3.2) |
 | **Sensitivity Detector** | PII/PHI/IP detection | 1, 2 | Local (Llama 3.2) |
 | **Semantic Generalizer** | Entity masking | 1 | Local (Llama 3.2) |
-| **Cloud Researcher** | Knowledge retrieval | 1, 2, 3 | Cloud (Gemini 2.5) |
+| **Cloud Researcher** | Knowledge retrieval | 1, 2, 3 | Cloud (Gemini / Llama 3.3) |
 | **Trust Enforcer** | Response validation | 1, 2 | Local (Llama 3.2) |
 | **Recontextualizer** | Context restoration | 1 | Local (Llama 3.2) |
 | **Evidence Curator** | Learning record manager | All | Local (Llama 3.2) |
@@ -156,7 +156,7 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 | **EXP05** | Adversarial Red Team | 25% attack resistance | ⚠️ Vulnerabilities Found |
 | **EXP05 Enhanced** | Defense-in-Depth Guardrails | 93% attack resistance | ✅ Validated |
 
-**📊 Detailed Results:** See [EXPERIMENTS_SUMMARY.md](EXPERIMENTS_SUMMARY.md)
+**📊 Detailed Results:** See [EXPERIMENTS_SUMMARY.md](docs/EXPERIMENTS_SUMMARY.md)
 
 ---
 
@@ -165,7 +165,7 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 ### Core Framework
 - **Orchestration:** [CrewAI](https://crewai.com) - Multi-agent coordination
 - **Local LLM:** [Ollama](https://ollama.com) - Privacy shield (Llama 3.2, Phi-3.5)
-- **Cloud LLM:** Google Gemini 2.5 Flash - Deep knowledge
+- **Cloud LLM:** Google Gemini 2.5 Flash / Llama 3.3 (via Groq) - Deep knowledge
 - **Memory:** [ChromaDB](https://www.trychroma.com/) - Local vector store
 - **Language:** Python 3.10+
 
@@ -192,7 +192,7 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
    ollama pull llama3.2
    ollama pull phi3.5
    ```
-3. **Google API Key** for Gemini access
+3. **Cloud API Key** (Google Gemini or Groq/OpenAI for Llama 3.3)
 4. **Node.js** (optional, for Promptfoo red teaming)
 
 ---
@@ -222,6 +222,8 @@ cp .env.example .env
 Edit `.env`:
 ```env
 GOOGLE_API_KEY=your_google_api_key_here
+# OR
+GROQ_API_KEY=your_groq_api_key_here
 MODEL=ollama/llama3.2
 API_BASE=http://localhost:11434
 ```
@@ -252,9 +254,12 @@ python src/sovereign_system/main.py
 ```
 sovereign_system/
 ├── 📄 README.md                          # This file
-├── 📄 EXPERIMENTS_SUMMARY.md             # Detailed experiment documentation
-├── 📄 TRACE_ANALYSIS_REPORT.md           # Trace analysis and metrics
-├── 📄 PRESENTATION_RESULTS.md            # Key results for presentations
+├── 📄 README.md                          # This file
+├── 📁 docs/                              # Project documentation
+│   ├── 📄 EXPERIMENTS_SUMMARY.md         # Detailed experiment documentation
+│   ├── 📄 TRACE_ANALYSIS_REPORT.md       # Trace analysis and metrics
+│   ├── 📄 PRESENTATION_RESULTS.md        # Key results for presentations
+│   └── ... (Technical Docs)
 │
 ├── 📁 src/sovereign_system/              # Core system code
 │   ├── config/
@@ -448,7 +453,7 @@ The system generates comprehensive traces for every query:
 }
 ```
 
-**📊 See [TRACE_ANALYSIS_REPORT.md](TRACE_ANALYSIS_REPORT.md) for full analysis**
+**📊 See [TRACE_ANALYSIS_REPORT.md](docs/TRACE_ANALYSIS_REPORT.md) for full analysis**
 
 ---
 
@@ -490,16 +495,16 @@ The system generates comprehensive traces for every query:
 | Document | Description |
 |----------|-------------|
 | [README.md](README.md) | This file - project overview |
-| [EXPERIMENTS_SUMMARY.md](EXPERIMENTS_SUMMARY.md) | Detailed experiment documentation (6 experiments) |
-| [THEORETICAL_JUSTIFICATIONS.md](THEORETICAL_JUSTIFICATIONS.md) | Defense of metrics (F1, MSE) & algorithms (Random Forest vs XGBoost) |
-| [METHODOLOGICAL_CHOICES_QUICK_REF.md](METHODOLOGICAL_CHOICES_QUICK_REF.md) | Quick cheat sheet for design choices |
-| [TRACE_ANALYSIS_REPORT.md](TRACE_ANALYSIS_REPORT.md) | Analysis of 1,238 traces with metrics |
-| [PRESENTATION_RESULTS.md](PRESENTATION_RESULTS.md) | Key results for presentations |
+| [EXPERIMENTS_SUMMARY.md](docs/EXPERIMENTS_SUMMARY.md) | Detailed experiment documentation (6 experiments) |
+| [THEORETICAL_JUSTIFICATIONS.md](docs/THEORETICAL_JUSTIFICATIONS.md) | Defense of metrics (F1, MSE) & algorithms (Random Forest vs XGBoost) |
+| [METHODOLOGICAL_CHOICES_QUICK_REF.md](docs/METHODOLOGICAL_CHOICES_QUICK_REF.md) | Quick cheat sheet for design choices |
+| [TRACE_ANALYSIS_REPORT.md](docs/TRACE_ANALYSIS_REPORT.md) | Analysis of 1,238 traces with metrics |
+| [PRESENTATION_RESULTS.md](docs/PRESENTATION_RESULTS.md) | Key results for presentations |
 | [experiments/README.md](experiments/README.md) | Experiments quick reference |
 | [dashboard/red_team_analysis.md](dashboard/red_team_analysis.md) | Security findings from EXP05 |
-| **[GUARDRAIL_IMPLEMENTATION.md](GUARDRAIL_IMPLEMENTATION.md)** | **NEW!** Complete technical documentation of defense-in-depth guardrails |
-| **[GUARDRAIL_SUMMARY.md](GUARDRAIL_SUMMARY.md)** | **NEW!** Executive summary of EXP05 Enhanced results |
-| **[GUARDRAIL_QUICK_REFERENCE.md](GUARDRAIL_QUICK_REFERENCE.md)** | **NEW!** Quick start guide for guardrail system |
+| **[GUARDRAIL_IMPLEMENTATION.md](docs/GUARDRAIL_IMPLEMENTATION.md)** | **NEW!** Complete technical documentation of defense-in-depth guardrails |
+| **[GUARDRAIL_SUMMARY.md](docs/GUARDRAIL_SUMMARY.md)** | **NEW!** Executive summary of EXP05 Enhanced results |
+| **[GUARDRAIL_QUICK_REFERENCE.md](docs/GUARDRAIL_QUICK_REFERENCE.md)** | **NEW!** Quick start guide for guardrail system |
 
 ---
 
@@ -549,7 +554,7 @@ If you use this system in your research, please cite:
 ## 📧 Contact
 
 - **Author:** Madusanka Premaratne
-- **Email:** madusankapremaratne@gmail.com
+- **Email:** rmmpremaratne@gmail.com
 - **GitHub:** [@madusankapremaratne](https://github.com/madusankapremaratne)
 
 ---
@@ -575,7 +580,7 @@ MIT License - See [LICENSE](LICENSE) for details
 ## 🎯 Project Status
 
 **Current Version:** Research Prototype with Production-Ready Security  
-**Last Updated:** 2026-02-12  
+**Last Updated:** 2026-02-15  
 **Total Experiments:** 6 (EXP01-05 + EXP05 Enhanced)  
 **Validation Status:** ✅ 5 validated, ✅ 1 enhanced (EXP05: 25% → 93% attack resistance)  
 **Security Status:** ✅ Defense-in-depth guardrails implemented and tested (17/17 unit tests passed)  
