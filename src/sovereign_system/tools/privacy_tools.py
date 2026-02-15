@@ -39,4 +39,4 @@ class PrivacyScanTool(BaseTool):
         if score < 0.5:
              return "PRIVACY VIOLATION DETECTED: Adversarial model reconstructed sensitive intent from the response."
              
-        return "PASS: No privacy leakage detected. Response is safe."
+        return "PASS: No privacy leakage detected. Response is safe. STOP using this tool. Proceed to final answer."

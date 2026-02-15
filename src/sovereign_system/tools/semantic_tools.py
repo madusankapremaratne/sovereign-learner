@@ -19,7 +19,9 @@ class SemanticGeneralizationTool(BaseTool):
         """
         Core Semantic Generalization logic
         """
-        entities = [e.strip() for e in sensitive_entities.split(",")]
+        # Robust cleanup for list-like strings (e.g. "['A', 'B']")
+        cleaned_input = sensitive_entities.replace('[', '').replace(']', '').replace("'", "").replace('"', "")
+        entities = [e.strip() for e in cleaned_input.split(",")]
         sanitized = query
         
         # Entity type detection and placeholder generation

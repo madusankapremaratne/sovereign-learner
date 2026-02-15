@@ -74,25 +74,34 @@ class SovereignGuard:
         
         Returns: (is_valid, reason)
         """
+        detected_risks = []
+        
         # If Presidio is available, use it for PII detection
         if self.analyzer:
             pii_entities = self.scan_for_pii(query)
-            if pii_entities and proposed_zone >= 2:
-                return False, f"PII detected ({len(pii_entities)} entities) but zone {proposed_zone} proposed. Forcing Zone 1."
+            if pii_entities:
+                detected_risks.append(f"PII ({len(pii_entities)} entities)")
         
         # Check for sensitive keywords that should never be Zone 3
         sensitive_keywords = [
             r"\bpatient\b", r"\bmedical\b", r"\bID\s*\d+", r"\bSSN\b",
             r"\bproprietary\b", r"\bconfidential\b", r"\bsecret\b",
             r"\bCRISPR\b", r"\bprotocol\b", r"\bresearch\b",
-            r"\bclient\b", r"\blegal\b", r"\bcontract\b"
+            r"\bclient\b", r"\blegal\b", r"\bcontract\b", r"\bHEK\d*\b"
         ]
         
         for keyword_pattern in sensitive_keywords:
-            if re.search(keyword_pattern, query, re.IGNORECASE) and proposed_zone >= 2:
-                return False, f"Sensitive keyword detected but zone {proposed_zone} proposed. Recommending Zone 1."
+            if re.search(keyword_pattern, query, re.IGNORECASE):
+                match = re.search(keyword_pattern, query, re.IGNORECASE).group()
+                detected_risks.append(f"Sensitive Term '{match}'")
+                
+        is_sensitive = len(detected_risks) > 0
+        max_allowed_zone = 1 if is_sensitive else 3
         
-        return True, "Zone classification validated."
+        if proposed_zone > max_allowed_zone:
+            return False, f"Risk detected ({', '.join(detected_risks[:3])}). Max allowed zone is {max_allowed_zone}. Your proposal Zone {proposed_zone} is unsafe."
+        
+        return True, f"Zone {proposed_zone} is within safe limits (Max: {max_allowed_zone})."
 
     def sanitize_output(self, text: str) -> str:
         """

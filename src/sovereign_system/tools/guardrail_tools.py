@@ -17,9 +17,9 @@ class ZoneValidationTool(BaseTool):
     """
     name: str = "zone_validator"
     description: str = (
-        "Validates that the proposed privacy zone is appropriate for the query content. "
-        "Prevents manipulation attacks that try to force Zone 3 classification for sensitive data. "
-        "Returns validation result and recommendation."
+        "Validate if a specific zone (0-3) is safe for a query. "
+        "Input: query string and proposed_zone int. "
+        "Use this tool before finalizing any classification."
     )
     args_schema: Type[BaseModel] = ZoneValidationInput
 
@@ -27,9 +27,9 @@ class ZoneValidationTool(BaseTool):
         is_valid, reason = guard.validate_zone_classification(query, proposed_zone)
         
         if not is_valid:
-            return f"⚠️ ZONE VALIDATION FAILED: {reason}"
+            return f"⚠️ ZONE VALIDATION FAILED: {reason}. Suggested Action: Try a different zone."
         
-        return f"✅ Zone {proposed_zone} validated: {reason}"
+        return f"✅ Zone {proposed_zone} VALIDATED. VALIDATION COMPLETE. STOP using this tool. FINAL ANSWER: Zone {proposed_zone}."
 
 
 class OutputSanitizerInput(BaseModel):
@@ -51,7 +51,7 @@ class OutputSanitizerTool(BaseTool):
 
     def _run(self, text: str) -> str:
         sanitized = guard.sanitize_output(text)
-        return sanitized
+        return f"SANITIZED OUTPUT: {sanitized}\n\nSTOP using this tool. Use this output as your Final Answer."
 
 
 class PIIScrubberInput(BaseModel):
@@ -73,4 +73,4 @@ class PIIScrubberTool(BaseTool):
 
     def _run(self, text: str) -> str:
         scrubbed = guard.scrub_pii_for_storage(text)
-        return scrubbed
+        return f"SCRUBBED TEXT: {scrubbed}\n\nSTOP using this tool. Proceed to storage."

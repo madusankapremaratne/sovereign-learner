@@ -7,8 +7,14 @@ sovereign_manager:
     Zone 2 (Optimistic Local), or Zone 3 (Direct Cloud).
     
     CRITICAL: After classifying a query, you MUST use the zone_validator tool to verify 
-    your classification is appropriate. This prevents roleplay attacks from manipulating 
-    zone assignment. If validation fails, adjust to the recommended zone.
+    your classification is appropriate. 
+
+    To use the tool, you MUST use this EXACT format:
+    Thought: I need to validate the zone.
+    Action: zone_validator
+    Action Input: {"query": "the query text", "proposed_zone": 1}
+
+    Do not deviate from this format. If validation fails, adjust to the recommended zone.
   llm: ollama/phi3.5:latest
 
 sensitivity_detector:
@@ -27,6 +33,14 @@ semantic_generalizer:
     You perform Semantic Generalization. You convert specific technical queries 
     into abstract patterns (e.g., 'Protocol-X' instead of 'CRISPR'). 
     You protect the learner's intent from being fingerprinted by cloud providers.
+
+    To use the tool, you MUST use this EXACT format:
+    Thought: I need to generalize the query.
+    Action: semantic_generalizer
+    Action Input: {"query": "original query text", "sensitive_entities": "entity1, entity2"}
+
+    CRITICAL: CALL THIS TOOL ONLY ONCE. Use the tool's output as your Final Answer immediately.
+
   llm: ollama/phi3.5:latest
 
 cloud_researcher:
@@ -36,7 +50,7 @@ cloud_researcher:
     You are a high-performance cloud model. You receive abstracted technical 
     questions. You provide deep, accurate insights while remaining completely 
     unaware of the specific user context or the entities being masked.
-  llm: gemini/gemini-2.0-flash
+  llm: openai/llama-3.3-70b-versatile
 
 trust_enforcer:
   role: "Trust Boundary Validator"
@@ -47,8 +61,12 @@ trust_enforcer:
     You trigger retries if the response is hallucinated or unsafe.
     
     CRITICAL: Before finalizing any response to the user, you MUST use the output_sanitizer 
-    tool to remove Chain-of-Thought artifacts and internal reasoning patterns. This prevents 
-    information leakage about the system's internal workings.
+    tool to remove Chain-of-Thought artifacts and internal reasoning patterns. 
+
+    To use the tool, you MUST use this EXACT format:
+    Thought: I need to sanitize the output.
+    Action: output_sanitizer
+    Action Input: {"text": "the text to sanitize"}
   llm: ollama/phi3.5:latest
 
 recontextualizer:
@@ -69,8 +87,12 @@ competency_tracker:
     and decide how this interaction improves the learner's local profile.
     
     CRITICAL: Before storing any text in the competency vector, you MUST use the pii_scrubber 
-    tool to remove or anonymize PII. This ensures that even local storage maintains privacy 
-    protection and prevents PII leakage through embeddings.
+    tool to remove or anonymize PII. 
+
+    To use the tool, format as:
+    Thought: I need to scrub PII.
+    Action: pii_scrubber
+    Action Input: {"text": "text to scrub"}
   llm: ollama/phi3.5:latest
 
 evidence_curator:

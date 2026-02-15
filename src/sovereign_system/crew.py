@@ -27,7 +27,11 @@ class SovereignSystem():
 
     @property
     def cloud_llm(self):
-        return LLM(model="gemini/gemini-2.0-flash", api_key=os.getenv("GOOGLE_API_KEY"))
+        return LLM(
+            model="openai/llama-3.3-70b-versatile", 
+            api_key=os.getenv("GROQ_API_KEY"),
+            base_url="https://api.groq.com/openai/v1"
+        )
 
     @agent
     def sovereign_manager(self) -> Agent:
@@ -36,7 +40,8 @@ class SovereignSystem():
             config=self.agents_config['sovereign_manager'], 
             llm=self.local_llm, 
             tools=[ZoneValidationTool()],
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
     @agent
@@ -46,7 +51,8 @@ class SovereignSystem():
             config=self.agents_config['sensitivity_detector'], 
             llm=self.worker_llm, 
             tools=[PresidioScanTool()],
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
     
@@ -56,7 +62,8 @@ class SovereignSystem():
             config=self.agents_config['semantic_generalizer'],
             llm=self.local_llm,
             tools=[SemanticGeneralizationTool()],
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
     @agent
@@ -65,7 +72,8 @@ class SovereignSystem():
             config=self.agents_config['recontextualizer'],
             llm=self.local_llm,
             tools=[RecontextualizationTool()],
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
     @agent
@@ -75,13 +83,14 @@ class SovereignSystem():
             config=self.agents_config['competency_tracker'],
             llm=self.worker_llm,
             tools=[CompetencyEvidenceTool(), PIIScrubberTool()],
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
     @agent
     def cloud_researcher(self) -> Agent:
         # This agent gets the Cloud LLM
-        return Agent(config=self.agents_config['cloud_researcher'], llm=self.cloud_llm, verbose=True)
+        return Agent(config=self.agents_config['cloud_researcher'], llm=self.cloud_llm, verbose=True, max_iter=5)
 
     @agent
     def trust_enforcer(self) -> Agent:
@@ -90,7 +99,8 @@ class SovereignSystem():
             config=self.agents_config['trust_enforcer'], 
             llm=self.local_llm, 
             tools=[PrivacyScanTool(), OutputSanitizerTool()],
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
     @agent
@@ -98,7 +108,8 @@ class SovereignSystem():
         return Agent(
             config=self.agents_config['evidence_curator'],
             llm=self.worker_llm, # Uses lighter model for simple storage
-            verbose=True
+            verbose=True,
+            max_iter=3
         )
 
 

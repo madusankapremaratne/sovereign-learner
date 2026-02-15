@@ -414,7 +414,7 @@ def render_agent_step(step: AgentStep, index: int):
         "Sovereign Manager": ("SLM", "Phi-3.5 (3.8B)"),
         "Sensitivity Detector": ("SLM", "Phi-3.5 (3.8B)"),
         "Semantic Generalizer": ("SLM", "Phi-3.5 (3.8B)"),
-        "Cloud Researcher": ("LLM", "Gemini 2.0 Flash"),
+        "Cloud Researcher": ("LLM", "Llama 3.3 70B (Groq)"),
         "Trust Enforcer": ("SLM", "Phi-3.5 (3.8B)"),
         "Recontextualizer": ("SLM", "Phi-3.5 (3.8B)"),
         "Evidence Curator": ("SLM", "Phi-3.5 (3.8B)")
@@ -704,7 +704,7 @@ def render_trace_view(trace):
         
         # Key insight
         st.info("""
-        **🔒 Key Privacy Insight:** The cloud (Gemini) only receives 15% of the original 
+        **🔒 Key Privacy Insight:** The cloud (Groq/Llama-3.3) only receives 15% of the original 
         information - abstract placeholders like "Protocol-A" and "Cell-A". 
         It never sees "CRISPR" or "HEK293".
         """)
@@ -731,7 +731,16 @@ def render_trace_view(trace):
     # Final response
     st.markdown("---")
     st.markdown("### 📤 Final Response to Learner")
-    st.success(trace.final_response)
+    
+    # Intelligently find the actual answer (usually from Recontextualizer), ignoring subsequent logging steps
+    final_answer = trace.final_response
+    for step in trace.steps:
+        # Check for Recontextualizer output
+        if "Recontextualizer" in step.agent_name or "Recontextualization Specialist" in step.agent_role:
+            final_answer = step.output_data
+            break
+            
+    st.success(final_answer)
 
 
 def main():
