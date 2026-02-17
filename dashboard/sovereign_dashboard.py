@@ -105,45 +105,64 @@ def create_privacy_waterfall(trace: SovereignTrace) -> go.Figure:
     base_data = [0.0] # Start of bar
     text_data = ["<b>100%</b><br>Initial"]
     colors = ["#FF5252"] # Start Red
+
+    # Scatter trace data for absolute values
+    scatter_y = [1.0]
+    scatter_text = ["100%"]
     
     prev_exposure = 1.0
+    is_restored = False
     
     for step in trace.steps:
         x_data.append(step.agent_name)
         
+        # Check if we are restoring context
+        if "Recontextualizer" in step.agent_name:
+            is_restored = True
+            
         current_exposure = step.privacy_score_after
         delta = current_exposure - prev_exposure
         
-        # For Bar chart: 
-        # If decreasing (delta < 0): Base = Prev, Y = Delta (negative)
-        # If increasing (delta > 0): Base = Prev, Y = Delta (positive)
-        base_data.append(prev_exposure if delta > 0 else prev_exposure + delta)
-        # Actually go.Bar draws from 'base' up to 'base + y'.
-        # If y is negative, it draws down? Plotly handles it.
-        # Let's stick to: Base is always the bottom of the bar?
-        # No, 'base' is the reference line.
-        # If I want to draw from 1.0 down to 0.1:
-        # Base = 0.1, Y = 0.9? Or Base=1.0, Y=-0.9?
-        # Usually Base=1.0, Y=-0.9 works.
-        
-        base_data.append(prev_exposure)
-        y_data.append(delta)
-        
+        # Robust Waterfall Logic:
+        base = min(prev_exposure, current_exposure)
+        height = abs(delta)
+
         # Color Logic
         if delta < -0.01:
-             colors.append("#00C853") # Green (Sanitization)
-             text_data.append(f"<b>{delta:+.0%}</b><br>Sanitized")
+             base_data.append(base)
+             y_data.append(height)
+             colors.append("#00C853") # Green (Sanitization/Improvement)
+             text_data.append(f"<b>{abs(delta):.0%}</b><br>Sanitized")
+             
         elif delta > 0.01:
+             base_data.append(base)
+             y_data.append(height)
              if "Recontextualizer" in step.agent_name:
                  colors.append("#448AFF") # Blue (Restored)
-                 text_data.append(f"<b>{delta:+.0%}</b><br>Restored")
+                 text_data.append(f"<b>{abs(delta):.0%}</b><br>Restored")
              else:
                  colors.append("#FF5252") # Red (Leak)
-                 text_data.append(f"<b>{delta:+.0%}</b><br>Risk")
+                 text_data.append(f"<b>{abs(delta):.0%}</b><br>Risk")
+                 
         else:
-             colors.append("rgba(0,0,0,0)") # Invisible/Grey
-             text_data.append("")
+             # Maintenance Candle (No change) - Starts from 0, ends at value
+             base_data.append(0.0) 
+             y_data.append(current_exposure)
              
+             if current_exposure > 0.8:
+                 if is_restored:
+                     colors.append("#448AFF") # Blue (Restored/Safe Local)
+                 else:
+                     colors.append("#ef5350") # Red (Maintained Risk)
+             else:
+                 colors.append("#66BB6A") # Green (Maintained Safe)
+                 
+             text_data.append(f"<b>{current_exposure:.0%}</b>") # Show absolute level
+             
+        # Add to scatter data for visibility of current state
+        scatter_y.append(current_exposure)
+        scatter_text.append(f"<b>{current_exposure:.0%}</b>")
+        
         prev_exposure = current_exposure
 
     # Final Bar
@@ -154,15 +173,23 @@ def create_privacy_waterfall(trace: SovereignTrace) -> go.Figure:
     colors.append(code)
     text_data.append(f"<b>{prev_exposure:.0%}</b><br>Final")
     
+    # Add final scatter point
+    scatter_y.append(prev_exposure)
+    scatter_text.append(f"<b>{prev_exposure:.0%}</b>")
+    
     # Create Figure
-    fig = go.Figure(go.Bar(
+    fig = go.Figure()
+    
+    # 1. Bar Trace (Waterfall blocks)
+    fig.add_trace(go.Bar(
         x=x_data,
         y=y_data,
         base=base_data,
         marker_color=colors,
         text=text_data,
         textposition="outside",
-        textfont=dict(size=11)
+        textfont=dict(size=11),
+        name="Change"
     ))
 
     # Add connector lines (simulation)
@@ -174,7 +201,7 @@ def create_privacy_waterfall(trace: SovereignTrace) -> go.Figure:
         type="rect",
         xref="paper", yref="y",
         x0=0, x1=1,
-        y0=-0.05, y1=0.2,
+        y0=-0.05, y1=0.2, # 20% threshold
         fillcolor="#00C853", opacity=0.1,
         line_width=0, layer="below"
     ))
@@ -187,9 +214,10 @@ def create_privacy_waterfall(trace: SovereignTrace) -> go.Figure:
         showlegend=False,
         height=450,
         shapes=shapes,
+        barmode='overlay', # Critical: prevents stacking, respects explicit 'base'
         yaxis=dict(
             title="Exposure Level (0% = Safe)",
-            range=[-0.1, 1.25],
+            range=[-0.1, 1.25], 
             tickformat=".0%",
             zeroline=True, gridcolor='rgba(0,0,0,0.1)'
         ),
@@ -390,11 +418,45 @@ def create_sankey_diagram(trace: SovereignTrace) -> go.Figure:
     return fig
 
 
-def render_agent_step(step: AgentStep, index: int):
+def _clean_agent_input(text: str) -> str:
+    """
+    Heuristic to extract the actual input data from verbose task instructions.
+    E.g., 'Scan the query: "How do I..." ...' -> 'How do I...'
+    """
+    if not text:
+        return ""
+        
+    # Common prefixes in our tasks.yaml
+    prefixes = [
+        "Analyze the incoming user query:",
+        "Scan the query:",
+        "rewrite the query:",
+        "Query:",
+        "Response:"
+    ]
+    
+    # Check if text starts with a known instruction pattern
+    starts_with_instruction = any(text.strip().startswith(p) for p in prefixes)
+    
+    if starts_with_instruction:
+        # If explicitly formatted as Key: Value, try return just the value line or remainder
+        # Or look for quotes
+        import re
+        match = re.search(r'["\']([^"\']+)["\']', text)
+        if match:
+            return match.group(1)
+            
+        # Fallback: if starts with "Query:", split and take rest
+        if text.strip().startswith("Query:"):
+            return text.strip().replace("Query:", "").split('\n')[0].strip()
+            
+    return text
+
+def render_agent_step(step: AgentStep, index: int, accumulated_mapping: dict = None):
     """Render a single agent step with details"""
     
     # Determine if local or cloud
-    is_cloud = "cloud" in step.agent_name.lower()
+    is_cloud = "cloud" in step.agent_name.lower() or "researcher" in step.agent_name.lower()
     box_class = "agent-box-cloud" if is_cloud else "agent-box-local"
     
     # Icon based on agent
@@ -420,6 +482,9 @@ def render_agent_step(step: AgentStep, index: int):
         "Evidence Curator": ("SLM", "Phi-3.5 (3.8B)")
     }
     model_type, model_name = model_info.get(step.agent_name, ("Unknown", "Unknown"))
+    if "Cloud" in step.agent_name:
+        model_type = "LLM"
+        
     model_badge_color = "#2196F3" if model_type == "LLM" else "#4CAF50"
     
     # Privacy change indicator
@@ -433,6 +498,11 @@ def render_agent_step(step: AgentStep, index: int):
     else:
         privacy_indicator = "🟡 Maintained"
         privacy_class = "privacy-medium"
+        
+    # Clean input for display
+    display_input = _clean_agent_input(step.input_data)
+    if len(display_input) > 200:
+        display_input = display_input[:200] + "..."
     
     with st.container():
         st.markdown(f"""
@@ -453,8 +523,8 @@ def render_agent_step(step: AgentStep, index: int):
         col1, col2, col3 = st.columns([2, 2, 1])
         
         with col1:
-            st.markdown("**Input:**")
-            st.code(step.input_data[:200] + "..." if len(step.input_data) > 200 else step.input_data)
+            st.markdown("**Input Data:**")
+            st.code(display_input)
         
         with col2:
             st.markdown("**Output:**")
@@ -464,22 +534,32 @@ def render_agent_step(step: AgentStep, index: int):
             st.metric("Duration", f"{step.duration_ms:.1f}ms")
             st.markdown(f"<span class='{privacy_class}'>{privacy_indicator}</span>", unsafe_allow_html=True)
         
-        # Show mapping if present
-        if step.mapping:
-            with st.expander("🔀 Mapping Table"):
+        # 1. Semantic Generalizer: Show Generated Mappings
+        if "Generalizer" in step.agent_name and step.mapping:
+             with st.expander("�️ Privacy Mappings Generated", expanded=True):
                 mapping_data = []
                 for k, v in step.mapping.items():
                     mapping_data.append({
-                        "Placeholder": k,
-                        "Original": v if v else "⚠️ (empty - detection failed)",
-                        "Status": "✅ Mapped" if v else "❌ Not detected"
+                        "Sensitive Entity (Hidden)": v,
+                        "Generated Placeholder": k
                     })
-                mapping_df = pd.DataFrame(mapping_data)
-                st.table(mapping_df)
-                
-                # Show warning if any mappings are empty
-                if any(not v for v in step.mapping.values()):
-                    st.warning("⚠️ Some entities were not detected (empty mappings). This may indicate the Knowledge Base was disabled or the entity wasn't in the detection patterns.")
+                st.table(pd.DataFrame(mapping_data))
+
+        # 2. Recontextualizer: Show Restoration (Reversal)
+        elif "Recontextualizer" in step.agent_name and accumulated_mapping:
+             with st.expander("🔓 Context Restoration (Reversal)", expanded=True):
+                restoration_data = []
+                for k, v in accumulated_mapping.items():
+                    restoration_data.append({
+                        "Placeholder (Cloud Input)": k,
+                        "Restored Entity (User Output)": v
+                    })
+                st.table(pd.DataFrame(restoration_data))
+
+        # 3. Fallback: Show mapping if present but not handled above
+        elif step.mapping:
+            with st.expander("🔀 Mapping Table"):
+                st.json(step.mapping)
         
         # Show metadata if present
         if step.metadata:
@@ -712,9 +792,16 @@ def render_trace_view(trace):
     with tab5:
         st.markdown("### Step-by-Step Agent Execution")
         
+        # Extract global mapping for context restoration
+        global_mapping = {}
+        for s in trace.steps:
+            if s.mapping and "Generalizer" in s.agent_name:
+                global_mapping = s.mapping
+                break
+        
         if st.checkbox("Show detailed steps", value=True, key="show_detailed_steps"):
             for i, step in enumerate(trace.steps):
-                render_agent_step(step, i)
+                render_agent_step(step, i, accumulated_mapping=global_mapping)
         else:
             # Condensed view
             for step in trace.steps:
@@ -730,14 +817,54 @@ def render_trace_view(trace):
     
     # Final response
     st.markdown("---")
-    st.markdown("### 📤 Final Response to Learner")
+    st.markdown("### 📤 Final Answer (Recontextualized)")
     
+    def _clean_final_answer(text: str) -> str:
+        if not text: return ""
+        import re
+        
+        # 1. Try to extract explicit "response" field from JSON-like Action Input
+        # Matches "response": "..." or 'response': '...'
+        # We use a non-greedy match for the content to avoid over-matching
+        response_match = re.search(r'[\"\']response[\"\']\s*:\s*[\"\'](.*?)[\"\']\s*[,}]', text, re.DOTALL)
+        if response_match:
+            # We found a structured response field!
+            return response_match.group(1)
+
+        # 2. Try to find "Final Answer:" marker
+        if "Final Answer:" in text:
+             return text.split("Final Answer:")[-1].strip()
+        
+        # 3. If it's a raw Thought/Action block without structured response, try to clean it
+        # Remove Thought...Action...Input...} blocks
+        cleaned = re.sub(r'Thought:.*?Action Input:.*?}', '', text, flags=re.DOTALL).strip()
+        
+        # If cleanup left just punctuation or empty, revert to original (or handle further)
+        if not cleaned or cleaned in ['"', '}', '"}', "'}"]:
+            # Maybe the regex stripped too much, or the content was ONLY the action.
+            # In that case, we failed to extract.
+            # Let's try one more heuristic: the last sentence?
+            return text
+            
+        return cleaned
+
     # Intelligently find the actual answer (usually from Recontextualizer), ignoring subsequent logging steps
     final_answer = trace.final_response
+    
     for step in trace.steps:
         # Check for Recontextualizer output
         if "Recontextualizer" in step.agent_name or "Recontextualization Specialist" in step.agent_role:
-            final_answer = step.output_data
+            step_output = step.output_data
+            # If the step output is just a tool call log, it might be junk.
+            # But usually trace.final_response is the reliable one IF the chain finished.
+            # If the chain failed or intermediate step is best:
+            if "Thought:" not in step_output and "Action:" not in step_output:
+                final_answer = step_output
+            else:
+                # Try to clean it
+                cleaned = _clean_final_answer(step_output)
+                if cleaned:
+                    final_answer = cleaned
             break
             
     st.success(final_answer)
@@ -831,29 +958,41 @@ def main():
                  st.rerun()
 
     # Load existing traces
-    trace_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "traces")
+    dashboard_dir = os.path.dirname(os.path.abspath(__file__))
+    trace_dir = os.path.join(dashboard_dir, "traces")
+    
+    # Fallback for project root execution
+    if not os.path.exists(trace_dir):
+        trace_dir = os.path.join(project_root, "dashboard", "traces")
+
     if os.path.exists(trace_dir):
         with st.sidebar:
             st.markdown("### 📂 Load Trace")
-            # Filter for JSON files
-            trace_files = [f for f in os.listdir(trace_dir) if f.endswith('.json')]
-            trace_files.sort(reverse=True)
-            
-            if not trace_files:
-                st.info("No trace files found.")
-            else:
-                selected_trace_file = st.selectbox("Select Trace", ["Current Run"] + trace_files, key="trace_selector")
+            try:
+                # Filter for JSON files
+                trace_files = [f for f in os.listdir(trace_dir) if f.endswith('.json')]
+                trace_files.sort(reverse=True)
                 
-                if selected_trace_file != "Current Run":
-                     trace_path = os.path.join(trace_dir, selected_trace_file)
-                     st.button("Load Trace", key="load_trace_btn", on_click=load_trace_callback, args=(trace_path,))
-                     
-                     if 'load_error' in st.session_state:
-                         st.error(f"❌ Error: {st.session_state.load_error}")
-                         del st.session_state.load_error
-                     
-                     if 'last_loaded_file' in st.session_state and st.session_state.last_loaded_file == trace_path:
-                         st.success(f"✅ Loaded")
+                if not trace_files:
+                    st.info("No trace files found.")
+                else:
+                    with st.form("trace_loader_form"):
+                        # Use a form to prevent auto-rerun on selection change which helps stability
+                        selected_trace_file = st.selectbox(
+                            "Select Trace File", 
+                            trace_files, 
+                            key="trace_file_selector"
+                        )
+                        load_submitted = st.form_submit_button("Load Trace")
+                        
+                        if load_submitted and selected_trace_file:
+                            trace_path = os.path.join(trace_dir, selected_trace_file)
+                            load_trace_callback(trace_path)
+                            st.success(f"Loaded: {selected_trace_file}")
+                            st.rerun()
+                            
+            except Exception as e:
+                st.error(f"Error listing traces: {e}")
 
     # Display current trace
     if 'current_trace' in st.session_state:

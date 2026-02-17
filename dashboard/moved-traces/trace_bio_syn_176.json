@@ -1,0 +1,169 @@
+{
+  "query_id": "bio_syn_176",
+  "original_query": "how do i reduce toxicity in my elisa protocol for vero cells targeting il6?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i reduce toxicity in my elisa protocol for vero cells targeting il6?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:56.645828",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i reduce toxicity in my elisa protocol for vero cells targeting il6?",
+      "output_data": "Detected: ['il6', 'elisa', 'vero']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:56.645860",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i reduce toxicity in my elisa protocol for vero cells targeting il6?\nEntities: ['il6', 'elisa', 'vero']",
+      "output_data": "SANITIZED: how do i reduce toxicity in my Protocol-A protocol for Entity-B cells targeting Entity-A?\nMAPPING: {'Entity-A': 'il6', 'Protocol-A': 'elisa', 'Entity-B': 'vero'}",
+      "duration_ms": 0.034809112548828125,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "il6",
+        "elisa",
+        "vero"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "il6",
+        "Protocol-A": "elisa",
+        "Entity-B": "vero"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:56.645944",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i reduce toxicity in my Protocol-A protocol for Entity-B cells targeting Entity-A?",
+      "output_data": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.00286102294921875,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:56.645950",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize toxicity, consider systematic paramete...\nMapping: {'Entity-A': 'il6', 'Protocol-A': 'elisa', 'Entity-B': 'vero'}",
+      "output_data": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.04601478576660156,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "il6",
+        "Protocol-A": "elisa",
+        "Entity-B": "vero"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:56.646000",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.8,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:25:57.120067",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.08368492126465,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.8,
+  "created_at": "2026-01-22T18:25:56.645823",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.034809112548828125,
+      "end_ms": 18.034809112548828
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.034809112548828,
+      "duration_ms": 0.00286102294921875,
+      "end_ms": 18.037670135498047
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.037670135498047,
+      "duration_ms": 0.04601478576660156,
+      "end_ms": 18.08368492126465
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.08368492126465,
+      "duration_ms": 5.0,
+      "end_ms": 23.08368492126465
+    }
+  ]
+}

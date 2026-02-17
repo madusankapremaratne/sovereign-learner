@@ -1,0 +1,169 @@
+{
+  "query_id": "bio_syn_263",
+  "original_query": "how do i isolate my crispr protocol for e. coli bl21 cells targeting tp53?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i isolate my crispr protocol for e. coli bl21 cells targeting tp53?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:39.053194",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i isolate my crispr protocol for e. coli bl21 cells targeting tp53?",
+      "output_data": "Detected: ['bl21', 'tp53', 'crispr']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:39.053224",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i isolate my crispr protocol for e. coli bl21 cells targeting tp53?\nEntities: ['bl21', 'tp53', 'crispr']",
+      "output_data": "SANITIZED: how do i isolate my Protocol-A protocol for e. coli Entity-A cells targeting Gene-A?\nMAPPING: {'Entity-A': 'bl21', 'Gene-A': 'tp53', 'Protocol-A': 'crispr'}",
+      "duration_ms": 0.030994415283203125,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "bl21",
+        "tp53",
+        "crispr"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "bl21",
+        "Gene-A": "tp53",
+        "Protocol-A": "crispr"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:39.053313",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i isolate my Protocol-A protocol for e. coli Entity-A cells targeting Gene-A?",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.0019073486328125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:39.053318",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize my, consider systematic parameter tuni...\nMapping: {'Entity-A': 'bl21', 'Gene-A': 'tp53', 'Protocol-A': 'crispr'}",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.03600120544433594,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "bl21",
+        "Gene-A": "tp53",
+        "Protocol-A": "crispr"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:39.053358",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.8,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:26:39.523631",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.06890296936035,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.8,
+  "created_at": "2026-01-22T18:26:39.053188",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.030994415283203125,
+      "end_ms": 18.030994415283203
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.030994415283203,
+      "duration_ms": 0.0019073486328125,
+      "end_ms": 18.032901763916016
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.032901763916016,
+      "duration_ms": 0.03600120544433594,
+      "end_ms": 18.06890296936035
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.06890296936035,
+      "duration_ms": 5.0,
+      "end_ms": 23.06890296936035
+    }
+  ]
+}

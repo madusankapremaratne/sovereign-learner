@@ -1,0 +1,44 @@
+{
+  "query_id": "auto_1769079209",
+  "original_query": "Query: Classification of sensitive elements in genetic data related to BRCA1 gene\nResponse: 'BRCA1' mapped to a non-specific term due to privacy constraints and semantic generalization, ensuri...",
+  "steps": [
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Competency Evidence Curator",
+      "input_data": "Query: Classification of sensitive elements in genetic data related to BRCA1 gene\nResponse: 'BRCA1' mapped to a non-specific term due to privacy constraints and semantic generalization, ensuri...",
+      "output_data": "SUCCESS: Evidence stored in ChromaDB.\nID: 454b2da9-5f73-4a04-aaba-95b123b30d63\nWeight: 1.0\nZone: 1\nPath: ./knowledge/chroma_db",
+      "duration_ms": 910.0630283355713,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "storage": "ChromaDB (local)",
+        "evidence_id": "454b2da9-5f73-4a04-aaba-95b123b30d63",
+        "weight": 1.0,
+        "interaction_type": "active"
+      },
+      "timestamp": "2026-01-22T16:23:29.206769",
+      "zone": 1,
+      "status": "success"
+    }
+  ],
+  "final_response": "'BRCA1' mapped to a non-specific term due to privacy constraints and semantic generalization, ensuring learner competency without direct reference.",
+  "total_duration_ms": 910.0630283355713,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.9,
+  "created_at": "2026-01-22T16:23:29.206754",
+  "agent_contributions": {
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 0,
+      "duration_ms": 910.0630283355713,
+      "end_ms": 910.0630283355713
+    }
+  ]
+}

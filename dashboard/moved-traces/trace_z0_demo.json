@@ -1,0 +1,93 @@
+{
+  "query_id": "z0_demo",
+  "original_query": "What is the Capital of France",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What is the Capital of France",
+      "output_data": "Zone 0 - Offline/Local Only. Public fact but user requested offline handling.",
+      "duration_ms": 45.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 0",
+        "reason": "User preference for offline processing"
+      },
+      "timestamp": "2026-02-17T07:50:53.642740",
+      "zone": 0,
+      "status": "success"
+    },
+    {
+      "agent_name": "Local Researcher",
+      "agent_role": "Offline Knowledge Retrieval",
+      "input_data": "What is the Capital of France",
+      "output_data": "The capital of France is Paris.",
+      "duration_ms": 120.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "model": "Phi-3.5-mini",
+        "source": "local_param_knowledge"
+      },
+      "timestamp": "2026-02-17T07:50:53.642745",
+      "zone": 0,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "The capital of France is Paris.",
+      "output_data": "Competency Updated (Local)",
+      "duration_ms": 25.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "persisted": true
+      },
+      "timestamp": "2026-02-17T07:50:53.642748",
+      "zone": 0,
+      "status": "success"
+    }
+  ],
+  "final_response": "The capital of France is Paris.",
+  "total_duration_ms": 190.0,
+  "zone_used": 0,
+  "privacy_protection_score": 0.0,
+  "utility_score": 1.0,
+  "created_at": "2026-02-17T07:50:53.642728",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Local Researcher": 0.0,
+    "Evidence Curator": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 45.0,
+      "end_ms": 45.0
+    },
+    {
+      "agent": "Local Researcher",
+      "start_ms": 45.0,
+      "duration_ms": 120.0,
+      "end_ms": 165.0
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 165.0,
+      "duration_ms": 25.0,
+      "end_ms": 190.0
+    }
+  ]
+}

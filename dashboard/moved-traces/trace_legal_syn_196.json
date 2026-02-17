@@ -1,0 +1,163 @@
+{
+  "query_id": "legal_syn_196",
+  "original_query": "draft a liability cap clause for our deal with netflix under singapore law.",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "draft a liability cap clause for our deal with netflix under singapore law.",
+      "output_data": "Zone 1 - High Sensitivity (legal)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:40:11.758248",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "draft a liability cap clause for our deal with netflix under singapore law.",
+      "output_data": "Detected: ['netflix']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:40:11.758331",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: draft a liability cap clause for our deal with netflix under singapore law.\nEntities: ['netflix']",
+      "output_data": "SANITIZED: draft a liability cap clause for our deal with Entity-A under singapore law.\nMAPPING: {'Entity-A': 'netflix'}",
+      "duration_ms": 0.07915496826171875,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "netflix"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "netflix"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:40:11.758549",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "draft a liability cap clause for our deal with Entity-A under singapore law.",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.015974044799804688,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:40:11.758575",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Regarding the contractual matter, standard practic...\nMapping: {'Entity-A': 'netflix'}",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.15616416931152344,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "netflix"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:40:11.758739",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.4,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:40:14.636480",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+  "total_duration_ms": 23.251293182373047,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.4,
+  "created_at": "2026-01-22T18:40:11.758223",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.07915496826171875,
+      "end_ms": 18.07915496826172
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.07915496826172,
+      "duration_ms": 0.015974044799804688,
+      "end_ms": 18.095129013061523
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.095129013061523,
+      "duration_ms": 0.15616416931152344,
+      "end_ms": 18.251293182373047
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.251293182373047,
+      "duration_ms": 5.0,
+      "end_ms": 23.251293182373047
+    }
+  ]
+}

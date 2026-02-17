@@ -1,0 +1,166 @@
+{
+  "query_id": "bio_syn_47",
+  "original_query": "how do i isolate my cloning protocol for sf9 cells targeting kras?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i isolate my cloning protocol for sf9 cells targeting kras?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:24:53.506859",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i isolate my cloning protocol for sf9 cells targeting kras?",
+      "output_data": "Detected: ['sf9', 'kras']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:24:53.506886",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i isolate my cloning protocol for sf9 cells targeting kras?\nEntities: ['sf9', 'kras']",
+      "output_data": "SANITIZED: how do i isolate my cloning protocol for Entity-A cells targeting Gene-A?\nMAPPING: {'Entity-A': 'sf9', 'Gene-A': 'kras'}",
+      "duration_ms": 0.027179718017578125,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "sf9",
+        "kras"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "sf9",
+        "Gene-A": "kras"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:24:53.506957",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i isolate my cloning protocol for Entity-A cells targeting Gene-A?",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.0016689300537109375,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:24:53.506962",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize my, consider systematic parameter tuni...\nMapping: {'Entity-A': 'sf9', 'Gene-A': 'kras'}",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.031948089599609375,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "sf9",
+        "Gene-A": "kras"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:24:53.506998",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.4,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:24:53.983111",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.0607967376709,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.4,
+  "created_at": "2026-01-22T18:24:53.506853",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.027179718017578125,
+      "end_ms": 18.027179718017578
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.027179718017578,
+      "duration_ms": 0.0016689300537109375,
+      "end_ms": 18.02884864807129
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.02884864807129,
+      "duration_ms": 0.031948089599609375,
+      "end_ms": 18.0607967376709
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.0607967376709,
+      "duration_ms": 5.0,
+      "end_ms": 23.0607967376709
+    }
+  ]
+}

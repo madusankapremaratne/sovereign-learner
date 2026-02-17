@@ -1,0 +1,169 @@
+{
+  "query_id": "bio_syn_110",
+  "original_query": "how do i quantify my crispr protocol for vero cells targeting actb?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i quantify my crispr protocol for vero cells targeting actb?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:23.949325",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i quantify my crispr protocol for vero cells targeting actb?",
+      "output_data": "Detected: ['crispr', 'vero', 'actb']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:23.949354",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i quantify my crispr protocol for vero cells targeting actb?\nEntities: ['crispr', 'vero', 'actb']",
+      "output_data": "SANITIZED: how do i quantify my Protocol-A protocol for Entity-A cells targeting Entity-B?\nMAPPING: {'Protocol-A': 'crispr', 'Entity-A': 'vero', 'Entity-B': 'actb'}",
+      "duration_ms": 0.03504753112792969,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "crispr",
+        "vero",
+        "actb"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Protocol-A": "crispr",
+        "Entity-A": "vero",
+        "Entity-B": "actb"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:23.949436",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i quantify my Protocol-A protocol for Entity-A cells targeting Entity-B?",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.0021457672119140625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:23.949441",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize my, consider systematic parameter tuni...\nMapping: {'Protocol-A': 'crispr', 'Entity-A': 'vero', 'Entity-B': 'actb'}",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.04291534423828125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Protocol-A": "crispr",
+        "Entity-A": "vero",
+        "Entity-B": "actb"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:25:23.949488",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.8,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:25:24.421966",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.080108642578125,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.8,
+  "created_at": "2026-01-22T18:25:23.949320",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.03504753112792969,
+      "end_ms": 18.03504753112793
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.03504753112793,
+      "duration_ms": 0.0021457672119140625,
+      "end_ms": 18.037193298339844
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.037193298339844,
+      "duration_ms": 0.04291534423828125,
+      "end_ms": 18.080108642578125
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.080108642578125,
+      "duration_ms": 5.0,
+      "end_ms": 23.080108642578125
+    }
+  ]
+}

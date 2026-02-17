@@ -1,6 +1,11 @@
+import sys
+import os
+
+# Add parent to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
-from sovereign_system.security.guard import SovereignGuard, guard
+from src.sovereign_system.security.guard import SovereignGuard, guard
 
 class TestZoneValidation:
     """

@@ -1,0 +1,172 @@
+{
+  "query_id": "cs_syn_161",
+  "original_query": "how do i fix the latency spike when applying rag to resnet-50 running on a100?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i fix the latency spike when applying rag to resnet-50 running on a100?",
+      "output_data": "Zone 1 - High Sensitivity (cs)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:28:21.856671",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i fix the latency spike when applying rag to resnet-50 running on a100?",
+      "output_data": "Detected: ['resnet-50', 'a100', 'resnet', 'rag']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:28:21.856702",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i fix the latency spike when applying rag to resnet-50 running on a100?\nEntities: ['resnet-50', 'a100', 'resnet', 'rag']",
+      "output_data": "SANITIZED: how do i fix the latency spike when applying Entity-C to Entity-A running on Hardware-A?\nMAPPING: {'Entity-A': 'resnet-50', 'Hardware-A': 'a100', 'Entity-B': 'resnet', 'Entity-C': 'rag'}",
+      "duration_ms": 0.051975250244140625,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "resnet-50",
+        "a100",
+        "resnet",
+        "rag"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "resnet-50",
+        "Hardware-A": "a100",
+        "Entity-B": "resnet",
+        "Entity-C": "rag"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:28:21.856806",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i fix the latency spike when applying Entity-C to Entity-A running on Hardware-A?",
+      "output_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "duration_ms": 0.0030994415283203125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:28:21.856812",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: For the technical challenge described, I recommend...\nMapping: {'Entity-A': 'resnet-50', 'Hardware-A': 'a100', 'Entity-B': 'resnet', 'Entity-C': 'rag'}",
+      "output_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "duration_ms": 0.034809112548828125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "resnet-50",
+        "Hardware-A": "a100",
+        "Entity-B": "resnet",
+        "Entity-C": "rag"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:28:21.856851",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.5,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:28:22.371927",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+  "total_duration_ms": 23.08988380432129,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.5,
+  "created_at": "2026-01-22T18:28:21.856666",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.051975250244140625,
+      "end_ms": 18.05197525024414
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.05197525024414,
+      "duration_ms": 0.0030994415283203125,
+      "end_ms": 18.05507469177246
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.05507469177246,
+      "duration_ms": 0.034809112548828125,
+      "end_ms": 18.08988380432129
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.08988380432129,
+      "duration_ms": 5.0,
+      "end_ms": 23.08988380432129
+    }
+  ]
+}

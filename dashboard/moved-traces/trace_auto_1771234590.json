@@ -1,0 +1,44 @@
+{
+  "query_id": "auto_1771234590",
+  "original_query": "Query: Understanding of Advanced Genetics through active learning\nResponse: SCRUBBED TEXT...",
+  "steps": [
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Competency Evidence Curator",
+      "input_data": "Query: Understanding of Advanced Genetics through active learning\nResponse: SCRUBBED TEXT...",
+      "output_data": "SUCCESS: Evidence stored in ChromaDB.\nID: ca217b6e-a60c-4aed-91ea-327c19ffa1df\nWeight: 1.0\nZone: 3\nPath: ./knowledge/chroma_db",
+      "duration_ms": 612.4999523162842,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "storage": "ChromaDB (local)",
+        "evidence_id": "ca217b6e-a60c-4aed-91ea-327c19ffa1df",
+        "weight": 1.0,
+        "interaction_type": "active"
+      },
+      "timestamp": "2026-02-16T15:06:30.195238",
+      "zone": 3,
+      "status": "success"
+    }
+  ],
+  "final_response": "SCRUBBED TEXT",
+  "total_duration_ms": 612.4999523162842,
+  "zone_used": 3,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.9,
+  "created_at": "2026-02-16T15:06:30.195227",
+  "agent_contributions": {
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 0,
+      "duration_ms": 612.4999523162842,
+      "end_ms": 612.4999523162842
+    }
+  ]
+}

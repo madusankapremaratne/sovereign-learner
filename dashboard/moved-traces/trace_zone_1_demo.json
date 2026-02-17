@@ -1,0 +1,135 @@
+{
+  "query_id": "zone_1_demo",
+  "original_query": "My patient John Doe (ID: 12345) has elevated Troponin T levels. Differential diagnosis?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "My patient John Doe (ID: 12345) has elevated Troponin T levels. Differential diagnosis?",
+      "output_data": "Zone 1 - PII/PHI Detected",
+      "duration_ms": 35.5,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 1",
+        "confidence": 0.98,
+        "reason": "Detected PII (Name, ID) + Medical Context"
+      },
+      "timestamp": "2026-01-22T15:51:30.996617",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "My patient John Doe (ID: 12345) has elevated Troponin T levels. Differential diagnosis?",
+      "output_data": "SANITIZED: Patient-X (ID: ID-Ref) has elevated Biomarker-A levels. Differential diagnosis?\nMAPPING: {'Patient-X': 'John Doe', 'ID-Ref': '12345', 'Biomarker-A': 'Troponin T'}",
+      "duration_ms": 110.2,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.1,
+      "entities_detected": [
+        "John Doe",
+        "12345",
+        "Troponin T"
+      ],
+      "entities_masked": [
+        "Patient-X",
+        "ID-Ref",
+        "Biomarker-A"
+      ],
+      "mapping": {
+        "Patient-X": "John Doe",
+        "ID-Ref": "12345",
+        "Biomarker-A": "Troponin T"
+      },
+      "metadata": {
+        "strategy": "medical_entity_masking"
+      },
+      "timestamp": "2026-01-22T15:51:30.996622",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "Patient-X (ID: ID-Ref) has elevated Biomarker-A levels. Differential diagnosis?",
+      "output_data": "Elevated Biomarker-A levels can indicate myocardial infarction, pulmonary embolism, or myocarditis. Clinical correlation is required.",
+      "duration_ms": 1250.0,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 0.1,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "model": "gemini-pro",
+        "source": "medical_kb"
+      },
+      "timestamp": "2026-01-22T15:51:30.996625",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Elevated Biomarker-A levels can indicate myocardial infarction, pulmonary embolism, or myocarditis. Clinical correlation is required.\nMapping: {'Patient-X': 'John Doe', 'ID-Ref': '12345', 'Biomarker-A': 'Troponin T'}",
+      "output_data": "Elevated Troponin T levels can indicate myocardial infarction, pulmonary embolism, or myocarditis. Clinical correlation is required.",
+      "duration_ms": 60.4,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Patient-X": "John Doe",
+        "ID-Ref": "12345",
+        "Biomarker-A": "Troponin T"
+      },
+      "metadata": {
+        "replacements_made": 1
+      },
+      "timestamp": "2026-01-22T15:51:30.996628",
+      "zone": 1,
+      "status": "success"
+    }
+  ],
+  "final_response": "Elevated Troponin T levels can indicate myocardial infarction, pulmonary embolism, or myocarditis. Clinical correlation is required.",
+  "total_duration_ms": 1456.1000000000001,
+  "zone_used": 1,
+  "privacy_protection_score": 0.9,
+  "utility_score": 0.95,
+  "created_at": "2026-01-22T15:51:30.996612",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.9,
+    "Cloud Researcher": 0.135,
+    "Recontextualizer": 0.2
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 35.5,
+      "end_ms": 35.5
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 35.5,
+      "duration_ms": 110.2,
+      "end_ms": 145.7
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 145.7,
+      "duration_ms": 1250.0,
+      "end_ms": 1395.7
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 1395.7,
+      "duration_ms": 60.4,
+      "end_ms": 1456.1000000000001
+    }
+  ]
+}

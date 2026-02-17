@@ -1,0 +1,166 @@
+{
+  "query_id": "bio_syn_199",
+  "original_query": "how do i reduce toxicity in my immunofluorescence protocol for a549 cells targeting vegf?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i reduce toxicity in my immunofluorescence protocol for a549 cells targeting vegf?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:07.840336",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i reduce toxicity in my immunofluorescence protocol for a549 cells targeting vegf?",
+      "output_data": "Detected: ['a549', 'vegf']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:07.840365",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i reduce toxicity in my immunofluorescence protocol for a549 cells targeting vegf?\nEntities: ['a549', 'vegf']",
+      "output_data": "SANITIZED: how do i reduce toxicity in my immunofluorescence protocol for Entity-A cells targeting Entity-B?\nMAPPING: {'Entity-A': 'a549', 'Entity-B': 'vegf'}",
+      "duration_ms": 0.030040740966796875,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "a549",
+        "vegf"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "a549",
+        "Entity-B": "vegf"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:07.840441",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i reduce toxicity in my immunofluorescence protocol for Entity-A cells targeting Entity-B?",
+      "output_data": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.0030994415283203125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:07.840448",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize toxicity, consider systematic paramete...\nMapping: {'Entity-A': 'a549', 'Entity-B': 'vegf'}",
+      "output_data": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.03886222839355469,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "a549",
+        "Entity-B": "vegf"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:26:07.840490",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:26:08.374633",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize toxicity, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.072002410888672,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7,
+  "created_at": "2026-01-22T18:26:07.840331",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.030040740966796875,
+      "end_ms": 18.030040740966797
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.030040740966797,
+      "duration_ms": 0.0030994415283203125,
+      "end_ms": 18.033140182495117
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.033140182495117,
+      "duration_ms": 0.03886222839355469,
+      "end_ms": 18.072002410888672
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.072002410888672,
+      "duration_ms": 5.0,
+      "end_ms": 23.072002410888672
+    }
+  ]
+}

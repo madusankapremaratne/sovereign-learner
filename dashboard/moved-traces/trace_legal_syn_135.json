@@ -1,0 +1,166 @@
+{
+  "query_id": "legal_syn_135",
+  "original_query": "draft a termination clause for our deal with amazon under delaware law.",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "draft a termination clause for our deal with amazon under delaware law.",
+      "output_data": "Zone 1 - High Sensitivity (legal)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:37:33.566096",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "draft a termination clause for our deal with amazon under delaware law.",
+      "output_data": "Detected: ['amazon', 'delaware']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:37:33.566257",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: draft a termination clause for our deal with amazon under delaware law.\nEntities: ['amazon', 'delaware']",
+      "output_data": "SANITIZED: draft a termination clause for our deal with Entity-A under Entity-B law.\nMAPPING: {'Entity-A': 'amazon', 'Entity-B': 'delaware'}",
+      "duration_ms": 0.09489059448242188,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "amazon",
+        "delaware"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "amazon",
+        "Entity-B": "delaware"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:37:33.566506",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "draft a termination clause for our deal with Entity-A under Entity-B law.",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.0069141387939453125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:37:33.566522",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Regarding the contractual matter, standard practic...\nMapping: {'Entity-A': 'amazon', 'Entity-B': 'delaware'}",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.1621246337890625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "amazon",
+        "Entity-B": "delaware"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:37:33.566692",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.5,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:37:36.032557",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+  "total_duration_ms": 23.26392936706543,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.5,
+  "created_at": "2026-01-22T18:37:33.566072",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.09489059448242188,
+      "end_ms": 18.094890594482422
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.094890594482422,
+      "duration_ms": 0.0069141387939453125,
+      "end_ms": 18.101804733276367
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.101804733276367,
+      "duration_ms": 0.1621246337890625,
+      "end_ms": 18.26392936706543
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.26392936706543,
+      "duration_ms": 5.0,
+      "end_ms": 23.26392936706543
+    }
+  ]
+}

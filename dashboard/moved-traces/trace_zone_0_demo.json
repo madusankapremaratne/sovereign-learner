@@ -1,0 +1,68 @@
+{
+  "query_id": "zone_0_demo",
+  "original_query": "What is the capital of France?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What is the capital of France?",
+      "output_data": "Zone 0 - Local Execution Only",
+      "duration_ms": 15.2,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 0",
+        "confidence": 0.99,
+        "reason": "Simple factoid, handled locally"
+      },
+      "timestamp": "2026-01-22T15:51:30.996243",
+      "zone": 0,
+      "status": "success"
+    },
+    {
+      "agent_name": "Local Knowledge Base",
+      "agent_role": "On-Device Retrieval",
+      "input_data": "What is the capital of France?",
+      "output_data": "The capital of France is Paris.",
+      "duration_ms": 45.8,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "source": "local_wiki_dump"
+      },
+      "timestamp": "2026-01-22T15:51:30.996248",
+      "zone": 0,
+      "status": "success"
+    }
+  ],
+  "final_response": "The capital of France is Paris.",
+  "total_duration_ms": 61.0,
+  "zone_used": 0,
+  "privacy_protection_score": 0.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T15:51:30.996228",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Local Knowledge Base": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 15.2,
+      "end_ms": 15.2
+    },
+    {
+      "agent": "Local Knowledge Base",
+      "start_ms": 15.2,
+      "duration_ms": 45.8,
+      "end_ms": 61.0
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "query_id": "z3_demo",
+  "original_query": "What is the latest Python Version.",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What is the latest Python Version.",
+      "output_data": "Zone 3 - Public Information",
+      "duration_ms": 35.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 3",
+        "reason": "Public technical query, no sensitivity"
+      },
+      "timestamp": "2026-02-17T07:50:53.644257",
+      "zone": 3,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What is the latest Python Version.",
+      "output_data": "As of late 2025/early 2026, the latest stable version of Python is Python 3.14.",
+      "duration_ms": 900.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "model": "Llama-3.3-70b",
+        "source": "public_web"
+      },
+      "timestamp": "2026-02-17T07:50:53.644259",
+      "zone": 3,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "As of late 2025/early 2026, the latest stable version of Python is Python 3.14.",
+      "output_data": "Competency Updated",
+      "duration_ms": 25.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-02-17T07:50:53.644261",
+      "zone": 3,
+      "status": "success"
+    }
+  ],
+  "final_response": "As of late 2025/early 2026, the latest stable version of Python is Python 3.14.",
+  "total_duration_ms": 960.0,
+  "zone_used": 3,
+  "privacy_protection_score": 0.0,
+  "utility_score": 1.0,
+  "created_at": "2026-02-17T07:50:53.644255",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Cloud Researcher": 0.0,
+    "Evidence Curator": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 35.0,
+      "end_ms": 35.0
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 35.0,
+      "duration_ms": 900.0,
+      "end_ms": 935.0
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 935.0,
+      "duration_ms": 25.0,
+      "end_ms": 960.0
+    }
+  ]
+}

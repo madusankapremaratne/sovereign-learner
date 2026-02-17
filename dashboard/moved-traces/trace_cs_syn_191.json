@@ -1,0 +1,163 @@
+{
+  "query_id": "cs_syn_191",
+  "original_query": "how do i fix the oom error when applying pruning to whisper running on raspberry pi?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i fix the oom error when applying pruning to whisper running on raspberry pi?",
+      "output_data": "Zone 1 - High Sensitivity (cs)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:29:31.917005",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i fix the oom error when applying pruning to whisper running on raspberry pi?",
+      "output_data": "Detected: ['whisper']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:29:31.917031",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i fix the oom error when applying pruning to whisper running on raspberry pi?\nEntities: ['whisper']",
+      "output_data": "SANITIZED: how do i fix the oom error when applying pruning to Entity-A running on raspberry pi?\nMAPPING: {'Entity-A': 'whisper'}",
+      "duration_ms": 0.019788742065429688,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "whisper"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "whisper"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:29:31.917092",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i fix the oom error when applying pruning to Entity-A running on raspberry pi?",
+      "output_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "duration_ms": 0.0019073486328125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T18:29:31.917097",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: For the technical challenge described, I recommend...\nMapping: {'Entity-A': 'whisper'}",
+      "output_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "duration_ms": 0.027894973754882812,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "whisper"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T18:29:31.917128",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.5,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T18:29:32.428427",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+  "total_duration_ms": 23.049591064453125,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.5,
+  "created_at": "2026-01-22T18:29:31.917001",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.019788742065429688,
+      "end_ms": 18.01978874206543
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.01978874206543,
+      "duration_ms": 0.0019073486328125,
+      "end_ms": 18.021696090698242
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.021696090698242,
+      "duration_ms": 0.027894973754882812,
+      "end_ms": 18.049591064453125
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.049591064453125,
+      "duration_ms": 5.0,
+      "end_ms": 23.049591064453125
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "query_id": "auto_1771234651",
+  "original_query": "Query: Optimizing Guide RNA Concentration for CRISPR Protocol\nResponse: ...",
+  "steps": [
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Competency Evidence Curator",
+      "input_data": "Query: Optimizing Guide RNA Concentration for CRISPR Protocol\nResponse: ...",
+      "output_data": "SUCCESS: Evidence stored in ChromaDB.\nID: 5434d2c3-e405-40a2-b169-8dd6f063b096\nWeight: 1.0\nZone: 0\nPath: ./knowledge/chroma_db",
+      "duration_ms": 307.3270320892334,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "storage": "ChromaDB (local)",
+        "evidence_id": "5434d2c3-e405-40a2-b169-8dd6f063b096",
+        "weight": 1.0,
+        "interaction_type": "active"
+      },
+      "timestamp": "2026-02-16T15:07:31.388702",
+      "zone": 0,
+      "status": "success"
+    }
+  ],
+  "final_response": "",
+  "total_duration_ms": 307.3270320892334,
+  "zone_used": 0,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.9,
+  "created_at": "2026-02-16T15:07:31.388696",
+  "agent_contributions": {
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 0,
+      "duration_ms": 307.3270320892334,
+      "end_ms": 307.3270320892334
+    }
+  ]
+}
