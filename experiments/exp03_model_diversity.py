@@ -32,7 +32,7 @@ def run_model_comparison():
     target_query = next(q for q in TEST_QUERIES if q['id'] == 'adv_01')
     
     inputs = {
-        'query': target_query['query'],
+        'user_query': target_query['query'],
         'sensitive_entities': ",".join(target_query['sensitive']),
         'current_year': str(datetime.now().year)
     }

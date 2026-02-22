@@ -9,18 +9,29 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def ensure_venv_and_deps():
+    os.environ["CREWAI_TELEMETRY_OPTOUT"] = "true"
+    os.environ["OTEL_SDK_DISABLED"] = "true"
+
     # 1. Auto-switch to Virtual Environment if it exists
     venv_python = os.path.abspath(os.path.join(os.getcwd(), '.venv', 'bin', 'python'))
     if os.path.exists(venv_python) and os.path.abspath(sys.executable) != venv_python:
         logging.info(f"Relaunching orchestrator inside virtual environment: {venv_python}")
         os.execv(venv_python, [venv_python] + sys.argv)
-        
     # 2. Auto-install orchestration requirements if missing
     try:
         import prettytable
+        import pandas
+        import numpy
+        import sklearn
+        import deepeval
+        import google.generativeai
     except ImportError:
         logging.info("Orchestration dependencies not found. Auto-installing...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "prettytable", "pytest"])
+        subprocess.check_call([
+            sys.executable, "-m", "pip", "install", 
+            "prettytable", "pytest", "pandas", "numpy", 
+            "scikit-learn", "deepeval", "google-generativeai"
+        ])
 
 ensure_venv_and_deps()
 from prettytable import PrettyTable
