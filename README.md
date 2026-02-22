@@ -345,23 +345,29 @@ query = "What is the capital of France?"
 
 ## 🔄 Running Experiments
 
-All 12 experimental scripts are located in the `/experiments` directory. 
+All 12 experimental scripts are located in the `/experiments` directory, but the easiest way to run the entire suite is using the orchestrated runner.
 
-### Core Simulation Scripts
+### Run Complete Suite
+```bash
+python run_experiments.py
+```
+
+### Dry Run / List Experiments
+```bash
+python run_experiments.py --dry-run
+```
+
+### Run Specific Experiments
+```bash
+python run_experiments.py --exp EXP01,EXP07,EXP11
+```
+
+### Run Scripts Manually
+Alternatively, you can run individual scripts:
 ```bash
 cd experiments
 python exp01_semantic_generalization.py --cloud --queries 100
-python exp02a_passive_struggle.py
-python exp07_preempt_ppts_comparison.py
-```
-
-### Scale & Verification Testing (Promptfoo / Pytest)
-```bash
-cd experiments
 promptfoo eval -c exp11_red_team.yaml
-
-cd ../
-python -m pytest tests/test_conservative_routing_fallback.py
 ```
 
 **📊 See [experiments/README.md](experiments/README.md) for detailed instructions**
