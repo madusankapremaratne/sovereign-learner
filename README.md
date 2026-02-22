@@ -256,14 +256,12 @@ python src/sovereign_system/main.py
 
 ## 📂 Project Structure
 
-```
+```text
 sovereign_system/
 ├── 📄 README.md                          # This file
-├── 📄 README.md                          # This file
-├── 📁 docs/                              # Project documentation
-│   ├── 📄 EXPERIMENTS_SUMMARY.md         # Detailed experiment documentation
+├──  docs/                              # Project documentation
+│   ├── 📄 EXPERIMENTS_SUMMARY.md         # Detailed experiment catalogs
 │   ├── 📄 TRACE_ANALYSIS_REPORT.md       # Trace analysis and metrics
-│   ├── 📄 PRESENTATION_RESULTS.md        # Key results for presentations
 │   └── ... (Technical Docs)
 │
 ├── 📁 src/sovereign_system/              # Core system code
@@ -272,38 +270,34 @@ sovereign_system/
 │   │   └── tasks.yaml                    # Task workflows
 │   ├── tools/
 │   │   ├── semantic_tools.py             # Generalization & recontextualization
-│   │   ├── competency_tools.py           # ChromaDB interactions
+│   │   ├── guardrail_tools.py            # PII validation and zone overriding
 │   │   └── cloud_tools.py                # Cloud LLM integration
+│   ├── security/
+│   │   └── guard.py                      # Core security boundaries and logic
 │   ├── utils/
 │   │   ├── sovereign_trace_logger.py     # Trace logging system
 │   │   └── evaluators.py                 # Privacy metrics
 │   ├── crew.py                           # Main crew orchestration
 │   └── main.py                           # Entry point
 │
-├── 📁 experiments/                       # All experiments (EXP01-05)
+├── 📁 experiments/                       # All 12 validation experiments
 │   ├── README.md                         # Experiments quick reference
-│   ├── exp01_semantic_generalization.py  # IP protection validation
-│   ├── exp02_oulad_hybrid_learning.py    # Real-world dataset testing
-│   ├── exp03_model_diversity.py          # Architecture agnosticism
-│   ├── exp04_agentic_evaluation.py       # Agentic behavior metrics
-│   ├── exp05_promptfoo_red_team.yaml     # Adversarial testing
+│   ├── exp01_semantic_generalization.py  # IP protection valuation
+│   ├── exp02a_passive_struggle.py        # OULAD Passive struggle detection
+│   ├── exp02b_complex_query.py           # OULAD Hybrid processing
+│   ├── exp02c_competency_transfer.py     # OULAD Competency transfer
+│   ├── exp03_to_exp12...                 # Validated scale tests
 │   ├── results/                          # Experiment outputs
-│   └── dashboard/                        # Visualizations (1,238 traces)
+│   └── dashboard/                        # Visualizations
 │
-├── 📁 data/                              # Datasets
-│   ├── oulad/                            # OULAD dataset (gitignored)
-│   └── synthetic/                        # Generated test queries
+├── 📁 tests/                             # Unit tests & verification
+│   └── test_conservative_routing_fallback.py # Validates EXP08 core systems
 │
-├── 📁 knowledge/                         # Local persistent memory
-│   ├── chroma_db/                        # Vector embeddings
-│   └── user_preference.txt               # User profile (local only)
+├── 📁 scripts/                           # Utility scripts
+│   └── generate_corpus.py                # Synthetic query generator (EXP11)
 │
-├── 📁 dashboard/                         # Analysis and reports
-│   ├── red_team_analysis.md              # Security findings
-│   └── traces/                           # 1,238 trace files
-│
-└── 📁 scripts/                           # Utility scripts
-    └── data_generation/                  # Synthetic data generators
+├── 📁 dashboard/                         # Reporting and UX
+│   └── sovereign_dashboard.py            # Streamlit multi-agent UI
 ```
 
 ---
