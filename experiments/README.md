@@ -4,47 +4,44 @@ This directory contains all experimental validations of the Sovereign Learner pr
 
 ## 📁 Experiment Files
 
-| File | Size | Description |
-|------|------|-------------|
-| `exp01_semantic_generalization.py` | 28K | IP Protection & Utility Preservation |
-| `exp02_oulad_hybrid_learning.py` | 32K | Real-World Dataset Validation (OULAD) |
-| `exp03_model_diversity.py` | 2.7K | Architecture Agnosticism Testing |
-| `exp04_agentic_evaluation.py` | 10K | Agentic Behavior Metrics |
-| `exp05_promptfoo_red_team.yaml` | 1.4K | Adversarial Red Team Testing |
-| `exp05_enhanced_red_team.yaml` | 3.2K | Defense-in-Depth Guardrails Testing |
+| File | Description | Status |
+|------|-------------|--------|
+| `exp01_semantic_generalization.py` | IP Protection & Utility Preservation | ✅ Complete |
+| `exp02a_passive_struggle.py` | Passive Struggle Detection (Local vs Cloud) | ✅ Complete |
+| `exp02b_complex_query.py` | Complex Query Resolution (Hybrid Effectiveness) | ✅ Complete |
+| `exp02c_competency_transfer.py` | Competency Vector Portability | ✅ Complete |
+| `exp03_model_diversity.py` | Architecture Agnosticism Testing | ✅ Complete |
+| `exp04_agentic_evaluation.py` | Agentic Behavior Metrics | ✅ Complete |
+| `exp05_promptfoo_red_team.yaml` | Adversarial Red Team Testing | ✅ Complete |
+| `exp05_enhanced_red_team.yaml` | Defense-in-Depth Guardrails Testing | ✅ Complete |
+| `exp06_arr_at_scale.py` | ARR at Scale & Degradation Curves | ✅ Complete |
+| `exp07_preempt_ppts_comparison.py` | SOTA Baseline (Preempt/PP-TS) | ✅ Complete |
+| `exp08_ner_audit.py` | NER Coverage & Precision Audit | ✅ Complete |
+| `exp09_gama_mvpi_demo.py` | GAMA Token Limitation Demonstration | ✅ Complete |
+| `exp09_gama_sota_comparison.py` | SOTA Baseline (GAMA) | ✅ Complete |
+| `exp10_dp_benchmarking.py` | Differential Privacy Benchmarking | ✅ Complete |
+| `exp11_red_team.yaml` | Categorized Red Teaming | ✅ Complete |
+| `exp12_nelr_scan.py` | Novel Entity Leakage Rate Scan | ✅ Complete |
 
 ## 🚀 Quick Start
 
-### EXP01: Semantic Generalization
+You can run any of the python experiment scripts directly from the terminal. 
+
+Example:
 ```bash
 cd experiments
 python exp01_semantic_generalization.py --cloud --queries 100
+python exp02a_passive_struggle.py
 ```
 
-### EXP02: OULAD Hybrid Learning
-```bash
-cd experiments
-python exp02_oulad_hybrid_learning.py
-```
-
-### EXP03: Model Diversity
-```bash
-cd experiments
-python exp03_model_diversity.py
-```
-
-### EXP04: Agentic Evaluation
-```bash
-cd experiments
-python exp04_agentic_evaluation.py
-```
-
-### EXP05: Promptfoo Red Team
+For Red Team scenarios, we utilize `promptfoo`:
 ```bash
 cd experiments
 npm install -g promptfoo
-promptfoo eval -c exp05_promptfoo_red_team.yaml
+promptfoo eval -c exp11_red_team.yaml
 ```
+
+*Note: For `EXP08B` (Conservative Routing Fallback validation), the formal tests reside in `../tests/test_conservative_routing_fallback.py` to align with unit testing standards.*
 
 ## 📊 Results
 
@@ -54,57 +51,20 @@ Experiment results are stored in:
 
 ## 📚 Documentation
 
-For detailed information about each experiment, see:
-- **Main Documentation:** `../EXPERIMENTS_SUMMARY.md`
-- **Trace Analysis:** `../TRACE_ANALYSIS_REPORT.md`
-- **Red Team Analysis:** `../dashboard/red_team_analysis.md`
-
-## 🎯 Experiment Summary
-
-| Experiment | Status | Key Finding |
-|------------|--------|-------------|
-| **EXP01** | ✅ Complete | 95% IP protection, 92% utility |
-| **EXP02** | ✅ Complete | +25% F1 with local data |
-| **EXP03** | ✅ Complete | Model-agnostic architecture |
-| **EXP04** | ✅ Complete | 95%+ task completion |
-| **EXP05** | ⚠️ Vulnerabilities Found | 25% attack resistance |
-| **EXP05 Enhanced** | ✅ Complete | 93% attack resistance (+68%) |
-
-## 🔬 Prerequisites
-
-### Python Dependencies
-```bash
-pip install pandas numpy scikit-learn crewai deepeval google-generativeai python-dotenv
-```
-
-### External Services
-- **Ollama** - Local LLM runtime (`ollama pull llama3.2`)
-- **Google Gemini** - Cloud LLM (optional, set `GOOGLE_API_KEY`)
-- **OpenAI API** - DeepEval metrics (optional, set `OPENAI_API_KEY`)
-
-### Datasets
-- **OULAD** - Download from [Open University Learning Analytics](https://analyse.kmi.open.ac.uk/open_dataset)
-  - Place in `../data/oulad/`
-- **Synthetic Queries** - Auto-generated (1,000+ queries)
-
-## 📈 Running All Experiments
-
-```bash
-# Run all experiments sequentially
-./run_all_experiments.sh
-
-# Or run individually as needed
-```
+For detailed methodology, metrics, and justifications about each experiment, please refer to:
+- **Main Documentation Summary:** `../docs/EXPERIMENTS_SUMMARY.md`
+- **Theoretical Justifications:** `../docs/THEORETICAL_JUSTIFICATIONS.md`
+- **Methodological Choices:** `../docs/METHODOLOGICAL_CHOICES_QUICK_REF.md`
 
 ## 🎓 Research Contributions
 
-These experiments provide empirical validation for:
-1. **Semantic Generalization** - Privacy-utility tradeoff optimization
-2. **Hybrid Learning** - Local context + cloud reasoning
-3. **Architecture Flexibility** - Model-agnostic design
-4. **Agentic Correctness** - Zone-aware decision making
-5. **Security Limitations** - Need for defense-in-depth (EXP05)
-6. **Defense-in-Depth** - 93% attack resistance with guardrails (EXP05 Enhanced)
+These experiments provide empirical validation for the Paper v4 improvements requested by reviewers, specifically:
+1. **Semantic Generalization** - Privacy-utility tradeoff optimization.
+2. **Hybrid Learning** - Scalable local context paired with cloud reasoning.
+3. **Adversarial Resiliency (ARR)** - Compound multi-turn leakage resistance (EXP06).
+4. **SOTA Comparisons** - Empirical superiority over Preempt (2024), PP-TS (2023), and GAMA (2025).
+5. **Differential Privacy Scaling** - Demonstrating token-DP failure states (EXP10).
+6. **Novel Entity Leakage Rate (NELR)** - Catching cloud-side hallucination inferences (EXP12).
 
 ## 📝 Citation
 
@@ -119,12 +79,8 @@ If you use these experiments in your research, please cite:
 }
 ```
 
-## 📧 Contact
-
-For questions about experiments, please open an issue or contact the research team.
-
 ---
 
-**Last Updated:** 2026-02-12  
-**Total Experiments:** 6 (EXP01-05 + EXP05 Enhanced)  
-**Status:** ✅ 5 validated, ✅ 1 enhanced (EXP05: 25% → 93% attack resistance)
+**Last Updated:** February 2026  
+**Total Experiments:** 12 Core Experiments (plus variations and demos)  
+**Status:** ✅ All 12 validated (fully aligns with Paper Improvement Plan v4.0).
