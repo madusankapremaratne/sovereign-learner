@@ -4,10 +4,27 @@ import time
 import subprocess
 import argparse
 from typing import List, Dict, Any
-from prettytable import PrettyTable
 import logging
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+def ensure_venv_and_deps():
+    # 1. Auto-switch to Virtual Environment if it exists
+    venv_python = os.path.abspath(os.path.join(os.getcwd(), '.venv', 'bin', 'python'))
+    if os.path.exists(venv_python) and os.path.abspath(sys.executable) != venv_python:
+        logging.info(f"Relaunching orchestrator inside virtual environment: {venv_python}")
+        os.execv(venv_python, [venv_python] + sys.argv)
+        
+    # 2. Auto-install orchestration requirements if missing
+    try:
+        import prettytable
+    except ImportError:
+        logging.info("Orchestration dependencies not found. Auto-installing...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "prettytable", "pytest"])
+
+ensure_venv_and_deps()
+from prettytable import PrettyTable
+
 
 EXPERIMENTS = [
     {"id": "EXP01", "name": "Semantic Generalization", "cmd": [sys.executable, "experiments/exp01_semantic_generalization.py", "--cloud", "--queries", "10"]},
