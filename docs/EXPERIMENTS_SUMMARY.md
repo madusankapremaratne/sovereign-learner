@@ -20,15 +20,18 @@ The Sovereign Learner system includes **6 comprehensive experiments** designed t
 | Experiment | File | Focus Area | Status |
 |------------|------|------------|--------|
 | **EXP01** | `exp01_semantic_generalization.py` | IP Protection & Utility | ✅ Complete |
-| **EXP02** | `exp02_oulad_hybrid_learning.py` | Real-World Dataset Validation | ✅ Complete |
+| **EXP02A**| `exp02a_passive_struggle.py` | Passive Struggle Detection | ✅ Complete |
+| **EXP02B**| `exp02b_complex_query.py` | Complex Query Resolution | ✅ Complete |
+| **EXP02C**| `exp02c_competency_transfer.py` | Competency Vector Portability | ✅ Complete |
 | **EXP03** | `exp03_model_diversity.py` | Architecture Agnosticism | ✅ Complete |
 | **EXP04** | `exp04_agentic_evaluation.py` | Agentic Behavior Metrics | ✅ Complete |
 | **EXP05** | `exp05_promptfoo_red_team.yaml` | Adversarial Red Team Testing | ✅ Complete |
 | **EXP05 Enhanced** | `exp05_enhanced_red_team.yaml` | Defense-in-Depth Guardrails | ✅ Complete |
 | **EXP06** | `exp06_arr_at_scale.py` | ARR at Scale & Degradation Curves | ✅ Complete |
-| **EXP07 & 09** | `exp07_09_sota_comparison.py` | SOTA Baseline Comparisons | ✅ Complete |
+| **EXP07** | `exp07_preempt_ppts_comparison.py` | SOTA Baseline (Preempt/PP-TS) | ✅ Complete |
 | **EXP08A** | `exp08a_ner_audit.py` | NER Coverage & Precision Audit | ✅ Complete |
 | **EXP08B** | `tests/test_guardrails_exp08b.py` | Conservative Routing Fallback | ✅ Complete |
+| **EXP09** | `exp09_gama_sota_comparison.py` | SOTA Baseline (GAMA) | ✅ Complete |
 | **EXP09 Demo**| `exp09_gama_mvpi_demo.py` | GAMA Token Limitation Demonstration | ✅ Complete |
 | **EXP10** | `exp10_dp_benchmarking.py` | Differential Privacy Benchmarking | ✅ Complete |
 | **EXP11A** | `scripts/generate_corpus.py` | Corpus Expansion (2000 queries) | ✅ Complete |
@@ -1982,15 +1985,23 @@ These experiments address critical reviewer critiques regarding empirical compar
   - ARR(3) = 0.81 (Initial degradation from contextual threading)
   - ARR(10) = 0.55 (Catastrophic multi-turn leakage). Effectively validates precisely why Sovereign Learner uses state-clearing isolated prompts for Zone 2+ queries.
 
-### **EXP07 & EXP09: SOTA Baseline Comparisons**
-- **File:** `exp07_09_sota_comparison.py`
-- **Goal:** Benchmark the Sovereign Learner head-to-head against Preempt (2024), PP-TS (2023), and GAMA (2025).
+### **EXP07: SOTA Baseline Comparison (Preempt & PP-TS)**
+- **File:** `exp07_preempt_ppts_comparison.py`
+- **Goal:** Benchmark the Sovereign Learner head-to-head against Preempt (2024) and PP-TS (2023).
 - **Methodology:** Compared Entity Detection Recall, Utility Preservation, and Latency across the simulated educational queries.
 - **Significance:** Preempt and PP-TS max out at ~45% recall because their pipelines natively focus only on standard PII (e.g., credit cards) and miss semantic domain IP (e.g., protocol names, cell lines) completely. Sovereign Learner scored 92.5%, asserting SOTA for unstructured IP recognition.
 - **Results:**
   - Sovereign Learner: 92.5% Recall, 0.85 Utility, 1.6s Latency.
   - Preempt (2024): 45.0% Recall, 0.90 Utility, 0.3s Latency.
   - PP-TS (2023): 38.5% Recall, 0.92 Utility, 4.5s Latency.
+
+### **EXP09: SOTA Baseline Comparison (GAMA 2025)**
+- **File:** `exp09_gama_sota_comparison.py`
+- **Goal:** Benchmark the Sovereign Learner head-to-head against GAMA (2025).
+- **Methodology:** Compared Entity Detection Recall, Utility Preservation, and Latency against GAMA.
+- **Significance:** GAMA claims to provide Multi-View Privacy Identification, but tests show it struggles with deep educational IP.
+- **Results:**
+  - Sovereign Learner: 92.5% Recall, 0.85 Utility, 1.6s Latency.
   - GAMA (2025): 25.0% Recall, 0.88 Utility, 8.0s Latency.
 
 ### **EXP08A: NER Coverage & Precision Audit**
