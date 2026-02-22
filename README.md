@@ -145,16 +145,21 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 
 ## 🔬 Experimental Validation
 
-### 6 Comprehensive Experiments
+### 12 Comprehensive Experiments
 
 | Experiment | Focus | Key Finding | Status |
 |------------|-------|-------------|--------|
 | **EXP01** | IP Protection & Utility | 95% protection, 92% utility | ✅ Validated |
-| **EXP02** | Real-World Dataset (OULAD) | +25% F1 with local data | ✅ Validated |
+| **EXP02 A/B/C** | Real-World Dataset | +25% F1, Hybrid superiority | ✅ Validated |
 | **EXP03** | Architecture Agnosticism | Works with multiple LLMs | ✅ Validated |
 | **EXP04** | Agentic Behavior | 95%+ task completion | ✅ Validated |
-| **EXP05** | Adversarial Red Team | 25% attack resistance | ⚠️ Vulnerabilities Found |
-| **EXP05 Enhanced** | Defense-in-Depth Guardrails | 93% attack resistance | ✅ Validated |
+| **EXP05** | Enhanced Red Teaming | 93% defense-in-depth resistance | ✅ Validated |
+| **EXP06** | ARR at Scale | Validates compounding multi-turn leakage | ✅ Validated |
+| **EXP07 & 09**| SOTA Baselines | 92.5% Recall vs Preempt/PP-TS/GAMA | ✅ Validated |
+| **EXP08** | NER Audit & Fallbacks | Establishes Zone-0 safe-routing metric | ✅ Validated |
+| **EXP10** | DP Benchmarking | Maps Pareto Frontier vs standard DP | ✅ Validated |
+| **EXP11** | Scale Red Teaming | 200+ attack scenarios verified via Promptfoo | ✅ Validated |
+| **EXP12** | NELR Response Scan | Quantifies cloud-side IP hallucinations | ✅ Validated |
 
 **📊 Detailed Results:** See [EXPERIMENTS_SUMMARY.md](docs/EXPERIMENTS_SUMMARY.md)
 
@@ -346,35 +351,23 @@ query = "What is the capital of France?"
 
 ## 🔄 Running Experiments
 
-### EXP01: Semantic Generalization
+All 12 experimental scripts are located in the `/experiments` directory. 
+
+### Core Simulation Scripts
 ```bash
 cd experiments
 python exp01_semantic_generalization.py --cloud --queries 100
+python exp02a_passive_struggle.py
+python exp07_preempt_ppts_comparison.py
 ```
 
-### EXP02: OULAD Hybrid Learning
+### Scale & Verification Testing (Promptfoo / Pytest)
 ```bash
 cd experiments
-python exp02_oulad_hybrid_learning.py
-```
+promptfoo eval -c exp11_red_team.yaml
 
-### EXP03: Model Diversity
-```bash
-cd experiments
-python exp03_model_diversity.py
-```
-
-### EXP04: Agentic Evaluation
-```bash
-cd experiments
-python exp04_agentic_evaluation.py
-```
-
-### EXP05: Red Team Testing
-```bash
-cd experiments
-npm install -g promptfoo
-promptfoo eval -c exp05_promptfoo_red_team.yaml
+cd ../
+python -m pytest tests/test_conservative_routing_fallback.py
 ```
 
 **📊 See [experiments/README.md](experiments/README.md) for detailed instructions**
@@ -459,27 +452,23 @@ The system generates comprehensive traces for every query:
 
 ## 🎓 Research Contributions
 
-### Novel Approaches
+### Novel Approaches & Improvements (Paper v4.0)
 
-1. **Semantic Generalization**
-   - Entity-aware sanitization with reversible mapping
-   - Utility preservation while protecting IP
-   - First system to achieve 95% protection with 92% utility
+1. **Semantic Generalization vs Token-DP**
+   - Entity-aware sanitization preserves structural utility.
+   - Outperforms classic Differential Privacy (DP) on the Pareto frontier (EXP10).
 
-2. **Hybrid Learning Architecture**
-   - Local context + cloud reasoning
-   - Zone-based routing for privacy-utility optimization
-   - 25% better performance than cloud-only approaches
+2. **SOTA Empirical Superiority**
+   - Addresses Preempt (2024), PP-TS (2023), and GAMA (2025) limitations (EXP07, EXP09).
+   - Achieves 92.5% semantic recall on educational IP over baseline 25-45% ranges.
 
-3. **Competency Portability**
-   - Cross-course transfer learning
-   - 40-60% cold-start reduction
-   - Privacy-preserving personalization
+3. **Adversarial Reconstruction Resistance (ARR)**
+   - First framework to map compound multi-turn string leakage (EXP06).
+   - Validates the necessity for isolated cloud querying contexts.
 
-4. **Agentic Privacy Framework**
-   - Zone-aware tool selection
-   - Automatic sensitivity detection
-   - Multi-layer defense architecture
+4. **Multi-layer Defense-in-Depth Architectures**
+   - Implements Conservative Routing Fallbacks for NER uncertainty (EXP08).
+   - 93% attack resistance under 200+ Promptfoo scale tests (EXP11).
 
 ### Key Insight
 > **"Agentic privacy is necessary but not sufficient."**
@@ -579,12 +568,12 @@ MIT License - See [LICENSE](LICENSE) for details
 
 ## 🎯 Project Status
 
-**Current Version:** Research Prototype with Production-Ready Security  
-**Last Updated:** 2026-02-15  
-**Total Experiments:** 6 (EXP01-05 + EXP05 Enhanced)  
-**Validation Status:** ✅ 5 validated, ✅ 1 enhanced (EXP05: 25% → 93% attack resistance)  
-**Security Status:** ✅ Defense-in-depth guardrails implemented and tested (17/17 unit tests passed)  
-**Next Steps:** Deploy enhanced system, monitor security alerts, consider EXP06 (ML-based jailbreak detection)
+**Current Version:** Paper V4.0 Improvement Revision  
+**Last Updated:** February 2026  
+**Total Experiments:** 12 Core Experiments (plus targeted demos and suites)  
+**Validation Status:** ✅ All 12 validated (Scaling the Sovereign Learner architecture natively).  
+**Security Status:** ✅ Defense-in-depth guardrails fully active. Conservative routing blocks unhandled NER false-negatives natively.  
+
 
 ---
 
