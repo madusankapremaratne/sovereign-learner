@@ -6,28 +6,31 @@ from sovereign_system.security.guard import guard
 class ZoneValidationInput(BaseModel):
     query: str = Field(..., description="The original query to validate")
     proposed_zone: int = Field(..., description="The proposed privacy zone (0-3)")
+    ner_confidence: float = Field(1.0, description="Confidence score from NER detection (0.0 to 1.0). Default is 1.0")
 
 class ZoneValidationTool(BaseTool):
     """
     Validates zone classification to prevent roleplay attacks from 
     forcing inappropriate zone assignments (e.g., Zone 3 for sensitive queries).
+    Also supports Conservative Routing Fallback under NER uncertainty.
     
-    Addresses EXP05 Critical Vulnerability: Jailbreak via roleplay causing 
-    Zone 3 misclassification for sensitive queries.
+    Addresses EXP05 Critical Vulnerability & EXP08B Conservative Routing.
     """
     name: str = "zone_validator"
     description: str = (
         "Validate if a specific zone (0-3) is safe for a query. "
-        "Input: query string and proposed_zone int. "
-        "Use this tool before finalizing any classification."
+        "Input: query string, proposed_zone int, and optionally ner_confidence float. "
+        "Use this tool before finalizing any classification to enforce privacy rules."
     )
     args_schema: Type[BaseModel] = ZoneValidationInput
 
-    def _run(self, query: str, proposed_zone: int) -> str:
-        is_valid, reason = guard.validate_zone_classification(query, proposed_zone)
+    def _run(self, query: str, proposed_zone: int, ner_confidence: float = 1.0) -> str:
+        is_valid, reason = guard.validate_zone_classification(query, proposed_zone, ner_confidence)
         
         if not is_valid:
-            return f"⚠️ ZONE VALIDATION FAILED: {reason}. Suggested Action: Try a different zone."
+            if "NER uncertainty" in reason:
+                return f"⚠️ SAFETY OVERRIDE: {reason}\nSuggested Action: Re-route to Zone 0 to ensure local data sovereignty."
+            return f"⚠️ ZONE VALIDATION FAILED: {reason}\nSuggested Action: Try a different lower-risk zone."
         
         return f"✅ Zone {proposed_zone} VALIDATED. VALIDATION COMPLETE. STOP using this tool. FINAL ANSWER: Zone {proposed_zone}."
 

@@ -67,15 +67,22 @@ class SovereignGuard:
             
         return True, "✅ Input validation passed.", threats
 
-    def validate_zone_classification(self, query: str, proposed_zone: int) -> Tuple[bool, str]:
+    def validate_zone_classification(self, query: str, proposed_zone: int, ner_confidence: float = 1.0) -> Tuple[bool, str]:
         """
         Validates that zone classification is appropriate for the query content.
         Prevents roleplay attacks from forcing Zone 3 classification.
+        Also evaluates NER confidence for Conservative Routing Fallback (EXP08B).
         
         Returns: (is_valid, reason)
         """
         detected_risks = []
         
+        # Conservative Routing Fallback: If NER confidence is too low, enforce Zone 0
+        if ner_confidence < 0.85:
+            if proposed_zone != 0:
+                return False, f"NER uncertainty (confidence {ner_confidence:.2f} < 0.85) — conservative routing applied. Max allowed zone is 0."
+            return True, "Zone 0 is validated under NER uncertainty."
+            
         # If Presidio is available, use it for PII detection
         if self.analyzer:
             pii_entities = self.scan_for_pii(query)

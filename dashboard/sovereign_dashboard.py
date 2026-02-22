@@ -715,18 +715,41 @@ def render_trace_view(trace):
         """)
         st.plotly_chart(create_privacy_waterfall(trace), use_container_width=True)
         
-        # Privacy score progression
-        st.markdown("#### Privacy Score Progression")
+        # C8.2: Privacy Waterfall Table
+        st.markdown("#### Per-Stage Privacy Waterfall (C8.2)")
         progression_data = []
-        for step in trace.steps:
+        
+        # Initial State
+        progression_data.append({
+            "Stage": "—",
+            "Component": "Raw query (no protection)",
+            "Privacy Exposure Before": 1.0,
+            "Privacy Exposure After": 1.0,
+            "Δ": 0.0
+        })
+        
+        for idx, step in enumerate(trace.steps, 1):
+            exposure_before = step.privacy_score_before
+            exposure_after = step.privacy_score_after
+            delta_val = exposure_after - exposure_before
+            
             progression_data.append({
-                "Agent": step.agent_name,
-                "Before": step.privacy_score_before,
-                "After": step.privacy_score_after
+                "Stage": f"Stage {idx}",
+                "Component": step.agent_name,
+                "Privacy Exposure Before": exposure_before,
+                "Privacy Exposure After": exposure_after,
+                "Δ": delta_val
             })
         
         prog_df = pd.DataFrame(progression_data)
-        st.dataframe(prog_df.style.format({"Before": "{:.0%}", "After": "{:.0%}"}), use_container_width=True)
+        st.dataframe(
+            prog_df.style.format({
+                "Privacy Exposure Before": "{:.0%}", 
+                "Privacy Exposure After": "{:.0%}",
+                "Δ": "{:+.0%}"
+            }), 
+            use_container_width=True
+        )
     
     with tab2:
         st.markdown("### Agent Contribution Analysis")

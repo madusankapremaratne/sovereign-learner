@@ -36,17 +36,17 @@ Based on the `paper_improvement_plan.md`, the following areas require immediate 
 *   **EXP12: NELR Post-hoc Scan:**
     *   Develop a script to run NER on existing `results/` JSON files to detect entities in cloud responses not present in the original sanitized query.
     *   Quantify "Hallucinated Leakage".
-*   **EXP08A: NER Coverage Audit:**
+*   **EXP08: NER Coverage Audit:**
     *   Benchmark the current NER pipeline (spaCy + Presidio) against a manually annotated golden set of 200 educational documents.
     *   Calculate Precision, Recall, and F1 by domain (CS, Bio, Legal, Med).
 *   **GAMA Reproduction (C10):**
     *   Implement a lightweight version of GAMA's `MVPI` (Multi-View Privacy Identification) and run 20 educational queries to prove its ~0% recall for domain-specific IP.
 
 ### Phase 2: System Enhancements & Scaling (Weeks 2-3)
-*   **EXP11A: Corpus Expansion:**
+*   **Corpus Expansion (Data Gen):**
     *   Use a generator LLM to synthesize 1,500 additional queries mirroring the OULAD domain distribution.
     *   Conduct human-in-the-loop validation for 10% of generated queries.
-*   **EXP08B: Conservative Routing Fallback:**
+*   **Conservative Routing Fallback (Guardrail):**
     *   Modify `Sovereign Manager` to check NER confidence scores.
     *   Implement Logic: `if confidence < threshold: zone = 0 (BLOCK_CLOUD_ACCESS)`.
 *   **EXP10: DP Benchmarking:**
@@ -62,7 +62,7 @@ Based on the `paper_improvement_plan.md`, the following areas require immediate 
     *   Side-by-side benchmarking on the full 2,000-query corpus.
 
 ### Phase 4: Red Team Expansion (Week 4)
-*   **EXP11B: Categorized Red Teaming:**
+*   **EXP11: Categorized Red Teaming:**
     *   Develop 200 prompts across 5 categories: Direct Extraction, Roleplay/Jailbreak, CoT Leakage, Multi-turn Inference, and System Prompt Injection.
     *   Run 3 trials per prompt to establish 95% Confidence Intervals (CIs).
 
@@ -73,19 +73,19 @@ Based on the `paper_improvement_plan.md`, the following areas require immediate 
 All required scripts and architecture tweaks have been completed and stored in the `paper-improvement` branch.
 
 ### **Core Systems Updates:**
-*   **Conservative Routing (EXP08B):** Modified `guard.py` and `guardrail_tools.py` to accept `ner_confidence`. If confidence drops below `0.85`, it enforces **Zone 0 (Local-only)** routing.
+*   **Conservative Routing (Guardrail):** Modified `guard.py` and `guardrail_tools.py` to accept `ner_confidence`. If confidence drops below `0.85`, it enforces **Zone 0 (Local-only)** routing.
 *   **Privacy Waterfall Table (C8.2):** Updated `dashboard/sovereign_dashboard.py` to include the exact `Δ` metric table detailing exposure differences "Before" and "After" each agent stage.
 
 ### **Experiment Scripts Created:**
 *   `experiments/exp12_nelr_scan.py`: Post-hoc cloud hallucination leakage analysis.
-*   `experiments/exp08a_ner_audit.py`: Benchmark coverage mapping using existing ground truths.
+*   `experiments/exp08_ner_audit.py`: Benchmark coverage mapping using existing ground truths.
 *   `experiments/exp09_gama_mvpi_demo.py`: Demo to definitively prove that GAMA's token-based approach fails to catch educational domain IP.
 *   `scripts/generate_corpus.py`: Generates synthetic multi-domain conversational sets to hit the 2,000 query scale requirements.
 *   `experiments/exp10_dp_benchmarking.py`: Pareto plotting script to map Utility vs. Privacy tradeoffs (DP vs. Semantic Generalizer).
 *   `experiments/exp06_arr_at_scale.py`: Scaled simulation of Adversarial Reconstruction Resistance up to 10 context turns.
 *   `experiments/exp07_09_sota_comparison.py`: Base comparison tables targeting Preempt, PP-TS, and GAMA.
-*   `experiments/exp11b_red_team.yaml`: Complete mapping of Promptfoo configurations focusing on 5 distinct LLM attack categories tailored for hybrid local/cloud separations.
-*   `tests/test_guardrails_exp08b.py`: Automated testing suite asserting that routing fails safely into local zones.
+*   `experiments/exp11_red_team.yaml`: Complete mapping of Promptfoo configurations focusing on 5 distinct LLM attack categories tailored for hybrid local/cloud separations.
+*   `tests/test_conservative_routing_fallback.py`: Automated testing suite asserting that routing fails safely into local zones.
 
 ---
 

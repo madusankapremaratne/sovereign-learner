@@ -29,13 +29,13 @@ The Sovereign Learner system includes **6 comprehensive experiments** designed t
 | **EXP05 Enhanced** | `exp05_enhanced_red_team.yaml` | Defense-in-Depth Guardrails | ✅ Complete |
 | **EXP06** | `exp06_arr_at_scale.py` | ARR at Scale & Degradation Curves | ✅ Complete |
 | **EXP07** | `exp07_preempt_ppts_comparison.py` | SOTA Baseline (Preempt/PP-TS) | ✅ Complete |
-| **EXP08A** | `exp08a_ner_audit.py` | NER Coverage & Precision Audit | ✅ Complete |
-| **EXP08B** | `tests/test_guardrails_exp08b.py` | Conservative Routing Fallback | ✅ Complete |
+| **EXP08** | `exp08_ner_audit.py` | NER Coverage & Precision Audit | ✅ Complete |
+| **Guardrail Test** | `tests/test_conservative_routing_fallback.py` | Conservative Routing Fallback | ✅ Complete |
 | **EXP09** | `exp09_gama_sota_comparison.py` | SOTA Baseline (GAMA) | ✅ Complete |
 | **EXP09 Demo**| `exp09_gama_mvpi_demo.py` | GAMA Token Limitation Demonstration | ✅ Complete |
 | **EXP10** | `exp10_dp_benchmarking.py` | Differential Privacy Benchmarking | ✅ Complete |
-| **EXP11A** | `scripts/generate_corpus.py` | Corpus Expansion (2000 queries) | ✅ Complete |
-| **EXP11B** | `exp11b_red_team.yaml` | Categorized Red Teaming | ✅ Complete |
+| **Corpus Gen** | `scripts/generate_corpus.py` | Corpus Expansion (2000 queries) | ✅ Complete |
+| **EXP11** | `exp11_red_team.yaml` | Categorized Red Teaming | ✅ Complete |
 | **EXP12** | `exp12_nelr_scan.py` | Novel Entity Leakage Rate Scan | ✅ Complete |
 
 ---
@@ -2004,8 +2004,8 @@ These experiments address critical reviewer critiques regarding empirical compar
   - Sovereign Learner: 92.5% Recall, 0.85 Utility, 1.6s Latency.
   - GAMA (2025): 25.0% Recall, 0.88 Utility, 8.0s Latency.
 
-### **EXP08A: NER Coverage & Precision Audit**
-- **File:** `exp08a_ner_audit.py`
+### **EXP08: NER Coverage & Precision Audit**
+- **File:** `exp08_ner_audit.py`
 - **Goal:** Address the exact detection ceiling of the NER (Named Entity Recognition) pipeline across Domain IP endpoints.
 - **Methodology:** Checked NER accuracy against a manually annotated 200-document golden truth set.
 - **Significance:** Mapped clear F1 score thresholds per educational domain (e.g., Biomedical, CS, Medical, Legal). 
@@ -2014,8 +2014,8 @@ These experiments address critical reviewer critiques regarding empirical compar
   - DomainIP_CS F1: 0.895 (Good extraction of algorithms/code references).
   - DomainIP_Legal F1: 0.799 (Lower extraction accuracy, confirming the need for Conservative Routing Fallback under complex litigation semantics).
 
-### **EXP08B: Conservative Routing Fallback**
-- **File:** `tests/test_guardrails_exp08b.py`
+### **Conservative Routing Fallback Test**
+- **File:** `tests/test_conservative_routing_fallback.py`
 - **Goal:** Handle the "False Negative" risk in NER operations.
 - **Methodology:** Introduced a validation guardrail where if NER confidence drops to `< 0.85`, the `Zone Validation Tool` forcefully down-routes the agent into **Zone 0 (Local-only)**.
 - **Significance:** Under uncertainty, the system natively fails safe to maximum privacy, blocking Cloud interaction completely.
@@ -2038,8 +2038,8 @@ These experiments address critical reviewer critiques regarding empirical compar
   - DP Standard (eps=0.5): 0.98 Privacy / 0.40 Utility (Breaks structural intent).
   - Sovereign Learner: 0.95 Privacy / 0.85 Utility (Preserves structural intent). 
 
-### **EXP11A & EXP11B: Corpus Expansion & Categorized Red Teaming**
-- **Files:** `scripts/generate_corpus.py` & `experiments/exp11b_red_team.yaml`
+### **EXP11: Categorized Red Teaming & Corpus Expansion**
+- **Files:** `scripts/generate_corpus.py` & `experiments/exp11_red_team.yaml`
 - **Goal:** Increase the statistical power by generating a 2,000 query dataset mapping to OULAD distributions, and running 200+ Promptfoo adversarial stress tests.
 - **Significance:** Establishes rigorous 95% Confidence Intervals mapped across 5 specific LLM attack categories (Direct Extraction, Protocol Bypass, Chain of Thought Leakage, Multi-turn Inference, System Prompt Injection).
 - **Results:** 
