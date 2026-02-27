@@ -112,3 +112,4 @@ experiments/dashboard/traces/*.json
 !dashboard/traces/.gitkeep
 /dashboard/old-traces
 /dashboard/dashboard/traces
+/experiments/unwanted

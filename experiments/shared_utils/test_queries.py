@@ -1,6 +1,18 @@
 
 """
 Standard Test Queries for Sovereign Learner Experiments
+
+⚠️  DEPRECATION NOTICE FOR EXP01 (February 2026):
+    EXP01 no longer uses TEST_QUERIES. Per supervisor feedback, all EXP01
+    data is now loaded from real published datasets:
+      • AI4Privacy pii-masking-300k (education subset, 200 samples)
+      • OULAD studentInfo.csv derived queries (100 samples)
+    See exp01_semantic_generalization.py → load_exp01_dataset()
+
+    TEST_QUERIES is retained here for:
+      • EXP04 zone-routing smoke tests
+      • Pipeline sanity checks / unit tests
+      • Other experiments that import it directly
 """
 
 TEST_QUERIES = [

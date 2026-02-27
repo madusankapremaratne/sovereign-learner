@@ -1,5 +1,5 @@
 from crewai.tools import BaseTool
-from typing import Type
+from typing import Type, Optional
 from pydantic import BaseModel, Field
 from sovereign_system.security.guard import guard
 
@@ -37,6 +37,8 @@ class ZoneValidationTool(BaseTool):
 
 class OutputSanitizerInput(BaseModel):
     text: str = Field(..., description="The output text to sanitize")
+    sensitive_entities: Optional[str] = Field(None, description="Comma-separated list of sensitive entities to scrub")
+    placeholders: Optional[str] = Field(None, description="Comma-separated list of placeholders to scrub")
 
 class OutputSanitizerTool(BaseTool):
     """
@@ -48,12 +50,15 @@ class OutputSanitizerTool(BaseTool):
     description: str = (
         "Removes internal reasoning artifacts, chain-of-thought patterns, and "
         "agent metadata from outputs before presenting to the user. "
-        "Prevents information leakage about the system's internal workings."
+        "Can also scrub specific entities and placeholders if provided."
     )
     args_schema: Type[BaseModel] = OutputSanitizerInput
 
-    def _run(self, text: str) -> str:
-        sanitized = guard.sanitize_output(text)
+    def _run(self, text: str, sensitive_entities: str = None, placeholders: str = None) -> str:
+        entities = [e.strip() for e in sensitive_entities.split(",")] if sensitive_entities else []
+        placeholders_list = [p.strip() for p in placeholders.split(",")] if placeholders else []
+        
+        sanitized = guard.sanitize_output(text, entities, placeholders_list)
         return f"SANITIZED OUTPUT: {sanitized}\n\nSTOP using this tool. Use this output as your Final Answer."
 
 

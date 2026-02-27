@@ -37,19 +37,23 @@ cloud_knowledge_task:
 
 privacy_audit_task:
   description: >
-    Review the cloud researcher's response. Ensure that the cloud model 
-    has not inadvertently 'guessed' the user's specific context or leaked 
-    any information that maps back to the sensitive entities found in Stage 1.
-  expected_output: "A validation report (Pass/Fail) with corrective feedback."
+    Review the cloud researcher's response. Perform a Differential Privacy Audit (DPA).
+    Ensure that the cloud model has not inadvertently 'guessed' the user's specific 
+    context or leaked any information that maps back to sensitive entities.
+    USE the output_sanitizer tool to scrub any internal reasoning or leaked tokens 
+    from your report.
+  expected_output: "A DPA-validated report (Pass/Fail) with corrective feedback."
   agent: trust_enforcer
   context: [cloud_knowledge_task, pii_detection_task]
 
 recontextualization_task:
   description: >
-    Using the 'Mapping Key' from the generalization stage, take the validated 
-    technical guide and replace all placeholders with the original specific terms. 
-    Ensure the final tone is helpful and educational.
-  expected_output: "The final specific technical response for the user."
+    Execute Symmetric Context Restoration (SCR). Using the 'Mapping Key' from 
+    Stage 1, replace all abstract axioms with the original lived entities. 
+    Perform a final 'Zero-Leak Finalization' sweep using the output_sanitizer tool 
+    to ensure no hidden metadata, 'Thoughts', or unmasked placeholders remain 
+    in the final response.
+  expected_output: "The final notarized specific response for the user."
   agent: recontextualizer
   context: [generalization_task, privacy_audit_task]
 

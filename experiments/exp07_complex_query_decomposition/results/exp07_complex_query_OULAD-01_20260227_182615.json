@@ -1,0 +1,100 @@
+{
+  "experiment": "EXP07 \u2013 Complex Query Decomposition (OULAD-01)",
+  "timestamp": "20260227_182615",
+  "query_id": "OULAD-01",
+  "v1_monolithic": {
+    "condition": "v1_monolithic",
+    "entity_detection": {
+      "entities_found": [],
+      "missed_entities": [
+        "587194",
+        "55%",
+        "420",
+        "BBB",
+        "8 active days"
+      ],
+      "false_positives": [],
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "sanitisation": {
+      "generalised_query": "I am student 587194 in module BBB. My average score is 55% and I have 420 clicks. Why am I struggling with mathematical modelling? Also, can you recommend some scientific writing protocols? And should I be worried about my 8 active days?",
+      "mapping": {},
+      "sanitisation_time_ms": 0.0007152557373046875
+    },
+    "privacy": {
+      "entities_leaked_in_generalised": [
+        "587194",
+        "55%",
+        "420",
+        "BBB",
+        "8 active days"
+      ],
+      "entities_leaked_in_final": [],
+      "privacy_score": 0.167
+    },
+    "utility": {
+      "sub_questions_addressed": 4,
+      "cross_sentence_coherence": 0.9,
+      "entity_restoration_accuracy": 1.0,
+      "overall_utility": 0.967
+    },
+    "failure_modes": [
+      "FM-1 [Cross-Sentence Entity Miss]: Entities not detected: ['587194', '55%', '420', 'BBB', '8 active days']. The v1 pipeline scans the full blob but the agent prompt template sometimes loses entities from early sentences when the paragraph is long.",
+      "FM-3 [Under-Sanitisation / Privacy Leak]: ['587194', '55%', '420', 'BBB', '8 active days'] appear verbatim in the generalised query sent to the cloud. Detection missed these entities or the replacer regex had a case mismatch.",
+      "FM-5 [Contextual Metadata Loss]: The supervisor recommendation context ('Dr. Smith at BioInstitute advised\u2026') was stripped away completely. The user cannot tell whether the answer takes Dr. Smith's advice into account."
+    ],
+    "total_time_ms": 0.1,
+    "final_response": "To optimise Protocol-X in Cell-Type-A, adjust reagent concentrations, use a validated delivery-method vector, and confirm cell viability >85% prior to modification. The delivery-method window of Timepoint-T is recommended by Institution-D for maximum uptake efficiency.\n\nKey literature on off-target effects includes:\n - 'Genome-wide specificities of Protocol-X nucleases' (Nature 2016)\n - 'Minimising off-target activity in Protocol-X' (Cell 2019)\n - 'Off-target profiling in Cell-Type-A' (Nat. Methods 2022)"
+  },
+  "v2_decomposed": {
+    "condition": "v2_decomposed",
+    "entity_detection": {
+      "entities_found": [],
+      "missed_entities": [
+        "587194",
+        "55%",
+        "420",
+        "BBB",
+        "8 active days"
+      ],
+      "false_positives": [],
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "sanitisation": {
+      "generalised_query": "[Context: I am student 587194 in module BBB. My average score is 55% and I have 420 clicks.] Why am I struggling with mathematical modelling? | [Context: I am student 587194 in module BBB. My average score is 55% and I have 420 clicks.] Also, can you recommend some scientific writing protocols? | [Context: I am student 587194 in module BBB. My average score is 55% and I have 420 clicks.] And should I be worried about my 8 active days?",
+      "mapping": {},
+      "sanitisation_time_ms": 0.00095367431640625
+    },
+    "privacy": {
+      "entities_leaked_in_generalised": [
+        "587194",
+        "55%",
+        "420",
+        "BBB",
+        "8 active days"
+      ],
+      "entities_leaked_in_final": [
+        "8 active days"
+      ],
+      "privacy_score": 0.133
+    },
+    "utility": {
+      "sub_questions_addressed": 3,
+      "cross_sentence_coherence": 0.92,
+      "entity_restoration_accuracy": 1.0,
+      "overall_utility": 0.89
+    },
+    "failure_modes": [
+      "FM-3 [Residual Under-Sanitisation]: ['587194', '55%', '420', 'BBB', '8 active days'] appeared in generalised sub-queries despite shared mapping pass."
+    ],
+    "total_time_ms": 0.1,
+    "final_response": "**Q1: Why am I struggling with mathematical modelling?**\nGeneral guidance: follow standard delivery-method best practices for Protocol-X modifications in Cell-Type-A.\n\n**Q2: Also, can you recommend some scientific writing protocols?**\nTo optimise Protocol-X in Cell-Type-A, adjust reagent concentrations, use a validated delivery-method vector, and confirm cell viability >85% prior to modification. The delivery-method window of Timepoint-T is recommended by Institution-D for maximum uptake efficiency.\n\nKey literature on off-target effects includes:\n - 'Genome-wide specificities of Protocol-X nucleases' (Nature 2016)\n - 'Minimising off-target activity in Protocol-X' (Cell 2019)\n - 'Off-target profiling in Cell-Type-A' (Nat. Methods 2022)\n\n**Q3: And should I be worried about my 8 active days?**\nGeneral guidance: follow standard delivery-method best practices for Protocol-X modifications in Cell-Type-A."
+  },
+  "improvements": {
+    "privacy_delta": -0.034,
+    "utility_delta": -0.077,
+    "failure_modes_reduced": 2
+  }
+}

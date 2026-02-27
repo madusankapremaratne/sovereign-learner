@@ -1,0 +1,99 @@
+{
+  "experiment": "EXP07 \u2013 Complex Query Decomposition (OULAD-02)",
+  "timestamp": "20260227_182615",
+  "query_id": "OULAD-02",
+  "v1_monolithic": {
+    "condition": "v1_monolithic",
+    "entity_detection": {
+      "entities_found": [],
+      "missed_entities": [
+        "CCC",
+        "85%",
+        "algorithm implementation in Python",
+        "OULAD",
+        "federated learning"
+      ],
+      "false_positives": [],
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "sanitisation": {
+      "generalised_query": "I'm enrolled in the CCC module focusing on algorithm implementation in Python. I've achieved a score of 85% so far. How can I optimize my database query performance? Also, I want to use the OULAD dataset for my final project on federated learning. What differential privacy techniques are most suitable for this?",
+      "mapping": {},
+      "sanitisation_time_ms": 0.0
+    },
+    "privacy": {
+      "entities_leaked_in_generalised": [
+        "CCC",
+        "85%",
+        "algorithm implementation in Python",
+        "OULAD",
+        "federated learning"
+      ],
+      "entities_leaked_in_final": [],
+      "privacy_score": 0.167
+    },
+    "utility": {
+      "sub_questions_addressed": 1,
+      "cross_sentence_coherence": 0.5,
+      "entity_restoration_accuracy": 1.0,
+      "overall_utility": 0.583
+    },
+    "failure_modes": [
+      "FM-1 [Cross-Sentence Entity Miss]: Entities not detected: ['CCC', '85%', 'algorithm implementation in Python', 'OULAD', 'federated learning']. The v1 pipeline scans the full blob but the agent prompt template sometimes loses entities from early sentences when the paragraph is long.",
+      "FM-3 [Under-Sanitisation / Privacy Leak]: ['CCC', '85%', 'algorithm implementation in Python', 'OULAD', 'federated learning'] appear verbatim in the generalised query sent to the cloud. Detection missed these entities or the replacer regex had a case mismatch.",
+      "FM-4 [Question Collapse]: Only 1/4 sub-questions appear addressed in the final response. When the 4 questions are sent as one blob, the cloud model prioritises the first question and gives shallow answers to the rest.",
+      "FM-5 [Contextual Metadata Loss]: The supervisor recommendation context ('Dr. Smith at BioInstitute advised\u2026') was stripped away completely. The user cannot tell whether the answer takes Dr. Smith's advice into account."
+    ],
+    "total_time_ms": 0.1,
+    "final_response": "General guidance: follow standard delivery-method best practices for Protocol-X modifications in Cell-Type-A."
+  },
+  "v2_decomposed": {
+    "condition": "v2_decomposed",
+    "entity_detection": {
+      "entities_found": [],
+      "missed_entities": [
+        "CCC",
+        "85%",
+        "algorithm implementation in Python",
+        "OULAD",
+        "federated learning"
+      ],
+      "false_positives": [],
+      "recall": 0.0,
+      "precision": 0.0
+    },
+    "sanitisation": {
+      "generalised_query": "[Context: I'm enrolled in the CCC module focusing on algorithm implementation in Python. I've achieved a score of 85% so far. Also, I want to use the OULAD dataset for my final project on federated learning.] How can I optimize my database query performance? | [Context: I'm enrolled in the CCC module focusing on algorithm implementation in Python. I've achieved a score of 85% so far. Also, I want to use the OULAD dataset for my final project on federated learning.] What differential privacy techniques are most suitable for this?",
+      "mapping": {},
+      "sanitisation_time_ms": 0.00095367431640625
+    },
+    "privacy": {
+      "entities_leaked_in_generalised": [
+        "CCC",
+        "85%",
+        "algorithm implementation in Python",
+        "OULAD",
+        "federated learning"
+      ],
+      "entities_leaked_in_final": [],
+      "privacy_score": 0.167
+    },
+    "utility": {
+      "sub_questions_addressed": 2,
+      "cross_sentence_coherence": 0.92,
+      "entity_restoration_accuracy": 1.0,
+      "overall_utility": 0.807
+    },
+    "failure_modes": [
+      "FM-3 [Residual Under-Sanitisation]: ['CCC', '85%', 'algorithm implementation in Python', 'OULAD', 'federated learning'] appeared in generalised sub-queries despite shared mapping pass."
+    ],
+    "total_time_ms": 0.1,
+    "final_response": "**Q1: How can I optimize my database query performance?**\nGeneral guidance: follow standard delivery-method best practices for Protocol-X modifications in Cell-Type-A.\n\n**Q2: What differential privacy techniques are most suitable for this?**\nGeneral guidance: follow standard delivery-method best practices for Protocol-X modifications in Cell-Type-A."
+  },
+  "improvements": {
+    "privacy_delta": 0.0,
+    "utility_delta": 0.224,
+    "failure_modes_reduced": 3
+  }
+}

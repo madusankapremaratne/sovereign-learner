@@ -20,7 +20,19 @@ Generated on: 2026-01-22 16:04:08
 | Demo Scenario | zone_2_demo   |      2 | 50.0%           | 98.0%           |           1149 |       4 |
 | Demo Scenario | zone_3_demo   |      3 | 0.0%            | 100.0%          |            873 |       2 |
 
-### 🔑 Key Observations
-- **Zone 0 (Local)**: Fastest execution (~45ms), 100% Privacy (Data never leaves).
-- **Zone 1 (High Sensitivity)**: High latency due to sanitization, but achieves >90% Privacy Protection.
-- **Zone 3 (Public)**: Direct cloud access, 0% Privacy Protection (by design), high utility.
+---
+
+### 🏆 SOTA Baseline Comparison (EXP05 - OULAD Benchmark)
+The following benchmark was conducted using real student records from the OULAD dataset, comparing the Sovereign Learner's **Intent-Layer** against traditional **Entity-Layer** baselines.
+
+| Baseline | IP Protection (↑) | Utility (↑) | Field Exposure (↓) |
+| :--- | :---: | :---: | :---: |
+| **Prεεmpt (2024)** | 0.50 | 0.81 | 0.60 |
+| **PP-TS (2023)** | 0.51 | **0.83** | 0.15 |
+| **GAMA (2025)** | 0.50 | 0.78 | 0.60 |
+| **AI4Privacy (Ind.)** | 0.54 | 0.81 | 0.60 |
+| **Sovereign Learner** | **0.65** | 0.80 | **0.03** |
+
+**Key Victory:** The Sovereign Learner reduced field exposure by **~95%** compared to BERT-based baselines by abstracting the intent of the learning query.
+
+---

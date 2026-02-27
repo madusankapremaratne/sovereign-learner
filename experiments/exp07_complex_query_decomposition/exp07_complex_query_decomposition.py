@@ -1,5 +1,5 @@
 """
-Experiment 13: Complex Multi-Question Query Decomposition
+Experiment 07: Complex Multi-Question Query Decomposition
 =========================================================
 
 PROBLEM STATEMENT
@@ -75,31 +75,45 @@ except ImportError:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-#  COMPLEX QUERY UNDER TEST
+#  COMPLEX QUERIES UNDER TEST
 # ═══════════════════════════════════════════════════════════════════════════
 
-COMPLEX_QUERY = (
-    "I am working on a gene editing project involving CRISPR modifications in "
-    "HEK293 cells. My supervisor Dr. Smith at BioInstitute advised using a "
-    "48-hour transfection window. What is the optimal protocol, and how do I "
-    "troubleshoot low efficiency? Also, can you recommend papers on off-target effects?"
-)
-
-# Ground-truth sensitive entities a perfect detector should find
-GROUND_TRUTH_ENTITIES = [
-    "CRISPR",
-    "HEK293",
-    "Dr. Smith",
-    "BioInstitute",
-    "48-hour transfection window",
-]
-
-# The four semantically distinct questions embedded in the paragraph
-EXPECTED_SUB_QUESTIONS = [
-    "What is the optimal CRISPR protocol for HEK293 cells?",
-    "How do I troubleshoot low transfection efficiency?",
-    "Why use a 48-hour transfection window for HEK293 cells?",
-    "What papers can I read on CRISPR off-target effects?",
+TEST_QUERIES = [
+    {
+        "id": "BIO-01",
+        "query": (
+            "I am working on a gene editing project involving CRISPR modifications in "
+            "HEK293 cells. My supervisor Dr. Smith at BioInstitute advised using a "
+            "48-hour transfection window. What is the optimal protocol, and how do I "
+            "troubleshoot low efficiency? Also, can you recommend papers on off-target effects?"
+        ),
+        "ground_truth": ["CRISPR", "HEK293", "Dr. Smith", "BioInstitute", "48-hour transfection window"],
+        "expected_sub_qs": 4,
+        "domain": "Biomedical IP"
+    },
+    {
+        "id": "OULAD-01",
+        "query": (
+            "I am student 587194 in module BBB. My average score is 55% and I have 420 clicks. "
+            "Why am I struggling with mathematical modelling? Also, can you recommend some "
+            "scientific writing protocols? And should I be worried about my 8 active days?"
+        ),
+        "ground_truth": ["587194", "55%", "420", "BBB", "8 active days"],
+        "expected_sub_qs": 3,
+        "domain": "Educational IP (Real OULAD)"
+    },
+    {
+        "id": "OULAD-02",
+        "query": (
+            "I'm enrolled in the CCC module focusing on algorithm implementation in Python. "
+            "I've achieved a score of 85% so far. How can I optimize my database query performance? "
+            "Also, I want to use the OULAD dataset for my final project on federated learning. "
+            "What differential privacy techniques are most suitable for this?"
+        ),
+        "ground_truth": ["CCC", "85%", "algorithm implementation in Python", "OULAD", "federated learning"],
+        "expected_sub_qs": 3,
+        "domain": "Technical Research IP (Real OULAD)"
+    }
 ]
 
 
@@ -887,16 +901,15 @@ def print_comparison(v1: ConditionResult, v2: ConditionResult):
 #  SAVE JSON RESULTS
 # ═══════════════════════════════════════════════════════════════════════════
 
-def save_results(v1: ConditionResult, v2: ConditionResult, out_dir: str):
+def save_results(v1: ConditionResult, v2: ConditionResult, out_dir: str, query_id: str):
     os.makedirs(out_dir, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    path = os.path.join(out_dir, f"exp13_complex_query_{ts}.json")
+    path = os.path.join(out_dir, f"exp07_complex_query_{query_id}_{ts}.json")
 
     payload = {
-        "experiment":    "EXP13 – Complex Multi-Question Query Decomposition",
+        "experiment":    f"EXP07 – Complex Query Decomposition ({query_id})",
         "timestamp":     ts,
-        "query":         COMPLEX_QUERY,
-        "ground_truth":  GROUND_TRUTH_ENTITIES,
+        "query_id":      query_id,
         "v1_monolithic": asdict(v1),
         "v2_decomposed": asdict(v2),
         "improvements": {
@@ -918,57 +931,44 @@ def save_results(v1: ConditionResult, v2: ConditionResult, out_dir: str):
 # ═══════════════════════════════════════════════════════════════════════════
 
 def main():
-    print("\n" + hr("═") + "\n  EXP13: COMPLEX MULTI-QUESTION QUERY — STRESS TEST & DECOMPOSITION\n" + hr("═"))
-    print(f"\n  Test query:\n")
-    for line in textwrap.wrap(COMPLEX_QUERY, width=68, initial_indent="    ", subsequent_indent="    "):
-        print(line)
-    print(f"\n  Ground-truth sensitive entities: {GROUND_TRUTH_ENTITIES}")
-    print(f"  Expected sub-questions:          {len(EXPECTED_SUB_QUESTIONS)}")
-
+    print("\n" + hr("═") + "\n  EXP07: COMPLEX MULTI-QUESTION QUERY — STRESS TEST & DECOMPOSITION\n" + hr("═"))
+    
     # Wire up components
     detector    = EntityDetector()
     generaliser = StubGeneraliser()
     cloud       = StubCloudResearcher()
 
-    if TOOLS_AVAILABLE:
-        print("\n  ℹ️  Live sovereign tools imported successfully.")
-    else:
-        print("\n  ⚠️  Running with STUB tools (deterministic mode for CI).")
-
-    # ── Phase 1: Show decomposition ──────────────────────────────────────
-    section("🔪 QUERY DECOMPOSITION ANALYSIS")
-    decomposer = QueryDecomposer()
-    ctx, qs = decomposer.decompose(COMPLEX_QUERY)
-    sub_qs = decomposer.build_contextual_subqueries(ctx, qs)
-    print(f"\n  Context sentences extracted ({len(ctx)}):")
-    for i, c in enumerate(ctx, 1):
-        print(f"    [{i}] {c}")
-    print(f"\n  Question sentences extracted ({len(qs)}):")
-    for i, q in enumerate(qs, 1):
-        print(f"    [{i}] {q}")
-    print(f"\n  Contextual sub-queries (what v2 sends to each agent):")
-    for i, sq in enumerate(sub_qs, 1):
-        print(f"\n    Sub-query {i}:")
-        for line in textwrap.wrap(sq, width=64, initial_indent="      ", subsequent_indent="      "):
-            print(line)
-
-    # ── Phase 2: Run conditions ──────────────────────────────────────────
-    print("\n\n" + hr() + "\n  RUNNING CONDITIONS…\n" + hr())
-    print("  [1/2] Running V1 Monolithic baseline…", flush=True)
-    v1_result = run_v1_monolithic(COMPLEX_QUERY, detector, generaliser, cloud)
-    print("  [2/2] Running V2 Decomposed pipeline…", flush=True)
-    v2_result = run_v2_decomposed(COMPLEX_QUERY, detector, generaliser, cloud)
-
-    # ── Phase 3: Print reports ───────────────────────────────────────────
-    print_condition_report(v1_result)
-    print_condition_report(v2_result)
-    print_comparison(v1_result, v2_result)
-
-    # ── Save ────────────────────────────────────────────────────────────
     results_dir = os.path.join(os.path.dirname(__file__), "results")
-    save_results(v1_result, v2_result, results_dir)
 
-    print("\n" + hr() + "\n  ✅ EXP13 COMPLETE\n" + hr() + "\n")
+    for test_case in TEST_QUERIES:
+        query_text = test_case['query']
+        query_id = test_case['id']
+        ground_truth = test_case['ground_truth']
+        
+        # Globally update GROUND_TRUTH_ENTITIES for individual run logic 
+        # (The original script uses it as a global; we pass it where we can or update it)
+        global GROUND_TRUTH_ENTITIES
+        GROUND_TRUTH_ENTITIES = ground_truth
+
+        print(f"\n\n  🚀 TESTING QUERY: {query_id} ({test_case['domain']})")
+        print(f"  {hr('-')}")
+        for line in textwrap.wrap(query_text, width=68, initial_indent="    ", subsequent_indent="    "):
+            print(line)
+        
+        # ── Phase 1: Run conditions ──────────────────────────────────────────
+        print("\n  [1/2] Running V1 Monolithic baseline...", flush=True)
+        v1_result = run_v1_monolithic(query_text, detector, generaliser, cloud)
+        print("  [2/2] Running V2 Decomposed pipeline...", flush=True)
+        v2_result = run_v2_decomposed(query_text, detector, generaliser, cloud)
+
+        # ── Phase 2: Print reports ───────────────────────────────────────────
+        print_condition_report(v2_result) # Print V2 for clarity
+        print_comparison(v1_result, v2_result)
+
+        # ── Save ────────────────────────────────────────────────────────────
+        save_results(v1_result, v2_result, results_dir, query_id)
+
+    print("\n" + hr() + "\n  ✅ EXP07 COMPLETE (Final Experiment)\n" + hr() + "\n")
 
 
 if __name__ == "__main__":

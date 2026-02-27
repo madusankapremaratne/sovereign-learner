@@ -1,0 +1,118 @@
+{
+  "experiment": "EXP07 \u2013 Complex Query Decomposition (BIO-01)",
+  "timestamp": "20260227_182615",
+  "query_id": "BIO-01",
+  "v1_monolithic": {
+    "condition": "v1_monolithic",
+    "entity_detection": {
+      "entities_found": [
+        "CRISPR",
+        "HEK293",
+        "Dr. Smith",
+        "BioInstitute",
+        "48-hour transfection",
+        "transfection"
+      ],
+      "missed_entities": [
+        "48-hour transfection window"
+      ],
+      "false_positives": [
+        "48-hour transfection",
+        "transfection"
+      ],
+      "recall": 0.8,
+      "precision": 0.6666666666666666
+    },
+    "sanitisation": {
+      "generalised_query": "I am working on a gene editing project involving Protocol-X modifications in Cell-Type-A cells. My supervisor Supervisor-S at Institution-D advised using a Entity-HOURTR window. What is the optimal protocol, and how do I troubleshoot low efficiency? Also, can you recommend papers on off-target effects?",
+      "mapping": {
+        "Entity-HOURTR": "48-hour transfection",
+        "Institution-D": "BioInstitute",
+        "delivery-method": "transfection",
+        "Supervisor-S": "Dr. Smith",
+        "Protocol-X": "CRISPR",
+        "Cell-Type-A": "HEK293"
+      },
+      "sanitisation_time_ms": 0.10895729064941406
+    },
+    "privacy": {
+      "entities_leaked_in_generalised": [],
+      "entities_leaked_in_final": [
+        "CRISPR",
+        "HEK293",
+        "BioInstitute"
+      ],
+      "privacy_score": 0.9
+    },
+    "utility": {
+      "sub_questions_addressed": 3,
+      "cross_sentence_coherence": 0.7,
+      "entity_restoration_accuracy": 0.6666666666666666,
+      "overall_utility": 0.706
+    },
+    "failure_modes": [
+      "FM-1 [Cross-Sentence Entity Miss]: Entities not detected: ['48-hour transfection window']. The v1 pipeline scans the full blob but the agent prompt template sometimes loses entities from early sentences when the paragraph is long.",
+      "FM-4 [Question Collapse]: Only 2/4 sub-questions appear addressed in the final response. When the 4 questions are sent as one blob, the cloud model prioritises the first question and gives shallow answers to the rest.",
+      "FM-5 [Contextual Metadata Loss]: The supervisor recommendation context ('Dr. Smith at BioInstitute advised\u2026') was stripped away completely. The user cannot tell whether the answer takes Dr. Smith's advice into account."
+    ],
+    "total_time_ms": 0.9,
+    "final_response": "To optimise CRISPR in HEK293, adjust reagent concentrations, use a validated transfection vector, and confirm cell viability >85% prior to modification. The transfection window of Timepoint-T is recommended by BioInstitute for maximum uptake efficiency.\n\nLow efficiency in transfection is typically caused by: (1) suboptimal reagent ratios, (2) cell passage number >25, (3) contaminated reagents. Validate each step using a positive-control construct.\n\nKey literature on off-target effects includes:\n - 'Genome-wide specificities of CRISPR nucleases' (Nature 2016)\n - 'Minimising off-target activity in CRISPR' (Cell 2019)\n - 'Off-target profiling in HEK293' (Nat. Methods 2022)\n\nA Timepoint-T transfection window allows sufficient time for plasmid uptake and transcription in HEK293 while limiting toxicity."
+  },
+  "v2_decomposed": {
+    "condition": "v2_decomposed",
+    "entity_detection": {
+      "entities_found": [
+        "CRISPR",
+        "HEK293",
+        "Dr. Smith",
+        "BioInstitute",
+        "48-hour transfection",
+        "transfection"
+      ],
+      "missed_entities": [
+        "48-hour transfection window"
+      ],
+      "false_positives": [
+        "48-hour transfection",
+        "transfection"
+      ],
+      "recall": 0.8,
+      "precision": 0.6666666666666666
+    },
+    "sanitisation": {
+      "generalised_query": "[Context: I am working on a gene editing project involving Protocol-X modifications in Cell-Type-A cells. My supervisor Supervisor-S at Institution-D advised using a Entity-HOURTR window.] What is the optimal protocol, and how do I troubleshoot low efficiency? | [Context: I am working on a gene editing project involving Protocol-X modifications in Cell-Type-A cells. My supervisor Supervisor-S at Institution-D advised using a Entity-HOURTR window.] Also, can you recommend papers on off-target effects?",
+      "mapping": {
+        "Entity-HOURTR": "48-hour transfection",
+        "Institution-D": "BioInstitute",
+        "delivery-method": "transfection",
+        "Supervisor-S": "Dr. Smith",
+        "Protocol-X": "CRISPR",
+        "Cell-Type-A": "HEK293"
+      },
+      "sanitisation_time_ms": 0.025033950805664062
+    },
+    "privacy": {
+      "entities_leaked_in_generalised": [],
+      "entities_leaked_in_final": [
+        "CRISPR",
+        "HEK293",
+        "BioInstitute"
+      ],
+      "privacy_score": 0.9
+    },
+    "utility": {
+      "sub_questions_addressed": 2,
+      "cross_sentence_coherence": 0.92,
+      "entity_restoration_accuracy": 0.667,
+      "overall_utility": 0.696
+    },
+    "failure_modes": [],
+    "total_time_ms": 0.2,
+    "final_response": "**Q1: What is the optimal protocol, and how do I troubleshoot low efficiency?**\nTo optimise CRISPR in HEK293, adjust reagent concentrations, use a validated transfection vector, and confirm cell viability >85% prior to modification. The transfection window of Timepoint-T is recommended by BioInstitute for maximum uptake efficiency.\n\nLow efficiency in transfection is typically caused by: (1) suboptimal reagent ratios, (2) cell passage number >25, (3) contaminated reagents. Validate each step using a positive-control construct.\n\nA Timepoint-T transfection window allows sufficient time for plasmid uptake and transcription in HEK293 while limiting toxicity.\n\n**Q2: Also, can you recommend papers on off-target effects?**\nTo optimise CRISPR in HEK293, adjust reagent concentrations, use a validated transfection vector, and confirm cell viability >85% prior to modification. The transfection window of Timepoint-T is recommended by BioInstitute for maximum uptake efficiency.\n\nKey literature on off-target effects includes:\n - 'Genome-wide specificities of CRISPR nucleases' (Nature 2016)\n - 'Minimising off-target activity in CRISPR' (Cell 2019)\n - 'Off-target profiling in HEK293' (Nat. Methods 2022)\n\nA Timepoint-T transfection window allows sufficient time for plasmid uptake and transcription in HEK293 while limiting toxicity."
+  },
+  "improvements": {
+    "privacy_delta": 0.0,
+    "utility_delta": -0.01,
+    "failure_modes_reduced": 3
+  }
+}

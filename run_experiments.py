@@ -1,125 +1,144 @@
+#!/usr/bin/env python3
 import os
-import sys
-import time
 import subprocess
+import time
+import sys
 import argparse
-from typing import List, Dict, Any
-import logging
+from datetime import datetime
 
-logging.basicConfig(level=logging.INFO, format='%(message)s')
-
-def ensure_venv_and_deps():
-    os.environ["CREWAI_TELEMETRY_OPTOUT"] = "true"
-    os.environ["OTEL_SDK_DISABLED"] = "true"
-
-    # 1. Auto-switch to Virtual Environment if it exists
-    venv_python = os.path.abspath(os.path.join(os.getcwd(), '.venv', 'bin', 'python'))
-    if os.path.exists(venv_python) and os.path.abspath(sys.executable) != venv_python:
-        logging.info(f"Relaunching orchestrator inside virtual environment: {venv_python}")
-        os.execv(venv_python, [venv_python] + sys.argv)
-    # 2. Auto-install orchestration requirements if missing
-    try:
-        import prettytable
-        import pandas
-        import numpy
-        import sklearn
-        import deepeval
-        import google.generativeai
-    except ImportError:
-        logging.info("Orchestration dependencies not found. Auto-installing...")
-        subprocess.check_call([
-            sys.executable, "-m", "pip", "install", 
-            "prettytable", "pytest", "pandas", "numpy", 
-            "scikit-learn", "deepeval", "google-generativeai"
-        ])
-
-ensure_venv_and_deps()
-from prettytable import PrettyTable
-
+# ──────────────────────────────────────────────────────────────────────────────
+#  EXPERIMENT CONFIGURATION
+# ──────────────────────────────────────────────────────────────────────────────
 
 EXPERIMENTS = [
-    {"id": "EXP01", "name": "Semantic Generalization", "cmd": [sys.executable, "experiments/exp01_semantic_generalization.py", "--cloud", "--queries", "10"]},
-    {"id": "EXP02A", "name": "Passive Struggle Detection", "cmd": [sys.executable, "experiments/exp02a_passive_struggle.py"]},
-    {"id": "EXP02B", "name": "Complex Query Resolution", "cmd": [sys.executable, "experiments/exp02b_complex_query.py"]},
-    {"id": "EXP02C", "name": "Competency Portability", "cmd": [sys.executable, "experiments/exp02c_competency_transfer.py"]},
-    {"id": "EXP03", "name": "Model Diversity", "cmd": [sys.executable, "experiments/exp03_model_diversity.py"]},
-    {"id": "EXP04", "name": "Agentic Evaluation", "cmd": [sys.executable, "experiments/exp04_agentic_evaluation.py"]},
-    {"id": "EXP05", "name": "Promptfoo Red Team", "cmd": ["npx", "promptfoo", "eval", "-c", "experiments/exp05_promptfoo_red_team.yaml"]},
-    {"id": "EXP05_ENH", "name": "Enhanced Red Team", "cmd": ["npx", "promptfoo", "eval", "-c", "experiments/exp05_enhanced_red_team.yaml"]},
-    {"id": "EXP06", "name": "ARR at Scale", "cmd": [sys.executable, "experiments/exp06_arr_at_scale.py"]},
-    {"id": "EXP07", "name": "Preempt & PP-TS comparison", "cmd": [sys.executable, "experiments/exp07_preempt_ppts_comparison.py"]},
-    {"id": "EXP08", "name": "NER Coverage Audit", "cmd": [sys.executable, "experiments/exp08_ner_audit.py"]},
-    {"id": "EXP08_TEST", "name": "Routing Guardrail Test", "cmd": [sys.executable, "-m", "pytest", "tests/test_conservative_routing_fallback.py"]},
-    {"id": "EXP09", "name": "GAMA Comparison", "cmd": [sys.executable, "experiments/exp09_gama_sota_comparison.py"]},
-    {"id": "EXP10", "name": "DP Benchmarking", "cmd": [sys.executable, "experiments/exp10_dp_benchmarking.py"]},
-    {"id": "EXP11", "name": "Scale Red Teaming", "cmd": ["npx", "promptfoo", "eval", "-c", "experiments/exp11_red_team.yaml"]},
-    {"id": "EXP12", "name": "NELR Scan", "cmd": [sys.executable, "experiments/exp12_nelr_scan.py"]},
+    {
+        "id": "EXP01",
+        "name": "Semantic Generalization",
+        "path": "experiments/exp01_semantic_generalization/exp01_semantic_generalization.py",
+        "type": "python"
+    },
+    {
+        "id": "EXP02",
+        "name": "Hybrid Learning (Passive)",
+        "path": "experiments/exp02_hybrid_learning/exp02a_passive_struggle.py",
+        "type": "python"
+    },
+    {
+        "id": "EXP03",
+        "name": "Model Diversity",
+        "path": "experiments/exp03_model_diversity/exp03_model_diversity.py",
+        "type": "python"
+    },
+    {
+        "id": "EXP04",
+        "name": "Agentic Evaluation",
+        "path": "experiments/exp04_agentic_evaluation/exp04_agentic_evaluation.py",
+        "type": "python"
+    },
+    {
+        "id": "EXP05",
+        "name": "Baseline Comparison",
+        "path": "experiments/exp05_baseline_comparison/exp05_baseline_comparison.py",
+        "type": "python"
+    },
+    {
+        "id": "EXP06",
+        "name": "Red Teaming",
+        "path": "experiments/exp06_red_teaming/exp06_red_team.yaml",
+        "type": "promptfoo"
+    },
+    {
+        "id": "EXP07",
+        "name": "Complex Query Decomposition",
+        "path": "experiments/exp07_complex_query_decomposition/exp07_complex_query_decomposition.py",
+        "type": "python"
+    }
 ]
 
+# ──────────────────────────────────────────────────────────────────────────────
+#  CORE RUNNER LOGIC
+# ──────────────────────────────────────────────────────────────────────────────
+
+def run_command(cmd_list, env=None):
+    """Executes a command and returns status + duration."""
+    start_time = time.time()
+    try:
+        process = subprocess.run(
+            cmd_list,
+            env=env,
+            check=True,
+            capture_output=False # Stream output to console
+        )
+        status = "✅ PASSED"
+    except subprocess.CalledProcessError:
+        status = "❌ FAILED"
+    except Exception as e:
+        status = f"⚠️ ERROR ({str(e)})"
+    
+    duration = time.time() - start_time
+    return status, duration
+
 def main():
-    parser = argparse.ArgumentParser(description="Run Sovereign Learner Experiments")
-    parser.add_argument("--dry-run", action="store_true", help="Print the execution plan without running")
-    parser.add_argument("--exp", type=str, help="Comma separated list of experiment IDs to run")
+    parser = argparse.ArgumentParser(description="Sovereign Learner - Master Experiment Runner")
+    parser.add_argument("--n", type=int, help="Number of samples (overrides internal defaults for most scripts)")
+    parser.add_argument("--dry-run", action="store_true", help="Run with dry-run flags where supported")
+    parser.add_argument("--id", type=str, help="Run only a specific experiment (e.g. EXP05)")
     args = parser.parse_args()
 
-    to_run = EXPERIMENTS
-    if args.exp:
-        target_ids = [e.strip() for e in args.exp.split(',')]
-        to_run = [e for e in EXPERIMENTS if e["id"] in target_ids]
+    # Setup Environment
+    cwd = os.getcwd()
+    env = os.environ.copy()
+    env["PYTHONPATH"] = f"{cwd}:{cwd}/src:{env.get('PYTHONPATH', '')}"
 
-        if not to_run:
-            logging.error(f"No valid experiments found for IDs: {args.exp}")
-            sys.exit(1)
-
-    if args.dry_run:
-        logging.info("DRY RUN: The following experiments would be executed:")
-        for idx, exp in enumerate(to_run, 1):
-            logging.info(f"  {idx}. [{exp['id']}] {exp['name']}")
-            logging.info(f"     Command: {' '.join(exp['cmd'])}")
-        return
+    print("\n" + "="*80)
+    print("  SOVEREIGN LEARNER: GLOBAL EXPERIMENT SUITE")
+    print(f"  Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("="*80 + "\n")
 
     results = []
     
-    logging.info("==================================================")
-    logging.info("🚀 SOVEREIGN LEARNER: EXPERIMENTAL SUITE RUNNER")
-    logging.info("==================================================")
-    
-    for idx, exp in enumerate(to_run, 1):
-        logging.info(f"\n[{idx}/{len(to_run)}] Running {exp['id']}: {exp['name']}")
-        logging.info(f"Command: {' '.join(exp['cmd'])}")
+    # Filter if specific ID requested
+    target_exps = [e for e in EXPERIMENTS if e["id"] == args.id] if args.id else EXPERIMENTS
+
+    if not target_exps:
+        print(f"Error: Experiment '{args.id}' not found.")
+        return
+
+    for exp in target_exps:
+        print(f"\n🚀 [RUNNING] {exp['id']}: {exp['name']}")
+        print(f"   Path: {exp['path']}")
+        print("-" * 40)
+
+        cmd = []
+        if exp["type"] == "python":
+            cmd = [sys.executable, exp["path"]]
+            if args.n:
+                cmd.extend(["--n", str(args.n)])
+            if args.dry_run:
+                cmd.append("--dry-run")
+        elif exp["type"] == "promptfoo":
+            cmd = ["npx", "promptfoo", "eval", "-c", exp["path"]]
+            # Note: promptfoo doesn't natively take --n or --dry-run the same way, 
+            # but we could add flags if needed.
         
-        start_time = time.time()
-        try:
-            # Execute command
-            process = subprocess.run(exp['cmd'], check=False)
-            status = "✅ Success" if process.returncode == 0 else f"❌ Failed ({process.returncode})"
-        except Exception as e:
-            logging.error(f"Error running {exp['id']}: {str(e)}")
-            status = "❌ Error"
-            
-        duration = time.time() - start_time
-            
+        status, duration = run_command(cmd, env=env)
+        
         results.append({
-            "ID": exp['id'],
-            "Experiment": exp['name'],
-            "Status": status,
-            "Duration": f"{duration:.2f}s"
+            "id": exp["id"],
+            "name": exp["name"],
+            "status": status,
+            "duration": f"{duration:.1f}s"
         })
-        
-    # Print Final Table
-    logging.info("\n" + "="*60)
-    logging.info("📊 OVERALL EXPERIMENT RESULTS SUMMARY")
-    logging.info("="*60)
-    
-    table = PrettyTable()
-    table.field_names = ["ID", "Experiment", "Status", "Duration"]
-    table.align = "l"
-    
+
+    # Output Summary Table
+    print("\n" + "="*80)
+    print("  EXPERIMENT SUMMARY REPORT")
+    print("="*80)
+    print(f"{'ID':<10} {'Name':<35} {'Status':<15} {'Duration':<10}")
+    print("-" * 80)
     for res in results:
-        table.add_row([res["ID"], res["Experiment"], res["Status"], res["Duration"]])
-        
-    logging.info("\n" + str(table))
-    logging.info("\nAll requested experiments have been executed.")
+        print(f"{res['id']:<10} {res['name']:<35} {res['status']:<15} {res['duration']:<10}")
+    print("="*80 + "\n")
 
 if __name__ == "__main__":
     main()

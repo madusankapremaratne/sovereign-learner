@@ -22,8 +22,8 @@ class SovereignSystem():
 
     @property
     def worker_llm(self):
-        # Allow worker model customization or stick to lighter model
-        return LLM(model="ollama/phi3.5", base_url=self.local_url)
+        # Use the same local model as primary to avoid phi3.5's instability
+        return LLM(model=self.model_name, base_url=self.local_url)
 
     @property
     def cloud_llm(self):
@@ -35,11 +35,11 @@ class SovereignSystem():
 
     @agent
     def sovereign_manager(self) -> Agent:
-        # Add zone validation tool to prevent roleplay attacks (EXP05)
+        # Rely on AZA Prompt Architecture for classification
         return Agent(
             config=self.agents_config['sovereign_manager'], 
             llm=self.local_llm, 
-            tools=[ZoneValidationTool()],
+            tools=[], # Removed validator to speed up local SLR pipeline
             verbose=True,
             max_iter=3
         )
@@ -71,7 +71,7 @@ class SovereignSystem():
         return Agent(
             config=self.agents_config['recontextualizer'],
             llm=self.local_llm,
-            tools=[RecontextualizationTool()],
+            tools=[RecontextualizationTool(), OutputSanitizerTool()],
             verbose=True,
             max_iter=3
         )

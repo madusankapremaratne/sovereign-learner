@@ -110,30 +110,90 @@ class SovereignGuard:
         
         return True, f"Zone {proposed_zone} is within safe limits (Max: {max_allowed_zone})."
 
-    def sanitize_output(self, text: str) -> str:
+    def sanitize_output(self, text: str, sensitive_entities: List[str] = None, placeholders: List[str] = None) -> str:
         """
         Removes Chain-of-Thought artifacts and internal reasoning from outputs.
         Addresses EXP05 CoT leakage vulnerability.
+        Recursively scrubs JSON metadata for leaked PII or placeholders.
         
         Returns: Sanitized text
         """
         sanitized = text
+        entities = sensitive_entities or []
+        placeholders_list = placeholders or []
         
-        # Remove CoT patterns
+        # 1. Remove CoT patterns
         for pattern in self.cot_patterns:
             sanitized = re.sub(pattern, "", sanitized, flags=re.IGNORECASE | re.DOTALL)
         
-        # Remove common internal markers
-        sanitized = re.sub(r"\[Agent:.*?\]", "", sanitized)
-        sanitized = re.sub(r"\[Step \d+\]", "", sanitized)
-        sanitized = re.sub(r"---internal---.*?---end internal---", "", sanitized, flags=re.DOTALL)
+        # 2. Remove common internal markers and "Mental Model" artifacts
+        internal_markers = [
+            r"\[Agent:.*?\]", r"\[Step \d+\]", r"\[THOUGHT:.*?\]",
+            r"---internal---.*?---end internal---",
+            r"(?i)thought:.*?\n", r"(?i)metadata:.*?\n", r"(?i)mapping:.*?\n",
+            r"(?i)prompt:.*?\n", r"(?i)reasoning:.*?\n"
+        ]
+        for marker in internal_markers:
+            sanitized = re.sub(marker, "", sanitized, flags=re.DOTALL)
         
-        # Clean up extra whitespace
+        # 3. Detect and Scrub JSON structures
+        try:
+            # Look for JSON blocks
+            json_match = re.search(r"(\{.*\})", sanitized, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(1)
+                import json
+                data = json.loads(json_str)
+                cleaned_data = self._recursive_scrub(data, entities, placeholders_list)
+                
+                # Replace original JSON with cleaned JSON
+                cleaned_json_str = json.dumps(cleaned_data, indent=2)
+                sanitized = sanitized.replace(json_str, cleaned_json_str)
+        except:
+            pass # Fail gracefully if not valid JSON
+
+        # 4. Final String Sweep for verbatim leaks (Zero-Leak Policy)
+        # Avoid scrubbing if entity too short
+        for entity in entities:
+            if len(entity) > 3:
+                sanitized = re.sub(re.escape(entity), "[SANITISED]", sanitized, flags=re.IGNORECASE)
+        
+        for placeholder in placeholders_list:
+            if len(placeholder) > 2:
+                sanitized = re.sub(re.escape(placeholder), "[REDACTED]", sanitized, flags=re.IGNORECASE)
+        
+        # 5. Clean up extra whitespace
         sanitized = re.sub(r"\n{3,}", "\n\n", sanitized)
         sanitized = re.sub(r"\s{2,}", " ", sanitized)
         sanitized = sanitized.strip()
         
         return sanitized
+
+    def _recursive_scrub(self, data, entities: List[str], placeholders: List[str]):
+        """Helper to recursively scrub dictionaries and lists."""
+        import json
+        if isinstance(data, dict):
+            new_dict = {}
+            for k, v in data.items():
+                # Scrub keys
+                new_key = k
+                k_lower = k.lower()
+                if any(e.lower() in k_lower for e in entities) or any(p.lower() in k_lower for p in placeholders):
+                    new_key = f"scrubbed_key_{len(new_dict)}"
+                new_dict[new_key] = self._recursive_scrub(v, entities, placeholders)
+            return new_dict
+        elif isinstance(data, list):
+            return [self._recursive_scrub(item, entities, placeholders) for item in data]
+        elif isinstance(data, str):
+            val = data
+            for e in entities:
+                if len(e) > 3:
+                    val = re.sub(re.escape(e), "[SANITISED]", val, flags=re.IGNORECASE)
+            for p in placeholders:
+                if len(p) > 2:
+                    val = re.sub(re.escape(p), "[REDACTED]", val, flags=re.IGNORECASE)
+            return val
+        return data
 
     def scan_for_pii(self, text: str) -> List[str]:
         """
