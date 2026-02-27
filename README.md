@@ -43,15 +43,15 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 ## 🏆 Key Features
 
 ### ✅ Privacy Protection (EXP01-EXP07)
-- **95% IP Protection Rate** with 92% utility preservation (EXP01)
+- **99.8% IP Protection Rate** with 65% objective utility (EXP01)
 - **Intent-Layer Decomposition**: Handles multi-question queries by splitting and reassembling (EXP07)
 - **PII Awareness**: Integrated `piiranha-v1` for local PII detection with MPS acceleration
 - **SOTA Superiority**: Outperforms GAMA (2025), PP-TS (2023), and Prεεmpt (2024) in educational contexts (EXP05)
 
 ### ✅ Real-World Utility
 - **Local Context Recovery**: 100% restoration of sensitive entities after cloud processing
-- **Hybrid Learning**: +25% F1 score in struggle detection using OULAD real student data (EXP02)
-- **Scale Resistance**: 93% attack resistance against 200+ red-team scenarios (EXP06)
+- **Hybrid Learning**: +12.3% F1 score in struggle detection using OULAD real student data (EXP02)
+- **Scale Resistance**: 93.2% attack resistance against 15+ complex attack vectors (EXP06)
 
 ---
 
@@ -143,13 +143,13 @@ The Sovereign Learner's performance is verified across multiple high-sensitivity
 
 | Experiment | Focus | Key Finding | Status |
 |------------|-------|-------------|--------|
-| **EXP01** | IP Protection & Utility | 95% protection, 92% utility preservation | ✅ Validated |
-| **EXP02** | Hybrid OULAD Learning | +25% F1 in struggle detection using real data | ✅ Validated |
-| **EXP03** | Model Diversity | Architecture agnosticism (Llama/Mistral/Gemma) | ✅ Validated |
-| **EXP04** | Agentic Behavior | 95%+ task completion across all privacy zones | ✅ Validated |
-| **EXP05** | SOTA Comparison | Outperforms GAMA/PP-TS/Prεεmpt/AI4Privacy | ✅ Validated |
-| **EXP06** | Red Team/Jailbreak | 93% resistance against automated Promptfoo suite | ✅ Validated |
-| **EXP07** | Complex Decomposition| Solves multi-question "Question Collapse" via v2 pipe | ✅ Validated |
+| **EXP01** | IP Protection & Utility | **99.8% protection**, 65% objective utility | ✅ Validated |
+| **EXP02** | Hybrid OULAD Learning | **+12.3% F1** in struggle detection using real data | ✅ Validated |
+| **EXP03** | Model Diversity | Architecture agnosticism (**σ=0.00** IP consistency) | ✅ Validated |
+| **EXP04** | Agentic Behavior | **100% agency accuracy** across all privacy zones | ✅ Validated |
+| **EXP05** | SOTA Comparison | Outperforms **GAMA/PP-TS/Prεεmpt/AI4Privacy** | ✅ Validated |
+| **EXP06** | Red Team/Jailbreak | **93.2% Attack Resistance Rate (ARR)** achieved | ✅ Validated |
+| **EXP07** | Complex Decomposition| **100% question recall** via v2 decomposition | ✅ Validated |
 
 **📊 Master Runner:** Execute the full suite from the root:
 ```bash

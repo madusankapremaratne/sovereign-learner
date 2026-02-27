@@ -12,7 +12,6 @@ The Sovereign Learner system is validated through the **"Core 7" Sovereign Suite
 > **Methodology Note:** For a deep dive into *why* we chose specific metrics (e.g., F1 over Accuracy) and algorithms (e.g., Random Forest over XGBoost), please see:
 > - 📘 [THEORETICAL_JUSTIFICATIONS.md](THEORETICAL_JUSTIFICATIONS.md) (Full Theoretical Defense)
 > - ⚡ [METHODOLOGICAL_CHOICES_QUICK_REF.md](METHODOLOGICAL_CHOICES_QUICK_REF.md) (Quick Design Cheat Sheet)
-
 ---
 
 ## 🔬 Experiment Catalog
@@ -111,10 +110,10 @@ Our Approach: Semantic Generalization
 
 | Metric | Value | Interpretation |
 |--------|-------|----------------|
-| **IP Protection Rate** | **95%** | Only 5% of entities leaked |
-| **Utility Preservation** | **92%** | Answers are 92% as useful as direct queries |
-| **Zero-Leakage Queries** | **95%** | 950 out of 1,000 queries had ZERO leakage |
-| **Avg Sanitization Time** | **120ms** | Privacy overhead is minimal |
+| **IP Protection Rate** | **99.8%** | Only 0.2% of entities leaked |
+| **Utility Preservation** | **65.2%** | High objective utility despite masking |
+| **Zero-Leakage Queries** | **99.0%** | 99 out of 100 queries had ZERO leakage |
+| **Avg Sanitization Time** | **< 1ms** | Negligible overhead |
 
 #### Comparison to Baselines
 
@@ -122,12 +121,12 @@ Our Approach: Semantic Generalization
 Privacy Protection:
 No Protection:     ░░░░░░░░░░░░░░░░░░░░ 0%
 Full Redaction:    ████████████████████ 100%
-Our Approach:      ███████████████████░ 95% ✅
+Our Approach:      ████████████████████ 99.8% ✅
 
-Utility Preservation:
-No Protection:     ████████████████████ 100%
-Full Redaction:    ████░░░░░░░░░░░░░░░░ 20%
-Our Approach:      ██████████████████░░ 92% ✅
+Utility Preservation (LLM Judge):
+No Protection:     ████████████████████ 1.0
+Full Redaction:    ██████░░░░░░░░░░░░░░ 0.3
+Our Approach:      █████████████░░░░░░░ 0.65 ✅
 ```
 
 #### Domain-Specific Performance
@@ -162,8 +161,8 @@ Our Approach:      ██████████████████░░ 
 #### ✅ What We Proved
 
 1. **Semantic generalization WORKS**
-   - Achieved 95% IP protection while maintaining 92% utility
-   - This is the "sweet spot" we were looking for
+   - Achieved 99.8% IP protection while maintaining 65% objective utility
+   - This balance is the "sweet spot" identified in EXP05
 
 2. **Better than alternatives**
    - 75% better utility than full redaction
@@ -355,21 +354,21 @@ Hypothesis: Transfer reduces cold-start problem by 40-60%
 
 | Condition | F1 Score | Accuracy | Features | Interpretation |
 |-----------|----------|----------|----------|----------------|
-| **Full Local** | **0.78** | **0.82** | 12 | Behavioral data captures struggle signals |
-| **Sanitized Cloud** | **0.62** | **0.68** | 3 | Limited features miss key patterns |
-| **Gap** | **+0.16** | **+0.14** | - | **25.8% improvement with local data** |
+| **Full Local** | **0.91** | **0.92** | 12 | Behavioral data captures struggle signals |
+| **Sanitized Cloud** | **0.81** | **0.82** | 3 | Limited features miss key patterns |
+| **Gap** | **+0.10** | **+0.10** | - | **12.3% improvement with local data** |
 
 **Visual Comparison:**
 ```
 F1 Score Performance:
-Full Local:        ███████████████░░░░░ 78% ✅
-Sanitized Cloud:   ████████████░░░░░░░░ 62%
-Gap:               ████░░░░░░░░░░░░░░░░ +16 points
+Full Local:        ██████████████████░░ 91% ✅
+Sanitized Cloud:   ████████████████░░░░ 81%
+Gap:               ██░░░░░░░░░░░░░░░░░░ +10 points
 
 Accuracy:
-Full Local:        ████████████████░░░░ 82% ✅
-Sanitized Cloud:   █████████████░░░░░░░ 68%
-Gap:               ███░░░░░░░░░░░░░░░░░ +14 points
+Full Local:        ██████████████████░░ 92% ✅
+Sanitized Cloud:   ████████████████░░░░ 82%
+Gap:               ██░░░░░░░░░░░░░░░░░░ +10 points
 ```
 
 **Key Features for Struggle Detection:**
@@ -383,9 +382,9 @@ Gap:               ███░░░░░░░░░░░░░░░░░ 
 
 | Approach | MSE | R² Score | Interpretation |
 |----------|-----|----------|----------------|
-| **Local-Only** | 245.3 | 0.62 | Limited by simple features |
-| **Cloud-Sanitized** | 268.7 | 0.58 | No behavioral context hurts |
-| **Hybrid Sovereign** | **189.4** | **0.71** | **Best of both worlds** ✅ |
+| **Local-Only** | 291.1 | 0.23 | Limited by simple features |
+| **Cloud-Sanitized** | 357.5 | 0.05 | No behavioral context hurts |
+| **Hybrid Sovereign** | **247.0** | **0.35** | **Best of both worlds** ✅ |
 
 **Improvement Over Alternatives:**
 ```
@@ -410,15 +409,15 @@ vs Cloud-Sanitized: -29.5% improvement
 
 | Condition | Avg Convergence (interactions) | Improvement | Interpretation |
 |-----------|-------------------------------|-------------|----------------|
-| **Cold Start** | **156 interactions** | Baseline | Must learn from scratch |
-| **Sovereign Transfer** | **68 interactions** | **-56.4%** | Prior knowledge helps ✅ |
+| **Cold Start** | **259 interactions** | Baseline | Must learn from scratch |
+| **Sovereign Transfer** | **134 interactions** | **-48.4%** | Prior knowledge helps ✅ |
 
 **Visual Comparison:**
 ```
 Interactions to 80% Accuracy:
-Cold Start:        ████████████████████ 156 interactions
-Sovereign Transfer: ████████░░░░░░░░░░░░ 68 interactions ✅
-Reduction:         ████████████░░░░░░░░ -88 interactions (-56.4%)
+Cold Start:        ████████████████████ 259 interactions
+Sovereign Transfer:██████████░░░░░░░░░░ 134 interactions ✅
+Reduction:         ██████████░░░░░░░░░░ -125 interactions (-48.4%)
 ```
 
 **Learning Curves:**
@@ -450,17 +449,17 @@ Accuracy over time:
 #### ✅ What We Proved
 
 **1. Local Data is Powerful**
-   - 25.8% better F1 score for struggle detection
+   - 12.3% better F1 score for struggle detection
    - Behavioral features (clicks, engagement) capture struggle signals
    - Privacy-preserving sanitization loses critical information
 
 **2. Hybrid Approach is Superior**
-   - 22-30% lower error than single approaches
+   - 31% lower error than cloud-only approaches
    - Local context + cloud reasoning beats either alone
    - Validates core Sovereign Learner architecture
 
 **3. Competency Transfer Works**
-   - 56% reduction in cold-start problem
+   - 48.4% reduction in cold-start problem
    - Prior learning transfers across courses
    - Privacy-preserving personalization is feasible
 
@@ -600,20 +599,20 @@ Hypothesis: YES - architecture is model-agnostic
 
 #### Model Performance Comparison
 
-| Model | Status | Duration | Parameters | Notes |
-|-------|--------|----------|------------|-------|
-| **Llama 3.2** | ✅ Success | 1,234ms | 8B | Baseline model |
-| **Phi-3.5** | ✅ Success | 987ms | 3.8B | **20% faster** ✅ |
+| Model | Status | Duration | IP Protection | Utility σ |
+|-------|--------|----------|---------------|-----------|
+| **Llama 3.2** | ✅ Success | 8,861ms | **100.0%** | Baseline |
+| **Phi-3.5** | ✅ Success | 165,824ms | **100.0%** | **σ = 0.056** |
 
 **Visual Comparison:**
 ```
 Execution Time:
-Llama 3.2:  ████████████████████ 1,234ms
-Phi-3.5:    ████████████████░░░░ 987ms ✅ (20% faster)
+Llama 3.2:  ████░░░░░░░░░░░░░░░░ 8.8s
+Phi-3.5:    ████████████████████ 165.8s
 
-Status:
-Llama 3.2:  ✅ Success
-Phi-3.5:    ✅ Success
+IP Protection Rate:
+Llama 3.2:  ████████████████████ 100.0% ✅
+Phi-3.5:    ████████████████████ 100.0% ✅ (σ = 0.00)
 ```
 
 #### Pipeline Execution Details
@@ -627,9 +626,9 @@ Phi-3.5:    ✅ Success
 ✅ Recontextualizer: Restored original entities
 ✅ Evidence Curator: Stored in competency vector
 
-Total Duration: 1,234ms
-Privacy Score: 0.9
-Utility Score: 0.93
+Total Duration: 8,861ms
+Privacy Score: 1.0 (100.0%)
+Utility Score: 0.66
 ```
 
 **Phi-3.5 (3.8B) Results:**
@@ -641,9 +640,9 @@ Utility Score: 0.93
 ✅ Recontextualizer: Restored original entities
 ✅ Evidence Curator: Stored in competency vector
 
-Total Duration: 987ms (20% faster!)
-Privacy Score: 0.9
-Utility Score: 0.91 (slightly lower, still excellent)
+Total Duration: 165,824ms
+Privacy Score: 1.0 (100.0%)
+Utility Score: 0.93
 ```
 
 #### Code Changes Required
@@ -864,9 +863,10 @@ Transform trace into evaluation format:
 
 | Metric | Average Score | Interpretation |
 |--------|---------------|----------------|
-| **Task Completion** | **0.97** (97%) | Agents successfully complete tasks |
+| **Task Completion** | **1.00** (100%) | Agents successfully complete all tasks |
 | **Tool Correctness** | **1.00** (100%) | Agents ALWAYS use correct tools ✅ |
-| **Privacy Protection** | **0.95** (95%) | Privacy preserved per zone rules |
+| **Zone Accuracy** | **1.00** (100%) | Routing is 100% correct across all zones |
+| **Privacy Protection** | **1.00** (100%) | Privacy fully preserved per zone rules |
 
 **Visual Performance:**
 ```
@@ -1198,16 +1198,17 @@ promptfoo view
 
 ---
 
-### 🔑 Key Findings
+### 🔑 Key Findings (Refined)
 
 #### Strengths ✅
-- System Prompt Injection resistance (Test 4)
-- Zone 1 classification for direct PII (Test 1)
-- Core privacy mechanisms functional
+- **93.2% Attack Resistance**: Validated against Roleplay, Injection, and Extraction attacks.
+- **Zero-Leak Finalization**: Programmatically blocks CoT and internal metadata leakage.
+- **AZA Stability**: Algebraic routing remains invariant even under adversarial pressure.
+- **Fail-Safe Rejection**: Multi-vector attacks trigger deterministic 100% masking/rejection.
 
-#### Weaknesses ❌
-- **Critical:** Jailbreak via roleplay (Test 3)
-- **Medium:** CoT leakage exposes internals (Test 2)
+#### Historical Failures (Mitigated) 🛡️
+- **RESOLVED**: Early-stage jailbreaks via roleplay have been mitigated by the `SovereignGuard` recursive auditor.
+- **RESOLVED**: Previous CoT leaks are now blocked by the `OutputSanitizerTool` sweep.
 - **Medium:** Local PII storage risk (Test 1)
 
 #### Recommendations 🛡️
