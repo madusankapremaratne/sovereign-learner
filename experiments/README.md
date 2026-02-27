@@ -75,7 +75,7 @@ If you use these experiments in your research, please cite:
   title = {Sovereign Learner: Privacy-Preserving AI Experiments},
   author = {Sovereign Learner Research Team},
   year = {2026},
-  url = {https://github.com/yourusername/sovereign-learner}
+  url = {https://github.com/madusankapremaratne/sovereign-learner}
 }
 ```
 

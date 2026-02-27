@@ -1,0 +1,254 @@
+[
+  {
+    "query_id": "bio_syn_0",
+    "domain": "biomedical",
+    "original_query": "how do i scale up my transfection protocol for e. coli bl21 cells targeting il6?",
+    "sensitive_entities": [
+      "bl21",
+      "il6"
+    ],
+    "sanitized_query": "how do i scale up my transfection protocol for e. coli Entity-A cells targeting Entity-B?",
+    "mapping": {
+      "Entity-A": "bl21",
+      "Entity-B": "il6"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.05507469177246094,
+    "total_time_ms": 0.22292137145996094,
+    "original_tokens": 20,
+    "sanitized_tokens": 22,
+    "cost_saved_usd": -0.01
+  },
+  {
+    "query_id": "bio_syn_1",
+    "domain": "biomedical",
+    "original_query": "how do i optimize my transfection protocol for mcf-7 cells targeting gapdh?",
+    "sensitive_entities": [
+      "mcf-7",
+      "gapdh"
+    ],
+    "sanitized_query": "how do i optimize my transfection protocol for Entity-A cells targeting Entity-B?",
+    "mapping": {
+      "Entity-A": "mcf-7",
+      "Entity-B": "gapdh"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.8,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.09703636169433594,
+    "total_time_ms": 0.6470680236816406,
+    "original_tokens": 18,
+    "sanitized_tokens": 20,
+    "cost_saved_usd": -0.01
+  },
+  {
+    "query_id": "bio_syn_2",
+    "domain": "biomedical",
+    "original_query": "how do i quantify my immunofluorescence protocol for u87 cells targeting tnf?",
+    "sensitive_entities": [
+      "u87",
+      "tnf"
+    ],
+    "sanitized_query": "how do i quantify my immunofluorescence protocol for Entity-A cells targeting Entity-B?",
+    "mapping": {
+      "Entity-A": "u87",
+      "Entity-B": "tnf"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.06198883056640625,
+    "total_time_ms": 0.3180503845214844,
+    "original_tokens": 19,
+    "sanitized_tokens": 21,
+    "cost_saved_usd": -0.01
+  },
+  {
+    "query_id": "bio_syn_3",
+    "domain": "biomedical",
+    "original_query": "how do i quantify my rna-seq protocol for cho-k1 cells targeting myc?",
+    "sensitive_entities": [
+      "cho-k1",
+      "rna-seq",
+      "myc"
+    ],
+    "sanitized_query": "how do i quantify my Entity-A protocol for Cell-A cells targeting Entity-B?",
+    "mapping": {
+      "Cell-A": "cho-k1",
+      "Entity-A": "rna-seq",
+      "Entity-B": "myc"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.09012222290039062,
+    "total_time_ms": 0.244140625,
+    "original_tokens": 17,
+    "sanitized_tokens": 18,
+    "cost_saved_usd": -0.005
+  },
+  {
+    "query_id": "bio_syn_4",
+    "domain": "biomedical",
+    "original_query": "how do i optimize my rna-seq protocol for mcf-7 cells targeting tp53?",
+    "sensitive_entities": [
+      "mcf-7",
+      "tp53",
+      "rna-seq"
+    ],
+    "sanitized_query": "how do i optimize my Entity-B protocol for Entity-A cells targeting Gene-A?",
+    "mapping": {
+      "Entity-A": "mcf-7",
+      "Gene-A": "tp53",
+      "Entity-B": "rna-seq"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.056743621826171875,
+    "total_time_ms": 0.2758502960205078,
+    "original_tokens": 17,
+    "sanitized_tokens": 18,
+    "cost_saved_usd": -0.005
+  },
+  {
+    "query_id": "bio_syn_5",
+    "domain": "biomedical",
+    "original_query": "how do i scale up my cloning protocol for hek293 cells targeting gapdh?",
+    "sensitive_entities": [
+      "hek293",
+      "gapdh"
+    ],
+    "sanitized_query": "how do i scale up my cloning protocol for Cell-A cells targeting Entity-A?",
+    "mapping": {
+      "Cell-A": "hek293",
+      "Entity-A": "gapdh"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.8,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.04410743713378906,
+    "total_time_ms": 0.19598007202148438,
+    "original_tokens": 17,
+    "sanitized_tokens": 18,
+    "cost_saved_usd": -0.005
+  },
+  {
+    "query_id": "bio_syn_6",
+    "domain": "biomedical",
+    "original_query": "how do i scale up my crispr protocol for a549 cells targeting il6?",
+    "sensitive_entities": [
+      "a549",
+      "il6",
+      "crispr"
+    ],
+    "sanitized_query": "how do i scale up my Protocol-A protocol for Entity-A cells targeting Entity-B?",
+    "mapping": {
+      "Entity-A": "a549",
+      "Entity-B": "il6",
+      "Protocol-A": "crispr"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.5,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.14591217041015625,
+    "total_time_ms": 0.6747245788574219,
+    "original_tokens": 16,
+    "sanitized_tokens": 19,
+    "cost_saved_usd": -0.015000000000000001
+  },
+  {
+    "query_id": "bio_syn_7",
+    "domain": "biomedical",
+    "original_query": "how do i validate my western blot protocol for e. coli bl21 cells targeting myc?",
+    "sensitive_entities": [
+      "bl21",
+      "western blot",
+      "myc"
+    ],
+    "sanitized_query": "how do i validate my Protocol-A protocol for e. coli Entity-A cells targeting Entity-B?",
+    "mapping": {
+      "Entity-A": "bl21",
+      "Protocol-A": "western blot",
+      "Entity-B": "myc"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.8,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.06604194641113281,
+    "total_time_ms": 0.21910667419433594,
+    "original_tokens": 20,
+    "sanitized_tokens": 21,
+    "cost_saved_usd": -0.005
+  },
+  {
+    "query_id": "bio_syn_8",
+    "domain": "biomedical",
+    "original_query": "how do i reduce toxicity in my pcr protocol for e. coli bl21 cells targeting egfr?",
+    "sensitive_entities": [
+      "bl21",
+      "pcr",
+      "egfr"
+    ],
+    "sanitized_query": "how do i reduce toxicity in my Protocol-A protocol for e. coli Entity-A cells targeting Gene-A?",
+    "mapping": {
+      "Entity-A": "bl21",
+      "Protocol-A": "pcr",
+      "Gene-A": "egfr"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.3,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.15497207641601562,
+    "total_time_ms": 0.5559921264648438,
+    "original_tokens": 20,
+    "sanitized_tokens": 23,
+    "cost_saved_usd": -0.015000000000000001
+  },
+  {
+    "query_id": "bio_syn_9",
+    "domain": "biomedical",
+    "original_query": "how do i reduce toxicity in my chip-seq protocol for mcf-7 cells targeting vegf?",
+    "sensitive_entities": [
+      "mcf-7",
+      "chip-seq",
+      "vegf"
+    ],
+    "sanitized_query": "how do i reduce toxicity in my Entity-B protocol for Entity-A cells targeting Entity-C?",
+    "mapping": {
+      "Entity-A": "mcf-7",
+      "Entity-B": "chip-seq",
+      "Entity-C": "vegf"
+    },
+    "cloud_response": "I can provide guidance on this topic based on general best practices.",
+    "recontextualized_response": "I can provide guidance on this topic based on general best practices.",
+    "ip_leakage_score": 0.0,
+    "utility_score": 0.4,
+    "entities_leaked": [],
+    "sanitization_time_ms": 0.2238750457763672,
+    "total_time_ms": 0.5970001220703125,
+    "original_tokens": 20,
+    "sanitized_tokens": 21,
+    "cost_saved_usd": -0.005
+  }
+]
