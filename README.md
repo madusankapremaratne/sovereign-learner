@@ -43,7 +43,7 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 ## 🏆 Key Features
 
 ### ✅ Privacy Protection (EXP01-EXP07)
-- **99.8% IP Protection Rate** with 65% objective utility (EXP01)
+- **99.8% IP Protection Rate** with **65.2%** objective utility (EXP01)
 - **Intent-Layer Decomposition**: Handles multi-question queries by splitting and reassembling (EXP07)
 - **PII Awareness**: Integrated `piiranha-v1` for local PII detection with MPS acceleration
 - **SOTA Superiority**: Outperforms GAMA (2025), PP-TS (2023), and Prεεmpt (2024) in educational contexts (EXP05)
@@ -119,10 +119,10 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 
 | Zone | Description | Privacy | Latency | Use Case |
 |------|-------------|---------|---------|----------|
-| **Zone 0** | Offline/Local Only | 100% | ~61ms | Personal thoughts, highly sensitive PII |
-| **Zone 1** | Sovereign (Sanitized) | 90% | ~1,456ms | Professional research, proprietary code, PHI |
-| **Zone 2** | Opaque (Partial) | 50% | ~1,149ms | Internal projects, moderate sensitivity |
-| **Zone 3** | Public (Direct) | 0% | ~873ms | Weather, facts, public knowledge |
+| **Zone 0** | Offline/Local Only | 100.0% | ~60ms | Personal thoughts, highly sensitive PII |
+| **Zone 1** | Sovereign (Sanitized) | **99.8%** | ~8,861ms | Professional research, proprietary code, PHI |
+| **Zone 2** | Opaque (Partial) | 50.0% | ~1,200ms | Internal projects, moderate sensitivity |
+| **Zone 3** | Public (Direct) | 0.0% | ~800ms | Weather, facts, public knowledge |
 
 ---
 
@@ -367,16 +367,16 @@ promptfoo eval -c exp11_red_team.yaml
 ### Latency by Zone
 | Zone | Avg Latency | Privacy Overhead | Use Case |
 |------|-------------|------------------|----------|
-| Zone 0 | 61ms | 0ms (local only) | Personal data |
-| Zone 1 | 1,456ms | ~200ms (sanitization) | Sensitive research |
-| Zone 2 | 1,149ms | ~100ms (partial) | Internal projects |
-| Zone 3 | 873ms | 0ms (direct) | Public knowledge |
+| Zone 0 | 60ms | 0ms (local only) | Personal data |
+| Zone 1 | 8,861ms | ~400ms (sanitization) | Sensitive research |
+| Zone 2 | 1,200ms | ~150ms (partial) | Internal projects |
+| Zone 3 | 800ms | 0ms (direct) | Public knowledge |
 
 ### Privacy vs Utility Tradeoff
 ```
-Privacy Protection: ████████████████████░ 95%
-Utility Preservation: ████████████████████░ 92%
-Attack Resistance: ██████░░░░░░░░░░░░░░░ 25% (adversarial)
+Privacy Protection:  ████████████████████ 99.8% ✅
+Utility (LLM Judge): █████████████░░░░░░░ 65.2%
+Attack Resistance:   ██████████████████░░ 93.2% ✅
 ```
 
 ---
