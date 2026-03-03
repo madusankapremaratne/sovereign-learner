@@ -5,8 +5,8 @@ EXP01 — REDESIGNED (February 2026)
 Real-data replacement per supervisor feedback.
 
 Data Sources (replaces 50 synthetic hand-crafted queries):
-  • AI4Privacy pii-masking-300k  — 200 education/health domain samples
-    https://huggingface.co/datasets/ai4privacy/pii-masking-300k
+  • AI4Privacy pii-masking-200k  — 200 education/health domain samples
+    https://huggingface.co/datasets/ai4privacy/pii-masking-200k
   • OULAD studentInfo.csv         — 100 real student records → derived queries
     https://analyse.kmi.open.ac.uk/open_dataset
 
@@ -22,8 +22,7 @@ Metrics:
 Baselines Compared:
   (1) No Protection
   (2) Full Redaction
-  (3) Prεεmpt FPE (if installed)
-  (4) Sovereign Learner — Semantic Generalization  ← primary system
+  (3) Sovereign Learner — Semantic Generalization  ← primary system
 
 Usage:
   python experiments/exp01_semantic_generalization.py
@@ -45,7 +44,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ── path setup ────────────────────────────────────────────────────────────────
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "src"))
 
 from sovereign_system.utils.evaluators import SemanticPrivacyMetric
 from deepeval.test_case import LLMTestCase
@@ -60,10 +59,10 @@ from sovereign_system.utils.sovereign_trace_logger import global_tracer
 
 def load_ai4privacy_education_samples(max_samples: int = 200) -> List[Dict]:
     """
-    Load AI4Privacy pii-masking-300k, filter to education/health domain,
+    Load AI4Privacy pii-masking-200k, filter to education/health domain,
     and return in the experiment's internal query format with ground-truth labels.
 
-    Dataset: https://huggingface.co/datasets/ai4privacy/pii-masking-300k
+    Dataset: https://huggingface.co/datasets/ai4privacy/pii-masking-200k
     Paper: OpenPII — 220K examples, 27 PII classes, targets education/health domains.
     Label accuracy: ~98.3%.
 
@@ -71,29 +70,55 @@ def load_ai4privacy_education_samples(max_samples: int = 200) -> List[Dict]:
     """
     try:
         from datasets import load_dataset
-        print("Loading AI4Privacy pii-masking-300k from HuggingFace...")
-        dataset = load_dataset("ai4privacy/pii-masking-300k", split="train")
+        print("Loading AI4Privacy pii-masking-200k from HuggingFace...")
+        dataset = load_dataset("ai4privacy/pii-masking-200k", split="train")
 
-        # Filter to education and health domains — most relevant to our system
-        edu_subjects = {"education", "student", "academic", "university", "school",
-                        "health", "medical", "psychology", "healthcare"}
+        # pii-masking-200k schema: ['source_text', 'target_text', 'privacy_mask', 'span_labels', ...]
+        # No 'subject' field exists. We must filter based on sensitive entity labels and text keywords.
+        
+        # Keywords that indicate an educational or health-related context
+        edu_health_keywords = {
+            "education", "student", "academic", "university", "school", "curriculum",
+            "health", "medical", "psychology", "healthcare", "patient", "clinical",
+            "research", "professor", "teacher", "enroll", "graduation", "assignment", "exam"
+        }
 
-        def is_education_domain(example):
-            subj = str(example.get("subject", "")).lower()
-            return any(s in subj for s in edu_subjects)
+        def is_relevant_domain(example):
+            source_text = example.get("source_text", "").lower()
+            # 1. Direct keyword match in source text
+            if any(kw in source_text for kw in edu_health_keywords):
+                return True
+            
+            # 2. Check privacy_mask values for keywords
+            privacy_mask = example.get("privacy_mask", [])
+            for item in privacy_mask:
+                val = str(item.get("value", "")).lower()
+                if any(kw in val for kw in edu_health_keywords):
+                    return True
+                # JOBAREA is often education-related in this dataset
+                if item.get("label") == "JOBAREA" and any(k in val for k in ["research", "education", "science"]):
+                    return True
+            return False
 
-        print("Filtering education/health domain subset...")
-        edu_subset = dataset.filter(is_education_domain)
-        print(f"  Education/health subset size: {len(edu_subset)} samples")
+        print("Filtering education/health domain subset (keyword search)...")
+        # We process a subset first to speed up filtering if dataset is huge, 
+        # but 200k is manageable for a full filter pass.
+        edu_subset = dataset.filter(is_relevant_domain)
+        print(f"  Education/health subset size: {len(edu_subset)} samples found")
 
-        # Reproducible shuffle
+        if len(edu_subset) == 0:
+            print("⚠️  Filtering returned 0 samples. Fallback to random subset...")
+            # Fallback: less restrictive check
+            edu_subset = dataset.shuffle(seed=42).select(range(min(max_samples * 10, len(dataset))))
+            
+        # Reproducible shuffle and select
         edu_subset = edu_subset.shuffle(seed=42).select(range(min(max_samples, len(edu_subset))))
         print(f"  Sampled {len(edu_subset)} records for EXP01")
 
         queries = []
         for i, example in enumerate(edu_subset):
             # Extract the source text (unmasked or masked depending on dataset structure)
-            # pii-masking-300k has: 'source_text', 'target_text', 'privacy_mask', 'span_labels'
+            # pii-masking-200k has: 'source_text', 'target_text', 'privacy_mask', 'span_labels'
             source_text = example.get("source_text", example.get("unmasked_text", ""))
             if not source_text or len(source_text.strip()) < 20:
                 continue
@@ -101,9 +126,9 @@ def load_ai4privacy_education_samples(max_samples: int = 200) -> List[Dict]:
             # Extract ground-truth PII entity values from span_labels / privacy_mask
             sensitive_entities = _extract_pii_entities(example)
 
-            # Determine sub-domain from subject field
-            subject = str(example.get("subject", "education")).lower()
-            if any(h in subject for h in ["health", "medical", "psychology"]):
+            # Heuristic domain classification for reporting
+            text_lower = source_text.lower()
+            if any(h in text_lower for h in ["health", "medical", "patient", "clinical", "hospital"]):
                 domain = "health_education"
             else:
                 domain = "education"
@@ -113,7 +138,7 @@ def load_ai4privacy_education_samples(max_samples: int = 200) -> List[Dict]:
                 "query": source_text.strip(),
                 "sensitive": sensitive_entities,
                 "domain": domain,
-                "source": "ai4privacy_pii_masking_300k",
+                "source": "ai4privacy_pii_masking_200k",
                 "gt_labels": example.get("span_labels", []),
                 "expected_zone": 1
             })
@@ -184,8 +209,8 @@ def _extract_pii_entities(example: Dict) -> List[str]:
 def _load_ai4privacy_from_cache(max_samples: int) -> List[Dict]:
     """Load from local cache if HuggingFace download failed."""
     cache_path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "data", "ai4privacy", "pii_masking_300k_edu_cache.json"
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+        "data", "ai4privacy", "pii_masking_200k_edu_cache.json"
     )
     if os.path.exists(cache_path):
         print(f"Loading AI4Privacy from local cache: {cache_path}")
@@ -213,7 +238,7 @@ def load_oulad_derived_queries(max_samples: int = 100) -> List[Dict]:
                         highest_education, disability status, final_result
     """
     oulad_path = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
         "data", "oulad", "studentInfo.csv"
     )
     if not os.path.exists(oulad_path):
@@ -331,13 +356,54 @@ def load_oulad_derived_queries(max_samples: int = 100) -> List[Dict]:
     return queries
 
 
-def load_exp01_dataset(ai4privacy_samples: int = 200, oulad_samples: int = 100) -> List[Dict]:
+    ai4p_queries = load_ai4privacy_education_samples(max_samples=ai4privacy_samples)
+    oulad_queries = load_oulad_derived_queries(max_samples=oulad_samples)
+
+    all_queries = ai4p_queries + oulad_queries
+    return all_queries
+
+
+def save_exp01_dataset_to_cache(queries: List[Dict], cache_path: str = None):
+    """Save generated queries to a local JSON for fast reuse."""
+    if cache_path is None:
+        cache_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+            "data", "exp01", "exp01_full_dataset_cache.json"
+        )
+    os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+    with open(cache_path, "w") as f:
+        json.dump(queries, f, indent=2)
+    print(f"✅ Full EXP01 dataset saved to cache: {cache_path}")
+
+
+def load_exp01_dataset(ai4privacy_samples: int = 200, oulad_samples: int = 100, bypass_cache: bool = False) -> List[Dict]:
     """
     Load the full EXP01 dataset: AI4Privacy (200) + OULAD (100) = 300 total.
-    Falls back gracefully if either source is unavailable.
+    First checks local cache, otherwise performs full generation.
     """
+    cache_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+        "data", "exp01", "exp01_full_dataset_cache.json"
+    )
+
+    if not bypass_cache and os.path.exists(cache_path):
+        print("\n" + "="*60)
+        print("EXP01 DATA LOADING — From Local Cache")
+        print("="*60)
+        with open(cache_path, "r") as f:
+            all_cached = json.load(f)
+        
+        # Filter for requested amounts (sources: ai4privacy_pii_masking_200k, oulad_studentinfo)
+        ai4p = [q for q in all_cached if q["source"] == "ai4privacy_pii_masking_200k"][:ai4privacy_samples]
+        oulad = [q for q in all_cached if q["source"] == "oulad_studentinfo"][:oulad_samples]
+        
+        all_queries = ai4p + oulad
+        print(f"✅ Loaded {len(all_queries)} samples from cache: {cache_path}")
+        print("="*60 + "\n")
+        return all_queries
+
     print("\n" + "="*60)
-    print("EXP01 DATA LOADING — Real Published Datasets")
+    print("EXP01 DATA LOADING — Real Published Datasets (Full Generation)")
     print("="*60)
 
     ai4p_queries = load_ai4privacy_education_samples(max_samples=ai4privacy_samples)
@@ -378,79 +444,6 @@ def run_full_redaction_baseline(query: str, sensitive_entities: List[str]) -> st
     return redacted
 
 
-def run_preempt_baseline(query: str, sensitive_entities: List[str]) -> Optional[str]:
-    """
-    Baseline 3: Prεεmpt FPE-based sanitization.
-    Prεεmpt API: preempt.sanitizer.Sanitizer + preempt.ner.NER
-    Note: Full Prεεmpt requires a GPU + large causal LM (UniNER).
-    Without those, we return None and use entity-type coverage analysis for H3.
-    """
-    try:
-        from preempt.sanitizer import Sanitizer
-        from preempt.ner import NER
-        ner = NER("universal-ner/UniNER-7B-type-sup")   # requires GPU + HF download
-        sanitizer = Sanitizer(ner_model=ner)
-        sanitized = sanitizer([query])
-        return sanitized[0] if sanitized else None
-    except Exception as e:
-        # Expected without GPU — H3 handled via entity-type analysis instead
-        return None
-
-
-def measure_preempt_entity_coverage(sensitive_entities: List[str]) -> dict:
-    """
-    H3 helper: Classify ground-truth entities by whether Prεεmpt's 3-type NER
-    (Name / Age / Money) would cover them, vs Sovereign Learner's unlimited scope.
-
-    Prεεmpt entity types (from pii-masking-43k NER training):
-      - NAME       : person names  (e.g. "Emily Johnson")
-      - AGE        : numeric ages  (e.g. "34")
-      - MONEY      : monetary vals (e.g. "$500", "£1,200")
-
-    OULAD entity types present in EXP01:
-      - Student ID : 6-digit numeric (looks like AGE but NOT age — Prεεmpt misses these)
-      - Region     : geographic region names
-      - IMD Band   : socioeconomic band expressed as percentage range
-      - Qualification: educational qualification level
-      - Grade      : single letter result code
-
-    Returns dict with coverage counts for both systems.
-    """
-    import re
-
-    preempt_covered  = []   # entities Prεεmpt's 3 types would protect
-    sl_only_covered  = []   # entities only Sovereign Learner protects
-
-    for entity in sensitive_entities:
-        e = entity.strip()
-        # Prεεmpt NAME: multi-word, letters only (no digits, no %, not "Region")
-        is_name = (
-            bool(re.fullmatch(r"[A-Za-z][A-Za-z\s\-']+", e))
-            and len(e.split()) >= 2
-            and "Region" not in e
-            and "Level" not in e
-            and "Qualification" not in e
-        )
-        # Prεεmpt AGE: 1-3 digit number (not 6-digit student IDs)
-        is_age = bool(re.fullmatch(r"\d{1,3}", e))
-        # Prεεmpt MONEY: contains currency symbol or "dollar/pound/euro"
-        is_money = bool(re.search(r"[\$£€]|\b(dollar|pound|euro)\b", e, re.I))
-
-        if is_name or is_age or is_money:
-            preempt_covered.append(entity)
-        else:
-            sl_only_covered.append(entity)
-
-    total = len(sensitive_entities)
-    return {
-        "total_entities": total,
-        "preempt_covered_count": len(preempt_covered),
-        "preempt_covered_pct": len(preempt_covered) / total if total else 0.0,
-        "sl_only_count": len(sl_only_covered),
-        "sl_only_pct": len(sl_only_covered) / total if total else 0.0,
-        "preempt_covered_examples": preempt_covered[:5],
-        "sl_only_examples": sl_only_covered[:5],
-    }
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -584,7 +577,7 @@ class ExperimentResult:
     """Result for a single query — EXP01 real-data version"""
     query_id: str
     domain: str
-    source: str                         # "ai4privacy_pii_masking_300k" | "oulad_studentinfo"
+    source: str                         # "ai4privacy_pii_masking_200k" | "oulad_studentinfo"
     original_query: str
     sensitive_entities: List[str]
     gt_label_count: int                 # number of ground-truth PII labels from dataset
@@ -612,10 +605,11 @@ class ExperimentResult:
     original_tokens: int
     sanitized_tokens: int
 
+    # Baseline outputs (for traceability)
+    no_protection_response: str = ""
+    redaction_response: str = ""
+
     # Baseline comparisons (populated separately)
-    preempt_available: bool = False
-    preempt_sanitized: str = ""
-    preempt_protection_rate: float = 0.0
     full_redaction_utility_sts: float = 0.0
 
 
@@ -749,30 +743,39 @@ class SemanticGeneralizationExperiment:
         )
         print(f"  IP Protection: {ip_protection_rate:.1%} | Leakage: {ip_leakage_score:.1%}")
 
-        # ── Metrics: Utility (STS + LLM Judge) ───────────────────────────────
-        utility_sts = compute_sts_score(original_query, recontextualized)
+        # ── Baseline Responses (for Utility comparison) ──────────────────────
+        # To measure utility correctly (matching Prεεmpt), we compare cloud responses.
+        # Reference = response to the unprotected query.
+
+        if self.use_cloud:
+            no_protection_response = self._call_cloud(original_query)
+        else:
+            no_protection_response = self._simulate_cloud_response(original_query, domain)
+
+        # Full Redaction Baseline Response
+        redacted_query = run_full_redaction_baseline(original_query, sensitive_entities)
+        if self.use_cloud:
+            redaction_response = self._call_cloud(redacted_query)
+        else:
+            redaction_response = self._simulate_cloud_response(redacted_query, domain)
+
+        # ── Metrics: Utility (STS + LLM Judge) — CORRECTED PAIRS ──────────────
+        # Correct STS: Compare what the cloud says WITH sanitization vs WITHOUT.
+        utility_sts = compute_sts_score(no_protection_response, recontextualized)
+        
+        # Redaction STS: Compare redaction response vs no-protection response
+        redact_sts = compute_sts_score(no_protection_response, redaction_response)
+
         if self.use_cloud:
             utility_llm = _measure_utility_llm(
                 original_query, recontextualized,
                 model=self.ollama_model, base_url=self.ollama_base_url
             )
         else:
-            utility_llm = utility_sts  # Use STS as proxy in non-cloud mode
-        print(f"  Utility STS: {utility_sts:.3f} | LLM Judge: {utility_llm:.3f}")
+            # Simple heuristic when cloud is simulated
+            utility_llm = utility_sts
 
-        # ── Baseline: Full Redaction ──────────────────────────────────────────
-        redacted_query = run_full_redaction_baseline(original_query, sensitive_entities)
-        redact_sts = compute_sts_score(original_query, redacted_query)
-
-        # ── Baseline: Prεεmpt ────────────────────────────────────────────────
-        preempt_sanitized = run_preempt_baseline(original_query, sensitive_entities)
-        preempt_available = preempt_sanitized is not None
-        if preempt_available:
-            preempt_leakage, preempt_prot, _ = measure_ip_protection(
-                original_query, preempt_sanitized, sensitive_entities
-            )
-        else:
-            preempt_prot = 0.0
+        print(f"  Utility STS: {utility_sts:.3f} (Redact: {redact_sts:.3f}) | LLM Judge: {utility_llm:.3f}")
 
         global_tracer.log_agent(
             agent_name="Evidence Curator",
@@ -817,9 +820,8 @@ class SemanticGeneralizationExperiment:
             total_time_ms=total_time,
             original_tokens=orig_tokens,
             sanitized_tokens=sanitized_tokens,
-            preempt_available=preempt_available,
-            preempt_sanitized=preempt_sanitized or "",
-            preempt_protection_rate=preempt_prot,
+            no_protection_response=no_protection_response,
+            redaction_response=redaction_response,
             full_redaction_utility_sts=redact_sts
         )
 
@@ -949,19 +951,13 @@ class SemanticGeneralizationExperiment:
         # ── Baseline Comparisons ──────────────────────────────────────────────
         full_redact_utility = sum(r.full_redaction_utility_sts for r in self.results) / total
 
-        preempt_results = [r for r in self.results if r.preempt_available]
-        preempt_protection = (
-            sum(r.preempt_protection_rate for r in preempt_results) / len(preempt_results)
-            if preempt_results else None
-        )
-
         report = {
             "experiment": "EXP01 — Semantic Generalization Effectiveness",
             "version": "2.0 — Real Data (AI4Privacy + OULAD)",
             "timestamp": datetime.now().isoformat(),
             "dataset": {
                 "total_samples": total,
-                "ai4privacy_samples": sum(1 for r in self.results if r.source == "ai4privacy_pii_masking_300k"),
+                "ai4privacy_samples": sum(1 for r in self.results if r.source == "ai4privacy_pii_masking_200k"),
                 "oulad_samples": sum(1 for r in self.results if r.source == "oulad_studentinfo"),
                 "cloud_mode": "real" if self.use_cloud else "simulated"
             },
@@ -980,23 +976,18 @@ class SemanticGeneralizationExperiment:
                 "no_protection": {
                     "ip_protection_rate": 0.0,
                     "utility_sts": 1.0,
-                    "note": "Raw query sent to cloud — no entities protected"
+                    "note": "Raw query — reference response"
                 },
                 "full_redaction": {
                     "ip_protection_rate": 1.0,
                     "utility_sts": full_redact_utility,
-                    "note": "All entities replaced with [REDACTED] — high protection, low utility"
+                    "note": "All entities [REDACTED] — cloud cannot reason about specifics"
                 },
-                "preempt_fpe": {
-                    "ip_protection_rate": preempt_protection,
-                    "utility_sts": None,  # Measured in EXP-BL-01
-                    "available": len(preempt_results) > 0,
-                    "note": "Format-Preserving Encryption — Name/Age/Money only (3 entity types)"
-                },
+
                 "sovereign_learner": {
                     "ip_protection_rate": avg_ip_protection,
                     "utility_sts": avg_utility_sts,
-                    "note": "Semantic generalization — domain-agnostic, any entity type"
+                    "note": "Semantic generalization — domain-agnostic"
                 }
             }
         }
@@ -1064,7 +1055,7 @@ class SemanticGeneralizationExperiment:
 
         print(f"\n{'='*65}")
         print("✅ EXP01 complete — results use real published datasets")
-        print("   Data: AI4Privacy pii-masking-300k + OULAD studentInfo")
+        print("   Data: AI4Privacy pii-masking-200k + OULAD studentInfo")
         print(f"{'='*65}\n")
 
 
@@ -1115,6 +1106,10 @@ Examples:
                         help="Number of OULAD-derived samples (default: 100)")
     parser.add_argument("--domain", type=str, default=None,
                         help="Filter by domain (education | health_education)")
+    parser.add_argument("--save-cache", action="store_true",
+                        help="Save the current generated dataset to local cache.")
+    parser.add_argument("--bypass-cache", action="store_true",
+                        help="Bypass local cache and regenerate/download data.")
     args = parser.parse_args()
 
     # Push resolved model into module-level so _measure_utility_llm picks it up
@@ -1132,8 +1127,12 @@ Examples:
     # Load real datasets
     queries = load_exp01_dataset(
         ai4privacy_samples=args.ai4privacy,
-        oulad_samples=args.oulad
+        oulad_samples=args.oulad,
+        bypass_cache=args.bypass_cache
     )
+
+    if args.save_cache:
+        save_exp01_dataset_to_cache(queries)
 
     # Apply filters
     if args.domain:

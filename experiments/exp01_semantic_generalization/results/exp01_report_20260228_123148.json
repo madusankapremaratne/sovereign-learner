@@ -1,0 +1,59 @@
+{
+  "experiment": "EXP01 \u2014 Semantic Generalization Effectiveness",
+  "version": "2.0 \u2014 Real Data (AI4Privacy + OULAD)",
+  "timestamp": "2026-02-28T12:31:48.171611",
+  "dataset": {
+    "total_samples": 5,
+    "ai4privacy_samples": 5,
+    "oulad_samples": 0,
+    "cloud_mode": "real"
+  },
+  "primary_metrics": {
+    "ip_protection_rate": 1.0,
+    "ip_leakage_rate": 0.0,
+    "utility_sts": 0.22498973860688093,
+    "utility_llm_judge": 0.62,
+    "zero_leakage_count": 5,
+    "zero_leakage_rate": 1.0,
+    "avg_sanitization_time_ms": 0.7726192474365234
+  },
+  "by_source": {
+    "ai4privacy_pii_masking_200k": {
+      "count": 5,
+      "avg_ip_protection": 1.0,
+      "avg_utility_sts": 0.22498973860688093,
+      "zero_leakage_rate": 1.0
+    }
+  },
+  "by_domain": {
+    "education": {
+      "count": 4,
+      "avg_ip_protection": 1.0,
+      "avg_utility_sts": 0.1477451108870492,
+      "zero_leakage_rate": 1.0
+    },
+    "health_education": {
+      "count": 1,
+      "avg_ip_protection": 1.0,
+      "avg_utility_sts": 0.5339682494862078,
+      "zero_leakage_rate": 1.0
+    }
+  },
+  "baseline_comparison": {
+    "no_protection": {
+      "ip_protection_rate": 0.0,
+      "utility_sts": 1.0,
+      "note": "Raw query \u2014 reference response"
+    },
+    "full_redaction": {
+      "ip_protection_rate": 1.0,
+      "utility_sts": 0.21020947382870941,
+      "note": "All entities [REDACTED] \u2014 cloud cannot reason about specifics"
+    },
+    "sovereign_learner": {
+      "ip_protection_rate": 1.0,
+      "utility_sts": 0.22498973860688093,
+      "note": "Semantic generalization \u2014 domain-agnostic"
+    }
+  }
+}

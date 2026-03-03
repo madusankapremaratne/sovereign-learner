@@ -1,0 +1,4423 @@
+[
+  {
+    "id": "ai4p_0000",
+    "query": "Dans l'enqu\u00eate sur les patients n\u00e9s le 25/01/1964, il est obligatoire de chiffrer leurs donn\u00e9es, y compris, mais sans s'y limiter, 75664680996. Cela est n\u00e9cessaire pour garantir leur s\u00e9curit\u00e9.",
+    "sensitive": [
+      "25/01/1964",
+      "75664680996"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 39, \"O\"], [39, 49, \"DOB\"], [49, 131, \"O\"], [131, 142, \"SSN\"], [142, 192, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0001",
+    "query": "Mrs. Lenore, lors du dernier test, une activit\u00e9 a \u00e9t\u00e9 d\u00e9tect\u00e9e li\u00e9e \u00e0 l'adresse Litecoin M3yNctXcfXfhmjk7fcNPjVWV8Y7VW correspondant \u00e0 votre p\u00e9riode d'examen. Veuillez vous pr\u00e9senter devant le comit\u00e9 disciplinaire.",
+    "sensitive": [
+      "Mrs",
+      "Lenore",
+      "M3yNctXcfXfhmjk7fcNPjVWV8Y7VW"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"PREFIX\"], [4, 5, \"O\"], [5, 11, \"FIRSTNAME\"], [11, 89, \"O\"], [89, 118, \"LITECOINADDRESS\"], [118, 214, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0002",
+    "query": "My financial situation had been a little tough this semester. The transaction to the university account had been a fuss. Eventually, I had to use the transaction method of Ethereum 0xb9292929e4b9e43d9abae9673bd45ed25dfe8bf5 for the first time under Orie's guidance.",
+    "sensitive": [
+      "0xb9292929e4b9e43d9abae9673bd45ed25dfe8bf5",
+      "Orie"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 181, \"O\"], [181, 223, \"ETHEREUMADDRESS\"], [223, 249, \"O\"], [249, 253, \"FIRSTNAME\"], [253, 265, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0003",
+    "query": "Educational inequality is a hot topic in Port Ernestine. Private school students have an average of 9754027895977859% higher college acceptance rate than public school students.",
+    "sensitive": [
+      "Port Ernestine",
+      "9754027895977859"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 41, \"O\"], [41, 55, \"CITY\"], [55, 100, \"O\"], [100, 116, \"MASKEDNUMBER\"], [116, 177, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0004",
+    "query": "For student 756.6298.7605, please attend a mandatory meeting regarding your exam and update your bank verification code to FCFVNO1D. Internet connection for the online meeting: IP - 77.166.23.71.",
+    "sensitive": [
+      "756.6298.7605",
+      "FCFVNO1D",
+      "77.166.23.71"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 12, \"O\"], [12, 25, \"SSN\"], [25, 123, \"O\"], [123, 131, \"BIC\"], [131, 182, \"O\"], [182, 194, \"IPV4\"], [194, 195, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0005",
+    "query": "J'ai re\u00e7u une recommandation de 101.5.234.143 pour une consultation orthop\u00e9dique et j'ai besoin de votre aide pour planifier le rendez-vous. Le patient mesure 1.2 m et a 43 years old ans. Le num\u00e9ro de dossier est 2517949634825908.",
+    "sensitive": [
+      "101.5.234.143",
+      "1.2 m",
+      "43 years old",
+      "2517949634825908"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 32, \"O\"], [32, 45, \"IPV4\"], [45, 159, \"O\"], [159, 164, \"HEIGHT\"], [164, 170, \"O\"], [170, 182, \"AGE\"], [182, 213, \"O\"], [213, 229, \"MASKEDNUMBER\"], [229, 230, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0006",
+    "query": "To Nico, the skin biopsy result for the patient with SSN 75675195142 has come back and it seems we have positive news. Full report is under 2f7d:fdfc:9ef4:429c:b72e:1cbc:3deb:32e7-ivered.",
+    "sensitive": [
+      "Nico",
+      "75675195142",
+      "2f7d:fdfc:9ef4:429c:b72e:1cbc:3deb:32e7"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 7, \"MIDDLENAME\"], [7, 57, \"O\"], [57, 68, \"SSN\"], [68, 140, \"O\"], [140, 179, \"IPV6\"], [179, 187, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0007",
+    "query": "Our 56 years old years old patient requires orthopedic services and his ID is 1288028785935464. Could you book an appointment?",
+    "sensitive": [
+      "56 years old",
+      "1288028785935464"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"O\"], [4, 16, \"AGE\"], [16, 78, \"O\"], [78, 94, \"MASKEDNUMBER\"], [94, 126, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0008",
+    "query": "A 71 years old patient of height 183 cm needs an orthopedic consultation. His Patient ID is 0036641489238253 and he hails from Johnson County.",
+    "sensitive": [
+      "71",
+      "183 cm",
+      "0036641489238253",
+      "Johnson County"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 2, \"O\"], [2, 4, \"AGE\"], [4, 33, \"O\"], [33, 39, \"HEIGHT\"], [39, 92, \"O\"], [92, 108, \"MASKEDNUMBER\"], [108, 127, \"O\"], [127, 141, \"COUNTY\"], [141, 142, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0009",
+    "query": "Attention patients Male, nos options de transport m\u00e9dical ont \u00e9t\u00e9 augment\u00e9es avec l'ajout d'un nouveau v\u00e9hicule \u00e0 la plaque d'immatriculation DTU808FA2GJW18540. Votre s\u00e9curit\u00e9 est notre priorit\u00e9 absolue.",
+    "sensitive": [
+      "Male",
+      "DTU808FA2GJW18540"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 19, \"O\"], [19, 23, \"SEX\"], [23, 142, \"O\"], [142, 159, \"VEHICLEVIN\"], [159, 203, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0010",
+    "query": "Caro Trudie, i tuoi studenti apprezzano il tuo impegno nel comprendere il loro modello di pensiero Southeast.",
+    "sensitive": [
+      "Trudie",
+      "Southeast"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 11, \"FIRSTNAME\"], [11, 99, \"O\"], [99, 108, \"ORDINALDIRECTION\"], [108, 109, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0011",
+    "query": "La patiente Elda a \u00e9t\u00e9 diagnostiqu\u00e9e avec un pneumothorax, des mesures imm\u00e9diates ont \u00e9t\u00e9 prises. Son \u00e9tat s'est stabilis\u00e9. Le paiement a \u00e9t\u00e9 effectu\u00e9 par carte de cr\u00e9dit avec le num\u00e9ro 6413130820319362. La patiente sera renvoy\u00e9e dans quelques jours apr\u00e8s une observation suppl\u00e9mentaire.",
+    "sensitive": [
+      "Elda",
+      "6413130820319362"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 12, \"O\"], [12, 16, \"FIRSTNAME\"], [16, 186, \"O\"], [186, 202, \"CREDITCARDNUMBER\"], [202, 287, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0012",
+    "query": "Due to patient 6769161250196491's COVID-19 symptoms worsening overnight, we are transferring her to the ICU. We need consent documents signed and forwarded to the ICU via Meggie.Rodriguez4@hotmail.com. Emergency contact details are +726 057 897.1114",
+    "sensitive": [
+      "6769161250196491",
+      "Meggie.Rodriguez4@hotmail.com",
+      "+726 057 897.1114"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 15, \"O\"], [15, 31, \"MASKEDNUMBER\"], [31, 171, \"O\"], [171, 200, \"EMAIL\"], [200, 232, \"O\"], [232, 249, \"PHONENUMBER\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0013",
+    "query": "Dear Staff, As part of our ongoing review of patient confidentiality procedures, we noticed a few instances where sensitive information like DE15500534182690683154, 2567074902120931, and 82-006796-139182-5 were stored on openly accessible platforms.",
+    "sensitive": [
+      "DE15500534182690683154",
+      "2567074902120931",
+      "82-006796-139182-5"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 141, \"O\"], [141, 163, \"IBAN\"], [163, 165, \"O\"], [165, 181, \"CREDITCARDNUMBER\"], [181, 187, \"O\"], [187, 205, \"PHONEIMEI\"], [205, 249, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0014",
+    "query": "Nous avons constat\u00e9 une prise de poids chez le cas de Anita est li\u00e9e \u00e0 des hormones d\u00e9s\u00e9quilibr\u00e9es. Nous avons besoin d'un examen complet du corps. Replanifiez son prochain rendez-vous \u00e0 18th June.",
+    "sensitive": [
+      "Anita",
+      "18th June"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 54, \"O\"], [54, 59, \"FIRSTNAME\"], [59, 187, \"O\"], [187, 196, \"DATE\"], [196, 197, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0015",
+    "query": "Addressing webinar on Holistic Education today, Intersex woman Director from Considine, Dicki and Cronin. Join via IPV6 access point: 6d84:c33f:3ff4:ac10:94ff:ac00:cadb:bdc6.",
+    "sensitive": [
+      "Intersex woman",
+      "Director",
+      "Considine, Dicki and Cronin",
+      "6d84:c33f:3ff4:ac10:94ff:ac00:cadb:bdc6"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 48, \"O\"], [48, 62, \"GENDER\"], [62, 63, \"O\"], [63, 71, \"JOBTYPE\"], [71, 77, \"O\"], [77, 104, \"COMPANYNAME\"], [104, 134, \"O\"], [134, 173, \"IPV6\"], [173, 174, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0016",
+    "query": "On 2014-01-13T04:49:46.900Z, we received feedback from parents to include more practical, hands-on activities in the curriculum. Reach us at (29).0830 6085.",
+    "sensitive": [
+      "2014-01-13T04:49:46.900Z",
+      "(29).0830 6085"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 27, \"DATE\"], [27, 141, \"O\"], [141, 155, \"PHONENUMBER\"], [155, 156, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0017",
+    "query": "The latest research on Preventive Medicine is ready for dispatch at 57101-9633, Suite 122. Total charges are Libyan Dinar kr.",
+    "sensitive": [
+      "57101-9633",
+      "Suite 122",
+      "Libyan Dinar",
+      "kr"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 68, \"O\"], [68, 78, \"ZIPCODE\"], [78, 80, \"O\"], [80, 89, \"SECONDARYADDRESS\"], [89, 109, \"O\"], [109, 121, \"CURRENCY\"], [121, 122, \"O\"], [122, 124, \"CURRENCYSYMBOL\"], [124, 125, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0018",
+    "query": "Un patient Cis female situ\u00e9 dans le 62432-0295 a re\u00e7u une \u00e9valuation g\u00e9riatrique via la t\u00e9l\u00e9sant\u00e9 mentale.",
+    "sensitive": [
+      "Cis female",
+      "62432-0295"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 11, \"O\"], [11, 21, \"GENDER\"], [21, 36, \"O\"], [36, 46, \"ZIPCODE\"], [46, 106, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0019",
+    "query": "To access the education policy reforms in South Obiebury, use our secured IP 8.125.153.232 along with password zMwp5WTKfuWO.",
+    "sensitive": [
+      "South Obiebury",
+      "8.125.153.232",
+      "zMwp5WTKfuWO"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 42, \"O\"], [42, 56, \"CITY\"], [56, 77, \"O\"], [77, 90, \"IP\"], [90, 111, \"O\"], [111, 123, \"PASSWORD\"], [123, 124, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0020",
+    "query": "Your geriatric medical payment 84521520 is due. Use 7143458746467337 ending in 880 to pay. Contact us at +62-998 260.5835 for more information.",
+    "sensitive": [
+      "84521520",
+      "7143458746467337",
+      "880",
+      "+62-998 260.5835"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 31, \"O\"], [31, 39, \"ACCOUNTNUMBER\"], [39, 52, \"O\"], [52, 68, \"CREDITCARDNUMBER\"], [68, 79, \"O\"], [79, 82, \"CREDITCARDCVV\"], [82, 105, \"O\"], [105, 121, \"PHONENUMBER\"], [121, 143, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0021",
+    "query": "Gentile Talia e Rau, in qualit\u00e0 di nostro Human Program Developer per lo sviluppo del curriculum di apprendimento sociale ed emotivo, ti preghiamo di esaminare e inviare via email a Caroline64@gmail.com eventuali suggerimenti.",
+    "sensitive": [
+      "Talia",
+      "Rau",
+      "Human Program Developer",
+      "Caroline64@gmail.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 13, \"FIRSTNAME\"], [13, 16, \"O\"], [16, 19, \"LASTNAME\"], [19, 42, \"O\"], [42, 65, \"JOBTITLE\"], [65, 182, \"O\"], [182, 202, \"EMAIL\"], [202, 226, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0022",
+    "query": "For all the attendees of the school trip from Worcestershire, make sure your children are sufficiently prepared to go from [6.0063,133.5156] to [-57.8688,-112.3352] to ensure they don't get lost.",
+    "sensitive": [
+      "Worcestershire",
+      "[6.0063,133.5156]",
+      "[-57.8688,-112.3352]"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 46, \"O\"], [46, 60, \"COUNTY\"], [60, 123, \"O\"], [123, 140, \"NEARBYGPSCOORDINATE\"], [140, 144, \"O\"], [144, 164, \"NEARBYGPSCOORDINATE\"], [164, 195, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0023",
+    "query": "Rosie School passe aux services num\u00e9riques. Payez via notre portail - eeea:57a8:f8f0:e2a5:6ad0:85a8:cfd9:c8c7. Vous pouvez utiliser 3DJVjXdNMV5GmF3kbrPisEzDxA7eFGHLHvCs7wf pour des transactions instantan\u00e9es.",
+    "sensitive": [
+      "Rosie",
+      "eeea:57a8:f8f0:e2a5:6ad0:85a8:cfd9:c8c7",
+      "3DJVjXdNMV5GmF3kbrPisEzDxA7eFGHLHvCs7wf"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"FIRSTNAME\"], [5, 70, \"O\"], [70, 109, \"IPV6\"], [109, 132, \"O\"], [132, 171, \"BITCOINADDRESS\"], [171, 207, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0024",
+    "query": "Le patient num\u00e9ro 1007636401544254 a \u00e9t\u00e9 transf\u00e9r\u00e9 \u00e0 l'unit\u00e9 3441264947814030. Plus de d\u00e9tails sur https://frivolous-rescue.biz/",
+    "sensitive": [
+      "1007636401544254",
+      "3441264947814030",
+      "https://frivolous-rescue.biz/"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 18, \"O\"], [18, 34, \"MASKEDNUMBER\"], [34, 61, \"O\"], [61, 77, \"MASKEDNUMBER\"], [77, 99, \"O\"], [99, 128, \"URL\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0025",
+    "query": "Elliott, we encourage all teachers to actively participate in peer-to-peer training sessions. Share your innovative teaching practices in our next session on 16th May.",
+    "sensitive": [
+      "Elliott",
+      "16th May"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 7, \"MIDDLENAME\"], [7, 158, \"O\"], [158, 166, \"DATE\"], [166, 167, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0026",
+    "query": "Female, our new fitness program starts next week. Pay with your masked number 3457970313276098. Keep your student ID and password, mqbpfuITNHMt, handy.",
+    "sensitive": [
+      "Female",
+      "3457970313276098",
+      "mqbpfuITNHMt"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"SEX\"], [6, 78, \"O\"], [78, 94, \"MASKEDNUMBER\"], [94, 131, \"O\"], [131, 143, \"PASSWORD\"], [143, 151, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0027",
+    "query": "Le traitement du lymphome plasmablastique (PBL) consiste en une chimioth\u00e9rapie intensive suivie d'une radioth\u00e9rapie de consolidation dans Colombie-Britannique. Veuillez contacter 3gBguvfCL1HUSbP87WYJCrRxH5h96yVMVepQ4a pour obtenir les formulaires de consentement des patients et effectuer les paiements.",
+    "sensitive": [
+      "Colombie-Britannique",
+      "3gBguvfCL1HUSbP87WYJCrRxH5h96yVMVepQ4a"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 138, \"O\"], [138, 158, \"STATE\"], [158, 179, \"O\"], [179, 217, \"BITCOINADDRESS\"], [217, 303, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0028",
+    "query": "Die Medikationshistorie des Patienten kann \u00fcber die Ethereum-Blockchain unter 0xb9e9b1f9bcc49cd3addbfbaffeecb8017cde4f5f gefunden werden. Synchronisieren Sie diese mit den Daten seiner tragbaren Ger\u00e4te, die \u00fcber Opera/11.47 (X11; Linux x86_64; U; MN Presto/2.9.190 Version/10.00) erhalten wurden, f\u00fcr eine umfassende Analyse.",
+    "sensitive": [
+      "0xb9e9b1f9bcc49cd3addbfbaffeecb8017cde4f5f",
+      "Opera/11.47 (X11; Linux x86_64; U; MN Presto/2.9.190 Version/10.00)"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 78, \"O\"], [78, 120, \"ETHEREUMADDRESS\"], [120, 212, \"O\"], [212, 279, \"USERAGENT\"], [279, 325, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0029",
+    "query": "Chers patients, nous vous demandons votre pr\u00e9sence lors de la campagne de sant\u00e9 mentale dans notre centre de Devon. Pour les paiements, les d\u00e9tails ME19294460030806007057 ou 3KvLEzj71XhcsWyxdndReYH5BHWDehwxXwDrP sont fournis. Notre c\u00e9l\u00e8bre Officer, North, animera la session.",
+    "sensitive": [
+      "Devon",
+      "ME19294460030806007057",
+      "3KvLEzj71XhcsWyxdndReYH5BHWDehwxXwDrP",
+      "Officer",
+      "North"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 109, \"O\"], [109, 114, \"COUNTY\"], [114, 148, \"O\"], [148, 170, \"IBAN\"], [170, 174, \"O\"], [174, 211, \"BITCOINADDRESS\"], [211, 240, \"O\"], [240, 247, \"JOBTYPE\"], [247, 249, \"O\"], [249, 254, \"MIDDLENAME\"], [254, 275, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0030",
+    "query": "Female, if you've recently moved, please use our Online student portal to update your address Apt. 799. Use your student-id 4017053264206378 to login.",
+    "sensitive": [
+      "Female",
+      "Apt. 799",
+      "4017053264206378"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"SEX\"], [6, 94, \"O\"], [94, 102, \"SECONDARYADDRESS\"], [102, 124, \"O\"], [124, 140, \"MASKEDNUMBER\"], [140, 150, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0031",
+    "query": "Wir m\u00f6chten unsere Nachhaltigkeitsinitiativen weiter ausbauen, insbesondere in den South Dakota-Operationen (38501). Wir haben unseren Corporate Research Planner damit beauftragt, diese Ma\u00dfnahmen anzuf\u00fchren. Bitte teilen Sie Ihre Gedanken und Vorschl\u00e4ge in unserem digitalen Forum, https://sweaty-die.org.",
+    "sensitive": [
+      "South Dakota",
+      "38501",
+      "Corporate Research Planner",
+      "https://sweaty-die.org"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 83, \"O\"], [83, 95, \"STATE\"], [95, 109, \"O\"], [109, 114, \"ZIPCODE\"], [114, 135, \"O\"], [135, 161, \"JOBTITLE\"], [161, 282, \"O\"], [282, 304, \"URL\"], [304, 305, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0032",
+    "query": "Just received new patient's records. Young girl, 84 years, Eye color: Brown, Male to female trans woman, 6' 1\". Could you review and start the initial assessment?",
+    "sensitive": [
+      "84 years",
+      "Eye color: Brown",
+      "Male to female trans woman",
+      "6' 1"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 49, \"O\"], [49, 57, \"AGE\"], [57, 59, \"O\"], [59, 75, \"EYECOLOR\"], [75, 77, \"O\"], [77, 103, \"GENDER\"], [103, 105, \"O\"], [105, 110, \"HEIGHT\"], [110, 162, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0033",
+    "query": "Examen d\u00e9taill\u00e9 d'une affaire maritime impliquant un envoi ill\u00e9gal avec l'\u00e9tiquette 4P0SK4EN5BXJ19128 dirig\u00e9e par Leslie. Tous les d\u00e9tails de l'affaire peuvent \u00eatre r\u00e9cup\u00e9r\u00e9s en utilisant le mot de passe Rw7CLUfN6Ndm.",
+    "sensitive": [
+      "4P0SK4EN5BXJ19128",
+      "Leslie",
+      "Rw7CLUfN6Ndm"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 84, \"O\"], [84, 101, \"VEHICLEVIN\"], [101, 114, \"O\"], [114, 120, \"MIDDLENAME\"], [120, 204, \"O\"], [204, 216, \"PASSWORD\"], [216, 217, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0034",
+    "query": "I urge everyone to be aware of phishing emails asking for your 1mpaHDCVLpWsmQs1cwjCzznKKGsbdhRADiN1 as part of our new healthcare policy. Always verify the 5cfd:c3a6:123b:c8dd:6ec0:7a62:3fca:f1eb of the sender.",
+    "sensitive": [
+      "1mpaHDCVLpWsmQs1cwjCzznKKGsbdhRADiN1",
+      "5cfd:c3a6:123b:c8dd:6ec0:7a62:3fca:f1eb"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 63, \"O\"], [63, 99, \"BITCOINADDRESS\"], [99, 156, \"O\"], [156, 195, \"IPV6\"], [195, 210, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0035",
+    "query": "Ein Notfallfall aus Lake Forest, Patient Female mit schwerer PTBS.",
+    "sensitive": [
+      "Lake Forest",
+      "Female"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 20, \"O\"], [20, 31, \"CITY\"], [31, 41, \"O\"], [41, 47, \"SEX\"], [47, 66, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0036",
+    "query": "Account activated! Start exploring our Health and Wellness website using Opera/14.20 (Windows NT 6.1; U; OC Presto/2.9.184 Version/10.00). Sign in using the password: nohZXDRbuZz_.",
+    "sensitive": [
+      "Opera/14.20 (Windows NT 6.1; U; OC Presto/2.9.184 Version/10.00)",
+      "nohZXDRbuZz_"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 73, \"O\"], [73, 137, \"USERAGENT\"], [137, 167, \"O\"], [167, 179, \"PASSWORD\"], [179, 180, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0037",
+    "query": "Hello Male, to complete the transaction for educational tools, process the payment of New Israeli Sheqel through bank LPCIQAGE. Further details have been sent to Reta_Smith8@yahoo.com.",
+    "sensitive": [
+      "Male",
+      "New Israeli Sheqel",
+      "LPCIQAGE",
+      "Reta_Smith8@yahoo.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"O\"], [6, 10, \"SEX\"], [10, 86, \"O\"], [86, 104, \"CURRENCY\"], [104, 118, \"O\"], [118, 126, \"BIC\"], [126, 162, \"O\"], [162, 183, \"EMAIL\"], [183, 184, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0038",
+    "query": "We've observed unusual activity on your Health Informatics profile from an unrecognised device whose IP is 25.193.176.53. If it was not you, kindly change your password 5yK2d0GEJAcv immediately.",
+    "sensitive": [
+      "25.193.176.53",
+      "5yK2d0GEJAcv"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 107, \"O\"], [107, 120, \"IPV4\"], [120, 169, \"O\"], [169, 181, \"PASSWORD\"], [181, 194, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0039",
+    "query": "Carissimi genitori, le vostre donazioni a Savings Account e gli sforzi volontari hanno aumentato la motivazione e la costanza dei nostri studenti questo mese. Non vediamo l'ora di molte altre opere di beneficenza come Designer, che ci aiuteranno a rendere la nostra scuola ancora migliore.",
+    "sensitive": [
+      "Savings Account",
+      "Designer"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 42, \"O\"], [42, 57, \"ACCOUNTNAME\"], [57, 218, \"O\"], [218, 226, \"JOBTYPE\"], [226, 289, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0040",
+    "query": "La nostra iniziativa di finanziamento copre i libri di testo e altri materiali degli studenti. Una ricevuta delle spese pu\u00f2 essere inviata a Christelle_Russel1@yahoo.com per il rimborso. Utilizzare la carta aziendale 2324692473876952 se necessario.",
+    "sensitive": [
+      "Christelle_Russel1@yahoo.com",
+      "2324692473876952"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 141, \"O\"], [141, 169, \"EMAIL\"], [169, 217, \"O\"], [217, 233, \"CREDITCARDNUMBER\"], [233, 248, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0041",
+    "query": "Num\u00e9ro de s\u00e9curit\u00e9 sociale : 638 97 2181 du patient Female montre des paiements via Venezuelan bol\u00edvar. Veuillez trouver la facture convertie jointe.",
+    "sensitive": [
+      "638 97 2181",
+      "Female",
+      "Venezuelan bol\u00edvar"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 29, \"O\"], [29, 40, \"SSN\"], [40, 52, \"O\"], [52, 58, \"SEX\"], [58, 84, \"O\"], [84, 102, \"CURRENCYNAME\"], [102, 149, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0042",
+    "query": "Bitte \u00fcberpr\u00fcfen Sie den Versicherungsanspruch des Patienten 756.6997.8851. Sehen Sie sich im System Fotos des Patienten mit Eye color: Blue an und validieren Sie die Informationen.",
+    "sensitive": [
+      "756.6997.8851",
+      "Eye color: Blue"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 61, \"O\"], [61, 74, \"SSN\"], [74, 125, \"O\"], [125, 140, \"EYECOLOR\"], [140, 181, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0043",
+    "query": "Stiamo organizzando un workshop online per tutti i Global Research Strategist disponibili tramite Mozilla/5.0 (Windows NT 6.0; WOW64; rv:15.8) Gecko/20100101 Firefox/15.8.3 il 25th May. Il tema \u00e8 incentrato sul nostro 'Nikolaus - Kiehn'. La sua presenza sar\u00e0 preziosa.",
+    "sensitive": [
+      "Global Research Strategist",
+      "Mozilla/5.0 (Windows NT 6.0; WOW64; rv:15.8) Gecko/20100101 Firefox/15.8.3",
+      "25th May",
+      "Nikolaus - Kiehn"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 51, \"O\"], [51, 77, \"JOBTITLE\"], [77, 98, \"O\"], [98, 172, \"USERAGENT\"], [172, 176, \"O\"], [176, 184, \"DOB\"], [184, 219, \"O\"], [219, 235, \"COMPANYNAME\"], [235, 268, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0044",
+    "query": "Data gathered from b02a:7ff9:08db:1b8b:f05f:cd7f:7dee:fbc5 allows us to further our research in the pharmaceutical industry. Thank you for your cooperation and continued feedback Marcelo.",
+    "sensitive": [
+      "b02a:7ff9:08db:1b8b:f05f:cd7f:7dee:fbc5",
+      "Marcelo"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 19, \"O\"], [19, 58, \"IP\"], [58, 179, \"O\"], [179, 186, \"FIRSTNAME\"], [186, 187, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0045",
+    "query": "Patient Linda70, Male, 58 years old, reported continuous feelings of fear and worry, hindering their everyday activities. Suggest looking into anxiety disorders.",
+    "sensitive": [
+      "Linda70",
+      "Male",
+      "58 years old"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 15, \"USERNAME\"], [15, 17, \"O\"], [17, 21, \"SEX\"], [21, 23, \"O\"], [23, 35, \"AGE\"], [35, 161, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0046",
+    "query": "Madisen, you've been assigned to the curriculum development committee for the Implementation course. Your experience as a National Integration Strategist will be invaluable to us.",
+    "sensitive": [
+      "Madisen",
+      "Implementation",
+      "National Integration Strategist"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 7, \"FIRSTNAME\"], [7, 78, \"O\"], [78, 92, \"JOBAREA\"], [92, 122, \"O\"], [122, 153, \"JOBTITLE\"], [153, 179, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0047",
+    "query": "Dear Ms. Schroeder, you were mentioned as a key reference in a forensic psychology paper we recently reviewed. To facilitate your review, we have attached the document to this email. Please reply to Emory96@hotmail.com with your comments.",
+    "sensitive": [
+      "Ms",
+      "Schroeder",
+      "Emory96@hotmail.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 8, \"PREFIX\"], [8, 9, \"O\"], [9, 18, \"LASTNAME\"], [18, 199, \"O\"], [199, 218, \"EMAIL\"], [218, 238, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0048",
+    "query": "Elenora, could we have a report on the latest developments in sports psychology with a focus on team dynamics? Once completed, please use Guido_Turcotte17@hotmail.com to send it to me no later than 1993-07-28T19:55:34.153Z",
+    "sensitive": [
+      "Elenora",
+      "Guido_Turcotte17@hotmail.com",
+      "1993-07-28T19:55:34.153Z"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 7, \"FIRSTNAME\"], [7, 138, \"O\"], [138, 166, \"EMAIL\"], [166, 198, \"O\"], [198, 222, \"DATE\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0049",
+    "query": "Le patient Odessa Blake Kuhn (1919-12-05T20:11:21.005Z) a \u00e9t\u00e9 admis dans l'aile Nord-Est. Les constantes du patient sont surveill\u00e9es en continu. Assurez-vous d'enregistrer toutes les donn\u00e9es avec pr\u00e9cision.",
+    "sensitive": [
+      "Odessa",
+      "Blake",
+      "Kuhn",
+      "1919-12-05T20:11:21.005Z"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 11, \"O\"], [11, 17, \"FIRSTNAME\"], [17, 18, \"O\"], [18, 23, \"MIDDLENAME\"], [23, 24, \"O\"], [24, 28, \"LASTNAME\"], [28, 30, \"O\"], [30, 54, \"DOB\"], [54, 206, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0050",
+    "query": "Un dossier de patient en radiologie est manquant dans la base de donn\u00e9es. Le num\u00e9ro de confirmation se terminait par 5713463051223723 et la num\u00e9risation \u00e9tait \u00e9tiquet\u00e9e sous 50843.",
+    "sensitive": [
+      "5713463051223723",
+      "50843"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 117, \"O\"], [117, 133, \"MASKEDNUMBER\"], [133, 174, \"O\"], [174, 179, \"ZIPCODE\"], [179, 180, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0051",
+    "query": "Gentile Ms., nel nostro corso sulle leggi antitrust sono presenti esempi reali. Sarebbe utile per gli studenti se poteste condividere i report sui casi giuridici di Kuhlman Group.",
+    "sensitive": [
+      "Ms",
+      "Kuhlman Group"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 11, \"PREFIX\"], [11, 165, \"O\"], [165, 178, \"COMPANYNAME\"], [178, 179, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0052",
+    "query": "Die Female-Studenten im Bereich Usability berichten, dass sie anonyme Bedrohungen von https://crazy-sponge.net/ erhalten haben. Ihr Assistant ist mit dem Fall betraut, aber es k\u00f6nnte eine Polizeibeteiligung in Morgan County erforderlich sein.",
+    "sensitive": [
+      "Female",
+      "Usability",
+      "https://crazy-sponge.net/",
+      "Assistant",
+      "Morgan County"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"O\"], [4, 10, \"SEX\"], [10, 32, \"O\"], [32, 41, \"JOBAREA\"], [41, 86, \"O\"], [86, 111, \"URL\"], [111, 132, \"O\"], [132, 141, \"JOBTYPE\"], [141, 210, \"O\"], [210, 223, \"COUNTY\"], [223, 242, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0053",
+    "query": "Der Elternteil des Patienten, dessen Telefonnummer mit 9999860102463864 endet, m\u00f6ge bitte zur Abrechnungsabteilung gehen und Ihre 6628180215345589 mitbringen.",
+    "sensitive": [
+      "9999860102463864",
+      "6628180215345589"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 55, \"O\"], [55, 71, \"MASKEDNUMBER\"], [71, 130, \"O\"], [130, 146, \"CREDITCARDNUMBER\"], [146, 158, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0054",
+    "query": "Really thrilled for Jevon Schoen's presentation about school nutrition next week. On another note, let's prioritise online security. Please don't share your password SkAA7XVztSKI with anyone else.",
+    "sensitive": [
+      "Jevon",
+      "Schoen",
+      "SkAA7XVztSKI"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 20, \"O\"], [20, 25, \"FIRSTNAME\"], [25, 26, \"O\"], [26, 32, \"LASTNAME\"], [32, 166, \"O\"], [166, 178, \"PASSWORD\"], [178, 196, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0055",
+    "query": "Der Patient, der unter der Augenfarbe brown und einer Gr\u00f6\u00dfe von 136 cm registriert ist, hat den Betrag von $U0.0009b \u00fcber visa bezahlt.",
+    "sensitive": [
+      "brown",
+      "136 cm",
+      "$U",
+      "0.0009b",
+      "visa"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 38, \"O\"], [38, 43, \"EYECOLOR\"], [43, 64, \"O\"], [64, 70, \"HEIGHT\"], [70, 107, \"O\"], [107, 109, \"CURRENCYSYMBOL\"], [109, 116, \"AMOUNT\"], [116, 122, \"O\"], [122, 126, \"CREDITCARDISSUER\"], [126, 135, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0056",
+    "query": "We need to purchase new equipment for our research which amounts to 65205.89 Quetzal. To process the payment, please use your mastercard with number 8417953880153197.",
+    "sensitive": [
+      "65205.89",
+      "Quetzal",
+      "mastercard",
+      "8417953880153197"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 68, \"O\"], [68, 76, \"AMOUNT\"], [76, 77, \"O\"], [77, 84, \"CURRENCY\"], [84, 126, \"O\"], [126, 136, \"CREDITCARDISSUER\"], [136, 149, \"O\"], [149, 165, \"CREDITCARDNUMBER\"], [165, 166, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0057",
+    "query": "Les sympt\u00f4mes de col\u00e8re incontr\u00f4l\u00e9e chez le patient adolescent, Troy, sont pr\u00e9occupants. Les d\u00e9tails de paiement ont \u00e9t\u00e9 not\u00e9s, avec une Adresse Ethereum : 0xc8abfc9a0ecff579f8f220b1a9eda9b66f5117ba.",
+    "sensitive": [
+      "Troy",
+      "0xc8abfc9a0ecff579f8f220b1a9eda9b66f5117ba"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 64, \"O\"], [64, 68, \"FIRSTNAME\"], [68, 156, \"O\"], [156, 198, \"ETHEREUMADDRESS\"], [198, 199, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0058",
+    "query": "Urgence signal\u00e9e au 28932, patient Female, 78 years ans. Organisez le transport au plus vite.",
+    "sensitive": [
+      "28932",
+      "Female",
+      "78 years"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 20, \"O\"], [20, 25, \"BUILDINGNUMBER\"], [25, 35, \"O\"], [35, 41, \"SEX\"], [41, 43, \"O\"], [43, 51, \"AGE\"], [51, 93, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0059",
+    "query": "Dear Ricardo, In partnership with Stoltenberg - Hettinger, we're launching a wellness project. Our new meal plan aims to provide balanced nutrition for our students. Use Savings Account 45007283 for payments of N$463230.11. Please forward the info. Best regards, Internal Mobility Analyst, Maddison Green",
+    "sensitive": [
+      "Ricardo",
+      "Stoltenberg - Hettinger",
+      "Savings Account",
+      "45007283",
+      "N$",
+      "463230.11",
+      "Internal Mobility Analyst",
+      "Maddison",
+      "Green"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 12, \"FIRSTNAME\"], [12, 34, \"O\"], [34, 57, \"COMPANYNAME\"], [57, 170, \"O\"], [170, 185, \"ACCOUNTNAME\"], [185, 186, \"O\"], [186, 194, \"ACCOUNTNUMBER\"], [194, 211, \"O\"], [211, 213, \"CURRENCYSYMBOL\"], [213, 222, \"AMOUNT\"], [222, 263, \"O\"], [263, 288, \"JOBTITLE\"], [288, 290, \"O\"], [290, 298, \"FIRSTNAME\"], [298, 299, \"O\"], [299, 304, \"LASTNAME\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0060",
+    "query": "Reichert - Kautzer bietet Versicherungsschutz f\u00fcr Notfallmedizinische Verfahren f\u00fcr mehrere Patienten in der Implementation-Branche an. Die Liste der betroffenen Patienten und Schadenszusammenfassungen werden an Jordi_Robel69@yahoo.com gesendet.",
+    "sensitive": [
+      "Reichert - Kautzer",
+      "Implementation",
+      "Jordi_Robel69@yahoo.com"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 18, \"COMPANYNAME\"], [18, 109, \"O\"], [109, 123, \"JOBAREA\"], [123, 212, \"O\"], [212, 235, \"EMAIL\"], [235, 245, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0061",
+    "query": "For expedited processing of academic competition packs, 49255-2143 was allocated with an additional delivery fleet FJ35JBL. The VIN for tracking purposes is V7TDRCKTZ8ZH63631.",
+    "sensitive": [
+      "49255-2143",
+      "FJ35JBL",
+      "V7TDRCKTZ8ZH63631"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 56, \"O\"], [56, 66, \"ZIPCODE\"], [66, 115, \"O\"], [115, 122, \"VEHICLEVRM\"], [122, 157, \"O\"], [157, 174, \"VEHICLEVIN\"], [174, 175, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0062",
+    "query": "Neue Anweisung: \u00dcberpr\u00fcfen Sie immer die Patientendaten wie 3feet3inches und Amber w\u00e4hrend der Notaufnahme. Merken Sie sich das, Chief Optimization Supervisor, um Fehler bei der Patientenbetreuung zu reduzieren.",
+    "sensitive": [
+      "3feet3inches",
+      "Amber",
+      "Chief Optimization Supervisor"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 60, \"O\"], [60, 72, \"HEIGHT\"], [72, 77, \"O\"], [77, 82, \"EYECOLOR\"], [82, 129, \"O\"], [129, 158, \"JOBTITLE\"], [158, 211, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0063",
+    "query": "Nous venons de filtrer le patient \u00e9ligible en utilisant le 898 73 2607 pour les essais cliniques des nouveaux m\u00e9dicaments antiviraux. M\u00e9dicaments en transit, v\u00e9rifiez la commande en utilisant l'URL : https://early-rug.com/.",
+    "sensitive": [
+      "898 73 2607",
+      "https://early-rug.com/"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 59, \"O\"], [59, 70, \"SSN\"], [70, 200, \"O\"], [200, 222, \"URL\"], [222, 223, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0064",
+    "query": "I'm researching about Oncology in pediatric cases, specifically children with Eye color: Amber. I'm going to use my Money Market Account to purchase the necessary materials. Let me know if you need any information.",
+    "sensitive": [
+      "Eye color: Amber",
+      "Money Market Account"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 78, \"O\"], [78, 94, \"EYECOLOR\"], [94, 116, \"O\"], [116, 136, \"ACCOUNTNAME\"], [136, 214, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0065",
+    "query": "L'analyse sanguine du patient 10213675 est pr\u00eate. Taux \u00e9lev\u00e9 de LDL. Executive et le pharmacien concern\u00e9s ont \u00e9t\u00e9 inform\u00e9s \u00e0 ce sujet.",
+    "sensitive": [
+      "10213675",
+      "Executive"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 30, \"O\"], [30, 38, \"ACCOUNTNUMBER\"], [38, 69, \"O\"], [69, 78, \"JOBTYPE\"], [78, 134, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0066",
+    "query": "Dear Nathan, don't forget your eye-wear for the academic competitions. You unique eye-colour Eye color: Blue can be affected by the prolonged screen time. Take care!.",
+    "sensitive": [
+      "Nathan",
+      "Eye color: Blue"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 11, \"FIRSTNAME\"], [11, 93, \"O\"], [93, 108, \"EYECOLOR\"], [108, 166, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0067",
+    "query": "Heads up, Roxanne! Exercise isn't just physical. Join our online mental health sessions starting from 1992-11-24T02:13:42.454Z. Please book using card 5271517930238379.",
+    "sensitive": [
+      "Roxanne",
+      "1992-11-24T02:13:42.454Z",
+      "5271517930238379"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 10, \"O\"], [10, 17, \"FIRSTNAME\"], [17, 102, \"O\"], [102, 126, \"DOB\"], [126, 151, \"O\"], [151, 167, \"MASKEDNUMBER\"], [167, 168, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0068",
+    "query": "Une autorisation de la part de *visa* pour couvrir les frais de la proc\u00e9dure m\u00e9dicale du patient a \u00e9t\u00e9 demand\u00e9e. Toutefois, le *50429254* doit \u00eatre v\u00e9rifi\u00e9 au pr\u00e9alable.",
+    "sensitive": [
+      "visa",
+      "50429254"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 32, \"O\"], [32, 36, \"CREDITCARDISSUER\"], [36, 128, \"O\"], [128, 136, \"ACCOUNTNUMBER\"], [136, 169, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0069",
+    "query": "Patient, Garrett a \u00e9t\u00e9 programm\u00e9 pour une nouvelle visite au d\u00e9partement d'oncologie. Veuillez vous assurer que toutes ses donn\u00e9es, y compris 39-682018-077786-7 et 057-2771 7997, sont confidentielles.",
+    "sensitive": [
+      "Garrett",
+      "39-682018-077786-7",
+      "057-2771 7997"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 9, \"O\"], [9, 16, \"FIRSTNAME\"], [16, 142, \"O\"], [142, 160, \"PHONEIMEI\"], [160, 164, \"O\"], [164, 177, \"PHONENUMBER\"], [177, 200, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0070",
+    "query": "When handling transactions for patient Amely, use the encrypted card number: 8702230127935900 issued by mastercard without revealing the CVV: 806.",
+    "sensitive": [
+      "Amely",
+      "8702230127935900",
+      "mastercard",
+      "806"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 39, \"O\"], [39, 44, \"FIRSTNAME\"], [44, 77, \"O\"], [77, 93, \"CREDITCARDNUMBER\"], [93, 104, \"O\"], [104, 114, \"CREDITCARDISSUER\"], [114, 142, \"O\"], [142, 145, \"CREDITCARDCVV\"], [145, 146, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0071",
+    "query": "Student exchange forms have been received from Addie. Please provide your 19Gq9D7m9ZZ5f1Qn9AqNH8UPZiKM1NnpNN for coordinating financial transactions.",
+    "sensitive": [
+      "Addie",
+      "19Gq9D7m9ZZ5f1Qn9AqNH8UPZiKM1NnpNN"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 47, \"O\"], [47, 52, \"FIRSTNAME\"], [52, 74, \"O\"], [74, 108, \"BITCOINADDRESS\"], [108, 149, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0072",
+    "query": "Hi Alphonso_Adams, Let's create a better, healthier you. Our alternative medicine practices at South Lloydworth will help you get there.",
+    "sensitive": [
+      "Alphonso_Adams",
+      "South Lloydworth"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 17, \"USERNAME\"], [17, 95, \"O\"], [95, 111, \"CITY\"], [111, 136, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0073",
+    "query": "Organizziamo frequentemente attivit\u00e0 per gli studenti. Il 6/61, il nostro Director guider\u00e0 un workshop. Per ulteriori informazioni, controlla l'avviso condiviso su 249.198.151.116. Ricorda, dettagli personali come la data di nascita 1972-05-16T03:54:33.790Z sono confidenziali.",
+    "sensitive": [
+      "6/61",
+      "Director",
+      "249.198.151.116",
+      "1972-05-16T03:54:33.790Z"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 58, \"O\"], [58, 62, \"DOB\"], [62, 74, \"O\"], [74, 82, \"JOBTYPE\"], [82, 164, \"O\"], [164, 179, \"IPV4\"], [179, 233, \"O\"], [233, 257, \"DOB\"], [257, 277, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0074",
+    "query": "Dyfed hat einen Anstieg an Patienten mit Grey festgestellt. K\u00f6nnten Sie uns helfen, Ressourcen anzubieten, die dieser demografischen Gruppe gerecht werden, insbesondere aufgrund Ihrer F\u00e4higkeiten im Bereich Branding?",
+    "sensitive": [
+      "Dyfed",
+      "Grey",
+      "Branding"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"COUNTY\"], [5, 41, \"O\"], [41, 45, \"EYECOLOR\"], [45, 207, \"O\"], [207, 215, \"JOBAREA\"], [215, 216, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0075",
+    "query": "Notice: The results for final assessments involving Accounts curriculum can be viewed through our portal using IP c7c5:f01c:2e38:8aea:cf42:0e8f:cb31:1e7e. For important updates, stay connected on our portal.",
+    "sensitive": [
+      "Accounts",
+      "c7c5:f01c:2e38:8aea:cf42:0e8f:cb31:1e7e"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 52, \"O\"], [52, 60, \"JOBAREA\"], [60, 114, \"O\"], [114, 153, \"IP\"], [153, 207, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0076",
+    "query": "Chandler, la tua richiesta come Senior Research Consultant \u00e8 stata elaborata. I materiali in formato elettronico ti saranno inviati al tuo Obie_Medhurst-Rodriguez60@gmail.com. Per altre domande, chiamaci al 086.547 4531.",
+    "sensitive": [
+      "Chandler",
+      "Senior Research Consultant",
+      "Obie_Medhurst-Rodriguez60@gmail.com",
+      "086.547 4531"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"FIRSTNAME\"], [8, 32, \"O\"], [32, 58, \"JOBTITLE\"], [58, 139, \"O\"], [139, 174, \"EMAIL\"], [174, 207, \"O\"], [207, 219, \"PHONENUMBER\"], [219, 220, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0077",
+    "query": "Aux \u00e9tudiants bas\u00e9s dans Terre-Neuve-et-Labrador, nous tenons \u00e0 vous informer que les r\u00e9sultats de votre examen d'entr\u00e9e seront bient\u00f4t publi\u00e9s sur notre site Web. Gardez votre ID d'inscription et votre Si1M_Z7jGsbO \u00e0 port\u00e9e de main.",
+    "sensitive": [
+      "Terre-Neuve-et-Labrador",
+      "Si1M_Z7jGsbO"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 25, \"O\"], [25, 48, \"STATE\"], [48, 203, \"O\"], [203, 215, \"PASSWORD\"], [215, 233, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0078",
+    "query": "Cher Freeda Gray, Borer, Gulgowski and Greenfelder est impatient d'entamer des discussions concernant votre \u00e9volution de carri\u00e8re. Veuillez partager votre contact 0788.388 2582.",
+    "sensitive": [
+      "Freeda",
+      "Gray",
+      "Borer, Gulgowski and Greenfelder",
+      "0788.388 2582"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 11, \"FIRSTNAME\"], [11, 12, \"O\"], [12, 16, \"MIDDLENAME\"], [16, 18, \"O\"], [18, 50, \"COMPANYNAME\"], [50, 163, \"O\"], [163, 176, \"PHONENUMBER\"], [176, 177, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0079",
+    "query": "We are investigating the effects of personal space on mental health. Would you be comfortable providing access to data tracked at 41.158.65.8 and 1fd1:ed39:a44e:9bce:d0a4:8b6a:bf9a:cc7d?",
+    "sensitive": [
+      "41.158.65.8",
+      "1fd1:ed39:a44e:9bce:d0a4:8b6a:bf9a:cc7d"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 130, \"O\"], [130, 141, \"IPV4\"], [141, 146, \"O\"], [146, 185, \"IPV6\"], [185, 186, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0080",
+    "query": "Following your primary healthcare visit on 2018-08-01T11:45:42.205Z, charges were made on your card 8909717678555367. Please verify.",
+    "sensitive": [
+      "2018-08-01T11:45:42.205Z",
+      "8909717678555367"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 43, \"O\"], [43, 67, \"DATE\"], [67, 100, \"O\"], [100, 116, \"CREDITCARDNUMBER\"], [116, 132, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0081",
+    "query": "Sono Directives presso il Dipartimento di Disabilit\u00e0 di Apprendimento, 8475 Highland Avenue. Di recente ho ricevuto una email sospetta da parte di ade5:6bda:abff:e295:cc92:0baf:009d:b0e3 che chiedeva dettagli personali dei nostri studenti. Volevo solo chiarire che non condividiamo mai informazioni cos\u00ec sensibili.",
+    "sensitive": [
+      "Directives",
+      "8475",
+      "Highland Avenue",
+      "ade5:6bda:abff:e295:cc92:0baf:009d:b0e3"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 15, \"JOBAREA\"], [15, 71, \"O\"], [71, 75, \"BUILDINGNUMBER\"], [75, 76, \"O\"], [76, 91, \"STREET\"], [91, 147, \"O\"], [147, 186, \"IPV6\"], [186, 314, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0082",
+    "query": "Patient LysanneDaugherty, \u00e2g\u00e9 de 92 years ans, originaire du Devon, a consult\u00e9 pour des probl\u00e8mes orthop\u00e9diques. Contactez-le \u00e0 Anne61@yahoo.com ou consultez le compte Savings Account pour les mises \u00e0 jour. Toute transaction financi\u00e8re se fera via mastercard.",
+    "sensitive": [
+      "Lysanne",
+      "Daugherty",
+      "92 years",
+      "Devon",
+      "Anne61@yahoo.com",
+      "Savings Account",
+      "mastercard"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 15, \"FIRSTNAME\"], [15, 24, \"LASTNAME\"], [24, 33, \"O\"], [33, 41, \"AGE\"], [41, 61, \"O\"], [61, 66, \"COUNTY\"], [66, 128, \"O\"], [128, 144, \"EMAIL\"], [144, 168, \"O\"], [168, 183, \"ACCOUNTNAME\"], [183, 248, \"O\"], [248, 258, \"CREDITCARDISSUER\"], [258, 259, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0083",
+    "query": "Comme convenu, nous lan\u00e7ons un programme pilote pour fournir des conseils en \u00e9ducation financi\u00e8re \u00e0 nos \u00e9tudiants. Veuillez pr\u00e9parer un module couvrant le RIB KZ6490341758L4766944, le num\u00e9ro de carte de cr\u00e9dit (5082658180169128) et d'autres concepts importants. Envoyez-le moi pour examen avant de proc\u00e9der.",
+    "sensitive": [
+      "KZ6490341758L4766944",
+      "5082658180169128"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 159, \"O\"], [159, 179, \"IBAN\"], [179, 211, \"O\"], [211, 227, \"CREDITCARDNUMBER\"], [227, 307, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0084",
+    "query": "Don't miss the seminar on breakthroughs in oncology research. Log in using Mozilla/5.0 (X11; Linux i686; rv:6.5) Gecko/20100101 Firefox/6.5.4 on February 15, 1965.",
+    "sensitive": [
+      "Mozilla/5.0 (X11; Linux i686; rv:6.5) Gecko/20100101 Firefox/6.5.4",
+      "February 15, 1965"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 75, \"O\"], [75, 141, \"USERAGENT\"], [141, 145, \"O\"], [145, 162, \"DOB\"], [162, 163, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0085",
+    "query": "Dear Halle, please submit your healthcare policy report to Brandyn.Zboncak@gmail.com and use the password o0jxPao2eP2N to secure the file. We will review it on 08/11/1937.",
+    "sensitive": [
+      "Halle",
+      "Brandyn.Zboncak@gmail.com",
+      "o0jxPao2eP2N",
+      "08/11/1937"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 10, \"FIRSTNAME\"], [10, 59, \"O\"], [59, 84, \"EMAIL\"], [84, 106, \"O\"], [106, 118, \"PASSWORD\"], [118, 160, \"O\"], [160, 170, \"DATE\"], [170, 171, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0086",
+    "query": "Female, located in Suite 530, kindly connect to IP 9ea1:a5e0:4fc3:a4f0:b3e6:fcec:f75d:d1bc to access specialized software for educational assessment. If any issues, contact 62-585134-252827-1.",
+    "sensitive": [
+      "Female",
+      "Suite 530",
+      "9ea1:a5e0:4fc3:a4f0:b3e6:fcec:f75d:d1bc",
+      "62-585134-252827-1"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"SEX\"], [6, 19, \"O\"], [19, 28, \"SECONDARYADDRESS\"], [28, 51, \"O\"], [51, 90, \"IPV6\"], [90, 173, \"O\"], [173, 191, \"PHONEIMEI\"], [191, 192, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0087",
+    "query": "Aktualisierungen f\u00fcr den palliativen Pflegepatienten: Tevin Pagac-Stokes. Bitte beachten Sie die folgenden \u00c4nderungen in ihrer medizinischen Routine. Bei Fragen wenden Sie sich an unser Team unter Ryan.Runolfsdottir58@yahoo.com. Verwenden Sie f\u00fcr die Zahlungsabwicklung die Karte 1717607816629839 mit CVV 785.",
+    "sensitive": [
+      "Tevin",
+      "Pagac-Stokes",
+      "Ryan.Runolfsdottir58@yahoo.com",
+      "1717607816629839",
+      "785"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 54, \"O\"], [54, 59, \"FIRSTNAME\"], [59, 60, \"O\"], [60, 72, \"LASTNAME\"], [72, 197, \"O\"], [197, 227, \"EMAIL\"], [227, 280, \"O\"], [280, 296, \"CREDITCARDNUMBER\"], [296, 305, \"O\"], [305, 308, \"CREDITCARDCVV\"], [308, 309, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0088",
+    "query": "Si richiede la presenza dello studente con Blue e 96 centimeters all'ufficio dell'infermiere.",
+    "sensitive": [
+      "Blue",
+      "96 centimeters"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 43, \"O\"], [43, 47, \"EYECOLOR\"], [47, 50, \"O\"], [50, 64, \"HEIGHT\"], [64, 93, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0089",
+    "query": "Wir laden Sie herzlich ein, unser neuestes Mitglied unseres Curriculum-Entwicklungsteams, Riley, den neuen Principal Interactions Planner, willkommen zu hei\u00dfen.",
+    "sensitive": [
+      "Riley",
+      "Principal Interactions Planner"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 90, \"O\"], [90, 95, \"MIDDLENAME\"], [95, 107, \"O\"], [107, 137, \"JOBTITLE\"], [137, 160, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0090",
+    "query": "Hallo! Patient mit Konto Personal Loan Account Nummer 08473711 wurde angewiesen, unter 70414-8543 Sonneneinstrahlung zu trainieren, was zu einer Verbesserung seines Gesundheitszustands beitragen w\u00fcrde. Ich wollte dich nur dar\u00fcber informieren.",
+    "sensitive": [
+      "Personal Loan Account",
+      "08473711",
+      "70414-8543"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 25, \"O\"], [25, 46, \"ACCOUNTNAME\"], [46, 54, \"O\"], [54, 62, \"ACCOUNTNUMBER\"], [62, 87, \"O\"], [87, 97, \"ZIPCODE\"], [97, 244, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0091",
+    "query": "Cher Bertrand, pouvez-vous v\u00e9rifier le scan 7899867158952729? Le patient sera l\u00e0 \u00e0 7:55am. Essayez de vous concentrer sur le quadrant Northeast. Contactez Mathias si n\u00e9cessaire.",
+    "sensitive": [
+      "Bertrand",
+      "7899867158952729",
+      "7:55am",
+      "Northeast",
+      "Mathias"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 13, \"FIRSTNAME\"], [13, 44, \"O\"], [44, 60, \"MASKEDNUMBER\"], [60, 83, \"O\"], [83, 89, \"TIME\"], [89, 134, \"O\"], [134, 143, \"ORDINALDIRECTION\"], [143, 155, \"O\"], [155, 162, \"FIRSTNAME\"], [162, 177, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0092",
+    "query": "Des PIN uniques 4353, 3427 et 8911 ont \u00e9t\u00e9 attribu\u00e9s aux infirmi\u00e8res pour se connecter aux plateformes de soins num\u00e9riques pour les patients.",
+    "sensitive": [
+      "4353",
+      "3427",
+      "8911"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 16, \"O\"], [16, 20, \"PIN\"], [20, 22, \"O\"], [22, 26, \"PIN\"], [26, 30, \"O\"], [30, 34, \"PIN\"], [34, 141, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0093",
+    "query": "Thank you Leonel66 for your donation to our Sexual and Reproductive Health initiative. Your transaction with Bitcoin address: 1TLfvg9H85335pmTtozmTrvnzAM4 for an amount denoted in Libyan Dinar is confirmed.",
+    "sensitive": [
+      "Leonel66",
+      "1TLfvg9H85335pmTtozmTrvnzAM4",
+      "Libyan Dinar"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 10, \"O\"], [10, 18, \"USERNAME\"], [18, 126, \"O\"], [126, 154, \"BITCOINADDRESS\"], [154, 180, \"O\"], [180, 192, \"CURRENCY\"], [192, 206, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0094",
+    "query": "Hello team, we have planned an interactive session with London, our Future Implementation Designer, to discuss our next Division curriculum. Please join us via 38b2:a33a:e6dc:c3b5:1f21:508c:fed2:8e5c at 2:45pm.",
+    "sensitive": [
+      "London",
+      "Future Implementation Designer",
+      "Division",
+      "38b2:a33a:e6dc:c3b5:1f21:508c:fed2:8e5c",
+      "2:45pm"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 56, \"O\"], [56, 62, \"MIDDLENAME\"], [62, 68, \"O\"], [68, 98, \"JOBTITLE\"], [98, 120, \"O\"], [120, 128, \"JOBAREA\"], [128, 160, \"O\"], [160, 199, \"IPV6\"], [199, 203, \"O\"], [203, 209, \"TIME\"], [209, 210, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0095",
+    "query": "Patientin Genevieve, eine Frau, erlitt einen leichten Herzinfarkt und wurde in die Notaufnahme eingeliefert. Die Behandlungskosten sind betr\u00e4chtlich. Bitte kontaktieren Sie uns unter dieser IMEI-Telefonnummer 03-398792-608105-9, um weitere Informationen zur Zahlung zu erhalten.",
+    "sensitive": [
+      "Genevieve",
+      "03-398792-608105-9"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 10, \"O\"], [10, 19, \"FIRSTNAME\"], [19, 209, \"O\"], [209, 227, \"PHONEIMEI\"], [227, 278, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0096",
+    "query": "Women and children form the base of a healthy future generation. This is why we focus on the well-being of a Male. For more details, provide your current living address (9990, Suite 536).",
+    "sensitive": [
+      "Male",
+      "9990",
+      "Suite 536"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 109, \"O\"], [109, 113, \"SEX\"], [113, 170, \"O\"], [170, 174, \"BUILDINGNUMBER\"], [174, 176, \"O\"], [176, 185, \"SECONDARYADDRESS\"], [185, 187, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0097",
+    "query": "Student Jenifer Lesch, with ID 8904724065627338 sent a concern regarding dorm room conditions on 21th December. Please check the complaint details at https://used-airman.com/.",
+    "sensitive": [
+      "Jenifer",
+      "Lesch",
+      "8904724065627338",
+      "21th December",
+      "https://used-airman.com/"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 15, \"FIRSTNAME\"], [15, 16, \"O\"], [16, 21, \"LASTNAME\"], [21, 31, \"O\"], [31, 47, \"MASKEDNUMBER\"], [47, 97, \"O\"], [97, 110, \"DATE\"], [110, 150, \"O\"], [150, 174, \"URL\"], [174, 175, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0098",
+    "query": "Dear Foster, As Direct Program Officer, we would like you assist in formulating our STEM curriculum for Suite 434 and share your performance report for the past quarter.",
+    "sensitive": [
+      "Foster",
+      "Direct Program Officer",
+      "Suite 434"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 11, \"FIRSTNAME\"], [11, 16, \"O\"], [16, 38, \"JOBTITLE\"], [38, 104, \"O\"], [104, 113, \"SECONDARYADDRESS\"], [113, 169, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0099",
+    "query": "Patient 24865120 hat starke Reaktionen auf das neue Medikament gezeigt. Kontaktieren Sie den entsprechenden Agent f\u00fcr erforderliche Ma\u00dfnahmen.",
+    "sensitive": [
+      "24865120",
+      "Agent"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 16, \"ACCOUNTNUMBER\"], [16, 108, \"O\"], [108, 113, \"JOBTYPE\"], [113, 142, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0100",
+    "query": "Bitte best\u00e4tigen Sie Ihr Verst\u00e4ndnis f\u00fcr Vertraulichkeit und Patientendaten, unabh\u00e4ngig davon, ob es sich um Daten wie 657 24 6881 oder 89-330091-378826-5 handelt.",
+    "sensitive": [
+      "657 24 6881",
+      "89-330091-378826-5"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 119, \"O\"], [119, 130, \"SSN\"], [130, 136, \"O\"], [136, 154, \"PHONEIMEI\"], [154, 163, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0101",
+    "query": "Cari studenti Female, secondo il nostro codice di condotta basato su 38281, \u00e8 importante attenersi alle nostre regole sull'uniforme per una disciplina migliore e una maggiore concentrazione sul nostro curriculum orientato all'Infrastructure.",
+    "sensitive": [
+      "Female",
+      "38281",
+      "Infrastructure"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 14, \"O\"], [14, 20, \"SEX\"], [20, 69, \"O\"], [69, 74, \"ZIPCODE\"], [74, 226, \"O\"], [226, 240, \"JOBAREA\"], [240, 241, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0102",
+    "query": "Avviso a Genderqueer, gli studenti che accedono a siti non autorizzati dall'IP a81c:c9e8:e842:aaa3:c54f:19ce:ccce:d7df durante le lezioni online saranno soggetti a misure disciplinari.",
+    "sensitive": [
+      "Genderqueer",
+      "a81c:c9e8:e842:aaa3:c54f:19ce:ccce:d7df"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 9, \"O\"], [9, 20, \"GENDER\"], [20, 79, \"O\"], [79, 118, \"IP\"], [118, 184, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0103",
+    "query": "Auto Loan Account Investment Account belong to patient 752-46-6619 are safe encrypted.",
+    "sensitive": [
+      "Investment Account",
+      "752-46-6619"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 18, \"O\"], [18, 36, \"ACCOUNTNAME\"], [36, 55, \"O\"], [55, 66, \"SSN\"], [66, 86, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0104",
+    "query": "Le Integration de notre clinique a d\u00e9velopp\u00e9 un nouvel outil pour les consultations \u00e0 distance pour nos patients \u00e2g\u00e9s de 40 years old.",
+    "sensitive": [
+      "Integration",
+      "40 years old"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 14, \"JOBAREA\"], [14, 121, \"O\"], [121, 133, \"AGE\"], [133, 134, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0105",
+    "query": "Hallo! Ich habe euer Studenten-Freiwilligenprogramm auf eurer Website https://sandy-half-brother.com gefunden. Als Producer w\u00fcrde ich gerne daran teilnehmen. Mehr Details bitte. Ich bin 34 years.",
+    "sensitive": [
+      "https://sandy-half-brother.com",
+      "Producer",
+      "34 years"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 70, \"O\"], [70, 100, \"URL\"], [100, 115, \"O\"], [115, 123, \"JOBTYPE\"], [123, 186, \"O\"], [186, 194, \"AGE\"], [194, 195, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0106",
+    "query": "Ciao Libby, il tuo feedback sulle lezioni del Professor Toy sar\u00e0 molto apprezzato. Il modulo di valutazione sar\u00e0 inviato alla tua email Lonnie82@hotmail.com il January 20, 1982.",
+    "sensitive": [
+      "Libby",
+      "Toy",
+      "Lonnie82@hotmail.com",
+      "January 20, 1982"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 10, \"FIRSTNAME\"], [10, 56, \"O\"], [56, 59, \"LASTNAME\"], [59, 136, \"O\"], [136, 156, \"EMAIL\"], [156, 160, \"O\"], [160, 176, \"DATE\"], [176, 177, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0107",
+    "query": "Au nom de notre \u00c9quipe de D\u00e9fense des Patients, nous vous remercions d'avoir choisi de faire du b\u00e9n\u00e9volat avec nous. Nous nous assurons que toutes nos communications avec les patients sont s\u00e9curis\u00e9es, veuillez donc fournir votre adresse Bitcoin personnelle 1XGdB23CFFHZKqLtaWkNWpSBgFShHvDvf pour les dons. Informations personnelles - Hauteur 100centimeters enregistr\u00e9es dans le syst\u00e8me.",
+    "sensitive": [
+      "1XGdB23CFFHZKqLtaWkNWpSBgFShHvDvf",
+      "100centimeters"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 257, \"O\"], [257, 290, \"BITCOINADDRESS\"], [290, 342, \"O\"], [342, 356, \"HEIGHT\"], [356, 386, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0108",
+    "query": "Cher(e) Erika.Heaney, l'heure de votre examen est fix\u00e9e \u00e0 9 PM. Assurez-vous de mettre \u00e0 jour votre syst\u00e8me vers la version compatible avec Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6.7; rv:12.0) Gecko/20100101 Firefox/12.0.9.",
+    "sensitive": [
+      "Erika.Heaney",
+      "9 PM",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6.7; rv:12.0) Gecko/20100101 Firefox/12.0.9"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 20, \"USERNAME\"], [20, 58, \"O\"], [58, 62, \"TIME\"], [62, 140, \"O\"], [140, 225, \"USERAGENT\"], [225, 226, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0109",
+    "query": "Bitte best\u00e4tigen Sie den Erhalt dieser E-Mail, indem Sie Ihre AKZEPTANZ mit Ethereum-Adresse, 0x016c45e97df398dac362a5864f0f0ec125cae2b1, f\u00fcr den Response Studentenaustausch zur\u00fcckschicken. Bitte stellen Sie sicher, dass alle Details korrekt ausgef\u00fcllt sind.",
+    "sensitive": [
+      "0x016c45e97df398dac362a5864f0f0ec125cae2b1",
+      "Response"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 94, \"O\"], [94, 136, \"ETHEREUMADDRESS\"], [136, 146, \"O\"], [146, 154, \"JOBAREA\"], [154, 258, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0110",
+    "query": "Dr.Margaretta, le patient 515 34 1370 souhaite discuter de sa routine personnelle. Rencontrons-nous le 22th June.",
+    "sensitive": [
+      "Dr",
+      "Margaretta",
+      "515 34 1370",
+      "22th June"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"PREFIX\"], [3, 13, \"FIRSTNAME\"], [13, 26, \"O\"], [26, 37, \"SSN\"], [37, 103, \"O\"], [103, 112, \"DATE\"], [112, 113, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0111",
+    "query": "Hi Major, we will enter team Metrics into the inter-school champs. Your contribution will be appreciated.",
+    "sensitive": [
+      "Major",
+      "Metrics"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 8, \"FIRSTNAME\"], [8, 29, \"O\"], [29, 36, \"JOBAREA\"], [36, 105, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0112",
+    "query": "Sawyer ici - impatient de commencer \u00e0 travailler avec nos stagiaires la semaine prochaine \u00e0 Suite 447. \u00c0 votre arriv\u00e9e, veuillez vous connecter \u00e0 notre r\u00e9seau wifi s\u00e9curis\u00e9. Le mot de passe est IqjUct7mTvkk.",
+    "sensitive": [
+      "Sawyer",
+      "Suite 447",
+      "IqjUct7mTvkk"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"MIDDLENAME\"], [6, 92, \"O\"], [92, 101, \"SECONDARYADDRESS\"], [101, 194, \"O\"], [194, 206, \"PASSWORD\"], [206, 207, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0113",
+    "query": "Les donn\u00e9es de paiement de sant\u00e9 primaire du patient Erick.Mertz semblent incoh\u00e9rentes. V\u00e9rifiez votre 2505298662400589 et les d\u00e9tails de l'\u00e9metteur.",
+    "sensitive": [
+      "Erick.Mertz",
+      "2505298662400589"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 53, \"O\"], [53, 64, \"USERNAME\"], [64, 103, \"O\"], [103, 119, \"CREDITCARDNUMBER\"], [119, 149, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0114",
+    "query": "Ich ben\u00f6tige die Daten von den Impfungen, die unseren Patientinnen (Female) letzten Monat gegeben wurden, Maximo. Ich habe sie in der Verschl\u00fcsselung hinterlegt, gesch\u00fctzt mit AD8LZsmWNzHg. Stellen Sie sicher, dass Sie schnell auf die Informationen zugreifen k\u00f6nnen.",
+    "sensitive": [
+      "Female",
+      "Maximo",
+      "AD8LZsmWNzHg"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 68, \"O\"], [68, 74, \"SEX\"], [74, 106, \"O\"], [106, 112, \"FIRSTNAME\"], [112, 176, \"O\"], [176, 188, \"PASSWORD\"], [188, 266, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0115",
+    "query": "I'm considering taking a course on crystal healing. Sounds a bit out there, I know. But, there\u2019s a school in Apple Valley offering classes. Contact me at 3wvFDZdXZVow1qJHNfoAjXi7cXBWoN regarding the fee.",
+    "sensitive": [
+      "Apple Valley",
+      "3wvFDZdXZVow1qJHNfoAjXi7cXBWoN"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 109, \"O\"], [109, 121, \"CITY\"], [121, 154, \"O\"], [154, 184, \"BITCOINADDRESS\"], [184, 203, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0116",
+    "query": "Hello Hollis, I'm working on a case study of a 19 years Female. I could benefit from your expertise in Geriatric Psychology, especially regarding age-related cognitive changes.",
+    "sensitive": [
+      "Hollis",
+      "19 years",
+      "Female"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"O\"], [6, 12, \"FIRSTNAME\"], [12, 47, \"O\"], [47, 55, \"AGE\"], [55, 56, \"O\"], [56, 62, \"SEX\"], [62, 176, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0117",
+    "query": "Dear Corene, regarding your upcoming teacher training, please use the GPS coordinate [-69.1279,6.7246] for the location of the workshop. Please drive safely!",
+    "sensitive": [
+      "Corene",
+      "[-69.1279,6.7246]"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 11, \"FIRSTNAME\"], [11, 85, \"O\"], [85, 102, \"NEARBYGPSCOORDINATE\"], [102, 157, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0118",
+    "query": "Could you sign off on patient Celestine's billing? We're seeing an Account number of 07518742, a credit card number 7466753735146546, and CVV 308. Also, kindly note down her job type: Designer.",
+    "sensitive": [
+      "Celestine",
+      "07518742",
+      "7466753735146546",
+      "308",
+      "Designer"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 30, \"O\"], [30, 39, \"FIRSTNAME\"], [39, 85, \"O\"], [85, 93, \"ACCOUNTNUMBER\"], [93, 116, \"O\"], [116, 132, \"CREDITCARDNUMBER\"], [132, 142, \"O\"], [142, 145, \"CREDITCARDCVV\"], [145, 184, \"O\"], [184, 192, \"JOBTYPE\"], [192, 193, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0119",
+    "query": "Notre assistante des op\u00e9rations d'entreprise, River, a rencontr\u00e9 un probl\u00e8me avec les dossiers des patients. L'adresse IP 181.9.143.80 associ\u00e9e aux transactions n\u00e9cessite une attention imm\u00e9diate.",
+    "sensitive": [
+      "River",
+      "181.9.143.80"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 46, \"O\"], [46, 51, \"MIDDLENAME\"], [51, 122, \"O\"], [122, 134, \"IPV4\"], [134, 195, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0120",
+    "query": "Good evening. I am Maynard Klein, the legal attorney for patient 3087948057562811. I would like to access their records concerning the ongoing case.",
+    "sensitive": [
+      "Maynard",
+      "Klein",
+      "3087948057562811"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 19, \"O\"], [19, 26, \"FIRSTNAME\"], [26, 27, \"O\"], [27, 32, \"LASTNAME\"], [32, 65, \"O\"], [65, 81, \"MASKEDNUMBER\"], [81, 148, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0121",
+    "query": "Building 33053, Naomi Shoals in Abruzzo will be the new center for the global education initiative. Our aim: everyone has right to quality education.",
+    "sensitive": [
+      "33053",
+      "Naomi Shoals",
+      "Abruzzo"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 9, \"O\"], [9, 14, \"BUILDINGNUMBER\"], [14, 16, \"O\"], [16, 28, \"STREET\"], [28, 32, \"O\"], [32, 39, \"STATE\"], [39, 149, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0122",
+    "query": "Ensure to navigate to the correct longitude [0.0325,-154.101] for the venue of the academic competitions Mac. Best of luck!",
+    "sensitive": [
+      "[0.0325,-154.101]",
+      "Mac"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 44, \"O\"], [44, 61, \"NEARBYGPSCOORDINATE\"], [61, 105, \"O\"], [105, 108, \"FIRSTNAME\"], [108, 123, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0123",
+    "query": "Patient Joel, pour suivre votre appareil m\u00e9dical, veuillez partager l'adresse 08:85:09:aa:37:e3 de votre appareil, c'est crucial.",
+    "sensitive": [
+      "Joel",
+      "08:85:09:aa:37:e3"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 12, \"FIRSTNAME\"], [12, 78, \"O\"], [78, 95, \"MAC\"], [95, 129, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0124",
+    "query": "The annual school nutrition day is scheduled for March 10, 1932. We would need your financial support. Please use school's account AE750473810066195545664 to make your donations.",
+    "sensitive": [
+      "March 10, 1932",
+      "AE750473810066195545664"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 49, \"O\"], [49, 63, \"DOB\"], [63, 131, \"O\"], [131, 154, \"IBAN\"], [154, 178, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0125",
+    "query": "Der 5 years old-j\u00e4hrige Female-Patient, dem das Ger\u00e4t 8b:99:1b:03:3b:b5 zugewiesen ist, zeigt fr\u00fche Anzeichen einer Besserung. Diese Anzeichen best\u00e4tigen die Effizienz unserer intensiven Behandlungsprotokolle.",
+    "sensitive": [
+      "5 years old",
+      "Female",
+      "8b:99:1b:03:3b:b5"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"O\"], [4, 15, \"AGE\"], [15, 24, \"O\"], [24, 30, \"SEX\"], [30, 54, \"O\"], [54, 71, \"MAC\"], [71, 209, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0126",
+    "query": "Discutez avec Liaison de la mise en place d'une proc\u00e9dure chirurgicale de r\u00e9cup\u00e9ration pour les patients dans le Hamilton County.",
+    "sensitive": [
+      "Liaison",
+      "Hamilton County"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 14, \"O\"], [14, 21, \"JOBTYPE\"], [21, 113, \"O\"], [113, 128, \"COUNTY\"], [128, 129, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0127",
+    "query": "Male-Patient mit SSN 337 33 5247 hat einen Anspruch auf \u00e4rztliche Fehler geltend gemacht. Erfordert sofortige Aufmerksamkeit. Ref. Fall Nr: 08618991.",
+    "sensitive": [
+      "Male",
+      "337 33 5247",
+      "08618991"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"SEX\"], [4, 21, \"O\"], [21, 32, \"SSN\"], [32, 140, \"O\"], [140, 148, \"ACCOUNTNUMBER\"], [148, 149, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0128",
+    "query": "Der Patient auf 37948 hat nach einem Ger\u00e4t mit MAC-Adresse fa:0c:f9:73:90:60 gefragt. Wei\u00df jemand, worum es dabei geht?",
+    "sensitive": [
+      "37948",
+      "fa:0c:f9:73:90:60"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 16, \"O\"], [16, 21, \"BUILDINGNUMBER\"], [21, 59, \"O\"], [59, 76, \"MAC\"], [76, 119, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0129",
+    "query": "Notre patient Female de la localisation 38864 a besoin d'une IRM. Pr\u00e9paration de la salle de proc\u00e9dure d'imagerie avec la machine 250.37.155.25.",
+    "sensitive": [
+      "Female",
+      "38864",
+      "250.37.155.25"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 14, \"O\"], [14, 20, \"SEX\"], [20, 40, \"O\"], [40, 45, \"ZIPCODE\"], [45, 130, \"O\"], [130, 143, \"IP\"], [143, 144, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0130",
+    "query": "Hello, this is to confirm that we have received 20.1855k Colombian Peso for your neuropsychology course, transaction ID: 18rXniwANpSjA6EseYbjtd8qDT. You have successfully secured your place in the course now.",
+    "sensitive": [
+      "20.1855k",
+      "Colombian Peso",
+      "18rXniwANpSjA6EseYbjtd8qDT"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 48, \"O\"], [48, 56, \"AMOUNT\"], [56, 57, \"O\"], [57, 71, \"CURRENCY\"], [71, 121, \"O\"], [121, 147, \"BITCOINADDRESS\"], [147, 208, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0131",
+    "query": "La chimio-immunoth\u00e9rapie avec un sch\u00e9ma th\u00e9rapeutique SEFC modifi\u00e9 pourrait \u00eatre une nouvelle option th\u00e9rapeutique pour les patients atteints de lymphome NK/T r\u00e9cidivant/r\u00e9fractaire. Cela a \u00e9t\u00e9 d\u00e9couvert dans Ohio. Les informations financi\u00e8res et autres d\u00e9tails sensibles peuvent \u00eatre trouv\u00e9s \u00e0 l'adresse 1z5RyaSgbvY56gY5mzKntNiXgg5md4vLzET9Q.",
+    "sensitive": [
+      "Ohio",
+      "1z5RyaSgbvY56gY5mzKntNiXgg5md4vLzET9Q"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 209, \"O\"], [209, 213, \"STATE\"], [213, 305, \"O\"], [305, 342, \"BITCOINADDRESS\"], [342, 343, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0132",
+    "query": "A new Female student from 37646 has shown marked improvement over the past weeks. We are delighted at her progress.",
+    "sensitive": [
+      "Female",
+      "37646"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"O\"], [6, 12, \"SEX\"], [12, 26, \"O\"], [26, 31, \"ZIPCODE\"], [31, 115, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0133",
+    "query": "Pendant la proc\u00e9dure Supervisor, le patient 628 76 1659 a subi des blessures. Il r\u00e9side au 4781 Apt. 468, Johnson County. Contactez-le au t\u00e9l\u00e9phone 54-544584-842679-6.",
+    "sensitive": [
+      "Supervisor",
+      "628 76 1659",
+      "4781",
+      "Apt. 468",
+      "Johnson County",
+      "54-544584-842679-6"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 21, \"O\"], [21, 31, \"JOBTYPE\"], [31, 44, \"O\"], [44, 55, \"SSN\"], [55, 91, \"O\"], [91, 95, \"BUILDINGNUMBER\"], [95, 96, \"O\"], [96, 104, \"SECONDARYADDRESS\"], [104, 106, \"O\"], [106, 120, \"COUNTY\"], [120, 148, \"O\"], [148, 166, \"PHONEIMEI\"], [166, 167, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0134",
+    "query": "Dear Sheldon Rogahn, could you please provide a comprehensive report on the latest trends in social psychology by 12 o'clock today?",
+    "sensitive": [
+      "Sheldon",
+      "Rogahn",
+      "12 o'clock"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 12, \"FIRSTNAME\"], [12, 13, \"O\"], [13, 19, \"LASTNAME\"], [19, 114, \"O\"], [114, 124, \"TIME\"], [124, 131, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0135",
+    "query": "Per domande sullo sviluppo del curriculum, puoi contattare il nostro specialista in Factors, Reign, in qualsiasi momento al numero fd15:cb94:010b:cc12:02bf:1f20:4eea:c5d2.",
+    "sensitive": [
+      "Factors",
+      "Reign",
+      "fd15:cb94:010b:cc12:02bf:1f20:4eea:c5d2"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 84, \"O\"], [84, 91, \"JOBAREA\"], [91, 93, \"O\"], [93, 98, \"MIDDLENAME\"], [98, 131, \"O\"], [131, 170, \"IPV6\"], [170, 171, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0136",
+    "query": "Eine Konsultation am 11/76 wurde f\u00fcr den 19 years Jahre alten Patienten aus Worcestershire angefordert, der etwa 1.08m gro\u00df ist. Die Anfrage wurde von 197.90.34.199 gestellt.",
+    "sensitive": [
+      "11/76",
+      "19 years",
+      "Worcestershire",
+      "1.08m",
+      "197.90.34.199"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 21, \"O\"], [21, 26, \"DATE\"], [26, 41, \"O\"], [41, 49, \"AGE\"], [49, 76, \"O\"], [76, 90, \"COUNTY\"], [90, 113, \"O\"], [113, 118, \"HEIGHT\"], [118, 151, \"O\"], [151, 164, \"IPV4\"], [164, 174, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0137",
+    "query": "During this week's checkup, patient Melvin Hyatt-Kautzer, aged 31 years with SSN 75613856990, expressed discomfort in his Newfoundland and Labrador. We advise the immediate application of relevant treatments.",
+    "sensitive": [
+      "Melvin",
+      "Hyatt-Kautzer",
+      "31 years",
+      "75613856990",
+      "Newfoundland and Labrador"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 36, \"O\"], [36, 42, \"FIRSTNAME\"], [42, 43, \"O\"], [43, 56, \"LASTNAME\"], [56, 63, \"O\"], [63, 71, \"AGE\"], [71, 81, \"O\"], [81, 92, \"SSN\"], [92, 122, \"O\"], [122, 147, \"STATE\"], [147, 208, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0138",
+    "query": "Patient Corey, Ihre Sitzungsnotizen wurden an die sekund\u00e4re Adresse Apt. 419 zusammen mit Ihrer Rechnung gesendet. Die Rechnung kann mit der Endung 9585923148406197 der Kreditkartennummer 3248320628821097 oder den Bankdetails SI22690050527629669 beglichen werden.",
+    "sensitive": [
+      "Corey",
+      "Apt. 419",
+      "9585923148406197",
+      "3248320628821097",
+      "SI22690050527629669"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 13, \"MIDDLENAME\"], [13, 68, \"O\"], [68, 76, \"SECONDARYADDRESS\"], [76, 148, \"O\"], [148, 164, \"MASKEDNUMBER\"], [164, 188, \"O\"], [188, 204, \"CREDITCARDNUMBER\"], [204, 226, \"O\"], [226, 245, \"IBAN\"], [245, 263, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0139",
+    "query": "Un patient avec votre pr\u00e9nom, Karli, et la m\u00eame taille, 164centimeters, s'est inscrit chez nous. Veuillez confirmer si votre 5458149064817763 correspond au sien. Il s'agit d'une mesure de s\u00e9curit\u00e9 visant \u00e0 prot\u00e9ger votre vie priv\u00e9e.",
+    "sensitive": [
+      "Karli",
+      "164centimeters",
+      "5458149064817763"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 30, \"O\"], [30, 35, \"FIRSTNAME\"], [35, 56, \"O\"], [56, 70, \"HEIGHT\"], [70, 125, \"O\"], [125, 141, \"MASKEDNUMBER\"], [141, 232, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0140",
+    "query": "Just noticed a transaction denoted in HKD using your IBAN (IE38877D70406307503796) in the system. Kindly confirm if you've made this transaction for mental health services.",
+    "sensitive": [
+      "HKD",
+      "IE38877D70406307503796"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 38, \"O\"], [38, 41, \"CURRENCYCODE\"], [41, 59, \"O\"], [59, 81, \"IBAN\"], [81, 172, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0141",
+    "query": "Nous avons besoin de votre autorisation pour collecter plus d'informations concernant 20-557898-172775-1 pour les services d'assistance aux patients. Les donn\u00e9es seront accessibles en utilisant l'adresse IP s\u00e9curis\u00e9e 476c:ceff:fe1a:e9d4:eb93:4ac4:a61d:dbf7.",
+    "sensitive": [
+      "20-557898-172775-1",
+      "476c:ceff:fe1a:e9d4:eb93:4ac4:a61d:dbf7"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 86, \"O\"], [86, 104, \"PHONEIMEI\"], [104, 217, \"O\"], [217, 256, \"IPV6\"], [256, 257, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0142",
+    "query": "Dear Haley, we have set up a special curriculum for your child. Visit https://formal-subroutine.org to learn more. Message Elsa.Rutherford85@gmail.com if you have queries.",
+    "sensitive": [
+      "Haley",
+      "https://formal-subroutine.org",
+      "Elsa.Rutherford85@gmail.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 10, \"FIRSTNAME\"], [10, 70, \"O\"], [70, 99, \"URL\"], [99, 123, \"O\"], [123, 150, \"EMAIL\"], [150, 171, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0143",
+    "query": "Female patient admitted at 21:30. Birthday noted as 25/09/1994.",
+    "sensitive": [
+      "Female",
+      "21:30",
+      "25/09/1994"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"SEX\"], [6, 27, \"O\"], [27, 32, \"TIME\"], [32, 52, \"O\"], [52, 62, \"DOB\"], [62, 63, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0144",
+    "query": "Une diminution cognitive notable chez les patients \u00e2g\u00e9s de 87 years old \u00e0 Suite 716.",
+    "sensitive": [
+      "87 years old",
+      "Suite 716"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 59, \"O\"], [59, 71, \"AGE\"], [71, 74, \"O\"], [74, 83, \"SECONDARYADDRESS\"], [83, 84, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0145",
+    "query": "En examinant la sc\u00e8ne de crime situ\u00e9e \u00e0 Rohan Way num\u00e9ro 4791, les images de vid\u00e9osurveillance fournissent des preuves importantes. J'ai besoin de votre analyse avant 11:50 PM.",
+    "sensitive": [
+      "Rohan Way",
+      "4791",
+      "11:50 PM"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 40, \"O\"], [40, 49, \"STREET\"], [49, 57, \"O\"], [57, 61, \"BUILDINGNUMBER\"], [61, 167, \"O\"], [167, 175, \"TIME\"], [175, 176, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0146",
+    "query": "Les besoins alimentaires du patient Alene sont enregistr\u00e9s dans notre syst\u00e8me s\u00e9curis\u00e9 avec le mot de passe sv5ApPOhX0tj. Veuillez vous connecter depuis les postes de travail d\u00e9sign\u00e9s en utilisant le navigateur Opera/13.15 (X11; Linux i686; U; IS Presto/2.9.163 Version/12.00).",
+    "sensitive": [
+      "Alene",
+      "sv5ApPOhX0tj",
+      "Opera/13.15 (X11; Linux i686; U; IS Presto/2.9.163 Version/12.00)"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 36, \"O\"], [36, 41, \"FIRSTNAME\"], [41, 108, \"O\"], [108, 120, \"PASSWORD\"], [120, 211, \"O\"], [211, 276, \"USERAGENT\"], [276, 277, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0147",
+    "query": "\"Dear Miguel, we've received multiple queries about the $38721.65 donation for the library fund drive. The donation isn't compulsory, but it would greatly help us upgrade our existing resources for all students. If you'd like to contribute, the school's Bitcoin address is 3DTajqxNu5SUHurQD7eEZkP2a2JN711QwUj6. - Dora Ullrich, PTA Treasurer.\"",
+    "sensitive": [
+      "Miguel",
+      "38721.65",
+      "3DTajqxNu5SUHurQD7eEZkP2a2JN711QwUj6",
+      "Dora",
+      "Ullrich"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"O\"], [6, 12, \"FIRSTNAME\"], [12, 57, \"O\"], [57, 65, \"AMOUNT\"], [65, 273, \"O\"], [273, 309, \"BITCOINADDRESS\"], [309, 313, \"O\"], [313, 317, \"FIRSTNAME\"], [317, 318, \"O\"], [318, 325, \"LASTNAME\"], [325, 342, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0148",
+    "query": "Dear Jaquelin, the Direct Usability Producer has forwarded your report for age-46 years old healthy living and geriatric medicines best suited to you. Your health record number is 75615679418. Do not share this detail.",
+    "sensitive": [
+      "Jaquelin",
+      "Direct Usability Producer",
+      "46 years old",
+      "75615679418"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 13, \"FIRSTNAME\"], [13, 19, \"O\"], [19, 44, \"JOBTITLE\"], [44, 79, \"O\"], [79, 91, \"AGE\"], [91, 180, \"O\"], [180, 191, \"SSN\"], [191, 218, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0149",
+    "query": "To 60.178.128.199, your medical records were accessed from a non-registered device. Kindly change your cwarMFrWOm84 as a step of security and update your Patient Advocate.",
+    "sensitive": [
+      "60.178.128.199",
+      "cwarMFrWOm84"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 17, \"IP\"], [17, 103, \"O\"], [103, 115, \"PASSWORD\"], [115, 171, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0150",
+    "query": "Marcia, une patiente Trans, est attendue pour son suivi le 1931-08-02T00:02:38.786Z. Sa taille est de 173cm et elle a Eye color: Blue distinctif.",
+    "sensitive": [
+      "Trans",
+      "1931-08-02T00:02:38.786Z",
+      "173cm",
+      "Eye color: Blue"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 21, \"O\"], [21, 26, \"GENDER\"], [26, 59, \"O\"], [59, 83, \"DATE\"], [83, 102, \"O\"], [102, 107, \"HEIGHT\"], [107, 118, \"O\"], [118, 133, \"EYECOLOR\"], [133, 145, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0151",
+    "query": "As per Lenora's request, we have assigned a Dynamic Optimization Assistant to coordinate the necessary mental health support. Please update Vena to expect an email confirmation with further instructions.",
+    "sensitive": [
+      "Lenora",
+      "Dynamic Optimization Assistant",
+      "Vena"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 7, \"O\"], [7, 13, \"FIRSTNAME\"], [13, 44, \"O\"], [44, 74, \"JOBTITLE\"], [74, 140, \"O\"], [140, 144, \"FIRSTNAME\"], [144, 203, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0152",
+    "query": "Wir haben den neuen Lehrplan f\u00fcr unsere Research von IP bc6b:bc8b:0a2b:3aef:eeaf:a4ab:20a4:aad3 durch Shemar34 erhalten.",
+    "sensitive": [
+      "Research",
+      "bc6b:bc8b:0a2b:3aef:eeaf:a4ab:20a4:aad3",
+      "Shemar34"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 40, \"O\"], [40, 48, \"JOBAREA\"], [48, 56, \"O\"], [56, 95, \"IPV6\"], [95, 102, \"O\"], [102, 110, \"USERNAME\"], [110, 120, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0153",
+    "query": "Wir haben gerade ein Online-Bildungsprojekt gestartet, das global zug\u00e4nglich ist. Wir erwarten 2590113571395471 Studenten aus der Northwest-Region. Melden Sie sich mit Ihrer E-Mail Esteban_Waelchi-Champlin@yahoo.com an und lassen Sie uns gemeinsam die Bildungsl\u00fccke schlie\u00dfen.",
+    "sensitive": [
+      "2590113571395471",
+      "Northwest",
+      "Esteban_Waelchi-Champlin@yahoo.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 95, \"O\"], [95, 111, \"MASKEDNUMBER\"], [111, 130, \"O\"], [130, 139, \"ORDINALDIRECTION\"], [139, 181, \"O\"], [181, 215, \"EMAIL\"], [215, 276, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0154",
+    "query": "I have received an email about 66179 healthcare accessibility. It was saying something about the Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.3; Trident/4.1; .NET CLR 3.5.17888.4). Can you please check it out?",
+    "sensitive": [
+      "66179",
+      "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.3; Trident/4.1; .NET CLR 3.5.17888.4)"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 31, \"O\"], [31, 36, \"ZIPCODE\"], [36, 97, \"O\"], [97, 182, \"USERAGENT\"], [182, 212, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0155",
+    "query": "The upcoming field trip might give us a glimpse of Grey species of birds rarely seen in our area. Lead by professionals from the Wildlife Society, it's an exciting opportunity for students. Please send the payment of Boliviano boliviano 100 to our CR39277955068007800475.",
+    "sensitive": [
+      "Grey",
+      "Boliviano boliviano",
+      "CR39277955068007800475"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 51, \"O\"], [51, 55, \"EYECOLOR\"], [55, 217, \"O\"], [217, 236, \"CURRENCY\"], [236, 248, \"O\"], [248, 270, \"IBAN\"], [270, 271, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0156",
+    "query": "Bitte beachten Sie, Ihre Physiotherapie-Sitzung wurde f\u00fcr 7:21 AM geplant. Wir haben Ihre K\u00f6rpergr\u00f6\u00dfe als 168 cm notiert und wie von Ihnen gew\u00fcnscht wurde Ihre Zahlung unter Ber\u00fccksichtigung der Patientenprivatsph\u00e4re durch die Kontonummer 1945056963814747 geleistet.",
+    "sensitive": [
+      "7:21 AM",
+      "168 cm",
+      "1945056963814747"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 58, \"O\"], [58, 65, \"TIME\"], [65, 106, \"O\"], [106, 112, \"HEIGHT\"], [112, 239, \"O\"], [239, 255, \"MASKEDNUMBER\"], [255, 266, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0157",
+    "query": "Am March 3, 1942 wurde der Patient 756.8899.3872 von einem National Data Planner operiert. Eine formelle Klage wegen Fahrl\u00e4ssigkeit wurde eingereicht. Bitte pr\u00fcfen Sie dies umgehend.",
+    "sensitive": [
+      "March 3, 1942",
+      "756.8899.3872",
+      "National Data Planner"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 3, \"O\"], [3, 16, \"DATE\"], [16, 35, \"O\"], [35, 48, \"SSN\"], [48, 59, \"O\"], [59, 80, \"JOBTITLE\"], [80, 182, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0158",
+    "query": "Cliniques dans le County Fermanagh - Besoin d'informations sur le patient 63 years old. Difficult\u00e9s li\u00e9es aux limitations de la l\u00e9gislation sur les soins de sant\u00e9.",
+    "sensitive": [
+      "County Fermanagh",
+      "63 years old"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 18, \"O\"], [18, 34, \"COUNTY\"], [34, 74, \"O\"], [74, 86, \"AGE\"], [86, 163, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0159",
+    "query": "Mrs. Ellis, I refer to our conversation about the patient in 322 ICU. Born on April 23, 1986, she's 98 years old old and has brown eyes. Her phone imei: 07-786085-494647-7, SSN: 389 61 7968. Please ensure her family is updated regularly.",
+    "sensitive": [
+      "Mrs",
+      "Ellis",
+      "322",
+      "April 23, 1986",
+      "98 years old",
+      "brown",
+      "07-786085-494647-7",
+      "389 61 7968"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"PREFIX\"], [4, 5, \"O\"], [5, 10, \"MIDDLENAME\"], [10, 61, \"O\"], [61, 64, \"BUILDINGNUMBER\"], [64, 78, \"O\"], [78, 92, \"DOB\"], [92, 100, \"O\"], [100, 112, \"AGE\"], [112, 125, \"O\"], [125, 130, \"EYECOLOR\"], [130, 153, \"O\"], [153, 171, \"PHONEIMEI\"], [171, 178, \"O\"], [178, 189, \"SSN\"], [189, 237, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0160",
+    "query": "L'acc\u00e8s aux dossiers m\u00e9dicaux du patient Jillian, y compris des informations sensibles telles que la date de naissance 03/03/1939 et le num\u00e9ro de s\u00e9curit\u00e9 sociale 489 63 1820, est limit\u00e9 uniquement au personnel m\u00e9dical n\u00e9cessaire.",
+    "sensitive": [
+      "Jillian",
+      "03/03/1939",
+      "489 63 1820"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 41, \"O\"], [41, 48, \"FIRSTNAME\"], [48, 119, \"O\"], [119, 129, \"DOB\"], [129, 163, \"O\"], [163, 174, \"SSN\"], [174, 230, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0161",
+    "query": "Students who didn't get their medical forms, visit the health office at 92175 Cordell Ville.",
+    "sensitive": [
+      "92175",
+      "Cordell Ville"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 72, \"O\"], [72, 77, \"BUILDINGNUMBER\"], [77, 78, \"O\"], [78, 91, \"STREET\"], [91, 92, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0162",
+    "query": "Ich habe eine Patientin namens Abigail, Gr\u00f6\u00dfe 145cm, die erh\u00f6hte Aggressivit\u00e4t und verringerte Muskelmasse aufweist. Es scheint, dass sie hormonelle Ungleichgewichte hat, m\u00f6glicherweise endokrinologischer Natur. K\u00f6nnen Sie uns hier einige Anleitungen geben?",
+    "sensitive": [
+      "Abigail",
+      "145cm"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 31, \"O\"], [31, 38, \"FIRSTNAME\"], [38, 46, \"O\"], [46, 51, \"HEIGHT\"], [51, 257, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0163",
+    "query": "We have noticed an abrupt change in Eloisa's behavior at school. As the District Markets Architect at Aufderhar, Oberbrunner and Stracke, I believe we should arrange a meeting to discuss this matter. Let's work together for Ardella's betterment.",
+    "sensitive": [
+      "Eloisa",
+      "District Markets Architect",
+      "Aufderhar, Oberbrunner and Stracke",
+      "Ardella"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 36, \"O\"], [36, 42, \"FIRSTNAME\"], [42, 72, \"O\"], [72, 98, \"JOBTITLE\"], [98, 102, \"O\"], [102, 136, \"COMPANYNAME\"], [136, 224, \"O\"], [224, 231, \"FIRSTNAME\"], [231, 245, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0164",
+    "query": "Card payment for 8461780072170491 failed due to invalid 714. It's related to the ventilator maintenance for our 98 years old year old Demi-girl patient.",
+    "sensitive": [
+      "8461780072170491",
+      "714",
+      "98 years old",
+      "Demi-girl"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 17, \"O\"], [17, 33, \"MASKEDNUMBER\"], [33, 56, \"O\"], [56, 59, \"CREDITCARDCVV\"], [59, 112, \"O\"], [112, 124, \"AGE\"], [124, 134, \"O\"], [134, 143, \"GENDER\"], [143, 152, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0165",
+    "query": "Hello Team, we've received an anonymous donation from 3yC1KsuihyRBGFUo4gtAH9fsfSZGvrHDa for our ongoing cross-cultural psychology research. We need our financial consultant to verify this transaction and integrate these funds into our research budget. Please use account name Credit Card Account for this transaction.",
+    "sensitive": [
+      "3yC1KsuihyRBGFUo4gtAH9fsfSZGvrHDa",
+      "Credit Card Account"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 54, \"O\"], [54, 87, \"BITCOINADDRESS\"], [87, 276, \"O\"], [276, 295, \"ACCOUNTNAME\"], [295, 317, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0166",
+    "query": "Notre programme sp\u00e9cial pour les Research sera diffus\u00e9 sur le site web de l'\u00e9cole \u00e0 partir de 20.176.179.71.",
+    "sensitive": [
+      "Research",
+      "20.176.179.71"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 33, \"O\"], [33, 41, \"JOBAREA\"], [41, 94, \"O\"], [94, 107, \"IP\"], [107, 108, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0167",
+    "query": "Suivez la proc\u00e9dure d'imagerie secondaire pour le patient Male. Les images peuvent \u00eatre consult\u00e9es via le lien https://forsaken-spit.com en utilisant Mozilla/5.0 (Windows NT 6.2; Trident/7.0; rv:11.0) like Gecko.",
+    "sensitive": [
+      "Male",
+      "https://forsaken-spit.com",
+      "Mozilla/5.0 (Windows NT 6.2; Trident/7.0; rv:11.0) like Gecko"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 58, \"O\"], [58, 62, \"SEX\"], [62, 111, \"O\"], [111, 136, \"URL\"], [136, 150, \"O\"], [150, 211, \"USERAGENT\"], [211, 212, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0168",
+    "query": "Florencio, here is the latest Sex Education curriculum for your review. I sent it to your email, Elouise_Lindgren@hotmail.com.",
+    "sensitive": [
+      "Florencio",
+      "Elouise_Lindgren@hotmail.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 9, \"FIRSTNAME\"], [9, 97, \"O\"], [97, 125, \"EMAIL\"], [125, 126, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0169",
+    "query": "Hi, I want to enroll my daughter in a gifted program. She is 1.47m and has Eye color: Green eyes. I live in Idaho. Please guide me!",
+    "sensitive": [
+      "1.47m",
+      "Eye color: Green",
+      "Idaho"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 61, \"O\"], [61, 66, \"HEIGHT\"], [66, 75, \"O\"], [75, 91, \"EYECOLOR\"], [91, 108, \"O\"], [108, 113, \"STATE\"], [113, 131, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0170",
+    "query": "Salut, les donn\u00e9es li\u00e9es \u00e0 cb23:ccfa:efa6:be25:de23:d6a4:cd8f:b5cf contiennent des informations sur nos patients en t\u00e9l\u00e9consultation. L'acc\u00e8s n\u00e9cessite une v\u00e9rification via 94-692561-463873-7 ... 0580965626039049. Pour des raisons de s\u00e9curit\u00e9, nous avons envoy\u00e9 des instructions suppl\u00e9mentaires \u00e0 Diego.Bosco19@hotmail.com.",
+    "sensitive": [
+      "cb23:ccfa:efa6:be25:de23:d6a4:cd8f:b5cf",
+      "94-692561-463873-7",
+      "0580965626039049",
+      "Diego.Bosco19@hotmail.com"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 27, \"O\"], [27, 66, \"IPV6\"], [66, 173, \"O\"], [173, 191, \"PHONEIMEI\"], [191, 196, \"O\"], [196, 212, \"MASKEDNUMBER\"], [212, 297, \"O\"], [297, 322, \"EMAIL\"], [322, 323, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0171",
+    "query": "Dear Elliott. Entrance for the library festival will be RM5. Proceeds will fund new student programs.",
+    "sensitive": [
+      "Elliott",
+      "RM"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 12, \"FIRSTNAME\"], [12, 56, \"O\"], [56, 58, \"CURRENCYSYMBOL\"], [58, 101, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0172",
+    "query": "Patient 8084353893344268 soll geimpft werden. K\u00f6nnen Sie es f\u00fcr den Fl\u00fcgel Southwest planen? Ich werde die Koordinaten auf [-79.4911,119.9815] \u00fcberpr\u00fcfen, um eine bessere Kartierung vorzunehmen.",
+    "sensitive": [
+      "8084353893344268",
+      "Southwest",
+      "[-79.4911,119.9815]"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 24, \"MASKEDNUMBER\"], [24, 75, \"O\"], [75, 84, \"ORDINALDIRECTION\"], [84, 123, \"O\"], [123, 142, \"NEARBYGPSCOORDINATE\"], [142, 194, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0173",
+    "query": "We are developing the next level curriculum for Intranet. As a professional in the field, we'd appreciate your input. Please connect using the secure 27.19.20.15 or cb7d:bafd:fcfe:8da9:da01:1aa6:c5b3:aaa4.",
+    "sensitive": [
+      "Intranet",
+      "27.19.20.15",
+      "cb7d:bafd:fcfe:8da9:da01:1aa6:c5b3:aaa4"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 48, \"O\"], [48, 56, \"JOBAREA\"], [56, 150, \"O\"], [150, 161, \"IPV4\"], [161, 165, \"O\"], [165, 204, \"IPV6\"], [204, 205, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0174",
+    "query": "Allerta studente: Itzel, il tuo compito di Amministratore deve essere consegnato entro il 21th July. Invialo a Hazle.Waters@hotmail.com.",
+    "sensitive": [
+      "Itzel",
+      "21th July",
+      "Hazle.Waters@hotmail.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 18, \"O\"], [18, 23, \"FIRSTNAME\"], [23, 90, \"O\"], [90, 99, \"DATE\"], [99, 111, \"O\"], [111, 135, \"EMAIL\"], [135, 136, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0175",
+    "query": "The school has assisted the Engineer students in acquiring credit through the Home Loan Account. The pin for the account operations is 1724. Transactions are mostly done in Solomon Islands Dollar.",
+    "sensitive": [
+      "Engineer",
+      "Home Loan Account",
+      "1724",
+      "Solomon Islands Dollar"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 28, \"O\"], [28, 36, \"JOBTYPE\"], [36, 78, \"O\"], [78, 95, \"ACCOUNTNAME\"], [95, 135, \"O\"], [135, 139, \"PIN\"], [139, 173, \"O\"], [173, 195, \"CURRENCYNAME\"], [195, 196, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0176",
+    "query": "La societ\u00e0 artistica di County Tyrone sta organizzando un workshop per tutti gli studenti di 84 years anni a Clairestead.",
+    "sensitive": [
+      "County Tyrone",
+      "84 years",
+      "Clairestead"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 24, \"O\"], [24, 37, \"COUNTY\"], [37, 93, \"O\"], [93, 101, \"AGE\"], [101, 109, \"O\"], [109, 120, \"CITY\"], [120, 121, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0177",
+    "query": "Medical equipments required for Developer. Please fund through M7sHgUa6PPaU3g3io39KoyQmLpZ8KuZyj.",
+    "sensitive": [
+      "Developer",
+      "M7sHgUa6PPaU3g3io39KoyQmLpZ8KuZyj"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 32, \"O\"], [32, 41, \"JOBTYPE\"], [41, 63, \"O\"], [63, 96, \"LITECOINADDRESS\"], [96, 97, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0178",
+    "query": "\"Hi Zella, it has come to our attention that you have been an avid supporter of our school. To show gratitude, our school wants to hold a special day for you at Wuckert - Weissnat. Respond to this email with your availability.\"",
+    "sensitive": [
+      "Zella",
+      "Wuckert - Weissnat"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"O\"], [4, 9, \"FIRSTNAME\"], [9, 161, \"O\"], [161, 179, \"COMPANYNAME\"], [179, 227, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0179",
+    "query": "Patient: Danny41, Female, 59 years. Er \u00e4u\u00dferte eine st\u00e4ndige Notwendigkeit, seine H\u00e4nde zu waschen, was manchmal zu Narben f\u00fchrt. M\u00f6gliche Zwangsst\u00f6rung (OCD).",
+    "sensitive": [
+      "Danny41",
+      "Female",
+      "59 years"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 9, \"O\"], [9, 16, \"USERNAME\"], [16, 18, \"O\"], [18, 24, \"SEX\"], [24, 26, \"O\"], [26, 34, \"AGE\"], [34, 159, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0180",
+    "query": "Dear Miss White, Could you please send a copy of the recent Forensic Psychology report to our headquarters in 14th Street, Fort Elyssaburgh, Glarus, 53752?",
+    "sensitive": [
+      "Miss",
+      "White",
+      "14th Street",
+      "Fort Elyssaburgh",
+      "Glarus",
+      "53752"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 5, \"O\"], [5, 9, \"PREFIX\"], [9, 10, \"O\"], [10, 15, \"LASTNAME\"], [15, 110, \"O\"], [110, 121, \"STREET\"], [121, 123, \"O\"], [123, 139, \"CITY\"], [139, 141, \"O\"], [141, 147, \"STATE\"], [147, 149, \"O\"], [149, 154, \"ZIPCODE\"], [154, 155, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0181",
+    "query": "Vi preghiamo di allocare un budget di Cedi$594k dall'account 14497805 per il sistema di database degli studenti. Contattami al f3ff:f8d1:2ad4:af44:34fc:4ea4:b281:0b3e.",
+    "sensitive": [
+      "Cedi",
+      "594k",
+      "14497805",
+      "f3ff:f8d1:2ad4:af44:34fc:4ea4:b281:0b3e"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 38, \"O\"], [38, 42, \"CURRENCY\"], [42, 43, \"CURRENCYSYMBOL\"], [43, 47, \"AMOUNT\"], [47, 61, \"O\"], [61, 69, \"ACCOUNTNUMBER\"], [69, 127, \"O\"], [127, 166, \"IPV6\"], [166, 167, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0182",
+    "query": "Welcome Dr. Deckow to North Crawford School Library Book Club. Our next meeting is on 06/07/2001. We're reading works from the Security.",
+    "sensitive": [
+      "Dr",
+      "Deckow",
+      "North Crawford",
+      "06/07/2001",
+      "Security"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 8, \"O\"], [8, 11, \"PREFIX\"], [11, 12, \"O\"], [12, 18, \"LASTNAME\"], [18, 22, \"O\"], [22, 36, \"CITY\"], [36, 86, \"O\"], [86, 96, \"DATE\"], [96, 127, \"O\"], [127, 135, \"JOBAREA\"], [135, 136, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0183",
+    "query": "Use new decor for Male patient room 3058, in order to create more welcoming atmosphere.",
+    "sensitive": [
+      "Male",
+      "3058"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 18, \"O\"], [18, 22, \"SEX\"], [22, 36, \"O\"], [36, 40, \"BUILDINGNUMBER\"], [40, 87, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0184",
+    "query": "Unser Patientenassistent hat ein verd\u00e4chtiges Auto mit dem Kennzeichen ED84YCZ in der N\u00e4he von 175-N Union Street beobachtet. K\u00f6nnen Sie dies best\u00e4tigen?",
+    "sensitive": [
+      "ED84YCZ",
+      "175",
+      "N Union Street"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 71, \"O\"], [71, 78, \"VEHICLEVRM\"], [78, 95, \"O\"], [95, 98, \"BUILDINGNUMBER\"], [98, 99, \"O\"], [99, 113, \"STREET\"], [113, 153, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0185",
+    "query": "Getting grant of \u043b\u0432566,159.37 for maternal and child health research from wallet 0xdb282e1e54b645b87cfddad3efccddcb838e0d0c.",
+    "sensitive": [
+      "\u043b\u0432",
+      "566,159.37",
+      "0xdb282e1e54b645b87cfddad3efccddcb838e0d0c"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 17, \"O\"], [17, 19, \"CURRENCYSYMBOL\"], [19, 29, \"AMOUNT\"], [29, 81, \"O\"], [81, 123, \"ETHEREUMADDRESS\"], [123, 124, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0186",
+    "query": "Students partaking in the gifted program from 95660-1706 area are required to use transportation number UO37QIZ for their travel needs.",
+    "sensitive": [
+      "95660-1706",
+      "UO37QIZ"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 46, \"O\"], [46, 56, \"ZIPCODE\"], [56, 104, \"O\"], [104, 111, \"VEHICLEVRM\"], [111, 135, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0187",
+    "query": "F\u00fcr unseren Patienten im ICU, ein[e] Female im Alter von 88 years old mit der Sozialversicherungsnummer 218-65-6331, k\u00f6nnten Sie die neuesten Messwerte \u00fcberpr\u00fcfen?",
+    "sensitive": [
+      "Female",
+      "88 years old",
+      "218-65-6331"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 37, \"O\"], [37, 43, \"SEX\"], [43, 57, \"O\"], [57, 69, \"AGE\"], [69, 104, \"O\"], [104, 115, \"SSN\"], [115, 163, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0188",
+    "query": "Based on your feedback, here is the updated password 1aTQ2hyxz4uZ to access the medical library. Usage should be done only within the IP range,  fc46:d6ce:6c1a:854b:ca26:fabd:8dac:be49.",
+    "sensitive": [
+      "1aTQ2hyxz4uZ",
+      "fc46:d6ce:6c1a:854b:ca26:fabd:8dac:be49"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 53, \"O\"], [53, 65, \"PASSWORD\"], [65, 145, \"O\"], [145, 184, \"IP\"], [184, 185, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0189",
+    "query": "Der Patient, der in 24881 wohnt, hat schwere allergische Reaktionen auf das neue Medikament gezeigt. Ich habe diese Symptome durch seinen Tracker beobachtet, der in seinem Zuhause installiert ist, das sich in der N\u00e4he der GPS-Koordinate [17.6848,99.7682] befindet. Bitte beraten Sie.",
+    "sensitive": [
+      "24881",
+      "[17.6848,99.7682]"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 20, \"O\"], [20, 25, \"BUILDINGNUMBER\"], [25, 237, \"O\"], [237, 254, \"NEARBYGPSCOORDINATE\"], [254, 283, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0190",
+    "query": "Could Dr. Cremin please access the provided https://everlasting-gale.com and assist in designing a curriculum that closely aligns with the latest theories in educational psychology?",
+    "sensitive": [
+      "Dr",
+      "Cremin",
+      "https://everlasting-gale.com"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 6, \"O\"], [6, 9, \"PREFIX\"], [9, 10, \"O\"], [10, 16, \"LASTNAME\"], [16, 44, \"O\"], [44, 72, \"URL\"], [72, 181, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0191",
+    "query": "Prepare for your health check-up prior to your travel. Remember, do mention your height 4' 9\", date of birth 01/08/1956 and eye colour Eye color: Grey.",
+    "sensitive": [
+      "4' 9",
+      "01/08/1956",
+      "Eye color: Grey"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 88, \"O\"], [88, 93, \"HEIGHT\"], [93, 109, \"O\"], [109, 119, \"DOB\"], [119, 135, \"O\"], [135, 150, \"EYECOLOR\"], [150, 151, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0192",
+    "query": "Nel meeting di curriculum a Tyne and Wear, Emmie21 ha espresso l'opinione che i nuovi moduli non dovrebbero solo riflettere il cambiamento delle richieste del mercato del lavoro, ma dovrebbero fornire Cisgender una gamma di competenze diverse.",
+    "sensitive": [
+      "Tyne and Wear",
+      "Emmie21",
+      "Cisgender"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 28, \"O\"], [28, 41, \"COUNTY\"], [41, 43, \"O\"], [43, 50, \"USERNAME\"], [50, 201, \"O\"], [201, 210, \"GENDER\"], [210, 243, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0193",
+    "query": "Exciting news, due to the successful crypto funding received on 3QWrfPjPVUB8ABoDxQSSkMrsDv5d8DDV7FwiCbQ and 0x1b7aee6c41f33998a81dd70b21285e7c063adeff, our student volunteer program will be able to support additional projects this year.",
+    "sensitive": [
+      "3QWrfPjPVUB8ABoDxQSSkMrsDv5d8DDV7FwiCbQ",
+      "0x1b7aee6c41f33998a81dd70b21285e7c063adeff"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 64, \"O\"], [64, 103, \"BITCOINADDRESS\"], [103, 108, \"O\"], [108, 150, \"ETHEREUMADDRESS\"], [150, 236, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0194",
+    "query": "To: Natasha\nThere is a scheduled medical appointment on 05/05/1952. The address is Parisian Villages, 10764. We ask you to please come in with your wearable device synced to MAC address: 08:b2:ec:63:1b:0f.",
+    "sensitive": [
+      "Natasha",
+      "05/05/1952",
+      "Parisian Villages",
+      "10764",
+      "08:b2:ec:63:1b:0f"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"O\"], [4, 11, \"FIRSTNAME\"], [11, 56, \"O\"], [56, 66, \"DATE\"], [66, 83, \"O\"], [83, 100, \"STREET\"], [100, 102, \"O\"], [102, 107, \"ZIPCODE\"], [107, 187, \"O\"], [187, 204, \"MAC\"], [204, 205, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0195",
+    "query": "Ein Patient kommt aus Apt. 816. F\u00fcr diesen Fall ben\u00f6tigen wir umgehende Aufmerksamkeit mit Cis female Male Orientierung.",
+    "sensitive": [
+      "Apt. 816",
+      "Cis female",
+      "Male"
+    ],
+    "domain": "health_education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 22, \"O\"], [22, 30, \"SECONDARYADDRESS\"], [30, 91, \"O\"], [91, 101, \"GENDER\"], [101, 102, \"O\"], [102, 106, \"SEX\"], [106, 120, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0196",
+    "query": "Rencontr\u00e9 un probl\u00e8me de facturation. La MUR ne refl\u00e8te pas correctement dans le syst\u00e8me. Le International Interactions Liaison peut-il examiner cela?",
+    "sensitive": [
+      "MUR",
+      "International Interactions Liaison"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 41, \"O\"], [41, 44, \"CURRENCYCODE\"], [44, 93, \"O\"], [93, 127, \"JOBTITLE\"], [127, 150, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0197",
+    "query": "Roosevelt_Gislason78, unsere neueste Initiative im Bereich Bildung zielt auf die ganzheitliche Integration jeder Disziplin ab, vom Research bis zur bildenden Kunst. Wir bitten um Ihre Unterst\u00fctzung bei der Umsetzung dieses Experiments.",
+    "sensitive": [
+      "Roosevelt_Gislason78",
+      "Research"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 20, \"USERNAME\"], [20, 131, \"O\"], [131, 139, \"JOBAREA\"], [139, 235, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0198",
+    "query": "Miss Fahey, tutte le valutazioni degli studenti nell'area Operations si svolgono il giorno 8/95? Sono disponibile per aiutarti dopo le 8 AM.",
+    "sensitive": [
+      "Miss",
+      "Fahey",
+      "Operations",
+      "8/95",
+      "8 AM"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 4, \"PREFIX\"], [4, 5, \"O\"], [5, 10, \"LASTNAME\"], [10, 58, \"O\"], [58, 68, \"JOBAREA\"], [68, 91, \"O\"], [91, 95, \"DATE\"], [95, 135, \"O\"], [135, 139, \"TIME\"], [139, 140, \"O\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "ai4p_0199",
+    "query": "Head over to https://speedy-biopsy.net/ to download the raw data for the completed market research. User credentials: Olen_Feeney37/lqHIQaYLZRvu",
+    "sensitive": [
+      "https://speedy-biopsy.net/",
+      "Olen_Feeney37",
+      "lqHIQaYLZRvu"
+    ],
+    "domain": "education",
+    "source": "ai4privacy_pii_masking_200k",
+    "gt_labels": "[[0, 13, \"O\"], [13, 39, \"URL\"], [39, 118, \"O\"], [118, 131, \"USERNAME\"], [131, 132, \"O\"], [132, 144, \"PASSWORD\"]]",
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0000",
+    "query": "Student 629654 has a no registered disability status and lives in the South Region region. They are studying 60 credits in module EEE with A Level or Equivalent prior qualification. Their IMD band is 30-40%. What accessibility support should be recommended?",
+    "sensitive": [
+      "629654",
+      "South Region",
+      "30-40%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0001",
+    "query": "Student 577692 from West Midlands Region with Lower Than A Level qualification is enrolled in module BBB (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 120 credits who has no registered disability?",
+    "sensitive": [
+      "577692",
+      "West Midlands Region",
+      "Lower Than A Level",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0002",
+    "query": "A student (ID: 152910) from the West Midlands Region area with A Level or Equivalent background is showing signs of academic difficulty in BBB. Their socioeconomic band is  and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "152910",
+      "West Midlands Region",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0003",
+    "query": "A student (ID: 416696) from the Scotland area with HE Qualification background is showing signs of academic difficulty in FFF. Their socioeconomic band is 20-30% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "416696",
+      "Scotland",
+      "20-30%",
+      "HE Qualification"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0004",
+    "query": "Student 418224 from Ireland with HE Qualification qualification is enrolled in module CCC (2014B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 35-55-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "418224",
+      "Ireland",
+      "HE Qualification"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0005",
+    "query": "I need to submit a progress report for student 685052 in module BBB presentation 2014J. The student is from East Midlands Region, has Lower Than A Level qualifications, and is currently in the 0-35 age bracket with 120 studied credits. Their previous attempts: 0. Gender: M. How should I frame their academic journey?",
+    "sensitive": [
+      "685052",
+      "East Midlands Region",
+      "M"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0006",
+    "query": "Student 642731 from South Region with A Level or Equivalent qualification is enrolled in module BBB (2014J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 35-55-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "642731",
+      "South Region",
+      "A Level or Equivalent",
+      "60-70%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0007",
+    "query": "Performance analysis needed for student 1726951 (module: BBB, presentation: 2013J). Background: A Level or Equivalent, from Wales, age group 35-55, IMD band 90-100%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "1726951",
+      "Wales",
+      "90-100%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0008",
+    "query": "Performance analysis needed for student 302566 (module: FFF, presentation: 2013J). Background: Lower Than A Level, from South West Region, age group 35-55, IMD band 40-50%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "302566",
+      "South West Region",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0009",
+    "query": "A student (ID: 557652) from the East Anglian Region area with Lower Than A Level background is showing signs of academic difficulty in BBB. Their socioeconomic band is 70-80% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "557652",
+      "East Anglian Region",
+      "70-80%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0010",
+    "query": "Performance analysis needed for student 696044 (module: EEE, presentation: 2014J). Background: A Level or Equivalent, from South East Region, age group 35-55, IMD band 70-80%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "696044",
+      "South East Region",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0011",
+    "query": "A student (ID: 395814) from the North Western Region area with A Level or Equivalent background is showing signs of academic difficulty in FFF. Their socioeconomic band is 40-50% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "395814",
+      "North Western Region",
+      "40-50%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0012",
+    "query": "Student 676139 from East Anglian Region with A Level or Equivalent qualification is enrolled in module FFF (2014J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 35-55-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "676139",
+      "East Anglian Region",
+      "A Level or Equivalent",
+      "50-60%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0013",
+    "query": "Student 469633 from West Midlands Region with A Level or Equivalent qualification is enrolled in module DDD (2014J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "469633",
+      "West Midlands Region",
+      "A Level or Equivalent",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0014",
+    "query": "Student 404269 from South West Region with A Level or Equivalent qualification is enrolled in module BBB (2013J) and has attempted the module 1 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "404269",
+      "South West Region",
+      "A Level or Equivalent",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0015",
+    "query": "A student (ID: 2654602) from the West Midlands Region area with HE Qualification background is showing signs of academic difficulty in DDD. Their socioeconomic band is 80-90% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "2654602",
+      "West Midlands Region",
+      "80-90%",
+      "HE Qualification"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0016",
+    "query": "Student 537868 from London Region with HE Qualification qualification is enrolled in module DDD (2013B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "537868",
+      "London Region",
+      "HE Qualification",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0017",
+    "query": "Student 386957 from Wales with Lower Than A Level qualification is enrolled in module BBB (2013B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "386957",
+      "Wales",
+      "Lower Than A Level",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0018",
+    "query": "I need to submit a progress report for student 349424 in module BBB presentation 2013B. The student is from London Region, has A Level or Equivalent qualifications, and is currently in the 35-55 age bracket with 60 studied credits. Their previous attempts: 1. Gender: F. How should I frame their academic journey?",
+    "sensitive": [
+      "349424",
+      "London Region",
+      "F"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0019",
+    "query": "Student 504013 from Wales with A Level or Equivalent qualification is enrolled in module BBB (2013J) and has attempted the module 1 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "504013",
+      "Wales",
+      "A Level or Equivalent",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0020",
+    "query": "Performance analysis needed for student 623441 (module: BBB, presentation: 2014J). Background: A Level or Equivalent, from Yorkshire Region, age group 35-55, IMD band 0-10%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "623441",
+      "Yorkshire Region",
+      "0-10%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0021",
+    "query": "A student (ID: 653577) from the South Region area with HE Qualification background is showing signs of academic difficulty in BBB. Their socioeconomic band is 90-100% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "653577",
+      "South Region",
+      "90-100%",
+      "HE Qualification"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0022",
+    "query": "I need to submit a progress report for student 445145 in module DDD presentation 2014B. The student is from West Midlands Region, has A Level or Equivalent qualifications, and is currently in the 0-35 age bracket with 60 studied credits. Their previous attempts: 0. Gender: M. How should I frame their academic journey?",
+    "sensitive": [
+      "445145",
+      "West Midlands Region",
+      "M"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0023",
+    "query": "Student 558054 has a no registered disability status and lives in the North Region region. They are studying 30 credits in module EEE with Lower Than A Level prior qualification. Their IMD band is 40-50%. What accessibility support should be recommended?",
+    "sensitive": [
+      "558054",
+      "North Region",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0024",
+    "query": "A student (ID: 235097) from the North Western Region area with Lower Than A Level background is showing signs of academic difficulty in BBB. Their socioeconomic band is 40-50% and they have a registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "235097",
+      "North Western Region",
+      "40-50%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0025",
+    "query": "Performance analysis needed for student 631513 (module: DDD, presentation: 2014J). Background: A Level or Equivalent, from East Midlands Region, age group 0-35, IMD band 90-100%. They withdrew after 1 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "631513",
+      "East Midlands Region",
+      "90-100%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0026",
+    "query": "A student (ID: 303165) from the Yorkshire Region area with Lower Than A Level background is showing signs of academic difficulty in BBB. Their socioeconomic band is 10-20 and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "303165",
+      "Yorkshire Region",
+      "10-20",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0027",
+    "query": "Performance analysis needed for student 550866 (module: FFF, presentation: 2013B). Background: A Level or Equivalent, from Wales, age group 0-35, IMD band 20-30%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "550866",
+      "Wales",
+      "20-30%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0028",
+    "query": "Performance analysis needed for student 525625 (module: EEE, presentation: 2014J). Background: A Level or Equivalent, from London Region, age group 0-35, IMD band 30-40%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "525625",
+      "London Region",
+      "30-40%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0029",
+    "query": "Student 520544 has a no registered disability status and lives in the Wales region. They are studying 120 credits in module FFF with Lower Than A Level prior qualification. Their IMD band is 50-60%. What accessibility support should be recommended?",
+    "sensitive": [
+      "520544",
+      "Wales",
+      "50-60%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0030",
+    "query": "A student (ID: 447644) from the South West Region area with A Level or Equivalent background is showing signs of academic difficulty in DDD. Their socioeconomic band is 80-90% and they have a registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "447644",
+      "South West Region",
+      "80-90%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0031",
+    "query": "Student 528420 has a no registered disability status and lives in the London Region region. They are studying 60 credits in module DDD with A Level or Equivalent prior qualification. Their IMD band is 10-20. What accessibility support should be recommended?",
+    "sensitive": [
+      "528420",
+      "London Region",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0032",
+    "query": "Student 632605 has a no registered disability status and lives in the South Region region. They are studying 60 credits in module BBB with A Level or Equivalent prior qualification. Their IMD band is 20-30%. What accessibility support should be recommended?",
+    "sensitive": [
+      "632605",
+      "South Region",
+      "20-30%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0033",
+    "query": "A student (ID: 380429) from the Scotland area with HE Qualification background is showing signs of academic difficulty in DDD. Their socioeconomic band is 80-90% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "380429",
+      "Scotland",
+      "80-90%",
+      "HE Qualification"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0034",
+    "query": "Student 2517387 from East Anglian Region with Lower Than A Level qualification is enrolled in module DDD (2014J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 120 credits who has no registered disability?",
+    "sensitive": [
+      "2517387",
+      "East Anglian Region",
+      "Lower Than A Level",
+      "90-100%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0035",
+    "query": "Student 483267 from West Midlands Region with HE Qualification qualification is enrolled in module CCC (2014B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 35-55-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "483267",
+      "West Midlands Region",
+      "HE Qualification",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0036",
+    "query": "Student 503024 has a no registered disability status and lives in the London Region region. They are studying 60 credits in module FFF with Lower Than A Level prior qualification. Their IMD band is 50-60%. What accessibility support should be recommended?",
+    "sensitive": [
+      "503024",
+      "London Region",
+      "50-60%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0037",
+    "query": "I need to submit a progress report for student 625515 in module FFF presentation 2014J. The student is from South East Region, has Lower Than A Level qualifications, and is currently in the 0-35 age bracket with 60 studied credits. Their previous attempts: 0. Gender: M. How should I frame their academic journey?",
+    "sensitive": [
+      "625515",
+      "South East Region",
+      "M"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0038",
+    "query": "Student 508818 has a no registered disability status and lives in the London Region region. They are studying 120 credits in module AAA with A Level or Equivalent prior qualification. Their IMD band is 40-50%. What accessibility support should be recommended?",
+    "sensitive": [
+      "508818",
+      "London Region",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0039",
+    "query": "Student 572047 has a no registered disability status and lives in the East Anglian Region region. They are studying 60 credits in module FFF with Lower Than A Level prior qualification. Their IMD band is 30-40%. What accessibility support should be recommended?",
+    "sensitive": [
+      "572047",
+      "East Anglian Region",
+      "30-40%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0040",
+    "query": "Student 406116 has a no registered disability status and lives in the North Western Region region. They are studying 120 credits in module FFF with Lower Than A Level prior qualification. Their IMD band is 20-30%. What accessibility support should be recommended?",
+    "sensitive": [
+      "406116",
+      "North Western Region",
+      "20-30%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0041",
+    "query": "Student 559090 from South East Region with No Formal quals qualification is enrolled in module BBB (2014B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "559090",
+      "South East Region",
+      "No Formal quals",
+      "60-70%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0042",
+    "query": "Student 501755 from South Region with Lower Than A Level qualification is enrolled in module FFF (2013B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "501755",
+      "South Region",
+      "Lower Than A Level",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0043",
+    "query": "Student 540310 from South West Region with A Level or Equivalent qualification is enrolled in module DDD (2013B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 120 credits who has no registered disability?",
+    "sensitive": [
+      "540310",
+      "South West Region",
+      "A Level or Equivalent",
+      "30-40%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0044",
+    "query": "Student 515734 has a no registered disability status and lives in the North Region region. They are studying 30 credits in module CCC with A Level or Equivalent prior qualification. Their IMD band is 50-60%. What accessibility support should be recommended?",
+    "sensitive": [
+      "515734",
+      "North Region",
+      "50-60%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0045",
+    "query": "I need to submit a progress report for student 479725 in module CCC presentation 2014B. The student is from North Western Region, has Lower Than A Level qualifications, and is currently in the 0-35 age bracket with 60 studied credits. Their previous attempts: 0. Gender: M. How should I frame their academic journey?",
+    "sensitive": [
+      "479725",
+      "North Western Region",
+      "M"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0046",
+    "query": "Student 499952 from Scotland with A Level or Equivalent qualification is enrolled in module BBB (2014B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "499952",
+      "Scotland",
+      "A Level or Equivalent",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0047",
+    "query": "A student (ID: 603203) from the South East Region area with A Level or Equivalent background is showing signs of academic difficulty in BBB. Their socioeconomic band is 20-30% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "603203",
+      "South East Region",
+      "20-30%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0048",
+    "query": "A student (ID: 616512) from the East Anglian Region area with Lower Than A Level background is showing signs of academic difficulty in GGG. Their socioeconomic band is 80-90% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "616512",
+      "East Anglian Region",
+      "80-90%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0049",
+    "query": "A student (ID: 577222) from the Scotland area with A Level or Equivalent background is showing signs of academic difficulty in FFF. Their socioeconomic band is 10-20 and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "577222",
+      "Scotland",
+      "10-20",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0050",
+    "query": "Performance analysis needed for student 479987 (module: CCC, presentation: 2014J). Background: HE Qualification, from Scotland, age group 0-35, IMD band 60-70%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "479987",
+      "Scotland",
+      "60-70%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0051",
+    "query": "Student 556062 has a no registered disability status and lives in the North Western Region region. They are studying 60 credits in module BBB with A Level or Equivalent prior qualification. Their IMD band is 20-30%. What accessibility support should be recommended?",
+    "sensitive": [
+      "556062",
+      "North Western Region",
+      "20-30%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0052",
+    "query": "A student (ID: 496442) from the West Midlands Region area with Lower Than A Level background is showing signs of academic difficulty in BBB. Their socioeconomic band is 70-80% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "496442",
+      "West Midlands Region",
+      "70-80%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0053",
+    "query": "Student 675111 has a no registered disability status and lives in the North Region region. They are studying 60 credits in module CCC with A Level or Equivalent prior qualification. Their IMD band is . What accessibility support should be recommended?",
+    "sensitive": [
+      "675111",
+      "North Region"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0054",
+    "query": "A student (ID: 522434) from the Scotland area with Lower Than A Level background is showing signs of academic difficulty in BBB. Their socioeconomic band is 0-10% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "522434",
+      "Scotland",
+      "0-10%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0055",
+    "query": "I need to submit a progress report for student 606036 in module CCC presentation 2014J. The student is from South Region, has HE Qualification qualifications, and is currently in the 35-55 age bracket with 90 studied credits. Their previous attempts: 0. Gender: M. How should I frame their academic journey?",
+    "sensitive": [
+      "606036",
+      "South Region",
+      "M"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0056",
+    "query": "Student 169596 has a no registered disability status and lives in the West Midlands Region region. They are studying 90 credits in module FFF with Lower Than A Level prior qualification. Their IMD band is 80-90%. What accessibility support should be recommended?",
+    "sensitive": [
+      "169596",
+      "West Midlands Region",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0057",
+    "query": "A student (ID: 549677) from the North Western Region area with A Level or Equivalent background is showing signs of academic difficulty in CCC. Their socioeconomic band is 0-10% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "549677",
+      "North Western Region",
+      "0-10%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0058",
+    "query": "Student 570448 from Yorkshire Region with A Level or Equivalent qualification is enrolled in module EEE (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 30 credits who has no registered disability?",
+    "sensitive": [
+      "570448",
+      "Yorkshire Region",
+      "A Level or Equivalent",
+      "30-40%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0059",
+    "query": "Student 51576 has a no registered disability status and lives in the London Region region. They are studying 90 credits in module CCC with Lower Than A Level prior qualification. Their IMD band is 10-20. What accessibility support should be recommended?",
+    "sensitive": [
+      "51576",
+      "London Region",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0060",
+    "query": "Performance analysis needed for student 439633 (module: FFF, presentation: 2014B). Background: A Level or Equivalent, from East Midlands Region, age group 0-35, IMD band 70-80%. They withdrew after 1 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "439633",
+      "East Midlands Region",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0061",
+    "query": "Student 511527 from South Region with A Level or Equivalent qualification is enrolled in module BBB (2013B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has a registered disability?",
+    "sensitive": [
+      "511527",
+      "South Region",
+      "A Level or Equivalent",
+      "60-70%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0062",
+    "query": "Student 26247 from South East Region with HE Qualification qualification is enrolled in module FFF (2013J) and has attempted the module 2 time(s). They are currently struggling with their coursework. How can I support a 35-55-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "26247",
+      "South East Region",
+      "HE Qualification",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0063",
+    "query": "Performance analysis needed for student 511890 (module: DDD, presentation: 2013J). Background: A Level or Equivalent, from Yorkshire Region, age group 0-35, IMD band 0-10%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "511890",
+      "Yorkshire Region",
+      "0-10%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0064",
+    "query": "Student 46812 from North Region with Lower Than A Level qualification is enrolled in module DDD (2014J) and has attempted the module 1 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 180 credits who has a registered disability?",
+    "sensitive": [
+      "46812",
+      "North Region",
+      "Lower Than A Level",
+      "0-10%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0065",
+    "query": "Student 596114 from Wales with HE Qualification qualification is enrolled in module BBB (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 35-55-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "596114",
+      "Wales",
+      "HE Qualification",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0066",
+    "query": "A student (ID: 371402) from the East Midlands Region area with Lower Than A Level background is showing signs of academic difficulty in GGG. Their socioeconomic band is 0-10% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "371402",
+      "East Midlands Region",
+      "0-10%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0067",
+    "query": "A student (ID: 536647) from the East Anglian Region area with A Level or Equivalent background is showing signs of academic difficulty in GGG. Their socioeconomic band is 60-70% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "536647",
+      "East Anglian Region",
+      "60-70%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0068",
+    "query": "Student 655484 has a a registered disability status and lives in the East Anglian Region region. They are studying 90 credits in module CCC with A Level or Equivalent prior qualification. Their IMD band is 10-20. What accessibility support should be recommended?",
+    "sensitive": [
+      "655484",
+      "East Anglian Region",
+      "10-20",
+      "disability"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0069",
+    "query": "Student 141949 has a no registered disability status and lives in the East Anglian Region region. They are studying 60 credits in module BBB with Lower Than A Level prior qualification. Their IMD band is 20-30%. What accessibility support should be recommended?",
+    "sensitive": [
+      "141949",
+      "East Anglian Region",
+      "20-30%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0070",
+    "query": "Student 573969 has a no registered disability status and lives in the North Western Region region. They are studying 60 credits in module DDD with Lower Than A Level prior qualification. Their IMD band is 70-80%. What accessibility support should be recommended?",
+    "sensitive": [
+      "573969",
+      "North Western Region",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0071",
+    "query": "A student (ID: 585464) from the South Region area with A Level or Equivalent background is showing signs of academic difficulty in CCC. Their socioeconomic band is 80-90% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "585464",
+      "South Region",
+      "80-90%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0072",
+    "query": "Student 625349 has a no registered disability status and lives in the Yorkshire Region region. They are studying 60 credits in module FFF with Lower Than A Level prior qualification. Their IMD band is 70-80%. What accessibility support should be recommended?",
+    "sensitive": [
+      "625349",
+      "Yorkshire Region",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0073",
+    "query": "Student 551856 from North Region with Lower Than A Level qualification is enrolled in module EEE (2014B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "551856",
+      "North Region",
+      "Lower Than A Level",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0074",
+    "query": "A student (ID: 608130) from the South West Region area with Lower Than A Level background is showing signs of academic difficulty in EEE. Their socioeconomic band is 50-60% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "608130",
+      "South West Region",
+      "50-60%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0075",
+    "query": "Student 652684 has a no registered disability status and lives in the North Region region. They are studying 60 credits in module FFF with A Level or Equivalent prior qualification. Their IMD band is 80-90%. What accessibility support should be recommended?",
+    "sensitive": [
+      "652684",
+      "North Region",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0076",
+    "query": "Student 573007 from Ireland with Lower Than A Level qualification is enrolled in module FFF (2014J) and has attempted the module 1 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 90 credits who has no registered disability?",
+    "sensitive": [
+      "573007",
+      "Ireland",
+      "Lower Than A Level",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0077",
+    "query": "Student 614265 has a a registered disability status and lives in the South Region region. They are studying 60 credits in module CCC with Lower Than A Level prior qualification. Their IMD band is 50-60%. What accessibility support should be recommended?",
+    "sensitive": [
+      "614265",
+      "South Region",
+      "50-60%",
+      "disability"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0078",
+    "query": "I need to submit a progress report for student 682897 in module DDD presentation 2014J. The student is from East Anglian Region, has A Level or Equivalent qualifications, and is currently in the 0-35 age bracket with 120 studied credits. Their previous attempts: 0. Gender: F. How should I frame their academic journey?",
+    "sensitive": [
+      "682897",
+      "East Anglian Region",
+      "F"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0079",
+    "query": "Student 2421428 has a no registered disability status and lives in the East Midlands Region region. They are studying 60 credits in module BBB with Lower Than A Level prior qualification. Their IMD band is 90-100%. What accessibility support should be recommended?",
+    "sensitive": [
+      "2421428",
+      "East Midlands Region",
+      "90-100%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0080",
+    "query": "I need to submit a progress report for student 529991 in module FFF presentation 2013B. The student is from South Region, has Lower Than A Level qualifications, and is currently in the 35-55 age bracket with 120 studied credits. Their previous attempts: 1. Gender: M. How should I frame their academic journey?",
+    "sensitive": [
+      "529991",
+      "South Region",
+      "M"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0081",
+    "query": "Student 559495 has a no registered disability status and lives in the North Region region. They are studying 60 credits in module BBB with A Level or Equivalent prior qualification. Their IMD band is 80-90%. What accessibility support should be recommended?",
+    "sensitive": [
+      "559495",
+      "North Region",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0082",
+    "query": "Performance analysis needed for student 522249 (module: BBB, presentation: 2013B). Background: Lower Than A Level, from South West Region, age group 35-55, IMD band 40-50%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "522249",
+      "South West Region",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0083",
+    "query": "Student 648518 has a no registered disability status and lives in the Scotland region. They are studying 180 credits in module EEE with A Level or Equivalent prior qualification. Their IMD band is 60-70%. What accessibility support should be recommended?",
+    "sensitive": [
+      "648518",
+      "Scotland",
+      "60-70%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0084",
+    "query": "A student (ID: 648985) from the East Anglian Region area with Lower Than A Level background is showing signs of academic difficulty in BBB. Their socioeconomic band is 80-90% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "648985",
+      "East Anglian Region",
+      "80-90%",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0085",
+    "query": "A student (ID: 590188) from the West Midlands Region area with Lower Than A Level background is showing signs of academic difficulty in FFF. Their socioeconomic band is 10-20 and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "590188",
+      "West Midlands Region",
+      "10-20",
+      "Lower Than A Level"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0086",
+    "query": "I need to submit a progress report for student 571571 in module CCC presentation 2014B. The student is from East Anglian Region, has HE Qualification qualifications, and is currently in the 0-35 age bracket with 90 studied credits. Their previous attempts: 0. Gender: F. How should I frame their academic journey?",
+    "sensitive": [
+      "571571",
+      "East Anglian Region",
+      "F"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0087",
+    "query": "A student (ID: 674660) from the London Region area with A Level or Equivalent background is showing signs of academic difficulty in GGG. Their socioeconomic band is 10-20 and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "674660",
+      "London Region",
+      "10-20",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0088",
+    "query": "Student 195938 from West Midlands Region with A Level or Equivalent qualification is enrolled in module BBB (2013J) and has attempted the module 1 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "195938",
+      "West Midlands Region",
+      "A Level or Equivalent",
+      "40-50%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0089",
+    "query": "Performance analysis needed for student 468623 (module: FFF, presentation: 2014J). Background: A Level or Equivalent, from South Region, age group 0-35, IMD band 90-100%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "468623",
+      "South Region",
+      "90-100%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0090",
+    "query": "Performance analysis needed for student 653730 (module: BBB, presentation: 2014J). Background: Lower Than A Level, from East Midlands Region, age group 0-35, IMD band 10-20. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "653730",
+      "East Midlands Region",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0091",
+    "query": "Student 605180 from North Region with A Level or Equivalent qualification is enrolled in module FFF (2014J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "605180",
+      "North Region",
+      "A Level or Equivalent",
+      "10-20"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0092",
+    "query": "I need to submit a progress report for student 549745 in module BBB presentation 2013J. The student is from North Western Region, has A Level or Equivalent qualifications, and is currently in the 0-35 age bracket with 120 studied credits. Their previous attempts: 0. Gender: F. How should I frame their academic journey?",
+    "sensitive": [
+      "549745",
+      "North Western Region",
+      "F"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "gender"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0093",
+    "query": "Student 675442 from North Region with Lower Than A Level qualification is enrolled in module CCC (2014J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 60 credits who has no registered disability?",
+    "sensitive": [
+      "675442",
+      "North Region",
+      "Lower Than A Level",
+      "20-30%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0094",
+    "query": "Student 480928 from Yorkshire Region with Lower Than A Level qualification is enrolled in module CCC (2014B) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 150 credits who has a registered disability?",
+    "sensitive": [
+      "480928",
+      "Yorkshire Region",
+      "Lower Than A Level",
+      "90-100%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "highest_education",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0095",
+    "query": "Performance analysis needed for student 445930 (module: DDD, presentation: 2013J). Background: A Level or Equivalent, from South West Region, age group 0-35, IMD band 60-70%. They withdrew after 1 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "445930",
+      "South West Region",
+      "60-70%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0096",
+    "query": "Student 621655 has a no registered disability status and lives in the North Western Region region. They are studying 60 credits in module EEE with Lower Than A Level prior qualification. Their IMD band is 70-80%. What accessibility support should be recommended?",
+    "sensitive": [
+      "621655",
+      "North Western Region",
+      "70-80%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "disability"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0097",
+    "query": "Performance analysis needed for student 629762 (module: FFF, presentation: 2014B). Background: Lower Than A Level, from South West Region, age group 0-35, IMD band 30-40%. They withdrew after 0 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "629762",
+      "South West Region",
+      "30-40%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0098",
+    "query": "Performance analysis needed for student 625126 (module: CCC, presentation: 2014J). Background: Lower Than A Level, from North Western Region, age group 0-35, IMD band 80-90%. They withdrew after 1 attempt(s). What are the common predictors for this outcome?",
+    "sensitive": [
+      "625126",
+      "North Western Region",
+      "80-90%"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band"
+    ],
+    "expected_zone": 1
+  },
+  {
+    "id": "oulad_0099",
+    "query": "A student (ID: 574944) from the West Midlands Region area with A Level or Equivalent background is showing signs of academic difficulty in BBB. Their socioeconomic band is 20-30% and they have no registered disability. What intervention strategies are best for this demographic?",
+    "sensitive": [
+      "574944",
+      "West Midlands Region",
+      "20-30%",
+      "A Level or Equivalent"
+    ],
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "gt_labels": [
+      "id_student",
+      "region",
+      "imd_band",
+      "highest_education"
+    ],
+    "expected_zone": 1
+  }
+]

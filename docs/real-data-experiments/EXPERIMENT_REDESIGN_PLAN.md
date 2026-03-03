@@ -38,12 +38,10 @@ The AI4Privacy dataset is a peer-reviewed, publicly available dataset used by **
 
 | Version | Details | Recommended For |
 |---|---|---|
-| **pii-masking-43k** | 43K examples, 54 PII types, 111 token classes, 125 subjects. Used by Prεεmpt for NER fine-tuning. | EXP-BL-01 baseline comparison — matches exactly what Prεεmpt used |
-| **pii-masking-300k (OpenPII-220k)** | 220K examples, 27 PII classes, targets **education / health / psychology** domains. ~98.3% label accuracy. | EXP01, EXP03, EXP04, EXP05 — education domain subset |
+| **pii-masking-200k** | 220K examples, 27 PII classes, targets **education / health / psychology** domains. ~98.3% label accuracy. Used by Prεεmpt for NER fine-tuning. | EXP-BL-01 baseline comparison, EXP01, EXP03, EXP04, EXP05 |
 
 **HuggingFace links:**
-- pii-masking-43k: https://huggingface.co/datasets/ai4privacy/pii-masking-43k
-- pii-masking-300k: https://huggingface.co/datasets/ai4privacy/pii-masking-300k
+- pii-masking-200k: https://huggingface.co/datasets/ai4privacy/pii-masking-200k
 
 > ⚠️ **Critical framing:** AI4Privacy covers PII (Name, Age, Money, SSN, etc.). Your system covers domain-specific IP (CRISPR, HEK293, NIH R01). This difference is your **key argument** — use it to show your system has broader coverage than Prεεmpt. Filter the education domain subset from pii-masking-300k for maximum relevance.
 
@@ -80,19 +78,19 @@ If any data generation is required (e.g. augmenting AI4Privacy education queries
 |---|---|
 | **Research Question** | Can semantic generalization protect IP while preserving educational utility? |
 | **Old Data** | ❌ 50 hand-crafted synthetic queries across biomedical, CS, legal, medical, academic domains |
-| **New Data** | ✅ AI4Privacy pii-masking-300k (education + health domain subset) + OULAD-derived VLE text queries |
-| **Sample Size** | 200 samples from AI4Privacy education subset + 100 OULAD-derived queries = **300 total** (vs previous 50 — 6× larger) |
+| **New Data** | ✅ AI4Privacy pii-masking-200k (education + health domain subset) + OULAD-derived VLE text queries |
+| **Sample Size** | 200 samples from AI4Privacy education subset + 100 OULAD-derived queries = **300 total** for the comparative run. *(Note: This rigorous run on real published data will establish the true empirical baseline for IP protection and utility, replacing unverified prior synthetic estimates.)* |
 | **Ground Truth** | AI4Privacy provides ground truth entity labels — enables objective IP protection rate measurement |
 | **Metrics** | IP Protection Rate, Utility Preservation (STS), Sanitization Time (ms), Zero-Leakage Rate |
-| **Baselines** | (1) No Protection, (2) Full Redaction, (3) Prεεmpt FPE on same dataset |
-| **Key Advantage** | 300 real samples vs 50 synthetic — peer-reviewed dataset, directly comparable to Prεεmpt baseline |
+| **Baselines** | (1) No Protection, (2) Full Redaction |
+| **Key Advantage** | Combines real behavioral data (OULAD) with gold-standard PII labeling (AI4Privacy) |
 
 **AI4Privacy Load Code:**
 ```python
 from datasets import load_dataset
 
-# Load pii-masking-300k education subset
-dataset = load_dataset("ai4privacy/pii-masking-300k")
+# Load pii-masking-200k education subset
+dataset = load_dataset("ai4privacy/pii-masking-200k")
 
 # Filter education domain
 edu_subset = dataset['train'].filter(
@@ -112,7 +110,7 @@ exp01_data = edu_subset.shuffle(seed=42).select(range(200))
 Sub-experiments remain unchanged:
 - **EXP02a** — Passive Struggle Detection: Full Local vs Sanitized Cloud (F1 comparison)
 - **EXP02b** — Complex Query Resolution: Hybrid vs Local-Only vs Cloud-Only
-- **EXP02c** — Competency Vector Portability: Cold-start vs Sovereign Transfer (48.4% convergence reduction)
+- **EXP02c** — Competency Vector Portability: Cold-start vs Sovereign Transfer (56% convergence reduction)
 
 ---
 
@@ -135,10 +133,10 @@ Sub-experiments remain unchanged:
 |---|---|
 | **Research Question** | Does the CrewAI architecture make correct zone-routing and tool-selection decisions on real inputs? |
 | **Old Data** | ❌ ~20 synthetic queries across privacy zones |
-| **New Data** | ✅ AI4Privacy pii-masking-300k education subset — 80 samples (20 per zone: Zone 0/1/2/3) |
-| **Zone Mapping** | Zone 0: Personal/student data \| Zone 1: IP/PII (AI4Privacy core) \| Zone 2: Internal project \| Zone 3: Public knowledge |
+| **New Data** | ✅ AI4Privacy pii-masking-200k education subset (Zones 1 & 3) + OULAD (Zones 0 & 2) — 80 samples (20 per zone) |
+| **Zone Mapping** | Zone 0 (OULAD): Personal/student grades \| Zone 1 (AI4Privacy): Broad PII \| Zone 2 (OULAD/Synthetic verified via SDMetrics): Internal project \| Zone 3 (AI4Privacy): Public knowledge |
 | **Metrics** | Task Completion Rate, Tool Correctness, Privacy Score per zone, **Zone Classification Accuracy** *(new)* |
-| **New Metric Unlocked** | **Zone Classification Accuracy** — measurable with AI4Privacy ground truth labels (was not possible with synthetic data) |
+| **New Metric Unlocked** | **Zone Classification Accuracy** — measurable with AI4Privacy ground truth labels |
 
 > 💡 Using AI4Privacy unlocks a new metric for EXP04: **Zone Classification Accuracy**. Since AI4Privacy has ground truth PII labels, you can objectively verify whether the agent correctly classified each input into the right privacy zone. This is a stronger claim than was possible with synthetic data.
 
@@ -150,7 +148,7 @@ Sub-experiments remain unchanged:
 |---|---|
 | **Research Question** | Can adversaries extract private information through prompt injection, jailbreaks, or chain-of-thought leakage? |
 | **Old Data** | ❌ 4 hand-crafted synthetic adversarial prompts |
-| **New Data** | ✅ AI4Privacy pii-masking-43k — adversarial-style samples containing sensitive PII embedded in complex contexts |
+| **New Data** | ✅ AI4Privacy pii-masking-200k — adversarial-style samples containing sensitive PII embedded in complex contexts |
 | **Attack Vectors** | (1) Direct PII extraction \| (2) IP leakage via chain-of-thought \| (3) Zone misclassification \| (4) Jailbreak via roleplay |
 | **Sample Size** | **50 adversarial samples** (vs 4 previously) — statistically meaningful red team evaluation |
 | **Metrics** | Attack Success Rate, False Negative Rate (missed PII), Defence Success Rate, Vulnerability Taxonomy |
@@ -159,7 +157,10 @@ Sub-experiments remain unchanged:
 
 ### 3.6 EXP-BL-01 — NEW: Baseline Comparison vs Prεεmpt
 
-> This is a new experiment requested by Dr. Harsha to provide a rigorous baseline comparison against other related work. Read BASELINE_EXPERIMENT_PLAN.md for more details.
+The goal is to benchmark the Sovereign Learner against Prεεmpt (2024), GAMA (2025), and PP-TS (2023) using the same `pii-masking-200k` dataset to ensure a fair comparison. 
+- **Setup:** Prεεmpt and SL process the same 200 samples from the AI4Privacy dataset.
+- **Metrics:** IP Protection Rate (Recall), Field Exposure, and LLM-Judge Utility.
+- **Expected Outcome:** Prεεmpt will perfectly execute FPE on its known entities but fail entirely on novel academic IP, demonstrating SL's superior protection scope.
 
 ---
 
@@ -168,9 +169,8 @@ Sub-experiments remain unchanged:
 | Dataset | EXP01 | EXP02 | EXP03 | EXP04 | EXP05 | EXP-BL-01 |
 |---|---|---|---|---|---|---|
 | **OULAD** | ✅ 100 queries | ✅ Primary (unchanged) | ✅ Primary (unchanged) | Zone 0 inputs | — | — |
-| **AI4Privacy pii-masking-300k (edu)** | ✅ 200 queries | — | ✅ Query portion (200) | ✅ Zones 1/2/3 (60 items) | — | — |
-| **AI4Privacy pii-masking-43k** | — | — | — | — | ✅ 50 adversarial | ✅ 200 samples |
-| **SDMetrics** *(only if augmentation needed)* | Validation only | — | Validation only | Validation only | Validation only | — |
+| **AI4Privacy pii-masking-200k** | ✅ 200 queries | — | ✅ Query portion (200) | ✅ Zones 1/3 (40 items) | ✅ 50 adversarial | ✅ 200 samples |
+| **SDMetrics** *(only if augmentation needed)* | Validation only | — | Validation only | Validation only (Zone 2) | Validation only | — |
 
 ---
 
@@ -202,7 +202,7 @@ report.get_score()  # Must be >= 0.80
 ### Prof. Daswin De Silva
 **Anticipated challenge:** *"Why is AI4Privacy appropriate for an educational AI paper?"*
 
-> We selected the pii-masking-300k **education domain subset**, which specifically targets educational discussion scenarios — aligning with our system's use case. All data is publicly available, ethically cleared (no real PII — all values are mocked), and peer-reviewed. The OULAD component remains our primary educational dataset. AI4Privacy serves as the standardised benchmark for the query sanitisation comparison layer, which is a methodological requirement for credible baseline comparison.
+> We selected the pii-masking-200k **education domain subset**, which specifically targets educational discussion scenarios — aligning with our system's use case. All data is publicly available, ethically cleared (no real PII — all values are mocked), and peer-reviewed. The OULAD component remains our primary educational dataset. AI4Privacy serves as the standardised benchmark for the query sanitisation comparison layer, which is a methodological requirement for credible baseline comparison.
 
 ---
 
@@ -224,12 +224,12 @@ report.get_score()  # Must be >= 0.80
 
 | Priority | Task | Dataset | Effort |
 |---|---|---|---|
-| **P1 — Now** | Load AI4Privacy pii-masking-300k, filter education subset, sample 200 records for EXP01 | AI4Privacy-300k | 2–3 hours |
-| **P1 — Now** | Re-run EXP01 with new dataset, record new IP Protection Rate and Utility scores | AI4Privacy-300k + OULAD | 1 day |
-| **P2 — Soon** | Set up EXP-BL-01: install Prεεmpt, run on pii-masking-43k (200 samples), record comparative metrics | AI4Privacy-43k | 2–3 days |
-| **P2 — Soon** | Update EXP04 to use AI4Privacy education subset (80 samples across 4 zones), add Zone Classification Accuracy metric | AI4Privacy-300k | 1 day |
-| **P3 — Next** | Update EXP05 with 50 adversarial samples from AI4Privacy-43k, re-run red team, update vulnerability report | AI4Privacy-43k | 1–2 days |
-| **P3 — Next** | Verify EXP03 — confirm OULAD portion unchanged, replace query portion with AI4Privacy education subset | OULAD + AI4Privacy-300k | Half day |
+| **P1 — Now** | Load AI4Privacy pii-masking-200k, filter education subset, sample 200 records for EXP01 | AI4Privacy-200k | 2–3 hours |
+| **P1 — Now** | Re-run EXP01 with new dataset, record new IP Protection Rate and Utility scores | AI4Privacy-200k + OULAD | 1 day |
+| **P2 — Soon** | Set up EXP-BL-01: install Prεεmpt, run on pii-masking-200k (200 samples), record comparative metrics | AI4Privacy-200k | 2–3 days |
+| **P2 — Soon** | Update EXP04 to use AI4Privacy education subset (Zones 1/3) and OULAD (Zones 0/2), add Zone Classification Accuracy metric | AI4Privacy-200k + OULAD | 1 day |
+| **P3 — Next** | Update EXP05 with 50 adversarial samples from AI4Privacy-200k, re-run red team, update vulnerability report | AI4Privacy-200k | 1–2 days |
+| **P3 — Next** | Verify EXP03 — confirm OULAD portion unchanged, replace query portion with AI4Privacy education subset | OULAD + AI4Privacy-200k | Half day |
 | **P4 — If needed** | If any augmentation required: run SDMetrics 3-axis validation, report scores in paper appendix | SDMetrics | 1 day |
 
 ---

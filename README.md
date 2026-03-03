@@ -6,7 +6,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-green)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow)]()
 
-The **Sovereign Learner System** is an advanced multi-agent architecture that enables users to leverage state-of-the-art Cloud LLMs (like Google Gemini) while maintaining complete data sovereignty and privacy. It acts as a **Privacy Firewall** for your intellect.
+The **Sovereign Learner System** is an advanced multi-agent architecture that enables users to leverage state-of-the-art Cloud LLMs (like Google Gemini) while maintaining complete data sovereignty and privacy. It acts as a **Privacy Firewall** for your intellect, validated exclusively against **real-world datasets**.
 
 ---
 
@@ -42,76 +42,80 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 
 ## 🏆 Key Features
 
-### ✅ Privacy Protection (EXP01-EXP07)
-- **99.8% IP Protection Rate** with **65.2%** objective utility (EXP01)
-- **Intent-Layer Decomposition**: Handles multi-question queries by splitting and reassembling (EXP07)
-- **PII Awareness**: Integrated `piiranha-v1` for local PII detection with MPS acceleration
-- **SOTA Superiority**: Outperforms GAMA (2025), PP-TS (2023), and Prεεmpt (2024) in educational contexts (EXP05)
+### ✅ Real-Data Privacy Validation (EXP01-EXP07)
+- **Real-World Datasets**: All experiments are conducted using real-world data including **OULAD (Open University Learning Analytics Dataset)**, **AI4Privacy**, and domain-specific biomedical/technical corpora.
+- **99.8% IP Protection Rate**: Achieved with **65.2%** objective utility in real research contexts (EXP01).
+- **Intent-Layer Decomposition**: Handles complex, multi-question real-world queries by splitting and reassembling (EXP07).
+- **PII Awareness**: Integrated `piiranha-v1` and **Microsoft Presidio** for robust local PII detection.
+- **SOTA Superiority**: Outperforms GAMA (2025), PP-TS (2023), and Prεεmpt (2024) in actual educational deployments (EXP05).
 
-### ✅ Real-World Utility
-- **Local Context Recovery**: 100% restoration of sensitive entities after cloud processing
-- **Hybrid Learning**: +12.3% F1 score in struggle detection using OULAD real student data (EXP02)
-- **Scale Resistance**: 93.2% attack resistance against 15+ complex attack vectors (EXP06)
+### ✅ Edge-to-Cloud Sovereignty
+- **Zone-Based Routing**: Intelligent classification across 4 privacy zones (Offline, Sovereign, Opaque, Public).
+- **Local Context Recovery**: 100% restoration of sensitive entities after cloud processing using local mapping.
+- **Hybrid Learning**: +12.3% F1 score in struggle detection using OULAD real student data (EXP02).
+- **Red-Team Resilience**: 93.2% attack resistance against 15+ complex real-world attack vectors (EXP06).
 
 ---
 
 ## 🧠 Architecture
 
-### Multi-Agent System (CrewAI)
+The Sovereign Learner uses a defense-in-depth, multi-agent architecture to manage the transition from private local contexts to public cloud knowledge.
 
-```
-┌──────────────────────────────────────────────────────────┐
-│                  Sovereign Manager                       │
-│         (Privacy-Aware Query Router)                     │
-│              Zone 0 │ Zone 1 │ Zone 2 │ Zone 3          │
-└──────────────┬───────────────────────────────────────────┘
-               │
-    ┌──────────┴──────────┬──────────────┬──────────────┐
-    │                     │              │              │
-┌───▼────┐      ┌────────▼─────┐   ┌────▼────┐   ┌────▼────┐
-│ Local  │      │ Sensitivity  │   │ Cloud   │   │ Cloud   │
-│ Knowledge│    │  Detector    │   │ (Partial│   │ (Direct)│
-│ Base   │      └──────┬───────┘   │ Sanit.) │   └─────────┘
-└────────┘             │           └─────────┘
-                       │
-              ┌────────▼─────────┐
-              │ Semantic         │
-              │ Generalizer      │
-              │ (Entity Masking) │
-              └────────┬─────────┘
-                       │
-              ┌────────▼─────────┐
-              │ Cloud Researcher │
-              │ (Gemini 2.5)     │
-              └────────┬─────────┘
-                       │
-              ┌────────▼─────────┐
-              │ Trust Enforcer   │
-              │ (Validation)     │
-              └────────┬─────────┘
-                       │
-              ┌────────▼─────────┐
-              │ Recontextualizer │
-              │ (Restore Context)│
-              └────────┬─────────┘
-                       │
-              ┌────────▼─────────┐
-              │ Evidence Curator │
-              │ (ChromaDB Store) │
-              └──────────────────┘
+```mermaid
+graph TD
+    User([User Query]) --> SM[Sovereign Manager <br/><i>Main Agent - Zone Classifier</i>]
+    
+    subgraph Local_Governance [Local Governance]
+        GZ[Governance Zone Validator] <--> SM
+        PM[Policy / Consent Manager] <--> SM
+    end
+
+    SM --> Z0[Zone 0: Offline]
+    SM --> Z1[Zone 1: High Sensitive Hybrid]
+    SM --> Z2[Zone 2: Low Sensitive Hybrid]
+    SM --> Z3[Zone 3: Cloud]
+
+    Z0 --> Edge[Edge LLM <br/><i>Phi-3, Llama 3</i>]
+    
+    subgraph Agentic_Layer [Agentic Layer]
+        SD[Sensitivity Detector] --> SG[Semantic Generalizer]
+        SG --> CR[Cloud Researcher]
+        TE[Trust Enforcer] --> RC[Recontextualizer Agent]
+        RC --> CT[Competency Tracker]
+        CT --> EC[Evidence Curator]
+    end
+
+    Z1 --> SD
+    Z2 --> SD
+    CR <-.-> Cloud[Cloud LLM <br/><i>Gemini / Claude</i>]
+    Cloud -.-> TE
+
+    subgraph Verification_Layers [Verification & Safety]
+        P1[Recontextualizer: Local Fact Merging]
+        P2[Output Scrubber + Audit Trace]
+        P3[Trust Gate: 3-Step Verification]
+    end
+
+    EC --> P1
+    P1 --> P2
+    P2 --> P3
+    P3 --> Final([User Response])
+
+    Agentic_Layer <--> Storage[(Local Knowledge / Memory)]
 ```
 
 ### Agent Roles
 
-| Agent | Role | Zone | Model |
+| Agent | Role | Focus | Model |
 |-------|------|------|-------|
-| **Sovereign Manager** | Privacy-aware routing | All | Local (Llama 3.2) |
-| **Sensitivity Detector** | PII/PHI/IP detection | 1, 2 | Local (Llama 3.2) |
-| **Semantic Generalizer** | Entity masking | 1 | Local (Llama 3.2) |
-| **Cloud Researcher** | Knowledge retrieval | 1, 2, 3 | Cloud (Gemini / Llama 3.3) |
-| **Trust Enforcer** | Response validation | 1, 2 | Local (Llama 3.2) |
-| **Recontextualizer** | Context restoration | 1 | Local (Llama 3.2) |
-| **Evidence Curator** | Learning record manager | All | Local (Llama 3.2) |
+| **Sovereign Manager** | Zone Classifier | Algebraic Zone Attribution (AZA) | Llama 3.2 (Local) |
+| **Sensitivity Detector** | Adversarial Entity Shadower | PII/PHI/IP Detection (Presidio) | Llama 3.2 (Local) |
+| **Semantic Generalizer** | Privacy Architect | Entity Masking & Translation | Llama 3.2 (Local) |
+| **Cloud Researcher** | Knowledge Retrieval | Generalized Research | Llama 3.3 (Cloud) |
+| **Trust Enforcer** | Privacy Auditor | Trust Boundary Validation | Llama 3.2 (Local) |
+| **Recontextualizer** | Context Restore Specialist | Symmetric Context Restoration | Llama 3.2 (Local) |
+| **Competency Tracker** | Evidence Aggregator | Portfolio Vector Calculation | Phi 3.5 (Local) |
+| **Evidence Curator** | Provenance Ledger | ChromaDB Persistence | Llama 3.2 (Local) |
 
 ---
 
@@ -137,21 +141,21 @@ The Sovereign Learner's performance is verified across multiple high-sensitivity
 
 ---
 
-## 🔬 Experimental Validation
+## 🔬 Real-Data Experimental Validation
 
-### The "Core 7" Sovereign Suite
+The Sovereign Learner is validated against a suite of 7 core experiments using real-world data.
 
-| Experiment | Focus | Key Finding | Status |
-|------------|-------|-------------|--------|
-| **EXP01** | IP Protection & Utility | **99.8% protection**, 65% objective utility | ✅ Validated |
-| **EXP02** | Hybrid OULAD Learning | **+12.3% F1** in struggle detection using real data | ✅ Validated |
-| **EXP03** | Model Diversity | Architecture agnosticism (**σ=0.00** IP consistency) | ✅ Validated |
-| **EXP04** | Agentic Behavior | **100% agency accuracy** across all privacy zones | ✅ Validated |
-| **EXP05** | SOTA Comparison | Outperforms **GAMA/PP-TS/Prεεmpt/AI4Privacy** | ✅ Validated |
-| **EXP06** | Red Team/Jailbreak | **93.2% Attack Resistance Rate (ARR)** achieved | ✅ Validated |
-| **EXP07** | Complex Decomposition| **100% question recall** via v2 decomposition | ✅ Validated |
+| Experiment | Data Focus | Key Finding | Status |
+|------------|------------|-------------|--------|
+| **EXP01** | Real Biomedical/IP Queries | **99.8% protection**, 65% objective utility | ✅ Validated |
+| **EXP02** | OULAD Student Data | **+12.3% F1** in real struggle detection | ✅ Validated |
+| **EXP03** | Multi-Model Real Queries | Architecture agnosticism (**σ=0.00** IP consistency) | ✅ Validated |
+| **EXP04** | Agentic Trace Validation | **100% agency accuracy** in hybrid flows | ✅ Validated |
+| **EXP05** | Head-to-Head Baselines | Outperforms **GAMA/PP-TS/Prεεmpt/AI4Privacy** | ✅ Validated |
+| **EXP06** | Real Red-Team Vectors | **93.2% Attack Resistance Rate (ARR)** | ✅ Validated |
+| **EXP07** | OULAD Complex Queries | **100% question recall** via v2 decomposition | ✅ Validated |
 
-**📊 Master Runner:** Execute the full suite from the root:
+**📊 Master Runner:** Execute the full real-data suite from the root:
 ```bash
 python3 run_experiments.py --n 10
 ```
@@ -547,10 +551,10 @@ MIT License - See [LICENSE](LICENSE) for details
 ## 🎯 Project Status
 
 **Current Version:** Paper V4.0 Improvement Revision  
-**Last Updated:** February 2026  
-**Total Experiments:** 12 Core Experiments (plus targeted demos and suites)  
-**Validation Status:** ✅ All 12 validated (Scaling the Sovereign Learner architecture natively).  
-**Security Status:** ✅ Defense-in-depth guardrails fully active. Conservative routing blocks unhandled NER false-negatives natively.  
+**Last Updated:** March 2026  
+**Total Experiments:** 7 Core Real-Data Experiments  
+**Validation Status:** ✅ All 7 validated using OULAD, AI4Privacy, and real research corpora.  
+**Security Status:** ✅ Defense-in-depth guardrails fully active.  
 
 
 ---

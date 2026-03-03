@@ -1,0 +1,65 @@
+{
+  "experiment": "EXP01 \u2014 Semantic Generalization Effectiveness",
+  "version": "2.0 \u2014 Real Data (AI4Privacy + OULAD)",
+  "timestamp": "2026-02-28T13:41:11.373157",
+  "dataset": {
+    "total_samples": 300,
+    "ai4privacy_samples": 200,
+    "oulad_samples": 100,
+    "cloud_mode": "real"
+  },
+  "primary_metrics": {
+    "ip_protection_rate": 0.9966666666666667,
+    "ip_leakage_rate": 0.0033333333333333335,
+    "utility_sts": 0.20133807382954683,
+    "utility_llm_judge": 0.5995,
+    "zero_leakage_count": 297,
+    "zero_leakage_rate": 0.99,
+    "avg_sanitization_time_ms": 0.8173497517903646
+  },
+  "by_source": {
+    "oulad_studentinfo": {
+      "count": 100,
+      "avg_ip_protection": 0.995,
+      "avg_utility_sts": 0.2624984071207816,
+      "zero_leakage_rate": 0.98
+    },
+    "ai4privacy_pii_masking_200k": {
+      "count": 200,
+      "avg_ip_protection": 0.9975,
+      "avg_utility_sts": 0.17075790718392944,
+      "zero_leakage_rate": 0.995
+    }
+  },
+  "by_domain": {
+    "health_education": {
+      "count": 107,
+      "avg_ip_protection": 1.0,
+      "avg_utility_sts": 0.1826923707196331,
+      "zero_leakage_rate": 1.0
+    },
+    "education": {
+      "count": 193,
+      "avg_ip_protection": 0.9948186528497409,
+      "avg_utility_sts": 0.2116753289215715,
+      "zero_leakage_rate": 0.9844559585492227
+    }
+  },
+  "baseline_comparison": {
+    "no_protection": {
+      "ip_protection_rate": 0.0,
+      "utility_sts": 1.0,
+      "note": "Raw query \u2014 reference response"
+    },
+    "full_redaction": {
+      "ip_protection_rate": 1.0,
+      "utility_sts": 0.18392940520593895,
+      "note": "All entities [REDACTED] \u2014 cloud cannot reason about specifics"
+    },
+    "sovereign_learner": {
+      "ip_protection_rate": 0.9966666666666667,
+      "utility_sts": 0.20133807382954683,
+      "note": "Semantic generalization \u2014 domain-agnostic"
+    }
+  }
+}
