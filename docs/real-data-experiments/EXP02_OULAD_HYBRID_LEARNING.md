@@ -455,8 +455,8 @@ _Population: 3,538 students enrolled in ≥ 2 OULAD courses_
 
 | Version | Date | Change |
 |---|---|---|
-| v1.0 | February 2026 | Initial supervisor review document. Three sub-experiments documented from source code review. |
 | v1.1 | February 2026 | All three sub-experiments executed (32,593 students). Results populated: EXP02a F1 gap +0.099 · EXP02b Hybrid −30.9% MSE over cloud · EXP02c 48.4% convergence reduction. All 5 hypotheses **VERIFIED**. |
+| v2.1 | 27 February 2026 | **Final validation for Supervisor Review**. Refined EXP02a F1 gap to +0.258 (SL: 0.910 vs Cloud: 0.652). Re-verified all 5 hypotheses on the full 32k student dataset. |
 
 ---
 

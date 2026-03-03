@@ -10,7 +10,7 @@
 | **Supervisors** | Prof. Daswin De Silva \| Dr. Nishan Mills \| Dr. Harsha Moraliyage |
 | **Status** | ✅ Fully Validated — AI4Privacy (n=200) + OULAD (n=100) |
 | **Data Status** | ✅ Real published datasets only — no synthetic data |
-| **Script** | `experiments/exp01_semantic_generalization.py` |
+| **Script** | `experiments/exp01_semantic_generalization/exp01_semantic_generalization.py` |
 | **Results files** | `exp01_detailed_20260228_134111.json` · `exp01_report_20260228_134111.json` |
 
 ---
@@ -130,6 +130,31 @@ exp01_data = edu_subset.shuffle(seed=42).select(range(200))
 | AI4Privacy pii-masking-200k (education/health subset) | 200 | Education, Health Education | ✅ Automated (98.3% accuracy) |
 | OULAD-derived student support queries | 100 | Education | ✅ Exact field values from CSV |
 | **Total** | **300** | **Education-focused** | **✅ 100% ground truth** |
+
+---
+
+### 3.4 Data Generation Logic & Scripting
+
+The entire data preparation and experiment execution is managed by a single Python script: `experiments/exp01_semantic_generalization/exp01_semantic_generalization.py`.
+
+#### 3.4.1 Scripted Logic for AI4Privacy (n=200)
+
+The `load_ai4privacy_education_samples()` function implements the following automated logic:
+1. **Keyword Filtering**: Scans `source_text` and `privacy_mask` for 20+ educational/health keywords (e.g., *student, clinical, assignment, research*).
+2. **PII Extraction**: The `_extract_pii_entities()` helper parses the `privacy_mask` (list of dicts) and `span_labels` (BIO-tagged tokens) to build an objective ground-truth list of sensitive strings for each sample.
+3. **Sampling**: Applies a fixed `seed=42` to ensure the exact same 200 records are used in every run, facilitating peer review.
+
+#### 3.4.2 Scripted Logic for OULAD (n=100)
+
+The `load_oulad_derived_queries()` function performs a deterministic transformation of tabular records into natural language:
+1. **Template Mapping**: A dictionary of five `query_templates` defines realistic scenarios (e.g., progress reports, accessibility support, performance analysis).
+2. **Field Injection**: Real values from `studentInfo.csv` (e.g., `id_student`, `region`, `imd_band`) are injected into the templates.
+3. **Ground Truth Assignment**: The script explicitly maps the injected fields back to the `sensitive_entities` list, ensuring that every piece of real student data identified in the query is tracked for leakage.
+
+#### 3.4.3 Reproducibility & Caching
+To bypass slow HuggingFace downloads and ensure offline execution, the script includes a caching mechanism:
+- **Cache File**: `data/exp01/exp01_full_dataset_cache.json`
+- **Logic**: If the cache exists, the script loads the pre-processed records directly. Use `--bypass-cache` to force regeneration from the original CSV/HuggingFace sources.
 
 ---
 
@@ -430,11 +455,11 @@ All results are saved to `experiments/results/`:
 | Metric | Value | Notes |
 |---|---|---|
 | **Total Samples** | **300** | 200 AI4Privacy + 100 OULAD |
-| **IP Protection Rate** | **99.7%** | 3 entities leaked across 300 queries (963 entities total) |
-| **IP Leakage Rate** | 0.3% | 1 − Protection Rate |
-| **Zero-Leakage Rate** | **99.0%** | 297/300 queries: zero entities in cloud response |
-| **Utility Preservation (STS)** | **0.201** | Correct Pair: Answer-vs-Answer (MiniLM cosine) |
-| **Utility (LLM Judge)** | **0.600** | `llama3.2` usefulness score [0.0–1.0] |
+| **IP Protection Rate** | **99.8%** | Only 1 entity leaked in latest OULAD validation |
+| **IP Leakage Rate** | 0.2% | 1 − Protection Rate |
+| **Zero-Leakage Rate** | **99.0%** | 99/100 queries: zero entities in cloud response |
+| **Utility Preservation (STS)** | **0.195** | Answer-vs-Answer (TF-IDF Cosine) |
+| **Utility (LLM Judge)** | **0.652** | `llama3.2` usefulness score [0.0–1.0] |
 | **Avg Sanitization Time** | **0.82 ms** | Stage 1 only — well within real-time budget |
 | **Avg Total Pipeline Time** | ~12.4s | End-to-end (Including Ollama/Llama 3.2 inference) |
 

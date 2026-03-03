@@ -1,0 +1,149 @@
+{
+  "query_id": "adv_03",
+  "original_query": "Compare the efficacy of 'Compound-773' versus 'Drug-Y' for treating 'Patient-Zero's' specific 'Variant-Delta' mutation.",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "Compare the efficacy of 'Compound-773' versus 'Drug-Y' for treating 'Patient-Zero's' specific 'Variant-Delta' mutation.",
+      "output_data": "Zone 1 - High Sensitivity (adversarial)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391658",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: Compare the efficacy of 'Compound-773' versus 'Drug-Y' for treating 'Patient-Zero's' specific 'Variant-Delta' mutation.\nEntities: ['Compound-773', 'Drug-Y', 'Patient-Zero', 'Variant-Delta']",
+      "output_data": "SANITIZED: Compare the efficacy of 'Compound-A' versus 'Compound-B' for treating 'Entity-A's' specific 'Entity-B' mutation.\nMAPPING: {'Compound-A': 'Compound-773', 'Compound-B': 'Drug-Y', 'Entity-A': 'Patient-Zero', 'Entity-B': 'Variant-Delta'}",
+      "duration_ms": 0.08702278137207031,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "Compound-773",
+        "Drug-Y",
+        "Patient-Zero",
+        "Variant-Delta"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Compound-A": "Compound-773",
+        "Compound-B": "Drug-Y",
+        "Entity-A": "Patient-Zero",
+        "Entity-B": "Variant-Delta"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391768",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "Compare the efficacy of 'Compound-A' versus 'Compound-B' for treating 'Entity-A's' specific 'Entity-B' mutation.",
+      "output_data": "I can provide guidance on this topic based on general best practices.",
+      "duration_ms": 0.0007152557373046875,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391772",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: I can provide guidance on this topic based on gene...\nMapping: {'Compound-A': 'Compound-773', 'Compound-B': 'Drug-Y', 'Entity-A': 'Patient-Zero', 'Entity-B': 'Variant-Delta'}",
+      "output_data": "I can provide guidance on this topic based on general best practices.",
+      "duration_ms": 0.014066696166992188,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Compound-A": "Compound-773",
+        "Compound-B": "Drug-Y",
+        "Entity-A": "Patient-Zero",
+        "Entity-B": "Variant-Delta"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391789",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "I can provide guidance on this topic based on general best practices.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.6,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.391805",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "I can provide guidance on this topic based on general best practices.",
+  "total_duration_ms": 15.101804733276367,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.6,
+  "created_at": "2026-01-22T11:50:53.391656",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.08702278137207031,
+      "end_ms": 10.08702278137207
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.08702278137207,
+      "duration_ms": 0.0007152557373046875,
+      "end_ms": 10.087738037109375
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.087738037109375,
+      "duration_ms": 0.014066696166992188,
+      "end_ms": 10.101804733276367
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.101804733276367,
+      "duration_ms": 5.0,
+      "end_ms": 15.101804733276367
+    }
+  ]
+}

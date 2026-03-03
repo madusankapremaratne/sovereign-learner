@@ -1,0 +1,161 @@
+{
+  "query_id": "bio_syn_168",
+  "original_query": "how do i enhance expression in my pcr protocol for vero cells targeting tnf?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i enhance expression in my pcr protocol for vero cells targeting tnf?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.988425",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i enhance expression in my pcr protocol for vero cells targeting tnf?",
+      "output_data": "Detected: []",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.988439",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i enhance expression in my pcr protocol for vero cells targeting tnf?\nEntities: []",
+      "output_data": "SANITIZED: Entity-AhEntity-AoEntity-AwEntity-A Entity-AdEntity-AoEntity-A Entity-AiEntity-A Entity-AeEntity-AnEntity-AhEntity-AaEntity-AnEntity-AcEntity-AeEntity-A Entity-AeEntity-AxEntity-ApEntity-ArEntity-AeEntity-AsEntity-AsEntity-AiEntity-AoEntity-AnEntity-A Entity-AiEntity-AnEntity-A Entity-AmEntity-AyEntity-A Entity-ApEntity-AcEntity-ArEntity-A Entity-ApEntity-ArEntity-AoEntity-AtEntity-AoEntity-AcEntity-AoEntity-AlEntity-A Entity-AfEntity-AoEntity-ArEntity-A Entity-AvEntity-AeEntity-ArEntity-AoEntity-A Entity-AcEntity-AeEntity-AlEntity-AlEntity-AsEntity-A Entity-AtEntity-AaEntity-ArEntity-AgEntity-AeEntity-AtEntity-AiEntity-AnEntity-AgEntity-A Entity-AtEntity-AnEntity-AfEntity-A?Entity-A\nMAPPING: {'Entity-A': ''}",
+      "duration_ms": 0.0247955322265625,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": ""
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.988515",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "Entity-AhEntity-AoEntity-AwEntity-A Entity-AdEntity-AoEntity-A Entity-AiEntity-A Entity-AeEntity-AnEntity-AhEntity-AaEntity-AnEntity-AcEntity-AeEntity-A Entity-AeEntity-AxEntity-ApEntity-ArEntity-AeEntity-AsEntity-AsEntity-AiEntity-AoEntity-AnEntity-A Entity-AiEntity-AnEntity-A Entity-AmEntity-AyEntity-A Entity-ApEntity-AcEntity-ArEntity-A Entity-ApEntity-ArEntity-AoEntity-AtEntity-AoEntity-AcEntity-AoEntity-AlEntity-A Entity-AfEntity-AoEntity-ArEntity-A Entity-AvEntity-AeEntity-ArEntity-AoEntity-A Entity-AcEntity-AeEntity-AlEntity-AlEntity-AsEntity-A Entity-AtEntity-AaEntity-ArEntity-AgEntity-AeEntity-AtEntity-AiEntity-AnEntity-AgEntity-A Entity-AtEntity-AnEntity-AfEntity-A?Entity-A",
+      "output_data": "To optimize Entity-AeEntity-AxEntity-ApEntity-ArEntity-AeEntity-AsEntity-AsEntity-AiEntity-AoEntity-AnEntity-A, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.00286102294921875,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.988523",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize Entity-AeEntity-AxEntity-ApEntity-ArEn...\nMapping: {'Entity-A': ''}",
+      "output_data": "To optimize expression, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.010013580322265625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": ""
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.988536",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize expression, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7999999999999999,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T12:01:39.988554",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize expression, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.037670135498047,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7999999999999999,
+  "created_at": "2026-01-22T12:01:39.988420",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.0247955322265625,
+      "end_ms": 18.024795532226562
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.024795532226562,
+      "duration_ms": 0.00286102294921875,
+      "end_ms": 18.02765655517578
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.02765655517578,
+      "duration_ms": 0.010013580322265625,
+      "end_ms": 18.037670135498047
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.037670135498047,
+      "duration_ms": 5.0,
+      "end_ms": 23.037670135498047
+    }
+  ]
+}

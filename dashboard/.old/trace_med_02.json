@@ -1,0 +1,146 @@
+{
+  "query_id": "med_02",
+  "original_query": "What are the contraindications for Metformin given my eGFR of 45?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What are the contraindications for Metformin given my eGFR of 45?",
+      "output_data": "Zone 1 - High Sensitivity (medical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.387117",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: What are the contraindications for Metformin given my eGFR of 45?\nEntities: ['Metformin', 'eGFR', '45']",
+      "output_data": "SANITIZED: What are the contraindications for Entity-A given my Gene-A of Entity-B?\nMAPPING: {'Entity-A': 'Metformin', 'Gene-A': 'eGFR', 'Entity-B': '45'}",
+      "duration_ms": 0.09179115295410156,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "Metformin",
+        "eGFR",
+        "45"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "Metformin",
+        "Gene-A": "eGFR",
+        "Entity-B": "45"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.387233",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What are the contraindications for Entity-A given my Gene-A of Entity-B?",
+      "output_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "duration_ms": 0.0030994415283203125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.387238",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Based on the clinical parameters mentioned, I reco...\nMapping: {'Entity-A': 'Metformin', 'Gene-A': 'eGFR', 'Entity-B': '45'}",
+      "output_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "duration_ms": 0.014066696166992188,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "Metformin",
+        "Gene-A": "eGFR",
+        "Entity-B": "45"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.387255",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 1.0,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.387273",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+  "total_duration_ms": 15.108957290649414,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T11:50:53.387114",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.09179115295410156,
+      "end_ms": 10.091791152954102
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.091791152954102,
+      "duration_ms": 0.0030994415283203125,
+      "end_ms": 10.094890594482422
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.094890594482422,
+      "duration_ms": 0.014066696166992188,
+      "end_ms": 10.108957290649414
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.108957290649414,
+      "duration_ms": 5.0,
+      "end_ms": 15.108957290649414
+    }
+  ]
+}

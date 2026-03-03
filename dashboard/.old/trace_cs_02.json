@@ -1,0 +1,140 @@
+{
+  "query_id": "cs_02",
+  "original_query": "What's the best way to optimize my BERT fine-tuning on domain-specific data?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What's the best way to optimize my BERT fine-tuning on domain-specific data?",
+      "output_data": "Zone 1 - High Sensitivity (cs)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.378241",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: What's the best way to optimize my BERT fine-tuning on domain-specific data?\nEntities: ['BERT']",
+      "output_data": "SANITIZED: What's the best way to optimize my Entity-A fine-tuning on domain-specific data?\nMAPPING: {'Entity-A': 'BERT'}",
+      "duration_ms": 0.013113021850585938,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "BERT"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "BERT"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.378269",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What's the best way to optimize my Entity-A fine-tuning on domain-specific data?",
+      "output_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "duration_ms": 0.0011920928955078125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.378273",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: For the technical challenge described, I recommend...\nMapping: {'Entity-A': 'BERT'}",
+      "output_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "duration_ms": 0.008106231689453125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "BERT"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.378284",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 1.0,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.378301",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "For the technical challenge described, I recommend profiling your implementation, optimizing memory access patterns, and considering hardware-specific optimizations for your deployment target.",
+  "total_duration_ms": 15.022411346435547,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T11:50:53.378238",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.013113021850585938,
+      "end_ms": 10.013113021850586
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.013113021850586,
+      "duration_ms": 0.0011920928955078125,
+      "end_ms": 10.014305114746094
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.014305114746094,
+      "duration_ms": 0.008106231689453125,
+      "end_ms": 10.022411346435547
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.022411346435547,
+      "duration_ms": 5.0,
+      "end_ms": 15.022411346435547
+    }
+  ]
+}

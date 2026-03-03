@@ -1,0 +1,143 @@
+{
+  "query_id": "edu_05",
+  "original_query": "How do I acknowledge the NIH R01 grant in my publication?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "How do I acknowledge the NIH R01 grant in my publication?",
+      "output_data": "Zone 1 - High Sensitivity (academic)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390508",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: How do I acknowledge the NIH R01 grant in my publication?\nEntities: ['NIH', 'R01']",
+      "output_data": "SANITIZED: How do I acknowledge the Entity-A Entity-B grant in my publication?\nMAPPING: {'Entity-A': 'NIH', 'Entity-B': 'R01'}",
+      "duration_ms": 0.04887580871582031,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "NIH",
+        "R01"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "NIH",
+        "Entity-B": "R01"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390575",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "How do I acknowledge the Entity-A Entity-B grant in my publication?",
+      "output_data": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+      "duration_ms": 0.0011920928955078125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390579",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: For academic writing, ensure proper attribution, f...\nMapping: {'Entity-A': 'NIH', 'Entity-B': 'R01'}",
+      "output_data": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+      "duration_ms": 0.010967254638671875,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "NIH",
+        "Entity-B": "R01"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390592",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 1.0,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.390609",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+  "total_duration_ms": 15.06103515625,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T11:50:53.390506",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.04887580871582031,
+      "end_ms": 10.04887580871582
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.04887580871582,
+      "duration_ms": 0.0011920928955078125,
+      "end_ms": 10.050067901611328
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.050067901611328,
+      "duration_ms": 0.010967254638671875,
+      "end_ms": 10.06103515625
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.06103515625,
+      "duration_ms": 5.0,
+      "end_ms": 15.06103515625
+    }
+  ]
+}

@@ -304,7 +304,7 @@ Query → Sovereign Manager [Zone Classification 0-3]
 | **Prεεmpt** | Translation BLEU | Baseline | ~Identical | ~0% |
 | **Prεεmpt** | RAG accuracy | 100% | 100% | 0% |
 | **Prεεmpt** | Long-context STS | 0.934 | 0.934 | 0% |
-| **SL** | Educational utility preservation | 100% (direct cloud) | TBD | TBD |
+| **SL** | Educational utility preservation | 100% (direct cloud) | 65.2% | −34.8% |
 | **SL** | Struggle detection F1 | 100% (local, no privacy) | +25.8% vs. sanitized cloud | Local privacy *improves* outcomes |
 
 ---

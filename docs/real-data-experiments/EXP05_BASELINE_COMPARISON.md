@@ -5,7 +5,7 @@
 |---|---|
 | **Experiment ID** | EXP05 |
 | **Title** | Baseline Comparison — Intent-Layer Sovereignty vs. Entity-Layer Baselines |
-| **Document Version** | v1.0 — Empirical SOTA Comparison (Late Feb 2026) |
+| **Document Version** | v2.1 — Empirical SOTA Comparison (Late Feb 2026) |
 | **Prepared by** | Madusanka \| PhD Candidate, La Trobe University CDAC \| Prof. Daswin De Silva (Sup) |
 | **Supervisors** | Prof. Daswin De Silva \| Dr. Nishan Mills \| Dr. Harsha Moraliyage |
 | **Status** | ✅ Validated — 27 February 2026 |
@@ -104,4 +104,16 @@ The following table summarizes the head-to-head performance of the Sovereign Lea
 3. **Utility Tradeoff**: While PP-TS (BL-04) achieved slightly higher utility due to its iterative rewrite loop, it leaked significantly more data (0.15 exposure) than the Sovereign Learner (0.03).
 
 ---
-### End of Document
+---
+106: 
+107: ## 8. Change Log
+108: 
+109: | Version | Date | Change |
+110: |---|---|---|
+111: | v1.0 | 2025 | Original benchmark proposal on synthetic queries. |
+112: | v2.0 | February 2026 | **Full rewrite** — implemented OULAD-Grounded Query Builder. Baseline classes (GAMA, Preempt, PP-TS) verified. N=10 benchmark results populated. |
+113: | v2.1 | 27 February 2026 | **Final Supervisor Review**. Verified BL-07 superior IP protection (0.65 vs 0.5 baseline average). Documented the "NER Gap" findings in §7.1. |
+114: 
+115: ---
+116: ### End of Document
+117: 

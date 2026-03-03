@@ -1,0 +1,143 @@
+{
+  "query_id": "legal_03",
+  "original_query": "How do I structure employee stock options for my YCombinator startup?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "How do I structure employee stock options for my YCombinator startup?",
+      "output_data": "Zone 1 - High Sensitivity (legal)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.383697",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: How do I structure employee stock options for my YCombinator startup?\nEntities: ['stock options', 'YCombinator']",
+      "output_data": "SANITIZED: How do I structure employee Entity-A for my Entity-B startup?\nMAPPING: {'Entity-A': 'stock options', 'Entity-B': 'YCombinator'}",
+      "duration_ms": 0.0629425048828125,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "stock options",
+        "YCombinator"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "stock options",
+        "Entity-B": "YCombinator"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.383779",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "How do I structure employee Entity-A for my Entity-B startup?",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.0019073486328125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.383782",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Regarding the contractual matter, standard practic...\nMapping: {'Entity-A': 'stock options', 'Entity-B': 'YCombinator'}",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.010967254638671875,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "stock options",
+        "Entity-B": "YCombinator"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.383795",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7999999999999999,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.383812",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+  "total_duration_ms": 15.075817108154297,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7999999999999999,
+  "created_at": "2026-01-22T11:50:53.383695",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.0629425048828125,
+      "end_ms": 10.062942504882812
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.062942504882812,
+      "duration_ms": 0.0019073486328125,
+      "end_ms": 10.064849853515625
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.064849853515625,
+      "duration_ms": 0.010967254638671875,
+      "end_ms": 10.075817108154297
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.075817108154297,
+      "duration_ms": 5.0,
+      "end_ms": 15.075817108154297
+    }
+  ]
+}

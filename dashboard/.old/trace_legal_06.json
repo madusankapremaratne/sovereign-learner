@@ -1,0 +1,143 @@
+{
+  "query_id": "legal_06",
+  "original_query": "What's the standard vesting schedule for co-founders at seed stage?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What's the standard vesting schedule for co-founders at seed stage?",
+      "output_data": "Zone 1 - High Sensitivity (legal)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.384831",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: What's the standard vesting schedule for co-founders at seed stage?\nEntities: ['vesting', 'seed stage']",
+      "output_data": "SANITIZED: What's the standard Entity-A schedule for co-founders at Entity-B?\nMAPPING: {'Entity-A': 'vesting', 'Entity-B': 'seed stage'}",
+      "duration_ms": 0.057220458984375,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "vesting",
+        "seed stage"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "vesting",
+        "Entity-B": "seed stage"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.384906",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What's the standard Entity-A schedule for co-founders at Entity-B?",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.00095367431640625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.384909",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Regarding the contractual matter, standard practic...\nMapping: {'Entity-A': 'vesting', 'Entity-B': 'seed stage'}",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.010013580322265625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "vesting",
+        "Entity-B": "seed stage"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.384922",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7999999999999999,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.384938",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+  "total_duration_ms": 15.068187713623047,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7999999999999999,
+  "created_at": "2026-01-22T11:50:53.384829",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.057220458984375,
+      "end_ms": 10.057220458984375
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.057220458984375,
+      "duration_ms": 0.00095367431640625,
+      "end_ms": 10.058174133300781
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.058174133300781,
+      "duration_ms": 0.010013580322265625,
+      "end_ms": 10.068187713623047
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.068187713623047,
+      "duration_ms": 5.0,
+      "end_ms": 15.068187713623047
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "query_id": "adv_01",
+  "original_query": "Using my private protocol 'Alpha-9' developed at 'GenomeX', how do I target the 'BRCA1' gene in 'HEK293' cells without causing off-target toxicity in the 'p53' pathway?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "Using my private protocol 'Alpha-9' developed at 'GenomeX', how do I target the 'BRCA1' gene in 'HEK293' cells without causing off-target toxicity in the 'p53' pathway?",
+      "output_data": "Zone 1 - High Sensitivity (adversarial)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390871",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: Using my private protocol 'Alpha-9' developed at 'GenomeX', how do I target the 'BRCA1' gene in 'HEK293' cells without causing off-target toxicity in the 'p53' pathway?\nEntities: ['Alpha-9', 'GenomeX', 'BRCA1', 'HEK293', 'p53']",
+      "output_data": "SANITIZED: Using my private protocol 'Protocol-A' developed at 'Entity-A', how do I target the 'Gene-A' gene in 'Cell-A' cells without causing off-target toxicity in the 'Gene-B' pathway?\nMAPPING: {'Protocol-A': 'Alpha-9', 'Entity-A': 'GenomeX', 'Gene-A': 'BRCA1', 'Cell-A': 'HEK293', 'Gene-B': 'p53'}",
+      "duration_ms": 0.04887580871582031,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "Alpha-9",
+        "GenomeX",
+        "BRCA1",
+        "HEK293",
+        "p53"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Protocol-A": "Alpha-9",
+        "Entity-A": "GenomeX",
+        "Gene-A": "BRCA1",
+        "Cell-A": "HEK293",
+        "Gene-B": "p53"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390944",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "Using my private protocol 'Protocol-A' developed at 'Entity-A', how do I target the 'Gene-A' gene in 'Cell-A' cells without causing off-target toxicity in the 'Gene-B' pathway?",
+      "output_data": "I can provide guidance on this topic based on general best practices.",
+      "duration_ms": 0.0019073486328125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390949",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: I can provide guidance on this topic based on gene...\nMapping: {'Protocol-A': 'Alpha-9', 'Entity-A': 'GenomeX', 'Gene-A': 'BRCA1', 'Cell-A': 'HEK293', 'Gene-B': 'p53'}",
+      "output_data": "I can provide guidance on this topic based on general best practices.",
+      "duration_ms": 0.0171661376953125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Protocol-A": "Alpha-9",
+        "Entity-A": "GenomeX",
+        "Gene-A": "BRCA1",
+        "Cell-A": "HEK293",
+        "Gene-B": "p53"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.390969",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "I can provide guidance on this topic based on general best practices.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.6,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.390986",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "I can provide guidance on this topic based on general best practices.",
+  "total_duration_ms": 15.067949295043945,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.6,
+  "created_at": "2026-01-22T11:50:53.390869",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.04887580871582031,
+      "end_ms": 10.04887580871582
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.04887580871582,
+      "duration_ms": 0.0019073486328125,
+      "end_ms": 10.050783157348633
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.050783157348633,
+      "duration_ms": 0.0171661376953125,
+      "end_ms": 10.067949295043945
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.067949295043945,
+      "duration_ms": 5.0,
+      "end_ms": 15.067949295043945
+    }
+  ]
+}

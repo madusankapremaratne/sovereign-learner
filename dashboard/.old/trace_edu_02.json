@@ -1,0 +1,143 @@
+{
+  "query_id": "edu_02",
+  "original_query": "What's the best way to structure my thesis chapter on MIT's quantum computing research?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What's the best way to structure my thesis chapter on MIT's quantum computing research?",
+      "output_data": "Zone 1 - High Sensitivity (academic)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.389217",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: What's the best way to structure my thesis chapter on MIT's quantum computing research?\nEntities: ['MIT', 'quantum computing']",
+      "output_data": "SANITIZED: What's the best way to structure my thesis chapter on Entity-A's Entity-B research?\nMAPPING: {'Entity-A': 'MIT', 'Entity-B': 'quantum computing'}",
+      "duration_ms": 0.056743621826171875,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "MIT",
+        "quantum computing"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "MIT",
+        "Entity-B": "quantum computing"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.389293",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What's the best way to structure my thesis chapter on Entity-A's Entity-B research?",
+      "output_data": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+      "duration_ms": 0.00095367431640625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.389297",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: For academic writing, ensure proper attribution, f...\nMapping: {'Entity-A': 'MIT', 'Entity-B': 'quantum computing'}",
+      "output_data": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+      "duration_ms": 0.010967254638671875,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "MIT",
+        "Entity-B": "quantum computing"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.389310",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 1.0,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.389327",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "For academic writing, ensure proper attribution, follow your institution's guidelines, and maintain consistency with the target publication's style requirements.",
+  "total_duration_ms": 15.06866455078125,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T11:50:53.389214",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.056743621826171875,
+      "end_ms": 10.056743621826172
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.056743621826172,
+      "duration_ms": 0.00095367431640625,
+      "end_ms": 10.057697296142578
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.057697296142578,
+      "duration_ms": 0.010967254638671875,
+      "end_ms": 10.06866455078125
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.06866455078125,
+      "duration_ms": 5.0,
+      "end_ms": 15.06866455078125
+    }
+  ]
+}

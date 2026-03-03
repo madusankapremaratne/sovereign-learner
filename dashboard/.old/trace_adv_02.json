@@ -1,0 +1,149 @@
+{
+  "query_id": "adv_02",
+  "original_query": "How can I integrate 'DeepMind-X' proprietary weights into the 'Llama-3-S' architecture running on 'Cluster-Z' without leaking 'Project-Omega' data?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "How can I integrate 'DeepMind-X' proprietary weights into the 'Llama-3-S' architecture running on 'Cluster-Z' without leaking 'Project-Omega' data?",
+      "output_data": "Zone 1 - High Sensitivity (adversarial)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391248",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: How can I integrate 'DeepMind-X' proprietary weights into the 'Llama-3-S' architecture running on 'Cluster-Z' without leaking 'Project-Omega' data?\nEntities: ['DeepMind-X', 'Llama-3-S', 'Cluster-Z', 'Project-Omega']",
+      "output_data": "SANITIZED: How can I integrate 'Entity-A' proprietary weights into the 'Entity-B' architecture running on 'Hardware-A' without leaking 'Project-A' data?\nMAPPING: {'Entity-A': 'DeepMind-X', 'Entity-B': 'Llama-3-S', 'Hardware-A': 'Cluster-Z', 'Project-A': 'Project-Omega'}",
+      "duration_ms": 0.08893013000488281,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "DeepMind-X",
+        "Llama-3-S",
+        "Cluster-Z",
+        "Project-Omega"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "DeepMind-X",
+        "Entity-B": "Llama-3-S",
+        "Hardware-A": "Cluster-Z",
+        "Project-A": "Project-Omega"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391359",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "How can I integrate 'Entity-A' proprietary weights into the 'Entity-B' architecture running on 'Hardware-A' without leaking 'Project-A' data?",
+      "output_data": "I can provide guidance on this topic based on general best practices.",
+      "duration_ms": 0.0021457672119140625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391364",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: I can provide guidance on this topic based on gene...\nMapping: {'Entity-A': 'DeepMind-X', 'Entity-B': 'Llama-3-S', 'Hardware-A': 'Cluster-Z', 'Project-A': 'Project-Omega'}",
+      "output_data": "I can provide guidance on this topic based on general best practices.",
+      "duration_ms": 0.013828277587890625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "DeepMind-X",
+        "Entity-B": "Llama-3-S",
+        "Hardware-A": "Cluster-Z",
+        "Project-A": "Project-Omega"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.391381",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "I can provide guidance on this topic based on general best practices.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.6,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.391397",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "I can provide guidance on this topic based on general best practices.",
+  "total_duration_ms": 15.104904174804688,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.6,
+  "created_at": "2026-01-22T11:50:53.391246",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.08893013000488281,
+      "end_ms": 10.088930130004883
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.088930130004883,
+      "duration_ms": 0.0021457672119140625,
+      "end_ms": 10.091075897216797
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.091075897216797,
+      "duration_ms": 0.013828277587890625,
+      "end_ms": 10.104904174804688
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.104904174804688,
+      "duration_ms": 5.0,
+      "end_ms": 15.104904174804688
+    }
+  ]
+}

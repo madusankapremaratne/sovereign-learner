@@ -1,0 +1,143 @@
+{
+  "query_id": "med_04",
+  "original_query": "What's the recommended Humira dosing for my Crohn's disease?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "What's the recommended Humira dosing for my Crohn's disease?",
+      "output_data": "Zone 1 - High Sensitivity (medical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.388028",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: What's the recommended Humira dosing for my Crohn's disease?\nEntities: ['Humira', \"Crohn's disease\"]",
+      "output_data": "SANITIZED: What's the recommended Entity-A dosing for my Compound-A?\nMAPPING: {'Entity-A': 'Humira', 'Compound-A': \"Crohn's disease\"}",
+      "duration_ms": 0.06079673767089844,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "Humira",
+        "Crohn's disease"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "Humira",
+        "Compound-A": "Crohn's disease"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.388109",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "What's the recommended Entity-A dosing for my Compound-A?",
+      "output_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "duration_ms": 0.0016689300537109375,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.388113",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Based on the clinical parameters mentioned, I reco...\nMapping: {'Entity-A': 'Humira', 'Compound-A': \"Crohn's disease\"}",
+      "output_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "duration_ms": 0.011920928955078125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "Humira",
+        "Compound-A": "Crohn's disease"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.388127",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 1.0,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.388145",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+  "total_duration_ms": 15.074386596679688,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T11:50:53.388026",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.06079673767089844,
+      "end_ms": 10.060796737670898
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.060796737670898,
+      "duration_ms": 0.0016689300537109375,
+      "end_ms": 10.06246566772461
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.06246566772461,
+      "duration_ms": 0.011920928955078125,
+      "end_ms": 10.074386596679688
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.074386596679688,
+      "duration_ms": 5.0,
+      "end_ms": 15.074386596679688
+    }
+  ]
+}

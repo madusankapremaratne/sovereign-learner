@@ -1,0 +1,163 @@
+{
+  "query_id": "bio_syn_114",
+  "original_query": "how do i quantify my crispr protocol for cho-k1 cells targeting egfr?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "how do i quantify my crispr protocol for cho-k1 cells targeting egfr?",
+      "output_data": "Zone 1 - High Sensitivity (biomedical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.967072",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "how do i quantify my crispr protocol for cho-k1 cells targeting egfr?",
+      "output_data": "Detected: ['cho-k1']",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.967083",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: how do i quantify my crispr protocol for cho-k1 cells targeting egfr?\nEntities: ['cho-k1']",
+      "output_data": "SANITIZED: how do i quantify my crispr protocol for Cell-A cells targeting egfr?\nMAPPING: {'Cell-A': 'cho-k1'}",
+      "duration_ms": 0.007867813110351562,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "cho-k1"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Cell-A": "cho-k1"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.967110",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "how do i quantify my crispr protocol for Cell-A cells targeting egfr?",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.00095367431640625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.967113",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: To optimize my, consider systematic parameter tuni...\nMapping: {'Cell-A': 'cho-k1'}",
+      "output_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "duration_ms": 0.007867813110351562,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Cell-A": "cho-k1"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:39.967124",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7999999999999999,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T12:01:39.967141",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "To optimize my, consider systematic parameter tuning, validation assays, and iterative refinement based on your specific experimental conditions.",
+  "total_duration_ms": 23.01668930053711,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7999999999999999,
+  "created_at": "2026-01-22T12:01:39.967069",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.007867813110351562,
+      "end_ms": 18.00786781311035
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.00786781311035,
+      "duration_ms": 0.00095367431640625,
+      "end_ms": 18.008821487426758
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.008821487426758,
+      "duration_ms": 0.007867813110351562,
+      "end_ms": 18.01668930053711
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.01668930053711,
+      "duration_ms": 5.0,
+      "end_ms": 23.01668930053711
+    }
+  ]
+}

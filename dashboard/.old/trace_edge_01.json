@@ -1,0 +1,172 @@
+{
+  "query_id": "edge_01",
+  "original_query": "My supervisor Dr. Smith's CRISPR method is showing off-target effects.",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "My supervisor Dr. Smith's CRISPR method is showing off-target effects.",
+      "output_data": "Zone 1",
+      "duration_ms": 57.6985959699811,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 1",
+        "reason": "Classified based on sensitivity"
+      },
+      "timestamp": "2026-01-17T22:01:52.455678",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "PII/IP Scanner",
+      "input_data": "My supervisor Dr. Smith's CRISPR method is showing off-target effects.",
+      "output_data": "['Dr. Smith', 'CRISPR']",
+      "duration_ms": 32.368617247379234,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [
+        "Dr. Smith",
+        "CRISPR"
+      ],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.455682",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: My supervisor Dr. Smith's CRISPR method is showing off-target effects.\nEntities: ['Dr. Smith', 'CRISPR']",
+      "output_data": "SANITIZED: My supervisor Entity-A's Entity-B method is showing off-target effects.",
+      "duration_ms": 136.67861657157215,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.1,
+      "entities_detected": [
+        "Dr. Smith",
+        "CRISPR"
+      ],
+      "entities_masked": [
+        "Entity-A",
+        "Entity-B"
+      ],
+      "mapping": {
+        "Entity-A": "Dr. Smith",
+        "Entity-B": "CRISPR"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.455688",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "My supervisor Entity-A's Entity-B method is showing off-target effects.",
+      "output_data": "[Cloud Response Content]",
+      "duration_ms": 1003.1473130562948,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 0.1,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.455690",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: [Cloud Response]\nMapping: {'Entity-A': 'Dr. Smith', 'Entity-B': 'CRISPR'}",
+      "output_data": "[Recontextualized Answer]",
+      "duration_ms": 73.30536249799727,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "Dr. Smith",
+        "Entity-B": "CRISPR"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.455693",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "[Recontextualized Answer]",
+      "output_data": "Competency Updated",
+      "duration_ms": 21.956883619247606,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-17T22:01:52.455695",
+      "zone": 1,
+      "status": "success"
+    }
+  ],
+  "final_response": "[Recontextualized Answer]",
+  "total_duration_ms": 1325.1553889624724,
+  "zone_used": 1,
+  "privacy_protection_score": 0.9,
+  "utility_score": 0.95,
+  "created_at": "2026-01-17T22:01:52.455675",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.9,
+    "Cloud Researcher": 0.135,
+    "Recontextualizer": 0.2,
+    "Evidence Curator": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 57.6985959699811,
+      "end_ms": 57.6985959699811
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 57.6985959699811,
+      "duration_ms": 32.368617247379234,
+      "end_ms": 90.06721321736033
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 90.06721321736033,
+      "duration_ms": 136.67861657157215,
+      "end_ms": 226.7458297889325
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 226.7458297889325,
+      "duration_ms": 1003.1473130562948,
+      "end_ms": 1229.8931428452274
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 1229.8931428452274,
+      "duration_ms": 73.30536249799727,
+      "end_ms": 1303.1985053432247
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 1303.1985053432247,
+      "duration_ms": 21.956883619247606,
+      "end_ms": 1325.1553889624724
+    }
+  ]
+}

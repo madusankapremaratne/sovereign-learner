@@ -1,0 +1,149 @@
+{
+  "query_id": "med_01",
+  "original_query": "I'm patient John Smith, ID 78432. How do I interpret my HbA1c results of 7.2%?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "I'm patient John Smith, ID 78432. How do I interpret my HbA1c results of 7.2%?",
+      "output_data": "Zone 1 - High Sensitivity (medical)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.386571",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: I'm patient John Smith, ID 78432. How do I interpret my HbA1c results of 7.2%?\nEntities: ['John Smith', '78432', 'HbA1c', '7.2%']",
+      "output_data": "SANITIZED: I'm patient Entity-A, ID Entity-B. How do I interpret my Entity-C results of Entity-D?\nMAPPING: {'Entity-A': 'John Smith', 'Entity-B': '78432', 'Entity-C': 'HbA1c', 'Entity-D': '7.2%'}",
+      "duration_ms": 0.09703636169433594,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "John Smith",
+        "78432",
+        "HbA1c",
+        "7.2%"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "John Smith",
+        "Entity-B": "78432",
+        "Entity-C": "HbA1c",
+        "Entity-D": "7.2%"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.386691",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "I'm patient Entity-A, ID Entity-B. How do I interpret my Entity-C results of Entity-D?",
+      "output_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "duration_ms": 0.0019073486328125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.386695",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Based on the clinical parameters mentioned, I reco...\nMapping: {'Entity-A': 'John Smith', 'Entity-B': '78432', 'Entity-C': 'HbA1c', 'Entity-D': '7.2%'}",
+      "output_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "duration_ms": 0.0171661376953125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "John Smith",
+        "Entity-B": "78432",
+        "Entity-C": "HbA1c",
+        "Entity-D": "7.2%"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.386715",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 1.0,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.386731",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Based on the clinical parameters mentioned, I recommend consulting with your healthcare provider for personalized guidance, as interpretation depends on individual medical history.",
+  "total_duration_ms": 15.116109848022461,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 1.0,
+  "created_at": "2026-01-22T11:50:53.386569",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.09703636169433594,
+      "end_ms": 10.097036361694336
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.097036361694336,
+      "duration_ms": 0.0019073486328125,
+      "end_ms": 10.098943710327148
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.098943710327148,
+      "duration_ms": 0.0171661376953125,
+      "end_ms": 10.116109848022461
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.116109848022461,
+      "duration_ms": 5.0,
+      "end_ms": 15.116109848022461
+    }
+  ]
+}

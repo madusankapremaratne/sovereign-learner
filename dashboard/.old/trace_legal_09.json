@@ -1,0 +1,143 @@
+{
+  "query_id": "legal_09",
+  "original_query": "How do I negotiate exclusivity terms with our Salesforce integration?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "How do I negotiate exclusivity terms with our Salesforce integration?",
+      "output_data": "Zone 1 - High Sensitivity (legal)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.385877",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: How do I negotiate exclusivity terms with our Salesforce integration?\nEntities: ['exclusivity', 'Salesforce']",
+      "output_data": "SANITIZED: How do I negotiate Entity-A terms with our Entity-B integration?\nMAPPING: {'Entity-A': 'exclusivity', 'Entity-B': 'Salesforce'}",
+      "duration_ms": 0.05698204040527344,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [
+        "exclusivity",
+        "Salesforce"
+      ],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "exclusivity",
+        "Entity-B": "Salesforce"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.385951",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "How do I negotiate Entity-A terms with our Entity-B integration?",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.00095367431640625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.385954",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Regarding the contractual matter, standard practic...\nMapping: {'Entity-A': 'exclusivity', 'Entity-B': 'Salesforce'}",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.010013580322265625,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": "exclusivity",
+        "Entity-B": "Salesforce"
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T11:50:53.385966",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7999999999999999,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T11:50:53.385982",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+  "total_duration_ms": 15.067949295043945,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7999999999999999,
+  "created_at": "2026-01-22T11:50:53.385874",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 10.0,
+      "duration_ms": 0.05698204040527344,
+      "end_ms": 10.056982040405273
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 10.056982040405273,
+      "duration_ms": 0.00095367431640625,
+      "end_ms": 10.05793571472168
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 10.05793571472168,
+      "duration_ms": 0.010013580322265625,
+      "end_ms": 10.067949295043945
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 10.067949295043945,
+      "duration_ms": 5.0,
+      "end_ms": 15.067949295043945
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "query_id": "384c073f",
+  "original_query": "How do I optimize my CRISPR protocol for HEK293 cells?",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "How do I optimize my CRISPR protocol for HEK293 cells?",
+      "output_data": "Zone 1 - High Sensitivity Research Query",
+      "duration_ms": 45.2,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "decision": "Zone 1",
+        "confidence": 0.98,
+        "reason": "Detected proprietary research terms (CRISPR, HEK293)"
+      },
+      "timestamp": "2026-01-22T15:30:32.700699",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: How do I optimize my CRISPR protocol for HEK293 cells?\nEntities: ['CRISPR', 'HEK293']",
+      "output_data": "SANITIZED: How do I optimize my Protocol-Alpha protocol for Cell-Beta cells?\nMAPPING: {'Protocol-Alpha': 'CRISPR', 'Cell-Beta': 'HEK293'}",
+      "duration_ms": 120.5,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.1,
+      "entities_detected": [
+        "CRISPR",
+        "HEK293"
+      ],
+      "entities_masked": [
+        "Protocol-Alpha",
+        "Cell-Beta"
+      ],
+      "mapping": {
+        "Protocol-Alpha": "CRISPR",
+        "Cell-Beta": "HEK293"
+      },
+      "metadata": {
+        "strategy": "generalization_substitution"
+      },
+      "timestamp": "2026-01-22T15:30:32.700711",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "How do I optimize my Protocol-Alpha protocol for Cell-Beta cells?",
+      "output_data": "Optimizing Protocol-Alpha for Cell-Beta typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls.",
+      "duration_ms": 1540.2,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 0.1,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "model": "gemini-pro",
+        "source": "external_api"
+      },
+      "timestamp": "2026-01-22T15:30:32.700719",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Optimizing Protocol-Alpha for Cell-Beta typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls.\nMapping: {'Protocol-Alpha': 'CRISPR', 'Cell-Beta': 'HEK293'}",
+      "output_data": "Optimizing CRISPR for HEK293 typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls.",
+      "duration_ms": 85.6,
+      "privacy_score_before": 0.1,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Protocol-Alpha": "CRISPR",
+        "Cell-Beta": "HEK293"
+      },
+      "metadata": {
+        "replacements_made": 2
+      },
+      "timestamp": "2026-01-22T15:30:32.700731",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Optimizing CRISPR for HEK293 typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls.",
+      "output_data": "Competency Updated: vector_db_id_8823",
+      "duration_ms": 32.1,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.95,
+        "leakage": 0.0,
+        "persisted": true
+      },
+      "timestamp": "2026-01-22T15:30:32.700734",
+      "zone": 1,
+      "status": "success"
+    }
+  ],
+  "final_response": "Optimizing CRISPR for HEK293 typically requires adjusting transfection reagents, carefully monitoring incubation times, and validating with appropriate controls.",
+  "total_duration_ms": 1823.6,
+  "zone_used": 1,
+  "privacy_protection_score": 0.9,
+  "utility_score": 0.95,
+  "created_at": "2026-01-22T15:30:32.700655",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Semantic Generalizer": 0.9,
+    "Cloud Researcher": 0.135,
+    "Recontextualizer": 0.2,
+    "Evidence Curator": 0.0
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 45.2,
+      "end_ms": 45.2
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 45.2,
+      "duration_ms": 120.5,
+      "end_ms": 165.7
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 165.7,
+      "duration_ms": 1540.2,
+      "end_ms": 1705.9
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 1705.9,
+      "duration_ms": 85.6,
+      "end_ms": 1791.5
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 1791.5,
+      "duration_ms": 32.1,
+      "end_ms": 1823.6
+    }
+  ]
+}

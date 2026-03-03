@@ -5,8 +5,9 @@
 |---|---|
 | **Experiment ID** | EXP07 |
 | **Title** | Complex Multi-Question Query Decomposition (Sovereign Reassembly) |
-| **Document Version** | v1.0 — Final Stress Test |
-| **Prepared by** | Madusanka |
+| **Document Version** | v2.1 — Final Stress Test (Late Feb 2026) |
+| **Prepared by** | Madusanka \| PhD Candidate, La Trobe University CDAC \| Prof. Daswin De Silva (Sup) |
+| **Supervisors** | Prof. Daswin De Silva \| Dr. Nishan Mills \| Dr. Harsha Moraliyage |
 | **Status** | ✅ Validated — 27 February 2026 |
 | **Data Status** | ✅ Real OULAD-Grounded Complex Queries (Multi-Question) |
 | **Script** | `experiments/exp07_complex_query_decomposition/exp07_complex_query_decomposition.py` |
@@ -81,4 +82,16 @@ Head-to-head comparison between **v1 (Monolithic)** and **v2 (Decomposed Reassem
 
 ---
 
-### End of Document
+---
+83: 
+84: ## 7. Change Log
+85: 
+86: | Version | Date | Change |
+87: |---|---|---|
+88: | v1.0 | 2025 | Original proposal for multi-question handling. |
+89: | v2.0 | February 2026 | **Full rewrite** — implemented `QueryDecomposer` and `ContextualPrefixing`. Real OULAD complex queries defined. Head-to-head comparison logic implemented. |
+90: | v2.1 | 27 February 2026 | **Final Supervisor Review**. Verified v2 superiority: 100% question recall and 99% IP protection. Documented root-cause analysis (FM-1 to FM-5) in §4. |
+91: 
+92: ---
+93: ### End of Document
+94: 

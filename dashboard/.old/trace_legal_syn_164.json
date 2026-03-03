@@ -1,0 +1,161 @@
+{
+  "query_id": "legal_syn_164",
+  "original_query": "draft a non-compete clause for our deal with microsoft under california law.",
+  "steps": [
+    {
+      "agent_name": "Sovereign Manager",
+      "agent_role": "Privacy-Aware Query Router",
+      "input_data": "draft a non-compete clause for our deal with microsoft under california law.",
+      "output_data": "Zone 1 - High Sensitivity (legal)",
+      "duration_ms": 10.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:40.233452",
+      "zone": 1,
+      "status": "success"
+    },
+    {
+      "agent_name": "Sensitivity Detector",
+      "agent_role": "Auto-Discovery (Knowledge-Based)",
+      "input_data": "draft a non-compete clause for our deal with microsoft under california law.",
+      "output_data": "Detected: []",
+      "duration_ms": 8.0,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 1.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:40.233463",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Semantic Generalizer",
+      "agent_role": "Intent Obfuscation Specialist",
+      "input_data": "Query: draft a non-compete clause for our deal with microsoft under california law.\nEntities: []",
+      "output_data": "SANITIZED: Entity-AdEntity-ArEntity-AaEntity-AfEntity-AtEntity-A Entity-AaEntity-A Entity-AnEntity-AoEntity-AnEntity-A-Entity-AcEntity-AoEntity-AmEntity-ApEntity-AeEntity-AtEntity-AeEntity-A Entity-AcEntity-AlEntity-AaEntity-AuEntity-AsEntity-AeEntity-A Entity-AfEntity-AoEntity-ArEntity-A Entity-AoEntity-AuEntity-ArEntity-A Entity-AdEntity-AeEntity-AaEntity-AlEntity-A Entity-AwEntity-AiEntity-AtEntity-AhEntity-A Entity-AmEntity-AiEntity-AcEntity-ArEntity-AoEntity-AsEntity-AoEntity-AfEntity-AtEntity-A Entity-AuEntity-AnEntity-AdEntity-AeEntity-ArEntity-A Entity-AcEntity-AaEntity-AlEntity-AiEntity-AfEntity-AoEntity-ArEntity-AnEntity-AiEntity-AaEntity-A Entity-AlEntity-AaEntity-AwEntity-A.Entity-A\nMAPPING: {'Entity-A': ''}",
+      "duration_ms": 0.019073486328125,
+      "privacy_score_before": 1.0,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": ""
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:40.233504",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Cloud Researcher",
+      "agent_role": "External Knowledge Retrieval",
+      "input_data": "Entity-AdEntity-ArEntity-AaEntity-AfEntity-AtEntity-A Entity-AaEntity-A Entity-AnEntity-AoEntity-AnEntity-A-Entity-AcEntity-AoEntity-AmEntity-ApEntity-AeEntity-AtEntity-AeEntity-A Entity-AcEntity-AlEntity-AaEntity-AuEntity-AsEntity-AeEntity-A Entity-AfEntity-AoEntity-ArEntity-A Entity-AoEntity-AuEntity-ArEntity-A Entity-AdEntity-AeEntity-AaEntity-AlEntity-A Entity-AwEntity-AiEntity-AtEntity-AhEntity-A Entity-AmEntity-AiEntity-AcEntity-ArEntity-AoEntity-AsEntity-AoEntity-AfEntity-AtEntity-A Entity-AuEntity-AnEntity-AdEntity-AeEntity-ArEntity-A Entity-AcEntity-AaEntity-AlEntity-AiEntity-AfEntity-AoEntity-ArEntity-AnEntity-AiEntity-AaEntity-A Entity-AlEntity-AaEntity-AwEntity-A.Entity-A",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.0030994415283203125,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.2,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:40.233509",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Recontextualizer",
+      "agent_role": "Response Re-contextualization Specialist",
+      "input_data": "Response: Regarding the contractual matter, standard practic...\nMapping: {'Entity-A': ''}",
+      "output_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "duration_ms": 0.01430511474609375,
+      "privacy_score_before": 0.2,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {
+        "Entity-A": ""
+      },
+      "metadata": {},
+      "timestamp": "2026-01-22T12:01:40.233526",
+      "zone": null,
+      "status": "success"
+    },
+    {
+      "agent_name": "Evidence Curator",
+      "agent_role": "Learning Record Manager",
+      "input_data": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+      "output_data": "Competency Updated",
+      "duration_ms": 5.0,
+      "privacy_score_before": 0.0,
+      "privacy_score_after": 0.0,
+      "entities_detected": [],
+      "entities_masked": [],
+      "mapping": {},
+      "metadata": {
+        "utility": 0.7999999999999999,
+        "leakage": 0.0
+      },
+      "timestamp": "2026-01-22T12:01:40.233555",
+      "zone": null,
+      "status": "success"
+    }
+  ],
+  "final_response": "Regarding the contractual matter, standard practice involves clear definition of terms, appropriate liability limitations, and compliance with relevant jurisdictional requirements.",
+  "total_duration_ms": 23.03647804260254,
+  "zone_used": 1,
+  "privacy_protection_score": 1.0,
+  "utility_score": 0.7999999999999999,
+  "created_at": "2026-01-22T12:01:40.233449",
+  "agent_contributions": {
+    "Sovereign Manager": 0.15,
+    "Sensitivity Detector": 0.0,
+    "Semantic Generalizer": 0.8,
+    "Cloud Researcher": 0.12,
+    "Recontextualizer": 0.32,
+    "Evidence Curator": 0.15
+  },
+  "timeline": [
+    {
+      "agent": "Sovereign Manager",
+      "start_ms": 0,
+      "duration_ms": 10.0,
+      "end_ms": 10.0
+    },
+    {
+      "agent": "Sensitivity Detector",
+      "start_ms": 10.0,
+      "duration_ms": 8.0,
+      "end_ms": 18.0
+    },
+    {
+      "agent": "Semantic Generalizer",
+      "start_ms": 18.0,
+      "duration_ms": 0.019073486328125,
+      "end_ms": 18.019073486328125
+    },
+    {
+      "agent": "Cloud Researcher",
+      "start_ms": 18.019073486328125,
+      "duration_ms": 0.0030994415283203125,
+      "end_ms": 18.022172927856445
+    },
+    {
+      "agent": "Recontextualizer",
+      "start_ms": 18.022172927856445,
+      "duration_ms": 0.01430511474609375,
+      "end_ms": 18.03647804260254
+    },
+    {
+      "agent": "Evidence Curator",
+      "start_ms": 18.03647804260254,
+      "duration_ms": 5.0,
+      "end_ms": 23.03647804260254
+    }
+  ]
+}
