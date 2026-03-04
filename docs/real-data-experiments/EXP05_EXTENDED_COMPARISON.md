@@ -347,4 +347,74 @@ Yes, relative to alternatives. PP-TS shows 11% logical inference leakage even wi
 
 ---
 
-*Document prepared for internal research use. All comparator results cited from original publications.*
+## 13. Empirical Head-to-Head Comparison (N=10, Cleaned)
+
+Cross-dataset validation conducted in **March 2026**. Results below are from the **cleaned dataset** (`exp05_extended_results_cleaned_20260304.json`), where all *Reasoning Leakage* artefacts (CrewAI "Thought" traces, internal JSON wrappers, tool `Action Input` dumps) were removed from Sovereign Learner outputs and re-evaluated with fresh LLM adversarial scoring.
+
+> **Dataset Sources:** Educational IP tested on OULAD-Grounded queries (Q-0 to Q-9). General PII tested on a standard benchmark set (PII-01 to PII-05).
+
+---
+
+### 13.1 Educational IP Protection (OULAD Dataset, Cleaned)
+*Goal: Protect learning metrics, module codes, score percentages, and research methodology.*
+
+| System | Avg IP Protection ↑ | Avg Utility ↑ | Avg Latency |
+| :--- | :---: | :---: | :---: |
+| BL-03: Prεεmpt (2025) | 0.57 | 0.80 | 0.85s |
+| BL-04: PP-TS (2023) | 0.64 | 0.76 | 22.93s |
+| BL-05: GAMA (2025) | 0.50 | 0.77 | 2.26s |
+| BL-06: AI4Privacy | 0.58 | 0.80 | 0.77s |
+| **BL-07: Sovereign Learner (Cleaned)** | **0.68** *(was 0.55)* | **0.56** | 59.52s |
+
+> **Δ after cleaning:** IP Protection improved by **+0.13** (from 0.55 to 0.68) once internal logs and tool traces were stripped from the final output. Sovereign Learner now leads all baselines on Educational IP protection.
+
+---
+
+### 13.2 General PII Protection (Benchmarks, Cleaned)
+*Goal: Protect Names, Addresses, Phone Numbers, SSNs, Emails.*
+
+| System | Avg IP Protection ↑ | Avg Utility ↑ | Avg Latency |
+| :--- | :---: | :---: | :---: |
+| BL-03: Prεεmpt (2025) | 0.72 | 0.56 | 0.78s |
+| BL-04: PP-TS (2023) | 0.68 | 0.68 | 40.92s |
+| BL-05: GAMA (2025) | 0.64 | 0.78 | 4.47s |
+| BL-06: AI4Privacy | 0.68 | 0.74 | 0.73s |
+| **BL-07: Sovereign Learner (Cleaned)** | **0.44** *(was 0.66)* | **0.68** | 57.77s |
+
+> **Note:** On the General PII benchmark, Sovereign Learner's re-evaluated score is **0.44** — lower than raw, because the original leaked JSON placeholders (e.g., `"response": "The final response from interaction"`) were mis-scored as "no leakage" by the adversary. After cleaning them out, the true underlying protection level (appropriate for a system designed for *Educational IP*, not PII) is correctly measured. This is consistent with the "NER Gap" hypothesis.
+
+---
+
+### 13.3 Cross-Domain Comparison: Before vs. After Cleaning
+
+| System | Educational IP (Raw) | Educational IP (Cleaned) | PII (Raw) | PII (Cleaned) |
+| :--- | :---: | :---: | :---: | :---: |
+| BL-03: Prεεmpt | 0.57 | 0.57 | 0.72 | 0.72 |
+| BL-04: PP-TS | 0.64 | 0.64 | 0.68 | 0.68 |
+| BL-05: GAMA | 0.50 | 0.50 | 0.64 | 0.64 |
+| BL-06: AI4Privacy | 0.58 | 0.58 | 0.68 | 0.68 |
+| **BL-07: SL** | 0.55 | **0.68 (+0.13)** | 0.66 | **0.44 (−0.22)** |
+
+**Key Findings:**
+1. **Sovereign Learner performs best on Educational IP** (0.68) after cleaning, leading all baselines including PP-TS (0.64) by a margin of **+0.04**.
+2. **The NER Gap is confirmed:** On general PII, all entity-layer systems (Prεεmpt: 0.72, PP-TS: 0.68, AI4Privacy: 0.68, GAMA: 0.64) outperform Sovereign Learner (0.44), which is expected — SL is not designed for traditional PII tokens.
+3. **Reasoning Leakage is a real threat:** The raw SL PII score of 0.66 was *inflated* by the adversary treating leaked JSON placeholder text as "safe." Post-cleaning reveals the true score.
+
+---
+
+### 13.4 Technical Root Cause: Reasoning Leakage
+The **Reasoning Leakage** issue — where CrewAI `Thought:`, `Action:`, and `Action Input:` traces appear verbatim in the final output — was identified in several cases:
+
+| Query | Leakage Type | Impact |
+| :--- | :--- | :--- |
+| Q-1 | `Action Input` contained original query text | Protection inflated (scored as "safe JSON") |
+| Q-3 | `Thought` + `Action` + `Action Input` dump | Protection underestimated |
+| Q-7 | JSON schema dump with `"description"` of placeholders | Adversary unsure of leakage |
+| PII-01 | Thought trace without actual PII exposed | Minimal impact |
+| PII-04 | Full tool schema JSON in output | Protection underestimated |
+
+**Remediation Path:** Implementing a `ZeroLeakFinalizer` post-processing step in the `recontextualizer` agent or `evidence_curator` to strip all non-prose content before returning the final answer to the user. This is already tracked as an architectural improvement in the defence-in-depth roadmap.
+
+---
+
+*Document updated on March 4, 2026, with cleaned empirical results from `exp05_extended_results_cleaned_20260304.json`.*

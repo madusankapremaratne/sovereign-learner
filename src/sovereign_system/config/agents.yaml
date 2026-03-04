@@ -89,7 +89,7 @@ semantic_generalizer:
 
     MAPPING PERSISTENCE:
     For every entity you generalize, you must maintain the precise
-    bidirectional mapping: {original} → {generalized_form}. This mapping
+    bidirectional mapping: [original] → [generalized_form]. This mapping
     is essential for the Recontextualizer to restore the original context
     in the final response. Do not use abbreviations or shorthand in the
     mapping — store the complete original term and the complete generalized
