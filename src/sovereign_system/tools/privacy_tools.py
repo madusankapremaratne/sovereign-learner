@@ -5,9 +5,9 @@ from sovereign_system.utils.evaluators import SemanticPrivacyMetric
 from deepeval.test_case import LLMTestCase
 
 class PrivacyScanInput(BaseModel):
-    original_query: str = Field(..., description="The original user query intent")
-    cloud_response: str = Field(..., description="The response received from the cloud")
-    sensitive_entities: str = Field(..., description="Comma-separated sensitive entities")
+    original_query: str = Field(..., description=None)
+    cloud_response: str = Field(..., description=None)
+    sensitive_entities: str = Field(..., description=None)
 
 class PrivacyScanTool(BaseTool):
     name: str = "privacy_scanner"

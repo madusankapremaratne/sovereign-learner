@@ -130,7 +130,21 @@ class ExtendedBaselineExperiment:
                                 sanitized = "[Dry-Run Sovereign Sanitized Output]"
                             else:
                                 result = system.crew().kickoff(inputs={"user_query": query_text})
-                                raw_output = str(result)
+                                
+                                # Fix: Extract the recontextualization_task output specifically
+                                # CrewAI result often includes the final task's output (storage)
+                                raw_output = ""
+                                try:
+                                    # Look for recontextualization in individual task outputs
+                                    for task_out in result.tasks_output:
+                                        if "recontextualization" in task_out.description.lower():
+                                            raw_output = task_out.raw
+                                            break
+                                    if not raw_output:
+                                        raw_output = str(result.raw)
+                                except Exception:
+                                    raw_output = str(result.raw)
+
                                 # Fix #3: Presidio post-processing — scrub any residual PII
                                 sanitized = self._presidio_scrub(raw_output)
                                 if sanitized != raw_output:

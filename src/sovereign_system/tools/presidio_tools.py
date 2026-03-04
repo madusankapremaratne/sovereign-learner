@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 from sovereign_system.security.guard import guard
 
 class PresidioScanInput(BaseModel):
-    text: str = Field(..., description="The text to scan for PII (can be query or response)")
+    text: str = Field(..., description=None)
 
 class PresidioScanTool(BaseTool):
     name: str = "pii_scanner"

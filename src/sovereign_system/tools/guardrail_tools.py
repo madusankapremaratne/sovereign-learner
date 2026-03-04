@@ -4,9 +4,9 @@ from pydantic import BaseModel, Field
 from sovereign_system.security.guard import guard
 
 class ZoneValidationInput(BaseModel):
-    query: str = Field(..., description="The original query to validate")
-    proposed_zone: int = Field(..., description="The proposed privacy zone (0-3)")
-    ner_confidence: float = Field(1.0, description="Confidence score from NER detection (0.0 to 1.0). Default is 1.0")
+    query: str = Field(..., description=None)
+    proposed_zone: int = Field(..., description=None)
+    ner_confidence: float = Field(1.0, description=None)
 
 class ZoneValidationTool(BaseTool):
     """
@@ -36,9 +36,9 @@ class ZoneValidationTool(BaseTool):
 
 
 class OutputSanitizerInput(BaseModel):
-    text: str = Field(..., description="The text to sanitize")
-    sensitive_entities: str = Field("", description="Comma-separated sensitive entities")
-    placeholders: str = Field("", description="Comma-separated placeholders")
+    text: str = Field(..., description=None)
+    sensitive_entities: str = Field("", description=None)
+    placeholders: str = Field("", description=None)
 
 class OutputSanitizerTool(BaseTool):
     """
@@ -63,7 +63,7 @@ class OutputSanitizerTool(BaseTool):
 
 
 class PIIScrubberInput(BaseModel):
-    text: str = Field(..., description="The text to scrub before storage")
+    text: str = Field(..., description=None)
 
 class PIIScrubberTool(BaseTool):
     """

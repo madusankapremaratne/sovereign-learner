@@ -1,7 +1,8 @@
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 import os
-from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
+from sovereign_system.tools.presidio_tools import PresidioScanTool
+from sovereign_system.tools.semantic_tools import IntentAbstractorTool, ContextRestorerTool
 from sovereign_system.tools.competency_tools import CompetencyEvidenceTool
 from sovereign_system.tools.privacy_tools import PrivacyScanTool
 from sovereign_system.tools.guardrail_tools import ZoneValidationTool, OutputSanitizerTool, PIIScrubberTool
@@ -64,7 +65,7 @@ class SovereignSystem():
         return Agent(
             config=self.agents_config['semantic_generalizer'],
             llm=self.local_llm,
-            tools=[SemanticGeneralizationTool()],
+            tools=[IntentAbstractorTool()],
             verbose=True,
             max_iter=3
         )
@@ -74,7 +75,7 @@ class SovereignSystem():
         return Agent(
             config=self.agents_config['recontextualizer'],
             llm=self.local_llm,
-            tools=[RecontextualizationTool(), OutputSanitizerTool()],
+            tools=[ContextRestorerTool(), OutputSanitizerTool()],
             verbose=True,
             max_iter=3
         )
