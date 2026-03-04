@@ -244,9 +244,13 @@ class SovereignSystem():
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
-            process=Process.sequential,
+            process=Process.sequential, # Logic flow must remain sequential as per V4.0
             verbose=True,
             task_callback=self.task_callback,
-            max_rpm=10,   # Fix #5: Prevent API throttling (10 calls/min)
-            max_iter=5,   # Fix #5: Cap crew retry cycles — reduces worst-case latency
+            # Optimization: Prevent Ollama from getting stuck
+            max_rpm=20, 
+            # Prevents agents from looping too long if they can't find PII
+            max_iter=3, 
+            # Set to True to help with throughput if your hardware allows
+            share_crew=False 
         )
