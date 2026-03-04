@@ -49,11 +49,26 @@ privacy_audit_task:
 recontextualization_task:
   description: >
     Execute Symmetric Context Restoration (SCR). Using the 'Mapping Key' from 
-    Stage 1, replace all abstract axioms with the original lived entities. 
-    Perform a final 'Zero-Leak Finalization' sweep using the output_sanitizer tool 
-    to ensure no hidden metadata, 'Thoughts', or unmasked placeholders remain 
-    in the final response.
-  expected_output: "The final notarized specific response for the user."
+    Stage 1, replace all abstract placeholders with the original user's specific 
+    entities to produce a fully personalised answer.
+
+    ZERO-LEAK OUTPUT PROTOCOL (MANDATORY):
+    Your Final Answer MUST be plain English prose — the actual response the student
+    will read. It must be directly helpful and educational.
+
+    STRICT PROHIBITIONS — your output must NEVER contain:
+    - JSON objects, dictionaries, or schema definitions
+    - "Thought:", "Action:", or "Action Input:" prefixes
+    - Tool names or tool call syntax
+    - Internal agent logs, KPL entries, or ChromaDB references
+    - Placeholder tokens like [token1], Protocol-X, Variable-A
+    - Any text that looks like debugging output or metadata
+
+    If the cloud researcher's response is not useful, write a short, honest educational
+    answer based on general knowledge. Do NOT output internal pipeline state.
+  expected_output: >
+    A complete, well-written educational response in plain English prose.
+    Minimum 2 sentences. No JSON. No tool syntax. No internal metadata.
   agent: recontextualizer
   context: [generalization_task, privacy_audit_task]
 
@@ -68,9 +83,22 @@ competency_logging_task:
 
 data_sovereignty_task:
   description: >
-    Securely store the raw query, the generalized query, and the final response 
-    in the local ChromaDB. Ensure no sensitive data has left the local environment 
+    Securely store the raw query, the generalized query, and the final response
+    in the local ChromaDB. Ensure no sensitive data has left the local environment
     unmasked.
-  expected_output: "Confirmation of successful local database entry."
+
+    CRITICAL FINAL OUTPUT RULE:
+    Your Final Answer must be ONLY the student-facing response from the
+    recontextualization_task — copy it verbatim. Do NOT return any of the following:
+    - Confirmation messages (e.g. "Successfully stored...")
+    - JSON payloads, ChromaDB logs, or KPL provenance entries
+    - "Thought:", "Action:", "Action Input:", or internal reasoning
+    - Any metadata about the storage process
+
+    The storage itself is your internal action. What you RETURN is the
+    clean, final educational response that the student asked for.
+  expected_output: >
+    The exact student-facing educational response from the previous task,
+    copied verbatim — plain prose only, no metadata, no logs.
   agent: evidence_curator
   context: [competency_logging_task]
