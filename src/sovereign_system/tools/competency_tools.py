@@ -9,17 +9,17 @@ import time
 from sovereign_system.utils.sovereign_trace_logger import global_tracer
 
 class CompetencyEvidenceInput(BaseModel):
-    query: str = Field(..., description="The original query or interaction subject")
-    response: str = Field(..., description="The final response provided to the learner")
-    zone: Union[int, str] = Field(..., description="Privacy zone used (0-3)")
-    interaction_type: str = Field("active", description="Type of interaction: 'active' (explicit questions) or 'passive' (browsing)")
+    query: str = Field(...)
+    response: str = Field(...)
+    zone: str = Field(...)
+    interaction_type: str = Field("active")
 
 class CompetencyEvidenceTool(BaseTool):
-    name: str = "evidence_curator"
+    name: str = "competency_storage_tool"
     description: str = "Stores learning interactions in a local vector database (ChromaDB) to build the learner's competency profile."
     args_schema: Type[BaseModel] = CompetencyEvidenceInput
 
-    def _run(self, query: str, response: str, zone: Union[int, str], interaction_type: str = "active") -> str:
+    def _run(self, query: str, response: str, zone: str, interaction_type: str = "active") -> str:
         """
         Store the interaction in ChromaDB with appropriate weighting.
         """

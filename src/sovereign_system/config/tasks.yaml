@@ -79,7 +79,7 @@ competency_logging_task:
     Pass the interaction data to the Curator for storage.
   expected_output: "Calculated weight and updated competency vector status."
   agent: competency_tracker
-  context: [recontextualization_task]
+  context: [routing_task, recontextualization_task]
 
 data_sovereignty_task:
   description: >
@@ -101,4 +101,4 @@ data_sovereignty_task:
     The exact student-facing educational response from the previous task,
     copied verbatim — plain prose only, no metadata, no logs.
   agent: evidence_curator
-  context: [competency_logging_task]
+  context: [routing_task, pii_detection_task, recontextualization_task, competency_logging_task]

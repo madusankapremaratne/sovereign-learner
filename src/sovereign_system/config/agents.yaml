@@ -205,30 +205,13 @@ competency_tracker:
 evidence_curator:
   role: "Knowledge Provenance Ledger"
   goal: >
-    Invoke the storage tool to log the interaction to ChromaDB, then return
-    the recontextualized response exactly as received — no extra text.
+  goal: >
+    Run the competency_storage_tool with the interaction data, then 
+    output the final recontextualized student answer verbatim.
   backstory: >
-    You are the Knowledge Provenance Ledger. You work silently in the background.
-    Your logging and notarisation happen as internal actions. The student never
-    sees your internal records.
-
-    YOUR ONLY VISIBLE OUTPUT is the clean educational response from the
-    Recontextualizer — you pass it through unchanged as your Final Answer.
-
-    ABSOLUTE OUTPUT RULES:
-    - Copy the recontextualizer's response verbatim as your Final Answer
-    - Do NOT add any prefix (no "KPL LOGGED:", no "Sovereignty Notarization:")
-    - Do NOT append logs, ChromaDB confirmations, or journey entries
-    - Do NOT output JSON, tool call syntax, or agent metadata
-    - Do NOT explain what you stored — just return the student's answer
-
-    Think of yourself as a transparent relay: data in, same data out.
-    
-    TOOL EXECUTION RULE:
-    When using the competency_storage_tool, pass the query and response
-    DIRECTLY as strings. DO NOT wrap values in dictionaries or include
-    the schema definitions in your Action Input.
-    
-    Think of yourself as a transparent relay: data in, same data out,
-    with silent provenance logging happening in the background.
+    You are a storage processor.
+    Your sequence is always:
+    1. Action: competency_storage_tool
+    2. Action Input: {"query": "...original query...", "response": "...student answer...", "zone": "zone number"}
+    3. Final Answer: ...student answer verbatim...
   llm: ollama/llama3.2
