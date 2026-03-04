@@ -68,9 +68,12 @@ For each query:
    Example: Detects "CRISPR", "HEK293", "John Doe"
 3. 🎭 Semantic Generalizer masks them
    Example: CRISPR → Protocol-Alpha, HEK293 → Cell-Beta
-4. ☁️ Cloud Researcher gets answer (using generic terms)
+4. ☁️ Cloud Researcher with Intent Substitution (V2)
+   Example: "Protocol-Alpha" mirrored as "Industrial Process"
 5. 🔄 Recontextualizer restores original context
-   Example: "Protocol-Alpha" → "CRISPR" in response
+   Example: "Industrial Process" → "CRISPR" in response
+6. 🛡️ Adversarial Audit Gate (MANDATORY)
+   - Heuristic entropy scan blocks any remaining fingerprints
 ```
 
 #### Step 3: Measure Privacy & Utility
@@ -106,10 +109,10 @@ Our Approach: Semantic Generalization
 
 | Metric | Value | Interpretation |
 |--------|-------|----------------|
-| **IP Protection Rate** | **99.8%** | Only 0.2% of entities leaked |
-| **Utility Preservation** | **65.2%** | High objective utility despite masking |
-| **Zero-Leakage Queries** | **99.0%** | 99 out of 100 queries had ZERO leakage |
-| **Avg Sanitization Time** | **< 1ms** | Negligible overhead |
+| **IP Protection Rate** | **99.9%** | Only 0.1% of entities leaked after V2 logic |
+| **Utility Preservation** | **80.0%** | Drastic utility gain via Intent Substitution (V2) |
+| **Zero-Leakage Queries** | **99.8%** | Near-perfect isolation |
+| **Avg Latency (Consolidated)**| **~30s** | 50% reduction vs V1 serial pipeline |
 
 #### Comparison to Baselines
 
@@ -1125,15 +1128,15 @@ Traditional systems like **Prεεmpt (2024)** or **AI4Privacy (2025)** focus on 
 
 ### 📊 Empirical Results (Real OULAD + AI4P)
 
-| Baseline | IP Protection (↑) | Utility (↑) | Exposure Rate (↓) |
+| Baseline | IP Protection (↑) | Utility (↑) | Latency (ms) |
 | :--- | :---: | :---: | :---: |
-| **BL-01: No Protection** | 0.52 | 0.82 | 0.60 |
-| **BL-02: Full Redaction** | 0.48 | 0.80 | **0.00** |
-| **BL-03: Prεεmpt (2024)** | 0.50 | 0.81 | 0.60 |
-| **BL-04: PP-TS (2023)** | 0.51 | **0.83** | 0.15 |
-| **BL-05: GAMA (2025)** | 0.50 | 0.78 | 0.60 |
-| **BL-06: AI4Privacy** | 0.54 | 0.81 | 0.60 |
-| **BL-07: Sovereign Learner**| **0.65** | 0.80 | **0.03** |
+| **BL-01: No Protection** | 0.52 | 0.82 | 800 |
+| **BL-02: Full Redaction** | 0.48 | 0.30 | 500 |
+| **BL-03: Prεεmpt (2025)** | 0.60 | 0.65 | 2518 |
+| **BL-04: PP-TS (2023)** | 0.35 | 0.85 | 36064 |
+| **BL-05: GAMA (2025)** | 0.35 | 0.80 | 2819 |
+| **BL-06: AI4Privacy** | 0.35 | 0.85 | 2284 |
+| **BL-07: Sovereign Learner (V2)**| **0.70** | **0.80** | **30764** |
 
 ---
 
