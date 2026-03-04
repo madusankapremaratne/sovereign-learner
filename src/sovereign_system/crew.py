@@ -27,10 +27,18 @@ class SovereignSystem():
 
     @property
     def cloud_llm(self):
+        # Fix #6: Upgraded to openai/gpt-oss-120b via Groq API
+        # Uses reasoning_effort="medium" passed via extra_body for deeper analysis
         return LLM(
-            model="openai/llama-3.3-70b-versatile", 
+            model="openai/gpt-oss-120b",
             api_key=os.getenv("GROQ_API_KEY"),
-            base_url="https://api.groq.com/openai/v1"
+            base_url="https://api.groq.com/openai/v1",
+            max_tokens=8192,
+            temperature=1,
+            top_p=1,
+            extra_body={
+                "reasoning_effort": "medium"  # Groq-specific: medium reasoning depth
+            }
         )
 
     @agent

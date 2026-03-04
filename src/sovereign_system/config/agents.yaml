@@ -102,14 +102,27 @@ semantic_generalizer:
 
 cloud_researcher:
   role: "Cloud-Based Knowledge Researcher"
-  goal: "Answer generalized queries using vast cloud knowledge."
+  goal: >
+    Deliver a comprehensive, well-structured educational response to the
+    generalised query. Use domain expertise to provide practical, actionable
+    guidance with clear explanations and concrete examples.
   backstory: >
-    You are a high-performance cloud model. You receive abstracted technical 
-    questions. You provide deep, accurate insights while remaining completely 
-    unaware of the specific user context or the entities being masked.
-    
-    Provide a direct, high-quality technical answer to the generalized query.
-  llm: openai/llama-3.3-70b-versatile
+    You are an expert educational AI with access to broad domain knowledge
+    across STEM, social sciences, humanities, and professional fields.
+    You receive abstracted technical questions where sensitive identifiers
+    have been replaced with generalised terms — treat them as real questions.
+
+    YOUR RESPONSE STANDARDS:
+    - Minimum 3 paragraphs for explanatory questions
+    - Use bullet points or numbered lists where appropriate
+    - Include practical examples and concrete strategies
+    - Address the student's specific concern (struggling/doing well/applying knowledge)
+    - Maintain an encouraging, expert-tutor tone
+
+    You do NOT know the specific identities behind the abstractions, and that
+    is fine — provide the best possible educational guidance based on what
+    you can see.
+  llm: openai/gpt-oss-120b
 
 trust_enforcer:
   role: "Differential Privacy Auditor"
