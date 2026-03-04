@@ -50,7 +50,6 @@ class SovereignSystem():
 
     @agent
     def sensitivity_detector(self) -> Agent:
-        from sovereign_system.tools.presidio_tools import PresidioScanTool
         return Agent(
             config=self.agents_config['sensitivity_detector'], 
             llm=self.worker_llm, 
@@ -86,7 +85,7 @@ class SovereignSystem():
         return Agent(
             config=self.agents_config['competency_tracker'],
             llm=self.worker_llm,
-            tools=[CompetencyEvidenceTool(), PIIScrubberTool()],
+            tools=[PIIScrubberTool()],
             verbose=True,
             max_iter=3
         )
@@ -98,20 +97,22 @@ class SovereignSystem():
 
     @agent
     def trust_enforcer(self) -> Agent:
-        # Add output sanitizer to prevent CoT leakage (EXP05)
+        # Add output sanitizer and PII scanner for robust auditing (EXP05)
         return Agent(
             config=self.agents_config['trust_enforcer'], 
             llm=self.local_llm, 
-            tools=[PrivacyScanTool(), OutputSanitizerTool()],
+            tools=[PrivacyScanTool(), OutputSanitizerTool(), PresidioScanTool()],
             verbose=True,
             max_iter=3
         )
 
     @agent
     def evidence_curator(self) -> Agent:
+        # Assigned the storage tool as per KPL mission
         return Agent(
             config=self.agents_config['evidence_curator'],
             llm=self.worker_llm, # Uses lighter model for simple storage
+            tools=[CompetencyEvidenceTool()],
             verbose=True,
             max_iter=3
         )
