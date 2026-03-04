@@ -207,7 +207,9 @@ class SovereignSystem():
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
-            process=Process.sequential, 
+            process=Process.sequential,
             verbose=True,
-            task_callback=self.task_callback
+            task_callback=self.task_callback,
+            max_rpm=10,   # Fix #5: Prevent API throttling (10 calls/min)
+            max_iter=5,   # Fix #5: Cap crew retry cycles — reduces worst-case latency
         )

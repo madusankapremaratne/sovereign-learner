@@ -24,6 +24,15 @@ import requests
 from typing import List, Dict, Any
 from datetime import datetime
 
+# Presidio for post-processing PII scrubbing (Fix #3)
+try:
+    from presidio_analyzer import AnalyzerEngine
+    from presidio_anonymizer import AnonymizerEngine
+    _presidio_available = True
+except ImportError:
+    _presidio_available = False
+    print("⚠️  Presidio not installed — PII post-processing disabled. Run: pip install presidio-analyzer presidio-anonymizer")
+
 # Add src and current project root to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src")))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -66,6 +75,27 @@ class ExtendedBaselineExperiment:
         
         self.ollama_url = "http://localhost:11434/api/generate"
 
+        # Fix #3: Initialize Presidio engines once for efficiency
+        if _presidio_available:
+            self._presidio_analyzer = AnalyzerEngine()
+            self._presidio_anonymizer = AnonymizerEngine()
+        else:
+            self._presidio_analyzer = None
+            self._presidio_anonymizer = None
+
+    def _presidio_scrub(self, text: str) -> str:
+        """Fix #3: Strip residual PII from output using Presidio as a safety net."""
+        if not self._presidio_analyzer or not text or len(text) < 5:
+            return text
+        try:
+            results = self._presidio_analyzer.analyze(text=text, language='en')
+            if results:
+                anonymized = self._presidio_anonymizer.anonymize(text=text, analyzer_results=results)
+                return anonymized.text
+        except Exception:
+            pass  # Fail open — return original if Presidio fails
+        return text
+
     def run(self):
         print("\n" + "="*80)
         print("🚀 EXP05: CROSS-DATASET EXTENDED BASELINE COMPARISON")
@@ -100,7 +130,11 @@ class ExtendedBaselineExperiment:
                                 sanitized = "[Dry-Run Sovereign Sanitized Output]"
                             else:
                                 result = system.crew().kickoff(inputs={"user_query": query_text})
-                                sanitized = str(result)
+                                raw_output = str(result)
+                                # Fix #3: Presidio post-processing — scrub any residual PII
+                                sanitized = self._presidio_scrub(raw_output)
+                                if sanitized != raw_output:
+                                    print(f" [Presidio scrubbed {len(raw_output) - len(sanitized)} chars]", end="")
                         else:
                             # Baseline Sanitization
                             sanitized = system.sanitize(query_text)
