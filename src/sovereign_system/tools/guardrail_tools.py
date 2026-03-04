@@ -1,10 +1,27 @@
 from crewai.tools import BaseTool
+
+def _robust_str(val: Any) -> str:
+    if isinstance(val, dict):
+        if "description" in val: return str(val.get("description", str(val)))
+        for v in val.values():
+            if isinstance(v, str): return v
+    return str(val)
+
 from typing import Type, Optional
 from pydantic import BaseModel, Field
+
+def _robust_str(val: Any) -> str:
+    if isinstance(val, dict):
+        if "description" in val: return str(val.get("description", str(val)))
+        for v in val.values():
+            if isinstance(v, str): return v
+    return str(val)
+
+from typing import Any
 from sovereign_system.security.guard import guard
 
 class ZoneValidationInput(BaseModel):
-    query: str = Field(..., description=None)
+    query: Any
     proposed_zone: int = Field(..., description=None)
     ner_confidence: float = Field(1.0, description=None)
 
@@ -24,7 +41,12 @@ class ZoneValidationTool(BaseTool):
     )
     args_schema: Type[BaseModel] = ZoneValidationInput
 
-    def _run(self, query: str, proposed_zone: int, ner_confidence: float = 1.0) -> str:
+    def _run(self, query: Any, proposed_zone: int, ner_confidence: float = 1.0) -> str:
+        # Immortal Robust Conversion
+        query = _robust_str(query)
+        proposed_zone = _robust_str(proposed_zone)
+        ner_confidence = _robust_str(ner_confidence)
+
         is_valid, reason = guard.validate_zone_classification(query, proposed_zone, ner_confidence)
         
         if not is_valid:
@@ -36,9 +58,9 @@ class ZoneValidationTool(BaseTool):
 
 
 class OutputSanitizerInput(BaseModel):
-    text: str = Field(..., description=None)
-    sensitive_entities: str = Field("", description=None)
-    placeholders: str = Field("", description=None)
+    text: Any
+    sensitive_entities: Any
+    placeholders: str = ""
 
 class OutputSanitizerTool(BaseTool):
     """
@@ -54,7 +76,12 @@ class OutputSanitizerTool(BaseTool):
     )
     args_schema: Type[BaseModel] = OutputSanitizerInput
 
-    def _run(self, text: str, sensitive_entities: str = "", placeholders: str = "") -> str:
+    def _run(self, text: Any, sensitive_entities: str = "", placeholders: str = "") -> str:
+        # Immortal Robust Conversion
+        text = _robust_str(text)
+        sensitive_entities = _robust_str(sensitive_entities)
+        placeholders = _robust_str(placeholders)
+
         entities = [e.strip() for e in sensitive_entities.split(",")] if sensitive_entities else []
         placeholders_list = [p.strip() for p in placeholders.split(",")] if placeholders else []
         
@@ -63,7 +90,7 @@ class OutputSanitizerTool(BaseTool):
 
 
 class PIIScrubberInput(BaseModel):
-    text: str = Field(..., description=None)
+    text: Any
 
 class PIIScrubberTool(BaseTool):
     """
@@ -79,6 +106,9 @@ class PIIScrubberTool(BaseTool):
     )
     args_schema: Type[BaseModel] = PIIScrubberInput
 
-    def _run(self, text: str) -> str:
+    def _run(self, text: Any) -> str:
+        # Immortal Robust Conversion
+        text = _robust_str(text)
+
         scrubbed = guard.scrub_pii_for_storage(text)
         return f"SCRUBBED TEXT: {scrubbed}\n\nSTOP using this tool. Proceed to storage."

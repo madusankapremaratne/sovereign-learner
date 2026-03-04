@@ -1,25 +1,40 @@
 from crewai.tools import BaseTool
 from typing import Type, Union, Any
 from pydantic import BaseModel, Field
+from typing import Any
 import chromadb
 import uuid
 from datetime import datetime
 import os
+
+def _robust_str(val: Any) -> str:
+    if isinstance(val, dict):
+        if "description" in val: return str(val.get("description", str(val)))
+        for v in val.values():
+            if isinstance(v, str): return v
+    return str(val)
+
 import time
 from sovereign_system.utils.sovereign_trace_logger import global_tracer
 
 class CompetencyEvidenceInput(BaseModel):
-    query: str = Field(...)
-    response: str = Field(...)
-    zone: str = Field(...)
-    interaction_type: str = Field("active")
+    query: Any
+    response: Any
+    zone: Any
+    interaction_type: str = "active"
 
 class CompetencyEvidenceTool(BaseTool):
     name: str = "competency_storage_tool"
     description: str = "Stores learning interactions in a local vector database (ChromaDB) to build the learner's competency profile."
     args_schema: Type[BaseModel] = CompetencyEvidenceInput
 
-    def _run(self, query: str, response: str, zone: str, interaction_type: str = "active") -> str:
+    def _run(self, query: Any, response: Any, zone: Any, interaction_type: str = "active") -> str:
+        # Immortal Robust Conversion
+        query = _robust_str(query)
+        response = _robust_str(response)
+        zone = _robust_str(zone)
+        interaction_type = _robust_str(interaction_type)
+
         """
         Store the interaction in ChromaDB with appropriate weighting.
         """

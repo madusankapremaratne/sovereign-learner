@@ -1,6 +1,23 @@
 from crewai.tools import BaseTool
+
+def _robust_str(val: Any) -> str:
+    if isinstance(val, dict):
+        if "description" in val: return str(val.get("description", str(val)))
+        for v in val.values():
+            if isinstance(v, str): return v
+    return str(val)
+
 from typing import Type, Optional
 from pydantic import BaseModel, Field
+
+def _robust_str(val: Any) -> str:
+    if isinstance(val, dict):
+        if "description" in val: return str(val.get("description", str(val)))
+        for v in val.values():
+            if isinstance(v, str): return v
+    return str(val)
+
+from typing import Any
 import re
 import json
 
@@ -181,8 +198,8 @@ FALLBACK_BY_TYPE = {
 
 
 class SemanticGeneralizationInput(BaseModel):
-    query: str = Field(..., description=None)
-    sensitive_entities: str = Field(..., description=None)
+    query: Any
+    sensitive_entities: Any
 
 
 class IntentAbstractorTool(BaseTool):
@@ -196,7 +213,11 @@ class IntentAbstractorTool(BaseTool):
     args_schema: Type[BaseModel] = SemanticGeneralizationInput
     placeholder_map: dict = {}
 
-    def _run(self, query: str, sensitive_entities: str) -> str:
+    def _run(self, query: Any, sensitive_entities: Any) -> str:
+        # Immortal Robust Conversion
+        query = _robust_str(query)
+        sensitive_entities = _robust_str(sensitive_entities)
+
         """
         Domain-aware semantic generalization.
         
@@ -268,7 +289,7 @@ class IntentAbstractorTool(BaseTool):
             f"COVERAGE: {output['generalization_coverage']:.1%} of sensitive content generalized"
         )
 
-    def _get_generalization(self, entity: str) -> str:
+    def _get_generalization(self, entity: Any) -> str:
         """
         Look up the most semantically appropriate generalization for an entity.
         Tries taxonomy keyword match first, then pattern match, then fallback.
@@ -296,13 +317,13 @@ class IntentAbstractorTool(BaseTool):
 
         return FALLBACK_BY_TYPE["default"]
 
-    def _map_pattern(self, original: str, generalization: str) -> str:
+    def _map_pattern(self, original: Any, generalization: Any) -> str:
         """Record a pattern-matched entity in the mapping and return its generalization."""
         if original not in self.placeholder_map:
             self.placeholder_map[original] = generalization
         return generalization
 
-    def _compute_coverage(self, original: str, sanitized: str) -> float:
+    def _compute_coverage(self, original: Any, sanitized: Any) -> float:
         """
         Estimate what fraction of original content was successfully generalized.
         Measured as reduction in unique content tokens.
@@ -315,15 +336,19 @@ class IntentAbstractorTool(BaseTool):
         return min(1.0, len(removed) / max(1, len(self.placeholder_map)))
 
 class RecontextualizationInput(BaseModel):
-    response: str = Field(..., description=None)
-    mapping: str = Field("", description=None)
+    response: Any
+    mapping: str = ""
 
 class ContextRestorerTool(BaseTool):
     name: str = "context_restorer"
     description: str = "Maps generalized cloud responses back to the learner's specific context"
     args_schema: Type[BaseModel] = RecontextualizationInput
     
-    def _run(self, response: str, mapping: str) -> str:
+    def _run(self, response: Any, mapping: Any) -> str:
+        # Immortal Robust Conversion
+        response = _robust_str(response)
+        mapping = _robust_str(mapping)
+
         """
         Re-contextualize the response using the provided mapping.
         """
