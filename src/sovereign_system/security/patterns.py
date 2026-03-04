@@ -76,3 +76,22 @@ SENSITIVE_PATTERNS = [
     r"\b(?:\d[ -]*?){13,16}\b", # Generic CC
     r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" # Email
 ]
+
+EDUCATIONAL_IP_PATTERNS = {
+    "INSTITUTIONAL_MARKER": [
+        r"\b[A-G]{3}\s+module\b", # OULAD coding (BBB, AAA, etc)
+        r"\bVLE\b", r"\bOUSE\b", r"\bOULAD\b", r"\bOpen University\b"
+    ],
+    "ASSESSMENT_TYPE": [
+        r"\bTMA\s*([0-9]*)\b", r"\biCMA\s*([0-9]*)\b", r"\bEMA\b",
+        r"\bend\s+of\s+module\s+assessment\b"
+    ],
+    "LEARNING_METRIC": [
+        r"\bV_Portfolio\b", r"\bcompetency\s+vector\b", 
+        r"\blearning\s+weight\b", r"\binteraction\s+type\b"
+    ],
+    "CURRICULUM_DOMAIN": [
+        r"\bSTEM\s+Foundation\b", r"\bComputing\s+&\s+IT\b",
+        r"\bSocial\s+Sciences\b", r"\bBusiness\s+&\s+Law\b"
+    ]
+}

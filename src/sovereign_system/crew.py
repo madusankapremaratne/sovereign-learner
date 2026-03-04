@@ -5,7 +5,7 @@ from typing import Any, Type, List, Optional
 from pydantic import BaseModel, Field
 
 from sovereign_system.tools.presidio_tools import PresidioScanTool
-from sovereign_system.tools.semantic_tools import IntentAbstractorTool, ContextRestorerTool
+from sovereign_system.tools.semantic_tools import IntentAbstractorTool, ContextRestorerTool, AdversarialAuditTool
 from sovereign_system.tools.competency_tools import CompetencyEvidenceTool
 from sovereign_system.tools.privacy_tools import PrivacyScanTool
 from sovereign_system.tools.guardrail_tools import OutputSanitizerTool
@@ -39,7 +39,7 @@ class SovereignSystem():
 
     @agent
     def semantic_generalizer(self) -> Agent:
-        return Agent(config=self.agents_config['semantic_generalizer'], llm=self.local_llm, tools=[PresidioScanTool(), IntentAbstractorTool()], verbose=False, max_iter=3)
+        return Agent(config=self.agents_config['semantic_generalizer'], llm=self.local_llm, tools=[PresidioScanTool(), IntentAbstractorTool(), AdversarialAuditTool()], verbose=False, max_iter=3)
 
     @agent
     def recontextualizer(self) -> Agent:

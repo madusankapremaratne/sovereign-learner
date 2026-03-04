@@ -158,43 +158,48 @@ To bypass slow HuggingFace downloads and ensure offline execution, the script in
 
 ---
 
-## 4. System Under Test — Sovereign Learner Pipeline
+## 4. System Under Test — Sovereign Learner Pipeline (V2 Optimization)
 
-The experiment runs every query through the full four-stage pipeline:
+The experiment runs every query through the optimized 5-phase Semantic Generalization pipeline:
 
 ```
 Original Query (sensitive)
         │
-        ▼
-┌───────────────────────┐
-│  Stage 1              │
-│  Semantic             │  ── Detects sensitive entities
-│  Generalization       │  ── Replaces with semantically equivalent
-│                       │     generic placeholders (not [REDACTED])
-│  e.g. "HEK293" →      │
-│  "a standard cell line"│
-└──────────┬────────────┘
-           │ Sanitized Query + Mapping
-           ▼
-┌───────────────────────┐
-│  Stage 2              │
-│  Cloud LLM Query      │  ── Sanitized query sent to cloud
-│  (Ollama / Simulated) │  ── No sensitive data leaves the system
-└──────────┬────────────┘
-           │ Cloud Response (using generic terms)
-           ▼
-┌───────────────────────┐
-│  Stage 3              │
-│  Recontextualization  │  ── Mapping used to reverse-substitute
-│                       │     original terms back into response
-└──────────┬────────────┘
-           │ Final Response (complete, original context restored)
-           ▼
-┌───────────────────────┐
-│  Stage 4              │
-│  Evidence Curation    │  ── Metrics captured, trace logged
-│  & Metric Capture     │
-└───────────────────────┘
+        ▼ 
+┌─────────────────────────────────────┐
+│  Phase 1-3: Ensemble Sensitivity    │
+│  (Presidio + Shadow Lexicon)        │
+│  - Detects PII & Educational IP     │
+│  - Maps to Universal NLU Slots      │
+│  - Numerical Fuzzing (Bucketing)    │
+└──────────────────┬──────────────────┘
+                   │ Generalized Query Candidate
+                   ▼
+┌─────────────────────────────────────┐
+│  Phase 4: Adversarial Audit Gate    │
+│  - Heuristic Entropy Check          │  ── If rejected, loop to Phase 1
+│  - Numerical Fingerprint Scan       │
+└──────────────────┬──────────────────┘
+                   │ APPROVED: High Abstraction Query
+                   ▼
+┌─────────────────────────────────────┐
+│  Phase 5: Intent Substitution       │
+│  Cloud LLM Query (with Surrogates)  │  ── Cloud sees "Technical Mirror"
+│                                     │  ── e.g. "BBB" -> "compliance"
+└──────────────────┬──────────────────┘
+                   │ Cloud Technical Response
+                   ▼
+┌─────────────────────────────────────┐
+│  Symmetric Context Restoration      │
+│  (Recontextualization)              │  ── Local mapping used to restore
+│                                     │     original identifiers
+└──────────────────┬──────────────────┘
+                   │ Final Response (Original context + Cloud wisdom)
+                   ▼
+┌─────────────────────────────────────┐
+│  Metric Capture                     │
+│  (IP Protection, Utility, Latency)  │
+└─────────────────────────────────────┘
 ```
 
 **Key distinction from redaction:** Semantic generalization replaces sensitive terms with semantically meaningful, contextually appropriate abstractions — not blank `[REDACTED]` tags. This preserves the *structure* and *intent* of the query so the cloud LLM can still produce a useful, domain-relevant response.

@@ -7,10 +7,12 @@ routing_task:
 
 pre_processing_task:
   description: >
-    1. Scan the query for sensitive entities (PII, Course Modules, Scores): "{user_query}".
-    2. Rewrite it into a 'Sovereign-Safe' generalized version.
+    1. Scan the query for sensitive entities (PII, Educational IP, Metrics): "{user_query}".
+    2. Rewrite it into a 'Sovereign-Safe' generalized version using NLU Intent Slots.
     3. Create a mapping key for restoration.
-  expected_output: "A JSON-like output containing 'generalized_query' and 'mapping'."
+    4. MANDATORY: Perform an `adversarial_auditor` check on the generalized query. 
+       If REJECTED, re-generalize with higher abstraction.
+  expected_output: "A JSON object with 'generalized_query', 'mapping', and 'audit_status'."
   agent: semantic_generalizer
 
 

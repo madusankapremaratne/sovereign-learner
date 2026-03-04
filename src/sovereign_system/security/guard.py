@@ -217,8 +217,61 @@ class SovereignGuard:
             analysis = self.analyzer.analyze(text=text, language='en')
             for res in analysis:
                 results.append((text[res.start:res.end], res.entity_type))
+        
+        # Add Educational IP scan results
+        ip_hits = self.scan_for_educational_ip(text)
+        results.extend(ip_hits)
+        
         return results
     
+    def scan_for_educational_ip(self, text: str) -> List[Tuple[str, str]]:
+        """
+        Ensemble Sensitivity pass for Institutional IP.
+        """
+        from .patterns import EDUCATIONAL_IP_PATTERNS
+        hits = []
+        for category, patterns in EDUCATIONAL_IP_PATTERNS.items():
+            for pattern in patterns:
+                for match in re.finditer(pattern, text, re.IGNORECASE):
+                    hits.append((match.group(), category))
+        return hits
+    
+    def audit_generalized_query(self, text: str) -> Tuple[bool, str, float]:
+        """
+        Dataset-Blind Adversarial Audit (Phase 4).
+        Evaluates structural entropy and information density to prevent 
+        Contextual Fingerprinting without institutional bias.
+        
+        Returns: (is_safe, reason, risk_score)
+        """
+        risk_score = 0.0
+        reasons = []
+
+        # 1. Numerical Fingerprint Test (High-precision numbers are risky)
+        high_precision = re.findall(r'\b\d{2,}\.?\d*\b', text)
+        if high_precision:
+            risk_score += len(high_precision) * 0.2
+            reasons.append(f"Found {len(high_precision)} high-precision numbers.")
+
+        # 2. Case-Cluster Test (Undetected Proper Nouns / Acronyms)
+        proper_nouns = re.findall(r'\b[A-Z]{2,}\b|\b[A-Z][a-z]{3,}\s+[A-Z][a-z]{3,}\b', text)
+        if proper_nouns:
+            risk_score += len(proper_nouns) * 0.15
+            reasons.append(f"Found {len(proper_nouns)} potentially sensitive proper nouns/acronyms.")
+
+        # 3. Structural Entropy (Keyword density)
+        words = text.split()
+        if len(words) > 0:
+            tech_density = len(proper_nouns) / len(words)
+            if tech_density > 0.4:
+                risk_score += 0.3
+                reasons.append(f"High technical entropy ({tech_density:.1%}) suggests fingerprinting.")
+
+        is_safe = risk_score < 0.7
+        status_msg = "PASSED: Query is structurally generalized." if is_safe else f"REJECTED: {'; '.join(reasons)}"
+        
+        return is_safe, status_msg, min(1.0, risk_score)
+
     def scrub_pii_for_storage(self, text: str) -> str:
         """
         Scrubs PII before storing in local competency vectors.

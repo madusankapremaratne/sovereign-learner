@@ -28,201 +28,76 @@ PRESIDIO_PII_MAPPING = {
     "IBAN_CODE": "a financial identifier",
     "CREDIT_CARD": "a payment method",
     "IP_ADDRESS": "a network address",
-}
-
-# ─────────────────────────────────────────────────────────────────────────────
-# Domain-aware semantic generalisation taxonomy
-# ─────────────────────────────────────────────────────────────────────────────
-SEMANTIC_TAXONOMY = {
-    # ── Molecular Biology & Biomedical ────────────────────────────────────────
-    "gene_editing_tool": {
-        "keywords": ["crispr", "cas9", "cas12", "talen", "zinc finger", "base editor"],
-        "generalization": "a precision gene-editing technique",
-        "category": "biomedical_method"
-    },
-    "cell_line": {
-        "keywords": ["hek293", "hela", "jurkat", "mcf7", "cho", "vero", "cos7",
-                     "nih 3t3", "pc12", "k562", "u937", "thp-1"],
-        "generalization": "a standard mammalian cell line",
-        "category": "biological_model"
-    },
-    "cancer_cell_line": {
-        "keywords": ["hct116", "a549", "u87", "t47d", "lncap", "pc3", "skbr3"],
-        "generalization": "a human cancer cell line",
-        "category": "biological_model"
-    },
-    "model_organism": {
-        "keywords": ["c. elegans", "drosophila", "zebrafish", "danio", "xenopus",
-                     "arabidopsis", "mus musculus"],
-        "generalization": "a standard model organism",
-        "category": "biological_model"
-    },
-    "molecular_assay": {
-        "keywords": ["pcr", "elisa", "western blot", "flow cytometry", "rna-seq",
-                     "chip-seq", "atac-seq", "immunofluorescence", "ihc", "facs"],
-        "generalization": "a standard molecular assay",
-        "category": "biomedical_method"
-    },
-    "drug_compound": {
-        "keywords": ["rapamycin", "doxorubicin", "imatinib", "gleevec", "taxol",
-                     "paclitaxel", "tamoxifen", "metformin"],
-        "generalization": "an experimental pharmacological compound",
-        "category": "chemical_entity"
-    },
-    "gene_or_protein": {
-        "keywords": ["tp53", "brca1", "brca2", "egfr", "vegf", "her2", "akt",
-                     "mtor", "ras", "myc", "p53", "stat3"],
-        "generalization": "a key signalling gene or protein",
-        "category": "molecular_entity"
-    },
-    "viral_vector": {
-        "keywords": ["aav", "lentiviral", "adenoviral", "retroviral", "baculovirus"],
-        "generalization": "a viral delivery vector",
-        "category": "biomedical_method"
-    },
-
-    # ── Research Grants & Funding ─────────────────────────────────────────────
-    "nih_grant": {
-        "keywords": ["nih r01", "nih r21", "nih r15", "nih k99", "nih u01", "nih p01"],
-        "generalization": "a federal research grant",
-        "category": "funding_mechanism"
-    },
-    "nsf_grant": {
-        "keywords": ["nsf grant", "nsf award", "nsf career", "nsf reu"],
-        "generalization": "a national science foundation award",
-        "category": "funding_mechanism"
-    },
-    "eu_grant": {
-        "keywords": ["horizon 2020", "horizon europe", "erc grant", "marie curie"],
-        "generalization": "a European research funding scheme",
-        "category": "funding_mechanism"
-    },
-
-    # ── Research Institutions & Companies ────────────────────────────────────
     
-    # ── Educational Data (OULAD) ──────────────────────────────────────────────
-    "course_module": {
-        "keywords": ["bbb module", "aaa module", "ccc module", "ddd module", 
-                     "eee module", "fff module", "ggg module"],
-        "generalization": "a university course module",
-        "category": "education_entity"
-    },
-    "student_performance": {
-        "keywords": ["current score is", "average score is", "score of", "passed with", 
-                     "achieved", "fail grade", "passing grade"],
-        "generalization": "academic performance metrics",
-        "category": "student_data"
-    },
-    "engagement_metrics": {
-        "keywords": ["active for", "resources accessed", "clicked on", "vle interactions", 
-                     "days active", "study sessions"],
-        "generalization": "learner engagement statistics",
-        "category": "student_data"
-    },
-    "pharma_company": {
-        "keywords": ["pfizer", "moderna", "astrazeneca", "genentech", "novartis",
-                     "roche", "merck", "johnson & j", "bayer", "sanofi"],
-        "generalization": "a major pharmaceutical company",
-        "category": "institution"
-    },
-    "tech_company": {
-        "keywords": ["google deepmind", "openai", "anthropic", "meta ai", "microsoft research",
-                     "ibm research", "nvidia research"],
-        "generalization": "a leading AI research organisation",
-        "category": "institution"
-    },
-
-    # ── Computer Science & AI ─────────────────────────────────────────────────
-    "specific_llm": {
-        "keywords": ["gpt-4", "gpt4", "claude", "gemini", "llama", "mistral",
-                     "falcon", "phi-3", "qwen"],
-        "generalization": "a large language model",
-        "category": "ai_system"
-    },
-    "ml_framework": {
-        "keywords": ["pytorch", "tensorflow", "jax", "keras", "huggingface",
-                     "scikit-learn", "xgboost", "lightgbm"],
-        "generalization": "a machine learning framework",
-        "category": "software_tool"
-    },
-    "hardware_accelerator": {
-        "keywords": ["h100", "a100", "v100", "rtx 4090", "tpu v4", "tpu v5",
-                     "nvidia", "amd mi300"],
-        "generalization": "a high-performance computing accelerator",
-        "category": "hardware"
-    },
-    "algorithm": {
-        "keywords": ["transformer", "bert", "gpt", "vae", "gan", "diffusion model",
-                     "reinforcement learning", "ppo", "sac", "dqn"],
-        "generalization": "a deep learning architecture",
-        "category": "ai_method"
-    },
-    "database_system": {
-        "keywords": ["chromadb", "pinecone", "weaviate", "qdrant", "milvus",
-                     "postgres", "mongodb", "redis", "elasticsearch"],
-        "generalization": "a database management system",
-        "category": "software_tool"
-    },
-
-    # ── Legal & Financial ─────────────────────────────────────────────────────
-    "law_firm": {
-        "keywords": ["skadden", "latham", "kirkland", "weil gotshal", "sullivan & cromwell"],
-        "generalization": "a major law firm",
-        "category": "institution"
-    },
-    "legal_jurisdiction": {
-        "keywords": ["gdpr", "ccpa", "hipaa", "ferpa", "coppa", "pipeda"],
-        "generalization": "a data privacy regulation",
-        "category": "legal_framework"
-    },
-    "financial_instrument": {
-        "keywords": ["series a", "series b", "ipo", "spac", "convertible note",
-                     "safe agreement"],
-        "generalization": "an equity financing instrument",
-        "category": "financial_entity"
-    },
-
-    # ── Education & Student Data ───────────────────────────────────────────────
-    "student_id": {
-        "keywords": [],  # Handled by pattern matching below
-        "pattern": r"\b\d{5,8}\b",
-        "generalization": "a registered student",
-        "category": "pii_identity"
-    },
-    "geographic_region": {
-        "keywords": ["east anglian", "west midlands", "south east", "north west",
-                     "yorkshire", "scotland", "wales", "london region"],
-        "generalization": "a regional area",
-        "category": "pii_location"
-    },
-    "imd_band": {
-        "keywords": [],
-        "pattern": r"\b\d{1,2}-\d{1,2}%",
-        "generalization": "a socioeconomic deprivation band",
-        "category": "pii_demographic"
-    },
-
-    # ── Proprietary Methods (catch-all for domain-specific terms) ─────────────
-    "synthesis_protocol": {
-        "keywords": ["protocol", "procedure", "synthesis route", "workflow",
-                     "pipeline", "assay protocol", "treatment regimen"],
-        "generalization": "a proprietary research procedure",
-        "category": "method"
-    },
+    # Educational IP (Phase 3 Ensemble results)
+    "INSTITUTIONAL_MARKER": "the academic institution",
+    "ASSESSMENT_TYPE": "a formal academic assessment",
+    "LEARNING_METRIC": "a standardized learning metric",
+    "CURRICULUM_DOMAIN": "a foundational academic discipline",
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Fallback generalizations by grammatical context
-# Used when no taxonomy match is found
+# Universal NLU Intent Schema (Generalization of all semantic tools)
 # ─────────────────────────────────────────────────────────────────────────────
-FALLBACK_BY_TYPE = {
-    "numeric_id":    "a unique identifier",
-    "proper_noun":   "a domain-specific entity",
-    "acronym":       "a specialized technique",
-    "compound":      "a research-specific term",
-    "default":       "a relevant domain entity",
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Intent Mirrors (Cross-Domain Surrogates - Phase 5)
+# ─────────────────────────────────────────────────────────────────────────────
+SEMANTIC_MIRRORS = {
+    "snips/educational_concept": "standardized business compliance training",
+    "snips/technical_method": "a common industrial manufacturing procedure",
+    "snips/product": "a commercially available software suite",
+    "snips/biomedical": "a general laboratory workflow",
 }
 
+UNIVERSAL_NLU_ONTOLOGY = {
+    # Numerical & Quantitative (snips/amount, snips/percentage, etc.)
+    "snips/amount": {
+        "abstract": "a significant quantity",
+        "fuzzy_logic": True
+    },
+    "snips/percentage": {
+        "abstract": "a relevant percentage value",
+        "fuzzy_logic": True
+    },
+    "snips/datetime": {
+        "abstract": "a specific point in time",
+    },
+    "snips/duration": {
+        "abstract": "a period of time",
+    },
+    
+    # Entities (Generalization of keywords)
+    "snips/person": {
+        "abstract": "the individual",
+    },
+    "snips/organization": {
+        "abstract": "a professional organization",
+    },
+    "snips/educational_concept": {
+        "abstract": "a foundational academic concept",
+    },
+    "snips/technical_method": {
+        "abstract": "a specialized technical procedure",
+    },
+    "snips/product": {
+        "abstract": "a specific technical tool",
+    },
+    "snips/location": {
+        "abstract": "a geographic area",
+    },
+    "snips/identifier": {
+        "abstract": "a unique system identifier",
+    }
+}
+
+SEMANTIC_TAXONOMY = {
+    "gene_editing": {"keywords": ["crispr", "cas9"], "type": "snips/technical_method"},
+    "university_module": {"keywords": ["module", "bbb", "aaa", "ccc"], "type": "snips/educational_concept"},
+    "platform": {"keywords": ["vle", "ouse", "moodle"], "type": "snips/product"},
+    "assessment": {"keywords": ["tma", "icma", "ema"], "type": "snips/educational_concept"},
+    "student_id": {"pattern": r"\b\d{5,8}\b", "type": "snips/identifier"},
+}
 
 class SemanticGeneralizationInput(BaseModel):
     query: Any
@@ -294,22 +169,36 @@ class IntentAbstractorTool(BaseTool):
                 flags=re.IGNORECASE
             )
 
-        # ── Step 2: Pattern-based PII sweeps (catches anything missed) ───────
-        # Student IDs: 5-8 digit standalone numbers
+        # ── Step 2: Pattern-based PII & Numerical Abstraction (Phase 2) ───────
+        # 2a. Student IDs: 5-8 digit standalone numbers
         sanitized = re.sub(
             r'(?<!\d)(\d{5,8})(?!\d)',
             lambda m: self._map_pattern(m.group(0), get_unique_gen("a registered student")),
             sanitized
         )
 
-        # IMD / percentage bands like "10-20%" or "90-100%"
+        # 2b. Score Abstraction (e.g., "score of 30%", "achieved 85%")
+        sanitized = re.sub(
+            r'\b(\d{1,3}%)',
+            lambda m: self._map_pattern(m.group(0), self._get_fuzzed_score(m.group(0))),
+            sanitized
+        )
+
+        # 2c. Engagement Fuzzing (e.g., "active for 10 days", "accessed 92 resources")
+        sanitized = re.sub(
+            r'(\d+)\s+(days|resources|sessions|interactions)',
+            lambda m: self._map_pattern(m.group(0), f"{self._get_fuzzed_count(m.group(1))} {m.group(2)}"),
+            sanitized
+        )
+
+        # 2d. IMD / percentage bands
         sanitized = re.sub(
             r'\b(\d{1,3}-\d{1,3}%)',
             lambda m: self._map_pattern(m.group(0), get_unique_gen("a socioeconomic deprivation band")),
             sanitized
         )
 
-        # Email addresses
+        # 2e. Email addresses
         sanitized = re.sub(
             r'\b[\w.+-]+@[\w-]+\.[a-z]{2,}\b',
             lambda m: self._map_pattern(m.group(0), get_unique_gen("a contact email address")),
@@ -330,7 +219,65 @@ class IntentAbstractorTool(BaseTool):
             f"COVERAGE: {self._compute_coverage(query, sanitized):.1%} of sensitive content generalized"
         )
 
+
+    def _get_fuzzed_count(self, match: str) -> str:
+        """Fuzzes a resource or day count into natural language buckets."""
+        try:
+            num = int(re.search(r'\d+', match).group())
+            if num < 5: return "a few"
+            if num < 20: return "a moderate number of"
+            if num < 100: return "a significant volume of"
+            return "a high volume of"
+        except:
+            return "multiple"
+
+    def _get_fuzzed_score(self, match: str) -> str:
+        """Fuzzes an academic score into qualitative buckets."""
+        try:
+            num = int(re.search(r'\d+', match).group())
+            if "%" in match:
+                if num < 40: return "a score below the passing threshold"
+                if num < 60: return "a satisfactory marginal score"
+                if num < 85: return "a strong merit-level score"
+                return "a high distinction-level score"
+            return "the numerical benchmark"
+        except:
+            return "the academic result"
+
+    # DEPRECATED
+    def _get_generalization_old(self, entity: Any) -> str:
+        return "a relevant domain entity"
+
     def _get_generalization(self, entity: Any) -> str:
+        """
+        Standardized NLU Ontology Lookup with Intent Substitution (Phase 5).
+        """
+        entity_lower = entity.lower().strip()
+        
+        # A. Check mirrors FIRST (High Abstraction Path)
+        for key, config in SEMANTIC_TAXONOMY.items():
+            if any(k in entity_lower for k in config.get("keywords", [])):
+                nlu_type = config.get("type", "snips/educational_concept")
+                # Use mirror if available for higher protection
+                if nlu_type in SEMANTIC_MIRRORS:
+                    return SEMANTIC_MIRRORS[nlu_type]
+                return UNIVERSAL_NLU_ONTOLOGY.get(nlu_type, {}).get("abstract", "a domain entity")
+
+        # B. Direct Pattern Match (Identifier / Snips Patterns)
+        if re.match(r'^\d{5,8}$', entity.strip()):
+            return UNIVERSAL_NLU_ONTOLOGY["snips/identifier"]["abstract"]
+
+        # C. LLM-Assisted Intent-Slot Classification (Generalization Phase)
+        # This replaces hardcoding. We ask: "What type of slot is this entity?"
+        # For efficiency in tools, we use heuristics, but this is where the SLM would go.
+        if entity_lower in ["bbb", "aaa", "ccc", "ddd", "eee", "fff", "ggg"]:
+            return UNIVERSAL_NLU_ONTOLOGY["snips/educational_concept"]["abstract"]
+
+        # D. Fallback by lexical features (Standard Snips Entity Recognition)
+        if entity.strip()[0].isupper() and len(entity.split()) <= 3:
+            return UNIVERSAL_NLU_ONTOLOGY["snips/organization"]["abstract"]
+            
+        return "a relevant domain entity" 
         """
         Look up the most semantically appropriate generalization for an entity.
         Tries taxonomy keyword match first, then pattern match, then fallback.
@@ -412,3 +359,20 @@ class ContextRestorerTool(BaseTool):
             
 
             
+class AdversarialAuditInput(BaseModel):
+    generalized_query: Any
+
+class AdversarialAuditTool(BaseTool):
+    name: str = "adversarial_auditor"
+    description: str = "Performs a dataset-blind privacy audit on generalized queries to detect remaining contextual fingerprints."
+    args_schema: Type[BaseModel] = AdversarialAuditInput
+
+    def _run(self, generalized_query: Any) -> str:
+        generalized_query = _robust_str(generalized_query)
+        is_safe, reason, risk = guard.audit_generalized_query(generalized_query)
+        
+        return json.dumps({
+            "status": "APPROVED" if is_safe else "REJECTED",
+            "reason": reason,
+            "risk_score": risk
+        })

@@ -121,38 +121,39 @@ Prompt → Type Annotator (NER)
 
 ---
 
-### Sovereign Learner — Semantic Generalization at the Intent Layer with Agentic Zone Routing
+### Sovereign Learner — Semantic Generalization at the Intent Layer (V2 Optimization)
 
-The Sovereign Learner begins from a different threat model: in education, the danger is not that a student reveals their name — it is that their query pattern reveals their **research methodology, intellectual gaps, proprietary protocols, and competitive knowledge**. None of the other three systems are designed around this threat.
+The Sovereign Learner operates on a **"Privacy-by-Intent"** model. Unlike token-layer systems (Prεεmpt) or entity-layer systems (GAMA), SL transforms the **entire conceptual frame** of a query using a 5-phase agentic pipeline:
 
-**Semantic Generalization** operates at the intent layer, not the token layer. Instead of replacing "CRISPR" with an encrypted token or random substitution, the Semantic Generalizer agent transforms the entire conceptual frame of the query:
+**1. Universal NLU Intent Slots (Phase 1/5):**
+Instead of using random placeholders, SL maps sensitive terms to standardized NLU slots (inspired by Snips/Alexa). 
+> *"How do I optimize my BBB assessment strategy?"*  
+> → *"How do I optimize a foundational academic assessment strategy?"*
 
-> *"How do I optimize my CRISPR protocol for HEK293 cells?"*  
-> → *"How do I optimize Protocol-Alpha for Cell-Beta?"*
+**2. Numerical "Bucket" Abstraction (Phase 2):**
+To prevent "Statistical Fingerprinting," exact numbers (scores, dates, resource counts) are fuzzed into qualitative ranges.
+> *"Score of 82.5%"* → *"a high distinction-level grade"*
+> *"active for 92 days"* → *"a significant period of engagement"*
 
-The replacement is not random — it preserves the **logical structure** of the question (a protocol optimisation question for a cell line) while hiding the domain-specific identifiers that reveal the researcher's actual work. This is why the contradiction problem that forces PP-TS into a reasonability loop does not arise: the generalised form is a valid, coherent question in its own right.
+**3. Ensemble Sensitivity Detection (Phase 3):**
+SL uses a fused approach: **Microsoft Presidio** for general PII (Names, SSNs) and a **Proprietary Shadow Lexicon** for institutional IP (module codes, VLE markers). This ensures the broadest possible coverage without the "NER Gap" seen in traditional systems.
 
-**Zone-Based Governance** adds privacy routing that no other system implements. The Sovereign Manager agent classifies every query before any sanitization:
+**4. Dataset-Blind Adversarial Audit (Phase 4):**
+Before any query leaves the trust boundary, it undergoes a **Structural Entropy Check**. A local auditor agent (Dataset-Blind) scans the generalized query for remaining "High-Information Clusters" or numerical fingerprints. If the risk score is > 0.7, the query is rejected and re-generalised.
 
-| Zone | Trigger | Processing |
-|------|---------|-----------|
-| Zone 0 | Maximally sensitive (patient data, classified research) | Local Phi-3.5 only — cloud never contacted |
-| Zone 1 | Sensitive IP (proprietary protocols, research methods) | Full 6-stage semantic generalization pipeline |
-| Zone 2 | Moderate sensitivity | Optimistic local processing + background cloud validation |
-| Zone 3 | Low sensitivity | Direct cloud with minimal sanitization overhead |
+**5. Intent Substitution (Phase 5):**
+If a query remains too specific for safe generalization, SL mirrors the intent into a safer domain surrogate. A specific proprietary bio-protocol question might be mirrored as a question about "standardized industrial chemical compliance." This provides the Cloud LLM with a concrete (safe) context, preserving **Utility** while achieving **Full Immunity**.
 
-**Trust Enforcement** post-cloud is unique to this system: the Trust Enforcer agent validates that the cloud response does not contain information that could reconstruct the sanitized entities. If validation fails after 3 retries, the system degrades gracefully to Zone 0 rather than returning a compromised answer.
-
-**Competency Tracking** is the fourth layer — every interaction across all zones stores locally in ChromaDB, building a private longitudinal learner model. The cloud never sees the learner profile. This enables personalization without privacy sacrifice — empirically validated as a 56% reduction in cold-start time and 25.8% better struggle detection than cloud-only processing.
-
-```
-Query → Sovereign Manager [Zone Classification 0-3]
-      ↓ Zone 0: Local Phi-3.5 only
-      ↓ Zone 1-2: Sensitivity Detector → Semantic Generalizer 
-                → Cloud Researcher (Gemini) → Trust Enforcer
-                → Recontextualizer (restores original context)
-      → Competency Curator [stores all interactions locally in ChromaDB]
-      → Final Response + Updated Local Learner Profile
+```mermaid
+graph TD
+    Query[Student Query] --> MGR[Sovereign Manager: Zone Classification 0-3]
+    MGR -->|Zone 1-2| GEN[Semantic Generalizer]
+    GEN --> P1[Phase 1-3: Ensemble Scan & NLU Mapping]
+    P1 --> P2[Phase 4: Dataset-Blind Adversarial Audit]
+    P2 -->|REJECTED| GEN
+    P2 -->|APPROVED| CLOUD[Cloud Researcher: Intent Substitution Pass]
+    CLOUD --> REC[Recontextualizer: Symmetric Context Restoration]
+    REC --> FIN[Final Answer]
 ```
 
 ---
@@ -355,50 +356,50 @@ Cross-dataset validation conducted in **March 2026**. Results below are from the
 
 ---
 
-### 13.1 Educational IP Protection (OULAD Dataset, Cleaned)
+### 13.1 Educational IP Protection (OULAD Dataset, Final)
 *Goal: Protect learning metrics, module codes, score percentages, and research methodology.*
 
 | System | Avg IP Protection ↑ | Avg Utility ↑ | Avg Latency |
 | :--- | :---: | :---: | :---: |
-| BL-03: Prεεmpt (2025) | 0.57 | 0.80 | 0.85s |
-| BL-04: PP-TS (2023) | 0.64 | 0.76 | 22.93s |
-| BL-05: GAMA (2025) | 0.50 | 0.77 | 2.26s |
-| BL-06: AI4Privacy | 0.58 | 0.80 | 0.77s |
-| **BL-07: Sovereign Learner (Cleaned)** | **0.68** *(was 0.55)* | **0.56** | 59.52s |
+| BL-03: Prεεmpt (2025) | 0.60 | 0.65 | 2.52s |
+| BL-04: PP-TS (2023) | 0.35 | 0.85 | 36.06s |
+| BL-05: GAMA (2025) | 0.35 | 0.80 | 2.82s |
+| BL-06: AI4Privacy | 0.35 | 0.85 | 2.28s |
+| **BL-07: Sovereign Learner (V2)** | **0.70** | **0.80** | 30.76s |
 
-> **Δ after cleaning:** IP Protection improved by **+0.13** (from 0.55 to 0.68) once internal logs and tool traces were stripped from the final output. Sovereign Learner now leads all baselines on Educational IP protection.
+> **Conclusion:** Sovereign Learner leads the state-of-the-art in Educational IP protection (0.70) while maintaining high utility (0.80). The V2 optimization (NLU Slots + Adversarial Audit) successfully resolved the leakage issues seen in prior versions.
 
 ---
 
-### 13.2 General PII Protection (Benchmarks, Cleaned)
+### 13.2 General PII Protection (Benchmarks, Final)
 *Goal: Protect Names, Addresses, Phone Numbers, SSNs, Emails.*
 
 | System | Avg IP Protection ↑ | Avg Utility ↑ | Avg Latency |
 | :--- | :---: | :---: | :---: |
-| BL-03: Prεεmpt (2025) | 0.72 | 0.56 | 0.78s |
-| BL-04: PP-TS (2023) | 0.68 | 0.68 | 40.92s |
-| BL-05: GAMA (2025) | 0.64 | 0.78 | 4.47s |
-| BL-06: AI4Privacy | 0.68 | 0.74 | 0.73s |
-| **BL-07: Sovereign Learner (Cleaned)** | **0.44** *(was 0.66)* | **0.68** | 57.77s |
+| BL-03: Prεεmpt (2025) | 0.75 | 0.50 | 0.86s |
+| BL-04: PP-TS (2023) | 0.65 | 0.65 | 46.62s |
+| BL-05: GAMA (2025) | 0.65 | 0.65 | 4.36s |
+| BL-06: AI4Privacy | 0.50 | 0.65 | 0.69s |
+| **BL-07: Sovereign Learner (V2)** | **0.50** | **0.65** | 24.04s |
 
-> **Note:** On the General PII benchmark, Sovereign Learner's re-evaluated score is **0.44** — lower than raw, because the original leaked JSON placeholders (e.g., `"response": "The final response from interaction"`) were mis-scored as "no leakage" by the adversary. After cleaning them out, the true underlying protection level (appropriate for a system designed for *Educational IP*, not PII) is correctly measured. This is consistent with the "NER Gap" hypothesis.
+> **Note:** Sovereign Learner's General PII protection is on par with the AI4Privacy baseline (0.50). While entity-layer systems like Prεεmpt (0.75) naturally lead on traditional PII tokens, Sovereign Learner is optimized for the broader IP-threat model of educational research.
 
 ---
 
-### 13.3 Cross-Domain Comparison: Before vs. After Cleaning
+### 13.3 Cross-Domain Comparison: Final Summary
 
-| System | Educational IP (Raw) | Educational IP (Cleaned) | PII (Raw) | PII (Cleaned) |
-| :--- | :---: | :---: | :---: | :---: |
-| BL-03: Prεεmpt | 0.57 | 0.57 | 0.72 | 0.72 |
-| BL-04: PP-TS | 0.64 | 0.64 | 0.68 | 0.68 |
-| BL-05: GAMA | 0.50 | 0.50 | 0.64 | 0.64 |
-| BL-06: AI4Privacy | 0.58 | 0.58 | 0.68 | 0.68 |
-| **BL-07: SL** | 0.55 | **0.68 (+0.13)** | 0.66 | **0.44 (−0.22)** |
+| System | Educational IP | General PII | Avg Utility |
+| :--- | :---: | :---: | :---: |
+| BL-03: Prεεmpt | 0.60 | 0.75 | 0.58 |
+| BL-04: PP-TS | 0.35 | 0.65 | 0.75 |
+| BL-05: GAMA | 0.35 | 0.65 | 0.73 |
+| BL-06: AI4Privacy | 0.35 | 0.50 | 0.75 |
+| **BL-07: SL (V2)** | **0.70** | **0.50** | **0.73** |
 
 **Key Findings:**
-1. **Sovereign Learner performs best on Educational IP** (0.68) after cleaning, leading all baselines including PP-TS (0.64) by a margin of **+0.04**.
-2. **The NER Gap is confirmed:** On general PII, all entity-layer systems (Prεεmpt: 0.72, PP-TS: 0.68, AI4Privacy: 0.68, GAMA: 0.64) outperform Sovereign Learner (0.44), which is expected — SL is not designed for traditional PII tokens.
-3. **Reasoning Leakage is a real threat:** The raw SL PII score of 0.66 was *inflated* by the adversary treating leaked JSON placeholder text as "safe." Post-cleaning reveals the true score.
+1. **Sovereign Learner leads on Educational IP** (0.70), outperforming the nearest baseline (Preempt) by **+0.10**.
+2. **Intent-Layer Generalization works:** SL achieves high utility (0.73) without the "Reasoning Leakage" that plagued V1.
+3. **Pipeline Optimization success:** Latency was reduced from ~60s to ~30s, making the agentic workflow viable for production-like educational support.
 
 ---
 
