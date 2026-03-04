@@ -117,39 +117,72 @@ class SovereignSystem():
         )
 
 
-    # --- TASKS ---
-    # --- TASKS ---
+
+    # --- TASKS (Aligned with Sovereign Learner V4.0 Async Pipeline) ---
+    #
+    # CRITICAL PATH (synchronous — each step depends on the previous):
+    #   routing → generalization → cloud_knowledge → privacy_audit → recontextualization
+    #
+    # PARALLEL (async — runs concurrently to save wall-clock time):
+    #   pii_detection  : fires alongside routing (both local, fast)
+    #
+    # BACKGROUND SYNC (async — fire-and-forget after the user gets their answer):
+    #   competency_logging : updates V_Portfolio while user reads result
+    #   data_sovereignty   : writes to local ChromaDB without blocking response
+
     @task
     def routing_task(self) -> Task:
         return Task(config=self.tasks_config['routing_task'])
 
     @task
     def pii_detection_task(self) -> Task:
-        return Task(config=self.tasks_config['pii_detection_task'])
+        # Runs immediately alongside routing_task (both local Llama 3.2).
+        # Async here leverages multi-threading — NER scan completes before
+        # generalization_task needs its output.
+        return Task(
+            config=self.tasks_config['pii_detection_task'],
+            async_execution=True
+        )
 
     @task
     def generalization_task(self) -> Task:
+        # Waits for both routing_task + pii_detection_task outputs (via context).
+        # CrewAI blocks here until the async pii_detection_task resolves.
         return Task(config=self.tasks_config['generalization_task'])
 
     @task
     def cloud_knowledge_task(self) -> Task:
+        # Critical path — must have the generalised query before calling cloud.
         return Task(config=self.tasks_config['cloud_knowledge_task'])
 
     @task
     def privacy_audit_task(self) -> Task:
+        # Critical path — validates cloud response before recontextualisation.
         return Task(config=self.tasks_config['privacy_audit_task'])
 
     @task
     def recontextualization_task(self) -> Task:
+        # Critical path — the "User Response" point. Final answer assembles here.
+        # Must complete before returning to the student.
         return Task(config=self.tasks_config['recontextualization_task'])
 
     @task
     def competency_logging_task(self) -> Task:
+        # Synchronous — CrewAI only allows one async tail task.
+        # Still fast (lightweight vector update) and feeds data_sovereignty_task.
         return Task(config=self.tasks_config['competency_logging_task'])
 
     @task
     def data_sovereignty_task(self) -> Task:
-        return Task(config=self.tasks_config['data_sovereignty_task'])
+        # SINGLE ASYNC TAIL — CrewAI's background task.
+        # ChromaDB write happens while the student reads their answer.
+        # This is the "fire-and-forget" storage step; user response
+        # is already delivered by recontextualization_task above.
+        return Task(
+            config=self.tasks_config['data_sovereignty_task'],
+            async_execution=True
+        )
+
 
     def task_callback(self, task_output):
         """Callback to log task execution to the tracer"""
