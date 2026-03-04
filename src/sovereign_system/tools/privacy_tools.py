@@ -7,18 +7,21 @@ from deepeval.test_case import LLMTestCase
 class PrivacyScanInput(BaseModel):
     original_query: str = Field(..., description="The original user query intent")
     cloud_response: str = Field(..., description="The response received from the cloud")
-    sensitive_entities: List[str] = Field(..., description="List of sensitive entities to protect")
+    sensitive_entities: str = Field(..., description="Comma-separated sensitive entities")
 
 class PrivacyScanTool(BaseTool):
     name: str = "privacy_scanner"
     description: str = "Scans cloud response for IP leakage using adversarial LLM scoring"
     args_schema: Type[BaseModel] = PrivacyScanInput
 
-    def _run(self, original_query: str, cloud_response: str, sensitive_entities: List[str]) -> str:
+    def _run(self, original_query: str, cloud_response: str, sensitive_entities: str) -> str:
+        # Parse entities
+        entities_list = [e.strip() for e in sensitive_entities.split(",")] if isinstance(sensitive_entities, str) else []
+        
         # Check 1: Exact String Matching (Fast Fail)
         leaked = []
         response_lower = cloud_response.lower()
-        for entity in sensitive_entities:
+        for entity in entities_list:
             if entity.lower() in response_lower:
                 leaked.append(entity)
         

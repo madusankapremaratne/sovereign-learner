@@ -36,9 +36,9 @@ class ZoneValidationTool(BaseTool):
 
 
 class OutputSanitizerInput(BaseModel):
-    text: str = Field(..., description="The output text to sanitize")
-    sensitive_entities: Optional[str] = Field(None, description="Comma-separated list of sensitive entities to scrub")
-    placeholders: Optional[str] = Field(None, description="Comma-separated list of placeholders to scrub")
+    text: str = Field(..., description="The text to sanitize")
+    sensitive_entities: str = Field("", description="Comma-separated sensitive entities")
+    placeholders: str = Field("", description="Comma-separated placeholders")
 
 class OutputSanitizerTool(BaseTool):
     """
@@ -54,7 +54,7 @@ class OutputSanitizerTool(BaseTool):
     )
     args_schema: Type[BaseModel] = OutputSanitizerInput
 
-    def _run(self, text: str, sensitive_entities: str = None, placeholders: str = None) -> str:
+    def _run(self, text: str, sensitive_entities: str = "", placeholders: str = "") -> str:
         entities = [e.strip() for e in sensitive_entities.split(",")] if sensitive_entities else []
         placeholders_list = [p.strip() for p in placeholders.split(",")] if placeholders else []
         

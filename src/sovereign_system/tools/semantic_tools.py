@@ -181,15 +181,12 @@ FALLBACK_BY_TYPE = {
 
 
 class SemanticGeneralizationInput(BaseModel):
-    query: str = Field(..., description="The original sensitive query to be generalized")
-    sensitive_entities: str = Field(
-        ...,
-        description="Comma-separated list of sensitive entities detected in the query"
-    )
+    query: str = Field(..., description="The query to generalize")
+    sensitive_entities: str = Field(..., description="Comma-separated list of entities")
 
 
 class SemanticGeneralizationTool(BaseTool):
-    name: str = "semantic_generalizer"
+    name: str = "intent_abstractor"
     description: str = (
         "Transforms sensitive queries into semantically equivalent, naturally phrased "
         "generalizations using domain-aware vocabulary. Replaces specific identifiers "
@@ -318,11 +315,11 @@ class SemanticGeneralizationTool(BaseTool):
         return min(1.0, len(removed) / max(1, len(self.placeholder_map)))
 
 class RecontextualizationInput(BaseModel):
-    response: str = Field(..., description="The cloud response containing placeholders")
-    mapping: str = Field(..., description="The placeholder mapping from generalization step")
+    response: str = Field(..., description="The response text")
+    mapping: str = Field("", description="The JSON mapping string")
 
 class RecontextualizationTool(BaseTool):
-    name: str = "recontextualizer"
+    name: str = "context_restorer"
     description: str = "Maps generalized cloud responses back to the learner's specific context"
     args_schema: Type[BaseModel] = RecontextualizationInput
     
