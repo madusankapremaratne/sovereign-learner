@@ -12,7 +12,7 @@ pii_detection_task:
     Scan the query: "{user_query}" for any Personally Identifiable Information (PII) 
     or domain-sensitive entities (e.g., specific chemical compounds, proprietary 
     research names, or medical conditions).
-  expected_output: "A list of sensitive entities that must be masked."
+  expected_output: "A clean, comma-separated list of EXACT sensitive words or phrases found in the text. If none, return 'None'."
   agent: sensitivity_detector
   context: [routing_task]
 
