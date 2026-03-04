@@ -137,8 +137,12 @@ class ExtendedBaselineExperiment:
                                 try:
                                     # Look for recontextualization in individual task outputs
                                     for task_out in result.tasks_output:
-                                        if "recontextualization" in task_out.description.lower():
-                                            raw_output = task_out.raw
+                                        if "response_processing_task" in task_out.description.lower() or "recontextualization" in task_out.description.lower():
+                                            # Prefer Pydantic object to avoid CoT leakage (Fix #12)
+                                            if hasattr(task_out, 'pydantic') and task_out.pydantic:
+                                                raw_output = str(getattr(task_out.pydantic, 'answer', task_out.raw))
+                                            else:
+                                                raw_output = task_out.raw
                                             break
                                     if not raw_output:
                                         raw_output = str(result.raw)

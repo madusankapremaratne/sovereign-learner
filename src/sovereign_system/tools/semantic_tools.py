@@ -1,30 +1,37 @@
-from crewai.tools import BaseTool
-
-def _robust_str(val: Any) -> str:
-    if isinstance(val, dict):
-        if "description" in val: return str(val.get("description", str(val)))
-        for v in val.values():
-            if isinstance(v, str): return v
-    return str(val)
-
-from typing import Type, Optional
+from typing import Any, Type, List, Optional
 from pydantic import BaseModel, Field
 
 def _robust_str(val: Any) -> str:
     if isinstance(val, dict):
         if "description" in val: return str(val.get("description", str(val)))
+        if "value" in val: return str(val["value"])
         for v in val.values():
             if isinstance(v, str): return v
     return str(val)
 
-from typing import Any
+from crewai.tools import BaseTool
 import re
 import json
+from sovereign_system.security.guard import guard
+
+# ─────────────────────────────────────────────────────────────────────────────
+# General PII Mapping (Presidio Entity Types to Natural Language)
+# ─────────────────────────────────────────────────────────────────────────────
+PRESIDIO_PII_MAPPING = {
+    "PERSON": "the individual",
+    "LOCATION": "a physical location",
+    "EMAIL_ADDRESS": "an electronic contact",
+    "PHONE_NUMBER": "a telephonic contact",
+    "DATE_TIME": "a specific point in time",
+    "US_SSN": "a government identifier",
+    "UK_NHS": "a medical identifier",
+    "IBAN_CODE": "a financial identifier",
+    "CREDIT_CARD": "a payment method",
+    "IP_ADDRESS": "a network address",
+}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Domain-aware semantic generalisation taxonomy
-# Each entry: (detection_keywords, generalized_form_template)
-# The template uses {entity} where the original term's category is implied.
 # ─────────────────────────────────────────────────────────────────────────────
 SEMANTIC_TAXONOMY = {
     # ── Molecular Biology & Biomedical ────────────────────────────────────────
@@ -92,6 +99,26 @@ SEMANTIC_TAXONOMY = {
     },
 
     # ── Research Institutions & Companies ────────────────────────────────────
+    
+    # ── Educational Data (OULAD) ──────────────────────────────────────────────
+    "course_module": {
+        "keywords": ["bbb module", "aaa module", "ccc module", "ddd module", 
+                     "eee module", "fff module", "ggg module"],
+        "generalization": "a university course module",
+        "category": "education_entity"
+    },
+    "student_performance": {
+        "keywords": ["current score is", "average score is", "score of", "passed with", 
+                     "achieved", "fail grade", "passing grade"],
+        "generalization": "academic performance metrics",
+        "category": "student_data"
+    },
+    "engagement_metrics": {
+        "keywords": ["active for", "resources accessed", "clicked on", "vle interactions", 
+                     "days active", "study sessions"],
+        "generalization": "learner engagement statistics",
+        "category": "student_data"
+    },
     "pharma_company": {
         "keywords": ["pfizer", "moderna", "astrazeneca", "genentech", "novartis",
                      "roche", "merck", "johnson & j", "bayer", "sanofi"],
@@ -230,18 +257,39 @@ class IntentAbstractorTool(BaseTool):
         6. Return sanitized query + full bidirectional mapping as JSON
         """
         self.placeholder_map = {}
+        used_generalizations = {}
+
+        def get_unique_gen(base_gen):
+            if base_gen not in used_generalizations:
+                used_generalizations[base_gen] = 0
+                return base_gen
+            used_generalizations[base_gen] += 1
+            return f"{base_gen} ({used_generalizations[base_gen] + 1})"
+
+        # ── Step 0: Presidio-based bootstrapping (General PII) ────────────────
+        pii_hits = guard.scan_for_pii_entities(query)
+        for text, entity_type in pii_hits:
+            if entity_type in PRESIDIO_PII_MAPPING:
+                # Use a unique natural language generalization
+                if text not in self.placeholder_map:
+                    self.placeholder_map[text] = get_unique_gen(PRESIDIO_PII_MAPPING[entity_type])
+
         entities = [e.strip() for e in sensitive_entities.split(",") if e.strip()]
         sanitized = query
 
         # ── Step 1: Entity-based generalization ──────────────────────────────
         for entity in entities:
+            if not entity: continue
+            # Only override if not already mapped by Presidio or if taxonomy is more specific
             generalization = self._get_generalization(entity)
-            self.placeholder_map[entity] = generalization
+            if entity not in self.placeholder_map or generalization != FALLBACK_BY_TYPE["default"]:
+                self.placeholder_map[entity] = get_unique_gen(generalization)
 
-            # Replace all occurrences (case-insensitive)
+        # Apply substitutions
+        for entity, replacement in self.placeholder_map.items():
             sanitized = re.sub(
                 re.escape(entity),
-                generalization,
+                replacement,
                 sanitized,
                 flags=re.IGNORECASE
             )
@@ -250,21 +298,21 @@ class IntentAbstractorTool(BaseTool):
         # Student IDs: 5-8 digit standalone numbers
         sanitized = re.sub(
             r'(?<!\d)(\d{5,8})(?!\d)',
-            lambda m: self._map_pattern(m.group(0), "a registered student"),
+            lambda m: self._map_pattern(m.group(0), get_unique_gen("a registered student")),
             sanitized
         )
 
         # IMD / percentage bands like "10-20%" or "90-100%"
         sanitized = re.sub(
             r'\b(\d{1,3}-\d{1,3}%)',
-            lambda m: self._map_pattern(m.group(0), "a socioeconomic deprivation band"),
+            lambda m: self._map_pattern(m.group(0), get_unique_gen("a socioeconomic deprivation band")),
             sanitized
         )
 
         # Email addresses
         sanitized = re.sub(
             r'\b[\w.+-]+@[\w-]+\.[a-z]{2,}\b',
-            lambda m: self._map_pattern(m.group(0), "a contact email address"),
+            lambda m: self._map_pattern(m.group(0), get_unique_gen("a contact email address")),
             sanitized
         )
 
@@ -276,17 +324,10 @@ class IntentAbstractorTool(BaseTool):
         sanitized = re.sub(r'\ba ([aeiou])', r'an \1', sanitized, flags=re.IGNORECASE)
 
         # ── Step 4: Compose output ────────────────────────────────────────────
-        output = {
-            "sanitized_query": sanitized,
-            "mapping": self.placeholder_map,
-            "entity_count": len(self.placeholder_map),
-            "generalization_coverage": self._compute_coverage(query, sanitized)
-        }
-
         return (
             f"SANITIZED: {sanitized}\n"
             f"MAPPING: {json.dumps(self.placeholder_map, indent=2)}\n"
-            f"COVERAGE: {output['generalization_coverage']:.1%} of sensitive content generalized"
+            f"COVERAGE: {self._compute_coverage(query, sanitized):.1%} of sensitive content generalized"
         )
 
     def _get_generalization(self, entity: Any) -> str:
@@ -360,9 +401,12 @@ class ContextRestorerTool(BaseTool):
             
         restored_response = response
         
-        # Replace placeholders with original terms
-        for placeholder, original in mapping_dict.items():
-            restored_response = restored_response.replace(placeholder, original)
+        # Replace generalizations (values) with original terms (keys)
+        # Sort by length descending to avoid partial matches
+        sorted_pairs = sorted(mapping_dict.items(), key=lambda x: len(str(x[1])), reverse=True)
+        
+        for original, generalization in sorted_pairs:
+            restored_response = restored_response.replace(str(generalization), str(original))
             
         return restored_response
             

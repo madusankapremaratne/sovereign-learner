@@ -1,23 +1,16 @@
-from crewai.tools import BaseTool
-
-def _robust_str(val: Any) -> str:
-    if isinstance(val, dict):
-        if "description" in val: return str(val.get("description", str(val)))
-        for v in val.values():
-            if isinstance(v, str): return v
-    return str(val)
-
-from typing import Type, List
+from typing import Any, Type, List, Optional
 from pydantic import BaseModel, Field
 
 def _robust_str(val: Any) -> str:
     if isinstance(val, dict):
         if "description" in val: return str(val.get("description", str(val)))
+        if "value" in val: return str(val["value"])
         for v in val.values():
             if isinstance(v, str): return v
     return str(val)
 
-from typing import Any
+from crewai.tools import BaseTool
+
 from sovereign_system.utils.evaluators import SemanticPrivacyMetric
 from deepeval.test_case import LLMTestCase
 

@@ -46,6 +46,10 @@ run_log.txt
 *.log.*
 
 # Data (large datasets)
+/data/ConvFinQA/
+/data/exp01/
+/data/GAMA/
+/data/nnarrativeqa/
 /data/oulad/
 /data/synthetic/*.json
 /dashboard/traces/*.json

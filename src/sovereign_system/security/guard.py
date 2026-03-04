@@ -198,13 +198,25 @@ class SovereignGuard:
     def scan_for_pii(self, text: str) -> List[str]:
         """
         Uses Presidio (if available) to find PII entities.
-        Returns a list of detected entity types/text.
+        Returns a list of detected entity strings.
         """
         results = []
         if self.analyzer:
             analysis = self.analyzer.analyze(text=text, language='en')
             for res in analysis:
                 results.append(text[res.start:res.end])
+        return results
+
+    def scan_for_pii_entities(self, text: str) -> List[Tuple[str, str]]:
+        """
+        Presidio-aware PII detection with type metadata.
+        Returns: List[(entity_text, entity_type)]
+        """
+        results = []
+        if self.analyzer:
+            analysis = self.analyzer.analyze(text=text, language='en')
+            for res in analysis:
+                results.append((text[res.start:res.end], res.entity_type))
         return results
     
     def scrub_pii_for_storage(self, text: str) -> str:

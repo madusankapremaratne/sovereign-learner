@@ -1,104 +1,38 @@
+# --- OPTIMIZED PIPELINE V2 (EXP05) ---
+
 routing_task:
-  description: >
-    Analyze the incoming user query: "{user_query}". 
-    Evaluate it against privacy levels: 0 (local-only) to 3 (direct cloud).
-    Identify if the query requires semantic generalization or if it can be 
-    processed by the local SLM immediately.
-  expected_output: "A routing decision (Zone 0-3) and a brief justification."
+  description: "Route the query: '{user_query}' to Zone 0-3."
+  expected_output: "Zone Number (0-3)."
   agent: sovereign_manager
 
-pii_detection_task:
+pre_processing_task:
   description: >
-    Scan the query: "{user_query}" for any Personally Identifiable Information (PII) 
-    or domain-sensitive entities (e.g., specific chemical compounds, proprietary 
-    research names, or medical conditions).
-  expected_output: "A clean, comma-separated list of EXACT sensitive words or phrases found in the text. If none, return 'None'."
-  agent: sensitivity_detector
-  context: [routing_task]
-
-generalization_task:
-  description: >
-    Using the list of sensitive entities, rewrite the query: "{user_query}" 
-    into a generalized version. Replace specific terms with abstract placeholders 
-    (e.g., 'Protocol-X', 'Variable-A'). 
-    Create a private 'Mapping Key' to store these associations locally.
-  expected_output: "The generalized query and the hidden Mapping Key."
+    1. Scan the query for sensitive entities (PII, Course Modules, Scores): "{user_query}".
+    2. Rewrite it into a 'Sovereign-Safe' generalized version.
+    3. Create a mapping key for restoration.
+  expected_output: "A JSON-like output containing 'generalized_query' and 'mapping'."
   agent: semantic_generalizer
-  context: [pii_detection_task]
+
 
 cloud_knowledge_task:
-  description: >
-    Take the generalized query from the previous task and provide a 
-    comprehensive, high-quality technical response. Do not attempt to 
-    uncover the specific identities behind the placeholders.
-  expected_output: "A detailed technical guide based on the generalized terms."
+  description: "Researcher knowledge for: {pre_processing_task.generalized_query}"
+  expected_output: "Technical guidance."
   agent: cloud_researcher
-  context: [generalization_task]
+  context: [pre_processing_task]
 
-privacy_audit_task:
+response_processing_task:
   description: >
-    Review the cloud researcher's response. Perform a Differential Privacy Audit (DPA).
-    Ensure that the cloud model has not inadvertently 'guessed' the user's specific 
-    context or leaked any information that maps back to sensitive entities.
-    USE the output_sanitizer tool to scrub any internal reasoning or leaked tokens 
-    from your report.
-  expected_output: "A DPA-validated report (Pass/Fail) with corrective feedback."
-  agent: trust_enforcer
-  context: [cloud_knowledge_task, pii_detection_task]
-
-recontextualization_task:
-  description: >
-    Execute Symmetric Context Restoration (SCR). Using the 'Mapping Key' from 
-    Stage 1, replace all abstract placeholders with the original user's specific 
-    entities to produce a fully personalised answer.
-
-    ZERO-LEAK OUTPUT PROTOCOL (MANDATORY):
-    Your Final Answer MUST be plain English prose — the actual response the student
-    will read. It must be directly helpful and educational.
-
-    STRICT PROHIBITIONS — your output must NEVER contain:
-    - JSON objects, dictionaries, or schema definitions
-    - "Thought:", "Action:", or "Action Input:" prefixes
-    - Tool names or tool call syntax
-    - Internal agent logs, KPL entries, or ChromaDB references
-    - Placeholder tokens like [token1], Protocol-X, Variable-A
-    - Any text that looks like debugging output or metadata
-
-    If the cloud researcher's response is not useful, write a short, honest educational
-    answer based on general knowledge. Do NOT output internal pipeline state.
-  expected_output: >
-    A complete, well-written educational response in plain English prose.
-    Minimum 2 sentences. No JSON. No tool syntax. No internal metadata.
+    1. Get the cloud response for the generalized query.
+    2. Perform SCR (Symmetric Context Restoration) using the mapping.
+    3. Sanitize the output to remove any leaked placeholders or metadata.
+  expected_output: "The final educational response for the student in plain English."
   agent: recontextualizer
-  context: [generalization_task, privacy_audit_task]
+  context: [pre_processing_task, cloud_knowledge_task]
 
-competency_logging_task:
-  description: >
-    Update the user's local profile. Calculate the learning weight (Active=1.0, Passive=0.2) 
-    for this interaction and update the competency vector V_Portfolio. 
-    Pass the interaction data to the Curator for storage.
-  expected_output: "Calculated weight and updated competency vector status."
-  agent: competency_tracker
-  context: [routing_task, recontextualization_task]
 
 data_sovereignty_task:
-  description: >
-    Securely store the raw query, the generalized query, and the final response
-    in the local ChromaDB. Ensure no sensitive data has left the local environment
-    unmasked.
-
-    CRITICAL FINAL OUTPUT RULE:
-    Your Final Answer must be ONLY the student-facing response from the
-    recontextualization_task — copy it verbatim. Do NOT return any of the following:
-    - Confirmation messages (e.g. "Successfully stored...")
-    - JSON payloads, ChromaDB logs, or KPL provenance entries
-    - "Thought:", "Action:", "Action Input:", or internal reasoning
-    - Any metadata about the storage process
-
-    The storage itself is your internal action. What you RETURN is the
-    clean, final educational response that the student asked for.
-  expected_output: >
-    The exact student-facing educational response from the previous task,
-    copied verbatim — plain prose only, no metadata, no logs.
+  description: "Store interaction data while returning final answer: {response_processing_task.output}"
+  expected_output: "verbatim copy of the final response."
   agent: evidence_curator
-  context: [routing_task, pii_detection_task, recontextualization_task, competency_logging_task]
+  context: [pre_processing_task, response_processing_task]
+  async_execution: true

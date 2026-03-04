@@ -16,8 +16,8 @@ sovereign_manager:
     JSON RULE: Use simple Action Input. Do not use nesting.
     
     FINAL OUTPUT PROTOCOL:
-    You MUST provide your final answer as a single string:
-    "PROTOCOL_RESULT: [Zone Number] | AUDIT_REASON: [Short justification]"
+    Your output MUST be a JSON object containing "zone" (int) and "reason" (str).
+    Example: {"zone": 1, "reason": "Sensitive entities detected."}
   llm: ollama/llama3.2
 
 sensitivity_detector:
@@ -28,22 +28,16 @@ sensitivity_detector:
     you build a 'Sensitivity Shadow' of the query. 
     
     INSTRUCTION:
-    1. Use the pii_scanner tool to find Names, IDs, and Locations.
-    2. Look for institutional terms like Project names or specific chemicals.
-    3. Your Final Answer MUST be a clean, comma-separated list of sensitive terms found.
-    
-    Example Final Answer: "John Doe, 123 Main St, New York"
+    - FAST PATH: If the query obviously contains a Name, Email, or SSN, use `pii_scanner` and return immediately.
+    - DEEP SCAN: If no obvious PII, check for institutional names or chemical compounds.
+    - FINAL ANSWER: Return a JSON object with "entities" (string).
   llm: ollama/llama3.2
 
 semantic_generalizer:
   role: "Semantic Privacy Architect"
   goal: >
-    Transform sensitive educational and research queries into semantically
-    equivalent, domain-appropriate generalizations that preserve the logical
-    intent of the question while replacing specific identifiers with natural
-    language abstractions — not placeholders. The output must read as a
-    legitimate, coherent technical question that any domain expert would
-    recognize as meaningful.
+    Scan the query for PII and IP, then abstract the intent and return a JSON map.
+    Example Map: {"Student_629": "a student", "BBB": "a course"}
   backstory: >
     You are a Semantic Privacy Architect with deep expertise in scientific
     communication across biomedical, legal, computational, and educational
@@ -92,8 +86,8 @@ semantic_generalizer:
     phrase.
 
     Use the `intent_abstractor` tool to execute the transformation.
-    Always verify your output reads as natural, coherent English before
-    returning it.
+    Your Final Answer MUST be a JSON object with "generalized_query" and "mapping".
+    Example: {"generalized_query": "How do I edit genes?", "mapping": '{"CRISPR": "genes"}'}
   llm: ollama/llama3.2
 
 cloud_researcher:
@@ -141,9 +135,7 @@ trust_enforcer:
 recontextualizer:
   role: "Final Answer Composer"
   goal: >
-    Compose the final, clean, student-facing educational response by restoring
-    any generalised placeholders back to the original specific terms using the
-    local Mapping Key, then delivering it as readable, helpful plain English prose.
+    Restore context to the cloud response using the local mapping key and finalize the answer.
   backstory: >
     You are the Final Answer Composer. Your entire job is to produce one thing:
     a clear, well-written, helpful answer that the student asked for.

@@ -1,18 +1,19 @@
-from crewai.tools import BaseTool
-from typing import Type, Union, Any
+from typing import Any, Type, List, Optional
 from pydantic import BaseModel, Field
-from typing import Any
-import chromadb
-import uuid
-from datetime import datetime
-import os
 
 def _robust_str(val: Any) -> str:
     if isinstance(val, dict):
         if "description" in val: return str(val.get("description", str(val)))
+        if "value" in val: return str(val["value"])
         for v in val.values():
             if isinstance(v, str): return v
     return str(val)
+
+from crewai.tools import BaseTool
+import chromadb
+import uuid
+from datetime import datetime
+import os
 
 import time
 from sovereign_system.utils.sovereign_trace_logger import global_tracer
