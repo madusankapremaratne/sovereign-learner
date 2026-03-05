@@ -3,7 +3,12 @@ import json
 import time
 import pandas as pd
 import re
+import sys
 from typing import List, Dict
+
+# Add project root and src to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from experiments.exp05_baseline_comparison.oulad_query_builder import OULADQueryBuilder
 from experiments.exp05_baseline_comparison.pp_ts_baseline import PPTSSystem
 from experiments.exp05_baseline_comparison.gama_baseline import GAMASystem

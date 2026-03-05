@@ -32,12 +32,11 @@ class SovereignSystem():
         return LLM(model=self.model_name, base_url=self.local_url)
 
     @property
-    def cloud_llm(self):
-        return LLM(model="gemini/gemini-2.0-flash-lite", api_key=os.getenv("GOOGLE_API_KEY"))
-        # return LLM(model="groq/openai/gpt-oss-120b", api_key=os.getenv("GROQ_API_KEY"))
+    def cloud_llm_gemini(self):
+        return LLM(model="gemini/gemini-2.5-flash", api_key=os.getenv("GOOGLE_API_KEY"))
 
     @property
-    def cloud_llm(self):
+    def cloud_llm_groq(self):
         return LLM(model="groq/openai/gpt-oss-120b", api_key=os.getenv("GROQ_API_KEY"))
 
     # Agents
@@ -55,7 +54,7 @@ class SovereignSystem():
 
     @agent
     def cloud_researcher(self) -> Agent:
-        return Agent(config=self.agents_config['cloud_researcher'], llm=self.cloud_llm, verbose=False, max_iter=3)
+        return Agent(config=self.agents_config['cloud_researcher'], llm=self.cloud_llm_gemini, verbose=False, max_iter=3)
 
     @agent
     def evidence_curator(self) -> Agent:

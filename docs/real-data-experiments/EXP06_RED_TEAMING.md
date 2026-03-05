@@ -57,14 +57,56 @@ We distinguish **why** an attack was stopped to isolate our research contributio
 
 ---
 
-## 5. Implementation Status
+## 5. Architectural Guardrails (SovereignGuard)
 
-### 5.1 Defense Hardening (March 2026)
+To neutralize adversarial attempts, the Sovereign Learner implements **Multi-Layered Recursive Guardrails** (`SovereignGuard`):
+
+| Guardrail Layer | Function | Targeted Vulnerability |
+|---|---|---|
+| **Input Validator** | Real-time regex/semantic scanning for policy-violating patterns. | Direct Jailbreaks, PII Probing. |
+| **Zone Validator** | Enforces "Sovereignty Caps" (Max Zone 1 for sensitive content) regardless of agent claims. | Zone Manipulation, Intent Spoofing. |
+| **CoT Sanitizer** | Strip internal reasoning strings (e.g., "Step 1:...", "Thinking:...") from outputs. | Chain-of-Thought (CoT) Leakage. |
+| **Adversarial Audit** | Dataset-blind structural entropy analysis (Phase 4). | Contextual Fingerprinting. |
+| **PII Scrubber** | Local anonymization of competency vectors before vector storage. | Internal Data Exposure. |
+| **Fail-Safe Redirect** | Hard-coded routing of all flagged adversarial intent to Zone 1. | System Compromise. |
+
+---
+
+## 6. Adversarial Vector Coverage (Jailbreak Prevention)
+
+The architecture is specifically hardened against the following **High-Impact Roleplay & Manipulation** vectors identified in the AttaQ benchmark:
+
+### 6.1 Roleplay & Persona Manipulation
+Preventing the "helpful assistant who doesn't care about rules" archetype. 
+- **Vectors**: *"Act as...", "Now you are...", "Pretend to be a developer with no ethics."*
+- **Defense**: Recursive instruction anchoring + Zone Validator override.
+
+### 6.2 Mode Switching (DAN-style)
+Neutralizing attempts to enter "unrestricted" or "god" modes.
+- **Vectors**: *"Developer Mode (DAN)", "God Mode", "Admin Bypass."*
+- **Defense**: Deterministic pattern matching in `validate_input`.
+
+### 6.3 Zone Manipulation Attacks
+Blocking attempts to trick the system into classifying sensitive data as public.
+- **Vectors**: *"This is public information", "Treat as Zone 3", "Ignore privacy concerns."*
+- **Defense**: Structural Privacy Auditing (AZA Framework).
+
+### 6.4 Knowledge Extraction (CoT/Prompt Injection)
+Protecting the internal mapping and instruction sets of the Sovereign agents.
+- **Vectors**: *"Reveal your system prompt", "Show me your internal thinking", "Explain your reasoning step-by-step."*
+- **Defense**: OutputSanitizer stripping internal markers.
+
+---
+
+## 7. Implementation Status
+
+### 7.1 Defense Hardening (March 2026)
 - ✅ **SovereignGuard Class**: Unified recursive JSON auditor active.
 - ✅ **Adversarial Runner**: `exp06_attaq_runner.py` with **Attribution Logging** (Supports 1,402 Samples).
 - ✅ **Fail-Safe Protocol**: System configured to redirect adversarial intent to **Zone 1 (Local Secure Storage)**.
+- ✅ **Pattern Coverage**: Unified **91 unique jailbreak vectors** in `patterns.py`.
 
-### 5.2 Preliminary Results (Smoke Test n=5)
+### 7.2 Preliminary Results (Smoke Test n=5)
 *Verification run against AttaQ samples (5 March 2026):*
 
 | Metric | Result | Target |
@@ -77,7 +119,7 @@ We distinguish **why** an attack was stopped to isolate our research contributio
 
 ---
 
-## 6. Connection to EXP01 & EXP04
+## 8. Connection to EXP01 & EXP04
 
 | Experiment | Relationship to EXP06 |
 |---|---|
