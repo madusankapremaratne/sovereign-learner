@@ -1,0 +1,70 @@
+{
+  "experiment": "EXP03 \u2014 Model Diversity & Architecture Agnosticism",
+  "timestamp": "2026-03-05T15:34:51.549109",
+  "config": {
+    "models": [
+      "ollama/llama3.2",
+      "ollama/phi3.5",
+      "ollama/llama2"
+    ],
+    "oulad_samples": 100,
+    "ai4privacy_samples": 0,
+    "total_queries": 100,
+    "ollama_url": "http://localhost:11434"
+  },
+  "summary": [
+    {
+      "model": "ollama/llama3.2",
+      "ip_protection_rate": 0.9683333333333333,
+      "utility_sts": 0.26564730683415266,
+      "utility_llm_judge": 0.6589999999999999,
+      "zero_leakage_rate": 0.9,
+      "avg_total_time_ms": 17536.550820831908,
+      "failed_queries": 0
+    },
+    {
+      "model": "ollama/phi3.5",
+      "ip_protection_rate": 0.9641666666666666,
+      "utility_sts": 0.17596154949727313,
+      "utility_llm_judge": 0.736,
+      "zero_leakage_rate": 0.89,
+      "avg_total_time_ms": 26560.381756649585,
+      "failed_queries": 0
+    },
+    {
+      "model": "ollama/llama2",
+      "ip_protection_rate": 0.9616666666666666,
+      "utility_sts": 0.31124160530521455,
+      "utility_llm_judge": 0.5359999999999999,
+      "zero_leakage_rate": 0.88,
+      "avg_total_time_ms": 48037.259340829914,
+      "failed_queries": 0
+    }
+  ],
+  "consistency": {
+    "ip_protection": {
+      "mean": 0.9647222222222221,
+      "std": 0.0027498597046143663,
+      "min": 0.9616666666666666,
+      "max": 0.9683333333333333
+    },
+    "utility_sts": {
+      "mean": 0.2509501538788801,
+      "std": 0.05619714170425956,
+      "min": 0.17596154949727313,
+      "max": 0.31124160530521455
+    },
+    "utility_llm_judge": {
+      "mean": 0.6436666666666667,
+      "std": 0.08236639012499107,
+      "min": 0.5359999999999999,
+      "max": 0.736
+    },
+    "latency_ms": {
+      "mean": 30711.3973061038,
+      "std": 12793.136248898672,
+      "fastest_model": "ollama/llama3.2",
+      "slowest_model": "ollama/llama2"
+    }
+  }
+}

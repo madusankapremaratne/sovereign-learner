@@ -117,3 +117,4 @@ experiments/dashboard/traces/*.json
 /dashboard/old-traces
 /dashboard/dashboard/traces
 /experiments/unwanted
+uv.lock

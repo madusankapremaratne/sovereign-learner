@@ -50,6 +50,31 @@ SEMANTIC_MIRRORS = {
     "snips/biomedical": "a general laboratory workflow",
 }
 
+FALLBACK_BY_TYPE = {
+    "numeric_id": "a unique system identifier",
+    "acronym": "a technical acronym",
+    "proper_noun": "a specific domain entity",
+    "default": "a relevant domain entity"
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# UniversalNER Taxonomy (Phase 6 - 13K+ Entity Support)
+# ─────────────────────────────────────────────────────────────────────────────
+# This maps specific open-domain entity types to safe semantic abstractions.
+UNIVERSAL_NER_TAXONOMY = {
+    "STEM": "a specialized technical element",
+    "Algorithm": "a foundational computational procedure",
+    "Dataset": "a standardized academic dataset",
+    "Medical Condition": "a specific health-related state",
+    "Programming Language": "a standard development language",
+    "Methodology": "a specialized research method",
+    "Chemical": "a specific laboratory compound",
+    "Academic Subject": "a foundational academic discipline",
+    "Protein": "a specific biological marker",
+    "Field of Study": "a major academic domain",
+    "Protocol": "a standardized technical workflow"
+}
+
 UNIVERSAL_NLU_ONTOLOGY = {
     # Numerical & Quantitative (snips/amount, snips/percentage, etc.)
     "snips/amount": {
@@ -267,42 +292,19 @@ class IntentAbstractorTool(BaseTool):
         if re.match(r'^\d{5,8}$', entity.strip()):
             return UNIVERSAL_NLU_ONTOLOGY["snips/identifier"]["abstract"]
 
-        # C. LLM-Assisted Intent-Slot Classification (Generalization Phase)
-        # This replaces hardcoding. We ask: "What type of slot is this entity?"
-        # For efficiency in tools, we use heuristics, but this is where the SLM would go.
-        if entity_lower in ["bbb", "aaa", "ccc", "ddd", "eee", "fff", "ggg"]:
-            return UNIVERSAL_NLU_ONTOLOGY["snips/educational_concept"]["abstract"]
+        # C. UniversalNER-Inspired Category Matching (Enhanced Open-Domain Support)
+        # Check first for direct technical patterns (Methods/Algorithms/Datasets)
+        if any(w in entity_lower for w in ["protocol", "method", "workflow", "algorithm", "procedure"]):
+            return UNIVERSAL_NER_TAXONOMY["Methodology"]
+        if any(w in entity_lower for w in ["dataset", "repository", "corpus", "database"]):
+            return UNIVERSAL_NER_TAXONOMY["Dataset"]
+        if any(w in entity_lower for w in ["framework", "library", "sdk", "api"]):
+            return UNIVERSAL_NER_TAXONOMY["Programming Language"]
 
         # D. Fallback by lexical features (Standard Snips Entity Recognition)
         if entity.strip()[0].isupper() and len(entity.split()) <= 3:
             return UNIVERSAL_NLU_ONTOLOGY["snips/organization"]["abstract"]
             
-        return "a relevant domain entity" 
-        """
-        Look up the most semantically appropriate generalization for an entity.
-        Tries taxonomy keyword match first, then pattern match, then fallback.
-        """
-        entity_lower = entity.lower().strip()
-
-        # ── Taxonomy keyword match ────────────────────────────────────────────
-        for category, config in SEMANTIC_TAXONOMY.items():
-            keywords = config.get("keywords", [])
-            for keyword in keywords:
-                if keyword in entity_lower or entity_lower in keyword:
-                    return config["generalization"]
-
-        # ── Pattern-based detection ───────────────────────────────────────────
-        if re.match(r'^\d{5,8}$', entity.strip()):
-            return FALLBACK_BY_TYPE["numeric_id"]
-
-        if re.match(r'^[A-Z]{2,6}[0-9]*$', entity.strip()):
-            # Looks like an acronym (e.g. "HEK293", "CRISPR", "VEGF")
-            return FALLBACK_BY_TYPE["acronym"]
-
-        if entity.strip()[0].isupper() and len(entity.split()) <= 3:
-            # Capitalised proper noun
-            return FALLBACK_BY_TYPE["proper_noun"]
-
         return FALLBACK_BY_TYPE["default"]
 
     def _map_pattern(self, original: Any, generalization: Any) -> str:

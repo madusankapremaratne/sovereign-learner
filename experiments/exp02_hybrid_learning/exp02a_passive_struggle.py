@@ -63,6 +63,7 @@ class StruggleDetectionExperiment:
     """
     
     def __init__(self, features: pd.DataFrame):
+        print(f"DEBUG: Feature columns: {features.columns.tolist()}")
         self.features = features
         self.results: List[StruggleDetectionResult] = []
         
@@ -230,5 +231,5 @@ class StruggleDetectionExperiment:
 
 if __name__ == '__main__':
     loader = OULADDataLoader().load_all()
-    exp = StruggleDetectionExperiment(loader.get_student_features())
+    exp = StruggleDetectionExperiment(loader.get_engineered_features())
     exp.run()

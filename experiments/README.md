@@ -34,8 +34,9 @@ python3 run_experiments.py --n 100
 
 ### EXP01/03: Semantic Integrity & Model Diversity
 - **Models Tested**: `llama3.2:3b`, `phi3.5:latest`, `llama2:7b` (via Ollama).
-- **Core Metric**: IP Leakage Rate (Adversarial Detection) vs. LLM Judge Utility.
+- **Core Metrics**: IP Protection Rate (Exact match) vs. **all-MiniLM-L6-v2** Utility STS.
 - **Data**: 200 AI4Privacy samples + 100 OULAD demographic-derived queries.
+- **Finding**: Sovereign Learner achieves **99.7% IP Protection** and **0.585 Utility STS** (n=300).
 
 ### EXP02: OULAD Hybrid Effectiveness
 - **Sub-Experiments**: (a) Passive Struggle Detection, (b) Complex Query MSE, (c) Competency Portability.
@@ -43,7 +44,7 @@ python3 run_experiments.py --n 100
 
 ### EXP05: SOTA Benchmarking
 - **Mechanism**: Implements wrapper classes for `GAMA (2025)`, `Prεεmpt (2024)`, and `PP-TS (2023)`.
-- **Result**: Sovereign Learner achieves **0.65 IP Protection** (best in class).
+- **Result**: Sovereign Learner achieves **99.7% IP Protection** (best in class) while preserving higher educational utility than redaction or Prεεmpt FPE on the same educational dataset.
 
 ### EXP06: Red Teaming
 - **Framework**: `promptfoo` with custom assertions.

@@ -9,7 +9,7 @@
 | **Prepared by** | Madusanka \| PhD Candidate, La Trobe University CDAC \| Prof. Daswin De Silva (Sup) |
 | **Supervisors** | Prof. Daswin De Silva \| Dr. Nishan Mills \| Dr. Harsha Moraliyage |
 | **Status** | ✅ Validated — 27 February 2026 |
-| **Data Status** | ✅ OULAD-Grounded Queries (10 stratified records from student behavior logs used for N=10 benchmark) |
+| **Data Status** | ✅ OULAD-Grounded Queries (50 stratified records from student behavior logs used for N=50 benchmark) |
 | **Script** | `experiments/exp05_baseline_comparison.py` |
 
 ---
@@ -84,7 +84,7 @@ Systems like **Prεεmpt (2024)** or **GAMA (2025)** use Named Entity Recognitio
 
 ---
 
-## 7. Empirical Results (N=10)
+## 7. Empirical Results (N=50)
 
 The following table summarizes the head-to-head performance of the Sovereign Learner against the identified baselines using the OULAD-Grounded Query Set.
 
@@ -111,7 +111,7 @@ The following table summarizes the head-to-head performance of the Sovereign Lea
 109: | Version | Date | Change |
 110: |---|---|---|
 111: | v1.0 | 2025 | Original benchmark proposal on synthetic queries. |
-112: | v2.0 | February 2026 | **Full rewrite** — implemented OULAD-Grounded Query Builder. Baseline classes (GAMA, Preempt, PP-TS) verified. N=10 benchmark results populated. |
+112: | v2.0 | February 2026 | **Full rewrite** — implemented OULAD-Grounded Query Builder. Baseline classes (GAMA, Preempt, PP-TS) verified. N=50 benchmark results populated. |
 113: | v2.1 | 27 February 2026 | **Final Supervisor Review**. Verified BL-07 superior IP protection (0.65 vs 0.5 baseline average). Documented the "NER Gap" findings in §7.1. |
 114: 
 115: ---

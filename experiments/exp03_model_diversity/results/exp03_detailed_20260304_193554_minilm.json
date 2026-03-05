@@ -1,0 +1,78 @@
+{
+  "experiment": "EXP03 \u2014 Model Diversity & Architecture Agnosticism",
+  "timestamp": "2026-03-04T19:35:54.033966",
+  "config": {
+    "models": [
+      "ollama/llama3.2"
+    ],
+    "oulad_samples": 100,
+    "ai4privacy_samples": 0,
+    "total_queries": 2,
+    "ollama_url": "http://localhost:11434"
+  },
+  "models_tested": [
+    "ollama/llama3.2"
+  ],
+  "per_model": {
+    "ollama/llama3.2": {
+      "model": "ollama/llama3.2",
+      "total_queries": 2,
+      "successful_queries": 2,
+      "failed_queries": 0,
+      "avg_ip_protection_rate": 1.0,
+      "avg_utility_sts": 0.6983495354652405,
+      "avg_utility_llm_judge": 0.75,
+      "avg_sanitization_time_ms": 60.75031298678368,
+      "avg_total_time_ms": 20430.424166552257,
+      "zero_leakage_rate": 1.0,
+      "per_query": [
+        {
+          "query_id": "oulad_0000",
+          "model": "ollama/llama3.2",
+          "original_query": "Student 629654 has a no registered disability status and lives in the South Region region. They are studying 60 credits in module EEE with A Level or Equivalent prior qualification. Their IMD band is 30-40%. What accessibility support should be recommended?",
+          "sensitive_entities": [
+            "629654",
+            "South Region",
+            "30-40%"
+          ],
+          "sanitized_query": "Student an unique system identifier has a no registered disability status and lives in the a professional organization region. They are studying 60 credits in module EEE with A Level or Equivalent prior qualification. Their IMD band is a relevant domain entity. What accessibility support should be recommended?",
+          "cloud_response": "Based on the provided information, here's a recommendation for accessibility support:\n\n**Initial Assessment:**\n\n1. **Unique system identifier:** The student has a unique identifier, which can help track their progress and provide personalized support.\n2. **No registered disability status:** Since there is no indication of a registered disability, it's essential to focus on general accessibility needs rather than specific accommodations for a diagnosed condition.\n3. **Professional organization re",
+          "entities_leaked": [],
+          "ip_protection_rate": 1.0,
+          "utility_sts": 0.7735346555709839,
+          "utility_llm_judge": 0.8,
+          "sanitization_time_ms": 94.37041694764048,
+          "total_time_ms": 20977.752833045088,
+          "no_protection_response": "Based on the provided information, here's a recommendation for accessibility support for Student 629654:\n\n**Reasoning:**\n\n1. No registered disability status: Since the student does not have a registered disability, we cannot assume any specific needs or requirements.\n2. Lives in South Region region: This is important to consider when recommending accessibility support, as different regions may have varying levels of infrastructure and resources available for students with disabilities.\n3. Studying 60 credits in module EEE with A Level or Equivalent prior qualification: The student's academic profile suggests that they are likely to be in a competitive environment, but this information alone does not indicate any specific accessibility needs.\n4. IMD band is 30-40%: The IMD (Information and Decision-Making) band is used to assess an individual's level of support needed due to their disability or health condition. A band of 30-40% suggests that the student may need some support, but not extensive accommodations.\n\n**Recommended accessibility support:**\n\nBased on these factors, I would recommend providing general accessibility support to ensure Student 629654 has equal access to learning opportunities:\n\n1. **Provide clear instructions and resources**: Make sure the module materials, including lecture notes, readings, and assignments, are clearly structured and easily accessible.\n2. **Accessible digital materials**: Ensure that all online materials, such as e-learning platforms, videos, and documents, can be accessed using assistive technologies like text-to-speech software or screen readers.\n3. **Flexible assessment options**: Offer flexible assessment options, such as extended deadlines or the option to submit assignments in alternative formats (e.g., audio or video), to accommodate any potential needs.\n4. **Regular check-ins and feedback**: Regularly schedule meetings with Student 629654 to discuss their progress, provide feedback, and address any concerns or difficulties they may be experiencing.\n\n**No specific accommodations:**\n\nGiven the student's no registered disability status, it is unlikely that specific accommodations would be necessary. However, providing general accessibility support can still ensure that Student 629654 has equal access to learning opportunities and can perform their best in the module.",
+          "redaction_response": "Based on the information provided, since the student has no registered disability status, they may not be eligible for standard accessibility support. However, it's essential to consider their individual needs and circumstances.\n\nGiven that the student lives in a specific region (not specified) and is studying 60 credits in module EEE with an A Level or Equivalent prior qualification, I would recommend the following:\n\n1. **General university resources**: Inform the student about the available general university resources, such as the library, IT support, academic support services, and counseling.\n2. **Regional accessibility information**: Provide information about local accessibility features, transportation options, and community resources specific to their region.\n3. **Module-specific accommodations**: Although not eligible for standard accessibility support, it's possible that the student may require accommodations related to their course material or teaching style. For example, they might need extra time to complete assignments or have access to adapted digital materials. Discuss these possibilities with the student and explore potential solutions together.\n4. **Mental health and well-being support**: As a student studying 60 credits, they may be vulnerable to stress and burnout. Recommend that they take advantage of university mental health and well-being services, such as counseling or mindfulness resources.\n\nTo summarize, while the student does not have registered disability status, it's essential to consider their individual needs and provide general support related to accessibility, resources, and personal well-being.",
+          "full_redaction_utility_sts": 0.8272279500961304,
+          "sts_metric": "all-MiniLM-L6-v2"
+        },
+        {
+          "query_id": "oulad_0001",
+          "model": "ollama/llama3.2",
+          "original_query": "Student 577692 from West Midlands Region with Lower Than A Level qualification is enrolled in module BBB (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 120 credits who has no registered disability?",
+          "sensitive_entities": [
+            "577692",
+            "West Midlands Region",
+            "Lower Than A Level",
+            "40-50%"
+          ],
+          "sanitized_query": "Student an unique system identifier from a professional organization with a relevant domain entity qualification is enrolled in module BBB (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-a specific point in time (2) student with 120 credits who has no registered disability?",
+          "cloud_response": "Based on the information provided, here's a tailored approach to support this student:\n\n1. **Regular Progress Meetings**: Schedule regular meetings with the student to discuss their progress, set achievable goals, and provide ongoing guidance. This will help them stay motivated and focused.\n2. **Personalized Learning Plan**: Collaborate with the student to create a personalized learning plan that addresses their specific needs and learning style. This plan should include targeted interventions, ",
+          "entities_leaked": [],
+          "ip_protection_rate": 1.0,
+          "utility_sts": 0.6231644153594971,
+          "utility_llm_judge": 0.7,
+          "sanitization_time_ms": 27.130209025926888,
+          "total_time_ms": 19883.095500059426,
+          "no_protection_response": "### Student Profile Analysis\n\n*   Age: 0-35 years old (assuming the \"0\" refers to a non-traditional age group, possibly due to enrollment in higher education for the first time)\n*   Region: West Midlands\n*   Qualification: Lower Than A Level\n*   Module: BBB (2013J)\n*   Attempted module: 0 times\n*   Credits earned so far: 120 credits\n\n### Coursework Struggles and Support Needs\n\nGiven the student's profile, it is likely that they require additional support to help them succeed in their coursework. Since there is no registered disability, we can focus on providing accommodations and resources that cater to their individual needs.\n\nHere are some potential strategies to support this student:\n\n1.  **One-to-One Tutoring**: Arrange for regular one-on-one sessions with a tutor or teaching assistant to provide guidance and support.\n2.  **Study Skills Workshops**: Enroll the student in study skills workshops or online resources that focus on effective learning strategies, time management, and note-taking techniques.\n3.  **Workshop Support**: Provide additional support during workshops by offering extra time to complete assignments, providing materials for students with visual impairments, or having a designated quiet area for focused work.\n4.  **Flexible Assessment Arrangements**: Explore flexible assessment arrangements that can help alleviate stress, such as submitting assessments in batches or providing more time to complete tasks.\n5.  **Mentorship Program**: Introduce the student to a mentor who can offer guidance on navigating the university environment and provide support with academic decision-making.\n6.  **Academic Support Services**: Refer the student to campus-based academic support services, such as writing centers or math support clinics.\n7.  **Summer School Placement**: Consider placing the student in a summer school program that caters specifically to students who require additional support, allowing them to engage with peers and build confidence.\n\n### Additional Recommendations\n\n*   Schedule regular progress meetings with the student to monitor their progress and adjust support strategies as needed.\n*   Foster open communication by encouraging the student to express their concerns, fears, or frustrations about their coursework.\n*   Provide opportunities for the student to engage in peer-to-peer learning activities, such as study groups or online forums.\n\nBy implementing these strategies, you can create a supportive environment that helps this student overcome their struggles and achieve academic success.",
+          "redaction_response": "**Supporting Student Success**\n\nThis student appears to be facing challenges in their coursework, despite having a strong academic background (120 credits). Since they don't have a registered disability, the focus should shift to providing individualized support and resources to help them overcome their current difficulties. Here are some suggestions:\n\n1.  **One-on-one meeting**: Schedule a private meeting with the student to discuss their struggles and understand the specific challenges they're facing. Listen actively and take notes on their concerns.\n2.  **Course content review**: Review the course material together, highlighting key concepts and areas where the student may need extra support. This will help identify specific knowledge gaps and enable targeted interventions.\n3.  **Learning strategies discussion**: Explore different learning techniques with the student, such as active recall, spaced repetition, or elaboration. Encourage them to experiment with various methods to find what works best for their learning style.\n4.  **Resource recommendations**: Provide the student with relevant resources, including textbooks, online materials, or study guides that can supplement their coursework. You could also suggest tutoring services or academic support centers on campus.\n5.  **Progress monitoring**: Regularly check in with the student to monitor their progress and adjust your support strategy as needed. Celebrate small victories and provide constructive feedback to help them stay motivated.\n6.  **Referral to additional support**: If necessary, consider referring the student to additional resources, such as academic advisors, mentors, or support groups. These external resources can offer valuable guidance and encouragement during a challenging period.\n\nBy taking a holistic approach to supporting this student's success, you can help them overcome their current difficulties and achieve their academic goals.",
+          "full_redaction_utility_sts": 0.8009521961212158,
+          "sts_metric": "all-MiniLM-L6-v2"
+        }
+      ],
+      "avg_full_redaction_sts": 0.8140900731086731
+    }
+  }
+}

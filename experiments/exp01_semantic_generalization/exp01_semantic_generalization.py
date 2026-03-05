@@ -49,7 +49,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
 from sovereign_system.utils.evaluators import SemanticPrivacyMetric
 from deepeval.test_case import LLMTestCase
 from crewai import LLM
-from sovereign_system.tools.semantic_tools import SemanticGeneralizationTool, RecontextualizationTool
+from sovereign_system.tools.semantic_tools import IntentAbstractorTool as SemanticGeneralizationTool, ContextRestorerTool as RecontextualizationTool
 from sovereign_system.utils.sovereign_trace_logger import global_tracer
 
 

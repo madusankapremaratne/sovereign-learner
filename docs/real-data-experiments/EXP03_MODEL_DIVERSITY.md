@@ -24,7 +24,8 @@ This is a critical differentiator from Prεεmpt: Prεεmpt's Format-Preserving 
 EXP03 answers two operationalised sub-questions:
 
 1. **Protection Consistency:** Does IP protection rate remain above the 85% threshold (proven in EXP01) across all three local LLM backends?
-2. **Utility Consistency:** Does educational utility (STS and LLM Judge) remain statistically consistent (σ < threshold) regardless of which model processes the query?
+2. **Utility Consistency:** Does educational utility (MiniLM STS and LLM Judge) remain statistically consistent (σ < threshold) regardless of which model processes the query?
+3. **Reference-Based Evaluation:** How does the response to a sanitized query compare semantically to the response of an unprotected raw query (Answer-vs-Answer)?
 
 ---
 
@@ -125,7 +126,8 @@ Original Query (with OULAD sensitive entities)
            ▼
 ┌───────────────────────┐
 │  Stage 4              │
-│  Utility Measurement  │  ← STS: TF-IDF bigram cosine (Tier 2, matches EXP01)
+│  Utility Measurement  │  ← STS: all-MiniLM-L6-v2 (Deep Semantic Embeddings)
+│                       │  ← Comparison: Model(Unprotected) vs. Model(Sanitized)
 │                       │  ← LLM Judge: same model-under-test scores its own output
 └───────────────────────┘
 ```
@@ -142,7 +144,7 @@ Original Query (with OULAD sensitive entities)
 |---|---|---|
 | **IP Protection Rate** | % of ground-truth entities NOT in cloud response | Exact string match (case-insensitive) on OULAD entity values |
 | **Zero-Leakage Rate** | % of queries with zero entity leakage | Count of queries where `entities_leaked == []` |
-| **Utility STS** | Semantic similarity: original query vs cloud response | TF-IDF bigram cosine (Tier 2 — matches EXP01) |
+| **Utility STS** | Semantic similarity: Model(Raw Response) vs. Model(Sanitized Response) | `sentence-transformers/all-MiniLM-L6-v2` (Deep Semantic Embeddings) |
 | **Utility LLM Judge** | Educational usefulness score [0.0–1.0] | Same model-under-test prompted as evaluator |
 | **Avg Sanitization Time (ms)** | Stage 1 wall-clock time | `time.perf_counter()` |
 | **Avg Total Pipeline Time (ms)** | End-to-end Stages 1–4 | `time.perf_counter()` |
@@ -248,24 +250,26 @@ Saved to `experiments/results/`:
 
 ## 9. Results
 
-### 9.1 Per-Model Results (Full Validated Run — OULAD Benchmark)
-*Results from the finalized consistency benchmark (27 Feb 2026):*
+### 9.1 Per-Model Results (Full Validated Run — 100 OULAD Samples)
+*Final results from the OULAD consistency benchmark (05 March 2026):*
 
 | Model | IP Protection | Utility STS | LLM Judge | Zero-Leakage | Avg Time (ms) |
 |---|---|---|---|---|---|
-| **Llama 3.2** | **100.0%** | 0.159 | 0.66 | 100.0% | 8,861 ms |
-| **Phi-3.5** | **100.0%** | 0.047 | 0.93 | 100.0% | 165,823 ms |
+| **Llama 3.2 (3B)** | **96.8%** | 0.266 | 0.66 | 90.0% | 17,537 ms |
+| **Phi-3.5 (3.8B)** | **96.4%** | 0.176 | 0.74 | 89.0% | 26,560 ms |
+| **Llama 2 (7B)** | **96.2%** | 0.311 | 0.54 | 88.0% | 48,037 ms |
 
 ### 9.2 Cross-Model Consistency Analysis
 
 | Metric | Mean | σ (std dev) | Min | Max |
 |---|---|---|---|---|
-| **IP Protection Rate** | **100.0%** | **0.00** | 100% | 100% |
-| **Utility STS** | 0.103 | 0.056 | 0.047 | 0.159 |
-| **Utility LLM Judge** | 0.795 | 0.135 | 0.66 | 0.93 |
-| **Latency (ms)** | 87,342 ms | 78,481 ms | 8,861 (Llama) | 165,823 (Phi) |
+| **IP Protection Rate** | **96.5%** | **0.0027** | 96.2% | 96.8% |
+| **Utility STS** | 0.251 | 0.056 | 0.176 | 0.311 |
+| **Utility LLM Judge** | 0.644 | 0.082 | 0.536 | 0.736 |
+| **Latency (ms)** | 30,711 ms | 12,793 ms | 17,537 (Llama) | 48,037 (Llama2) |
 
-> **Analyst Note**: The **Zero Standard Deviation (0.00)** in IP Protection Rate across completely different model architectures (Llama vs Phi) is the definitive empirical proof of **Model Agnosticism**. The privacy guarantee is enforced by the architecture, not the model weights.
+> **Analyst Note**: The Standard Deviation of **σ = 0.0027** in IP Protection Rate across three distinct model families (Llama 3, Phi-3, and Llama 2) provides high-confidence empirical proof of **Model Agnosticism**. The slight variance in protection is likely due to stochastic generation differences in how models phrase entities, but the core privacy property remains robustly consistent.
+
 
 ---
 
@@ -273,11 +277,14 @@ Saved to `experiments/results/`:
 
 | Hypothesis | Threshold | Result | Verified? |
 |---|---|---|---|
-| H1: All models IP ≥ 85% | Min ≥ 85% | **100%** | ✅ **VERIFIED** |
-| H2: IP σ < 0.05 | σ < 0.05 | **0.00** | ✅ **VERIFIED** |
+| H1: All models IP ≥ 85% | Min ≥ 85% | **96.2%** | ✅ **VERIFIED** |
+| H2: IP σ < 0.05 | σ < 0.05 | **0.0027** | ✅ **VERIFIED** |
 | H3: STS σ < 0.10 | σ < 0.10 | **0.056** | ✅ **VERIFIED** |
 | H4: Zero pipeline failures | Failed = 0 | **0** | ✅ **VERIFIED** |
-| H5: Latency < 30,000 ms (Llama) | Mean < 30s | **8.8s** | ✅ **VERIFIED** |
+| H5: Latency < 10,000 ms (Llama) | Mean < 10s | **17.5s** | ❌ **FAILED** |
+
+> [!NOTE]
+> **H5 Failure Rationale:** The latency target was missed due to the overhead of the in-pipeline evaluation (LLM Judge scoring). While the core sanitization and inference steps remain fast, the synchronous evaluation phase adds significant wall-clock time. In production, this would be decoupled into an asynchronous audit trail.
 
 ---
 
@@ -317,8 +324,9 @@ Saved to `experiments/results/`:
 |---|---|---|
 | v1.0 | 2025 | Original EXP03 — 83-line stub testing 2 models on 1 synthetic query |
 | v2.0 | February 2026 | **Full rewrite** — removed synthetic `TEST_QUERIES` dependency. Real OULAD data (100 samples). Full 4-stage pipeline per model × query. IP protection, STS, LLM Judge, latency metrics. Cross-model consistency (σ) as primary agnosticism metric. 5 falsifiable hypotheses. Detailed + aggregate JSON output. CLI-configurable models, sample counts, Ollama URL. |
-| v2.1 | February 2026 | Smoke test (5 samples, llama3.2 + phi3.5) — **H1/H2 verified**: both models 100% IP protection. **phi3.5 verbosity bug found** — added `--max-tokens 512` cap to script. H4 threshold revised to per-model 10s for llama3.2. Smoke results documented in §9.0. |
+| v2.1 | February 2026 | Smoke test (5 samples, llama3.2 + phi3.5) — **H1/H2 verified**: both models 100% IP protection. **phi3.5 verbosity bug found** — added `--max-tokens 512` cap to script. |
+| v3.0 | March 2026 | **Full Validated Run (100 Samples)** — Tested across llama3.2, phi3.5, and llama2. Confirmed **σ = 0.0027** for IP protection. Verified model-agnosticism across multiple model families. Updated STS metrics with answer-vs-answer embeddings. |
 
 ---
 
-*Sovereign Learner — PhD Research \| La Trobe University CDAC \| Prepared for Supervisor Review — February 2026*
+*Sovereign Learner — PhD Research \| La Trobe University CDAC \| Prepared for Supervisor Review — March 2026*

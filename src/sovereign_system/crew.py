@@ -1,6 +1,9 @@
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 from typing import Any, Type, List, Optional
 from pydantic import BaseModel, Field
 
@@ -27,6 +30,11 @@ class SovereignSystem():
     @property
     def worker_llm(self):
         return LLM(model=self.model_name, base_url=self.local_url)
+
+    @property
+    def cloud_llm(self):
+        return LLM(model="gemini/gemini-2.0-flash-lite", api_key=os.getenv("GOOGLE_API_KEY"))
+        # return LLM(model="groq/openai/gpt-oss-120b", api_key=os.getenv("GROQ_API_KEY"))
 
     @property
     def cloud_llm(self):

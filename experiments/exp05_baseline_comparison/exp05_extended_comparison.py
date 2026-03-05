@@ -38,11 +38,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../s
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 # Import baselines from local directory
-from experiments.exp05_baseline_and_extended_comparison.oulad_query_builder import OULADQueryBuilder
-from experiments.exp05_baseline_and_extended_comparison.pp_ts_baseline import PPTSSystem
-from experiments.exp05_baseline_and_extended_comparison.gama_baseline import GAMASystem
-from experiments.exp05_baseline_and_extended_comparison.preempt_baseline import PreemptSystem
-from experiments.exp05_baseline_and_extended_comparison.ai4privacy_baseline import AI4PrivacySystem
+from experiments.exp05_baseline_comparison.oulad_query_builder import OULADQueryBuilder
+from experiments.exp05_baseline_comparison.pp_ts_baseline import PPTSSystem
+from experiments.exp05_baseline_comparison.gama_baseline import GAMASystem
+from experiments.exp05_baseline_comparison.preempt_baseline import PreemptSystem
+from experiments.exp05_baseline_comparison.ai4privacy_baseline import AI4PrivacySystem
 from sovereign_system.crew import SovereignSystem
 
 class ExtendedBaselineExperiment:
@@ -155,7 +155,10 @@ class ExtendedBaselineExperiment:
                                     print(f" [Presidio scrubbed {len(raw_output) - len(sanitized)} chars]", end="")
                         else:
                             # Baseline Sanitization
-                            sanitized = system.sanitize(query_text)
+                            if self.dry_run:
+                                sanitized = f"[Dry-Run {sys_name} Output]"
+                            else:
+                                sanitized = system.sanitize(query_text)
                         
                         elapsed = (time.time() - start_time) * 1000
                         print(f" ✅ ({elapsed:.0f}ms)")

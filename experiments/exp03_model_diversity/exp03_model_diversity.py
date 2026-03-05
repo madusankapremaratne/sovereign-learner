@@ -73,6 +73,9 @@ class QueryResult:
     utility_llm_judge: float
     sanitization_time_ms: float
     total_time_ms: float
+    no_protection_response: str = ""
+    redaction_response: str = ""
+    full_redaction_utility_sts: float = 0.0
 
 
 @dataclass
@@ -98,7 +101,8 @@ def load_exp03_dataset(oulad_samples: int = 100, ai4privacy_samples: int = 0) ->
     Load experiment queries.
     Uses the same loader as EXP01 for consistency.
     """
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    exp01_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../exp01_semantic_generalization"))
+    sys.path.insert(0, exp01_dir)
     from exp01_semantic_generalization import load_exp01_dataset
     queries = load_exp01_dataset(
         ai4privacy_samples=ai4privacy_samples,
@@ -111,24 +115,35 @@ def load_exp03_dataset(oulad_samples: int = 100, ai4privacy_samples: int = 0) ->
 
 def sanitize_query(query: str, sensitive_entities: List[str]) -> Tuple[str, Dict[str, str], float]:
     """
-    Stage 1: Semantic generalization using the RecontextualizationTool.
+    Stage 1: Semantic generalization using the IntentAbstractorTool.
     Returns (sanitized_query, entity_mapping, time_ms).
     """
-    from sovereign_system.tools.semantic_tools import RecontextualizationTool
-    tool = RecontextualizationTool()
+    from sovereign_system.tools.semantic_tools import IntentAbstractorTool
+    tool = IntentAbstractorTool()
     start = time.perf_counter()
     try:
-        result = tool._run(query)
+        # Pass both query and entities as required by IntentAbstractorTool
+        entities_str = ",".join(sensitive_entities) if sensitive_entities else ""
+        raw_result = tool._run(query=query, sensitive_entities=entities_str)
         elapsed_ms = (time.perf_counter() - start) * 1000
-        # Build a simple entity→placeholder mapping from the result
+        
+        # Parse the tool's formatted output
+        sanitized = ""
         mapping = {}
-        for i, ent in enumerate(sensitive_entities):
-            placeholder = f"Entity-{chr(65 + i)}"  # Entity-A, Entity-B, ...
-            if ent in result:
-                mapping[ent] = ent   # not replaced by tool
-            else:
-                mapping[ent] = placeholder
-        return result, mapping, elapsed_ms
+        for line in raw_result.split("\n"):
+            if line.startswith("SANITIZED:"):
+                sanitized = line.replace("SANITIZED:", "").strip()
+            elif line.startswith("MAPPING:"):
+                mapping_str = line.replace("MAPPING:", "").strip()
+                try:
+                    mapping = json.loads(mapping_str)
+                except:
+                    mapping = {}
+        
+        if not sanitized:
+            sanitized = raw_result.strip()
+            
+        return sanitized, mapping, elapsed_ms
     except Exception as e:
         elapsed_ms = (time.perf_counter() - start) * 1000
         # Fallback: manual replacement
@@ -208,12 +223,24 @@ def run_model(model: str, queries: List[Dict], verbose: bool = True) -> ModelRes
         qid = q.get("id", f"q{i:04d}")
         original = q.get("query", "")
         entities = q.get("sensitive_entities", q.get("sensitive", []))
+        domain = q.get("domain", "education")
 
         if verbose:
             print(f"[{i+1:3d}/{len(queries)}] {qid} → ", end="", flush=True)
 
         pipeline_start = time.perf_counter()
         try:
+            # Stage 0: Baselines (No Protection & Redaction)
+            # Reference = response to raw query
+            no_prot_response = call_cloud_llm(original, model)
+            
+            # Redaction Baseline
+            redacted_query = original
+            for ent in entities:
+                redacted_query = redacted_query.replace(ent, "[REDACTED]")
+            redaction_response = call_cloud_llm(redacted_query, model)
+            redact_sts = compute_sts(no_prot_response, redaction_response)
+
             # Stage 1: Sanitize
             sanitized, mapping, san_ms = sanitize_query(original, entities)
 
@@ -223,8 +250,8 @@ def run_model(model: str, queries: List[Dict], verbose: bool = True) -> ModelRes
             # Stage 3: IP leakage check
             leaked, protection_rate = measure_ip_leakage(response, entities)
 
-            # Stage 4: Utility metrics
-            sts = compute_sts(original, response)
+            # Stage 4: Utility metrics - Compare sanitized response to no-protection response
+            sts = compute_sts(no_prot_response, response)
             llm_judge = compute_llm_judge(original, response, model)
 
             total_ms = (time.perf_counter() - pipeline_start) * 1000
@@ -240,13 +267,16 @@ def run_model(model: str, queries: List[Dict], verbose: bool = True) -> ModelRes
                 original_query=original,
                 sensitive_entities=entities,
                 sanitized_query=sanitized,
-                cloud_response=response[:300],
+                cloud_response=response[:500],
                 entities_leaked=leaked,
                 ip_protection_rate=protection_rate,
                 utility_sts=sts,
                 utility_llm_judge=llm_judge,
                 sanitization_time_ms=san_ms,
                 total_time_ms=total_ms,
+                no_protection_response=no_prot_response,
+                redaction_response=redaction_response,
+                full_redaction_utility_sts=redact_sts
             ))
 
         except Exception as e:

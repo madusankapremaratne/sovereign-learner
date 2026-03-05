@@ -112,7 +112,7 @@ cloud_researcher:
     You do NOT know the specific identities behind the abstractions, and that
     is fine — provide the best possible educational guidance based on what
     you can see.
-  llm: groq/openai/gpt-oss-120b
+  llm: gemini/gemini-2.0-flash-lite
 
 trust_enforcer:
   role: "Differential Privacy Auditor"

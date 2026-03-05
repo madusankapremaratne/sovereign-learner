@@ -1,0 +1,50 @@
+{
+  "experiment": "EXP03 \u2014 Model Diversity & Architecture Agnosticism",
+  "timestamp": "2026-03-04T19:35:54.035108",
+  "config": {
+    "models": [
+      "ollama/llama3.2"
+    ],
+    "oulad_samples": 100,
+    "ai4privacy_samples": 0,
+    "total_queries": 2,
+    "ollama_url": "http://localhost:11434"
+  },
+  "summary": [
+    {
+      "model": "ollama/llama3.2",
+      "ip_protection_rate": 1.0,
+      "utility_sts": 0.34653457989604375,
+      "utility_llm_judge": 0.75,
+      "zero_leakage_rate": 1.0,
+      "avg_total_time_ms": 20430.424166552257,
+      "failed_queries": 0
+    }
+  ],
+  "consistency": {
+    "ip_protection": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "utility_sts": {
+      "mean": 0.34653457989604375,
+      "std": 0.0,
+      "min": 0.34653457989604375,
+      "max": 0.34653457989604375
+    },
+    "utility_llm_judge": {
+      "mean": 0.75,
+      "std": 0.0,
+      "min": 0.75,
+      "max": 0.75
+    },
+    "latency_ms": {
+      "mean": 20430.424166552257,
+      "std": 0.0,
+      "fastest_model": "ollama/llama3.2",
+      "slowest_model": "ollama/llama3.2"
+    }
+  }
+}

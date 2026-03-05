@@ -100,21 +100,25 @@ class BaselineComparisonExperiment:
         return {"processed": redacted, "method": "Full Redaction"}
 
     def _run_bl03(self, text: str) -> Dict:
+        if self.dry_run: return {"processed": "[Dry-Run Preempt (2024)]", "method": "Preempt (2024)"}
         # Preempt (2024) - Entity-layer mDP
         sanitized = self.preempt.sanitize(text)
         return {"processed": sanitized, "method": "Preempt (2024)"}
 
     def _run_bl04(self, text: str) -> Dict:
+        if self.dry_run: return {"processed": "[Dry-Run PP-TS (Kan et al.)]", "method": "PP-TS (Kan et al.)"}
         # PP-TS (2023) - LLM Rewriting
         sanitized = self.pp_ts.sanitize(text)
         return {"processed": sanitized, "method": "PP-TS (Kan et al.)"}
 
     def _run_bl05(self, text: str) -> Dict:
+        if self.dry_run: return {"processed": "[Dry-Run GAMA-AMPP]", "method": "GAMA-AMPP"}
         # GAMA (2025) - BERT+LLM
         sanitized = self.gama.sanitize(text)
         return {"processed": sanitized, "method": "GAMA-AMPP"}
 
     def _run_bl06(self, text: str) -> Dict:
+        if self.dry_run: return {"processed": "[Dry-Run AI4Privacy (piiranha-v1)]", "method": "AI4Privacy (piiranha-v1)"}
         # AI4Privacy - 54 category NER
         sanitized = self.ai4p.sanitize(text)
         return {"processed": sanitized, "method": "AI4Privacy (piiranha-v1)"}
@@ -211,7 +215,7 @@ Respond with JSON only: {{"utility": 0.8}}"""
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--n", type=int, default=5, help="Number of queries to run")
+    parser.add_argument("--n", type=int, default=50, help="Number of queries to run")
     parser.add_argument("--dry-run", action="store_true", help="Run in dry-run mode (local simulation)")
     args = parser.parse_args()
     
