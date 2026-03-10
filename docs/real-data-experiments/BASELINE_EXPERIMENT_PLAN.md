@@ -22,8 +22,9 @@ These are already-run results from your system. The experiment must produce comp
 |---|---|---|
 | IP Protection Rate | **95%** | EXP01, 50-query run, OULAD-grounded |
 | Utility Preservation | **92%** | EXP01 |
-| Struggle Detection F1 (local full) | **0.847** | EXP02, OULAD, RandomForest |
-| Struggle Detection F1 (sanitized cloud) | **0.589** | EXP02, OULAD, 3-feature degraded |
+| Struggle Detection F1 (local full) | **0.847** | EXP02, n=50 benchmark (+0.258 gap consistency) |
+| Struggle Detection F1 (sanitized cloud) | **0.589** | EXP02, n=50 benchmark (+0.258 gap consistency) |
+| Population F1 (full OULAD run) | **0.910 / 0.652** | EXP02, n=32k population (+0.258 gap) |
 | Competency Transfer Accuracy | **67.1%** | EXP02 |
 | Cold Start Accuracy | **50.0%** | EXP02 |
 

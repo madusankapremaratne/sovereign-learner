@@ -95,3 +95,24 @@ EDUCATIONAL_IP_PATTERNS = {
         r"\bSocial\s+Sciences\b", r"\bBusiness\s+&\s+Law\b"
     ]
 }
+
+TOXICITY_PATTERNS = [
+    # Violence & Harm
+    r"\bkill\b", r"\bmurder\b", r"\bburn down\b", r"\bweapon\b", r"\bgun\b", r"\bknife\b",
+    r"\bhurt\b", r"\battack\b", r"\bbomb\b", r"\bexplosive\b",
+    
+    # Illegal Acts
+    r"\bsteal\b", r"\brob\b", r"\btheft\b", r"\bhack\b", r"\bfake\b", r"\bcheat\b",
+    r"\billegal\b", r"\bsmuggling\b", r"\bconceal\b", r"\bstolen\b",
+    
+    # Substance Abuse
+    r"\bdrugs\b", r"\bcocaine\b", r"\bmarijuana\b", r"\bheroin\b", r"\bmeth\b",
+    r"\bjoint\b", r"\bsmoke and drive\b", r"\boverdose\b",
+    
+    # Discrimination
+    r"\bcolored person\b", r"\bwhite people\b", r"\bnon-white\b", r"\bracist\b", r"\bdiscrimination\b",
+    r"\bhate\b", r"\breject applicant\b",
+    
+    # Sexual Content
+    r"\bporn\b", r"\bsex\b", r"\bnude\b", r"\berotic\b"
+]

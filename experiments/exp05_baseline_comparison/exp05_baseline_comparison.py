@@ -23,9 +23,10 @@ class BaselineComparisonExperiment:
     Compares Sovereign Learner against SOTA and traditional baselines.
     """
     
-    def __init__(self, n_queries: int = 50, dry_run: bool = False):
+    def __init__(self, n_queries: int = 50, dry_run: bool = False, augmented: bool = False):
         self.n_queries = n_queries
         self.dry_run = dry_run
+        self.augmented = augmented
         self.query_builder = OULADQueryBuilder()
         self.results = []
         self.model = "ollama/llama3.2"
@@ -41,6 +42,8 @@ class BaselineComparisonExperiment:
         print("\n" + "="*60)
         print("EXP 05: BASELINE COMPARISON EXPERIMENT")
         print(f"Dataset: OULAD (Stratified, N={self.n_queries})")
+        if self.augmented:
+            print("Mode:    TAXONOMY-EQUALIZED (Shadow Lexicon enabled for baselines)")
         print("="*60)
         
         queries = self.query_builder.build(n=self.n_queries)
@@ -90,6 +93,9 @@ class BaselineComparisonExperiment:
             
             self.results.append(case_results)
             
+            # Anti-429 Pace (Gemini Free Tier)
+            time.sleep(3)
+            
             if self.dry_run and q_idx >= 1:
                 break
                 
@@ -113,7 +119,7 @@ class BaselineComparisonExperiment:
     def _run_bl04(self, text: str) -> Dict:
         if self.dry_run: return {"processed": "[Dry-Run PP-TS (Kan et al.)]", "method": "PP-TS (Kan et al.)"}
         # PP-TS (2023) - LLM Rewriting
-        sanitized = self.pp_ts.sanitize(text)
+        sanitized = self.pp_ts.sanitize(text, use_shadow_lexicon=self.augmented)
         return {"processed": sanitized, "method": "PP-TS (Kan et al.)"}
 
     def _run_bl05(self, text: str) -> Dict:
@@ -134,8 +140,8 @@ class BaselineComparisonExperiment:
             return {"processed": "[Sovereign Sanitized Output]", "method": "Sovereign Learner"}
         
         system = SovereignSystem()
-        result = system.crew().kickoff(inputs={"user_query": text})
-        return {"processed": str(result), "method": "Sovereign Learner"}
+        response = system.kickoff(inputs={"user_query": text})
+        return {"processed": str(response.raw), "method": "Sovereign Learner"}
 
     def _evaluate(self, original: str, processed: str, sensitive_fields: List[Dict]) -> Dict:
         # 1. Field Exposure Rate (Deterministic)
@@ -222,7 +228,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--n", type=int, default=50, help="Number of queries to run")
     parser.add_argument("--dry-run", action="store_true", help="Run in dry-run mode (local simulation)")
+    parser.add_argument("--augmented", action="store_true", help="Equip baselines with Shadow Lexicon (Reviewer A5)")
     args = parser.parse_args()
     
-    exp = BaselineComparisonExperiment(n_queries=args.n, dry_run=args.dry_run)
+    exp = BaselineComparisonExperiment(n_queries=args.n, dry_run=args.dry_run, augmented=args.augmented)
     exp.run()

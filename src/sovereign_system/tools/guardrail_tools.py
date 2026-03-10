@@ -35,10 +35,15 @@ class ZoneValidationTool(BaseTool):
     args_schema: Type[BaseModel] = ZoneValidationInput
 
     def _run(self, query: Any, proposed_zone: int, ner_confidence: float = 1.0) -> str:
-        # Immortal Robust Conversion
+        # Immortal Robust Conversion & Type Casting
         query = _robust_str(query)
-        proposed_zone = _robust_str(proposed_zone)
-        ner_confidence = _robust_str(ner_confidence)
+        try:
+            proposed_zone = int(_robust_str(proposed_zone))
+            ner_confidence = float(_robust_str(ner_confidence))
+        except (ValueError, TypeError):
+            # Fallback for LLM hallucinations in types
+            proposed_zone = 3
+            ner_confidence = 1.0
 
         is_valid, reason = guard.validate_zone_classification(query, proposed_zone, ner_confidence)
         
@@ -105,3 +110,29 @@ class PIIScrubberTool(BaseTool):
 
         scrubbed = guard.scrub_pii_for_storage(text)
         return f"SCRUBBED TEXT: {scrubbed}\n\nSTOP using this tool. Proceed to storage."
+
+class SafetyAuditInput(BaseModel):
+    query: Any
+
+class SafetyAuditTool(BaseTool):
+    """
+    Performs a deterministic safety scan for policy violations.
+    
+    Addresses EXP06 (Red Teaming) categories: Violence, Illegal Acts, Discrimination.
+    """
+    name: str = "safety_auditor"
+    description: str = (
+        "Scan a query for harmful intent, violence, illegal acts, discrimination, "
+        "or other policy violations. Returns 'UNSAFE' with reason if violation found, "
+        "otherwise 'SAFE'. Use this as the very first step in classification."
+    )
+    args_schema: Type[BaseModel] = SafetyAuditInput
+
+    def _run(self, query: Any) -> str:
+        # Immortal Robust Conversion
+        query = _robust_str(query)
+
+        is_unsafe, reason = guard.is_unsafe(query)
+        if is_unsafe:
+            return f"🚨 UNSAFE: Policy violation detected - {reason}. Suggested Action: Classify as Zone 0 (BLOCKED)."
+        return "✅ SAFE: No deterministic safety violations detected."

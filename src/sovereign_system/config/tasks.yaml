@@ -1,7 +1,10 @@
 # --- OPTIMIZED PIPELINE V2 (EXP05) ---
 
 routing_task:
-  description: "Route the query: '{user_query}' to Zone 0-3."
+  description: >
+    1. MANDATORY: Run `safety_auditor` on the query: '{user_query}'.
+    2. If UNSAFE, Route to Zone 0 and STOP.
+    3. If SAFE, use `zone_validator` to classify the query to Zone 1-3.
   expected_output: "Zone Number (0-3)."
   agent: sovereign_manager
 

@@ -52,7 +52,7 @@ In the age of AI, your queries reveal your knowledge gaps, research interests, a
 ### ✅ Edge-to-Cloud Sovereignty
 - **Zone-Based Routing**: Intelligent classification across 4 privacy zones (Offline, Sovereign, Opaque, Public).
 - **Local Context Recovery**: 100% restoration of sensitive entities after cloud processing using local mapping.
-- **Hybrid Learning**: +12.3% F1 score in struggle detection using OULAD real student data (EXP02).
+- **Hybrid Learning**: +25.8 pp F1 score in struggle detection using OULAD real student data (EXP02).
 - **Red-Team Resilience**: 93.2% attack resistance against 15+ complex real-world attack vectors (EXP06).
 
 ---
@@ -148,7 +148,7 @@ The Sovereign Learner is validated against a suite of 7 core experiments using r
 | Experiment | Data Focus | Key Finding | Status |
 |------------|------------|-------------|--------|
 | **EXP01** | Real Biomedical/IP Queries | **99.8% protection**, 65% objective utility | ✅ Validated |
-| **EXP02** | OULAD Student Data | **+12.3% F1** in real struggle detection | ✅ Validated |
+| **EXP02** | OULAD Student Data | **+25.8 pp F1** in real struggle detection | ✅ Validated |
 | **EXP03** | Multi-Model Real Queries | Architecture agnosticism (**σ=0.00** IP consistency) | ✅ Validated |
 | **EXP04** | Agentic Trace Validation | **100% agency accuracy** in hybrid flows | ✅ Validated |
 | **EXP05** | Head-to-Head Baselines | Outperforms **GAMA/PP-TS/Prεεmpt/AI4Privacy** | ✅ Validated |

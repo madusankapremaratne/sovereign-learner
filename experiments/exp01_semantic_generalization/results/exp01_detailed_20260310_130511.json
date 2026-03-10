@@ -1,0 +1,61 @@
+[
+  {
+    "query_id": "oulad_0000",
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "original_query": "Student 629654 has a no registered disability status and lives in the South Region region. They are studying 60 credits in module EEE with A Level or Equivalent prior qualification. Their IMD band is 30-40%. What accessibility support should be recommended?",
+    "sensitive_entities": [
+      "629654",
+      "South Region",
+      "30-40%"
+    ],
+    "gt_label_count": 4,
+    "sanitized_query": "Student an unique system identifier has a no registered disability status and lives in the a professional organization region. They are studying 60 credits in module EEE with A Level or Equivalent prior qualification. Their IMD band is a relevant domain entity. What accessibility support should be recommended?",
+    "mapping": {},
+    "cloud_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "recontextualized_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "ip_leakage_score": 0.0,
+    "ip_protection_rate": 1.0,
+    "semantic_leakage_score": 0.0,
+    "entities_leaked": [],
+    "utility_sts": 1.0,
+    "utility_llm_judge": 1.0,
+    "sanitization_time_ms": 104.71487045288086,
+    "total_time_ms": 104.82907295227051,
+    "original_tokens": 41,
+    "sanitized_tokens": 48,
+    "no_protection_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "redaction_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "full_redaction_utility_sts": 1.0
+  },
+  {
+    "query_id": "oulad_0001",
+    "domain": "education",
+    "source": "oulad_studentinfo",
+    "original_query": "Student 577692 from West Midlands Region with Lower Than A Level qualification is enrolled in module BBB (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-35-year-old student with 120 credits who has no registered disability?",
+    "sensitive_entities": [
+      "577692",
+      "West Midlands Region",
+      "Lower Than A Level",
+      "40-50%"
+    ],
+    "gt_label_count": 4,
+    "sanitized_query": "Student an unique system identifier from a professional organization with a relevant domain entity qualification is enrolled in module BBB (2013J) and has attempted the module 0 time(s). They are currently struggling with their coursework. How can I support a 0-a specific point in time (2) student with 120 credits who has no registered disability?",
+    "mapping": {},
+    "cloud_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "recontextualized_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "ip_leakage_score": 0.0,
+    "ip_protection_rate": 1.0,
+    "semantic_leakage_score": 0.0,
+    "entities_leaked": [],
+    "utility_sts": 1.0,
+    "utility_llm_judge": 1.0,
+    "sanitization_time_ms": 29.405832290649414,
+    "total_time_ms": 29.561758041381836,
+    "original_tokens": 47,
+    "sanitized_tokens": 55,
+    "no_protection_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "redaction_response": "Based on the student profile described, I recommend a personalised learning plan that includes targeted academic support, peer mentoring, and regular progress check-ins. Consider referencing the student's prior qualifications and regional support services available in their area.",
+    "full_redaction_utility_sts": 1.0
+  }
+]

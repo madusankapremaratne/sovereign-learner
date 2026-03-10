@@ -37,7 +37,7 @@ import csv
 import random
 import re
 from datetime import datetime
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 from dataclasses import dataclass, asdict, field
 from dotenv import load_dotenv
 
@@ -533,19 +533,23 @@ Return ONLY a numerical score between 0.0 and 1.0."""
 def measure_ip_protection(
     original_query: str,
     cloud_response: str,
-    sensitive_entities: List[str]
-) -> Tuple[float, float, List[str]]:
+    sensitive_entities: List[str],
+    mapping: Optional[Dict[str, str]] = None,
+    sts_model: Any = None
+) -> Tuple[float, float, List[str], float]:
     """
     Measure IP/PII protection using:
-      1. Ground-truth entity leakage check (exact match on sensitive_entities from AI4Privacy labels)
-      2. Adversarial LLM check (SemanticPrivacyMetric)
+      1. Ground-truth entity leakage check (exact match on sensitive_entities)
+      2. Semantic/Attribute Leakage check (STS between mapping pairs)
+      3. Adversarial LLM check (SemanticPrivacyMetric)
 
     Returns:
       ip_leakage_score  : float [0.0=none, 1.0=full leakage]
       ip_protection_rate: float [0.0=no protection, 1.0=fully protected]
       leaked_entities   : list of entity strings found in response
+      semantic_leakage  : float [Mean STS(original, placeholder)]
     """
-    # 1. Ground-truth check — use the labeled entities from AI4Privacy
+    # 1. Ground-truth check — exact match
     leaked = []
     response_lower = cloud_response.lower()
     for entity in sensitive_entities:
@@ -553,19 +557,36 @@ def measure_ip_protection(
             if re.search(r'\b' + re.escape(entity.lower()) + r'\b', response_lower):
                 leaked.append(entity)
 
-    if leaked:
-        leakage_score = len(leaked) / max(len(sensitive_entities), 1)
-        return leakage_score, 1.0 - leakage_score, leaked
+    leakage_score = len(leaked) / max(len(sensitive_entities), 1) if sensitive_entities else 0.0
+    
+    # 2. Semantic/Attribute Leakage (Reviewer Concern P1-A1)
+    # Compute STS between original entities and their generalizations.
+    # High STS indicates the generalization is too close to the original (leakage).
+    semantic_leakage_scores = []
+    if mapping and sts_model:
+        try:
+            from sentence_transformers import util
+            for original, generalization in mapping.items():
+                # We want to know if the generalization 'reveals' the original too closely
+                emb_orig = sts_model.encode(original, convert_to_tensor=True)
+                emb_gen = sts_model.encode(generalization, convert_to_tensor=True)
+                sim = float(util.cos_sim(emb_orig, emb_gen).item())
+                semantic_leakage_scores.append(max(0.0, sim))
+        except Exception as e:
+            print(f"  ⚠️  Semantic leakage computation failed: {e}")
 
-    # 2. Adversarial LLM check for semantic leakage
+    avg_semantic_leakage = (sum(semantic_leakage_scores) / len(semantic_leakage_scores)) if semantic_leakage_scores else 0.0
+
+    # 3. Adversarial LLM check for semantic leakage (Contextual)
     try:
         metric = SemanticPrivacyMetric(threshold=0.5)
         test_case = LLMTestCase(input=original_query, actual_output=cloud_response)
         safety_score = metric.measure(test_case)
-        leakage_score = 1.0 - safety_score
-        return leakage_score, safety_score, []
+        # Combine safety score with exact match leakage if needed, 
+        # but usually safety_score is used independently for adversarial reporting.
+        return leakage_score, max(0.0, 1.0 - leakage_score), leaked, avg_semantic_leakage
     except Exception:
-        return 0.0, 1.0, []  # Conservative: assume protected if check fails
+        return leakage_score, max(0.0, 1.0 - leakage_score), leaked, avg_semantic_leakage
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -591,6 +612,7 @@ class ExperimentResult:
     # Primary metrics (objective — using ground-truth labels)
     ip_leakage_score: float             # 0=no leakage, 1=full leakage
     ip_protection_rate: float           # 1 - leakage
+    semantic_leakage_score: float       # Average STS(original, placeholder)
     entities_leaked: List[str]
 
     # Utility metrics
@@ -737,11 +759,13 @@ class SemanticGeneralizationExperiment:
 
         total_time = (time.time() - start_time) * 1000
 
-        # ── Metrics: IP Protection (Ground-Truth) ─────────────────────────────
-        ip_leakage_score, ip_protection_rate, leaked_entities = measure_ip_protection(
-            original_query, cloud_response, sensitive_entities
+        # ── Metrics: IP Protection (Ground-Truth & Semantic) ──────────────────
+        sts_model = self._get_sts_model()
+        ip_leakage_score, ip_protection_rate, leaked_entities, semantic_leakage = measure_ip_protection(
+            original_query, cloud_response, sensitive_entities, 
+            mapping=mapping, sts_model=sts_model
         )
-        print(f"  IP Protection: {ip_protection_rate:.1%} | Leakage: {ip_leakage_score:.1%}")
+        print(f"  IP Protection: {ip_protection_rate:.1%} | Semantic Leakage: {semantic_leakage:.3f}")
 
         # ── Baseline Responses (for Utility comparison) ──────────────────────
         # To measure utility correctly (matching Prεεmpt), we compare cloud responses.
@@ -813,6 +837,7 @@ class SemanticGeneralizationExperiment:
             recontextualized_response=recontextualized,
             ip_leakage_score=ip_leakage_score,
             ip_protection_rate=ip_protection_rate,
+            semantic_leakage_score=semantic_leakage,
             entities_leaked=leaked_entities,
             utility_sts=utility_sts,
             utility_llm_judge=utility_llm,
@@ -829,21 +854,35 @@ class SemanticGeneralizationExperiment:
 
     def _parse_generalization_result(self, result: str) -> Tuple[str, Dict]:
         """Parse tool output into (sanitized_query, mapping)."""
-        lines = result.split("\n")
         sanitized = ""
         mapping = {}
-        for line in lines:
-            if line.startswith("SANITIZED:"):
-                sanitized = line.replace("SANITIZED:", "").strip()
-            elif line.startswith("MAPPING:"):
-                mapping_str = line.replace("MAPPING:", "").strip()
+        
+        # Robust parsing for multi-line blocks
+        sanitized_match = re.search(r"SANITIZED:\s*(.*?)(?=\n[A-Z]+:|$)", result, re.DOTALL)
+        if sanitized_match:
+            sanitized = sanitized_match.group(1).strip()
+            
+        mapping_match = re.search(r"MAPPING:\s*(\{.*?\})(?=\n[A-Z]+:|$)", result, re.DOTALL)
+        if mapping_match:
+            try:
+                mapping = json.loads(mapping_match.group(1))
+            except json.JSONDecodeError:
+                # Fallback to ast if it's not strictly JSON
+                import ast
                 try:
-                    import ast
-                    mapping = ast.literal_eval(mapping_str)
-                except Exception:
+                    mapping = ast.literal_eval(mapping_match.group(1))
+                except:
                     mapping = {}
+                    
         if not sanitized:
-            sanitized = result.strip()
+            # Fallback for old-style or unstructured output
+            lines = result.split("\n")
+            for line in lines:
+                if line.startswith("SANITIZED:"):
+                    sanitized = line.replace("SANITIZED:", "").strip()
+            if not sanitized:
+                sanitized = result.strip()
+                
         return sanitized, mapping
 
     def _simulate_cloud_response(self, sanitized_query: str, domain: str) -> str:
@@ -921,6 +960,7 @@ class SemanticGeneralizationExperiment:
         # ── Aggregate: Sovereign Learner ──────────────────────────────────────
         avg_ip_protection = sum(r.ip_protection_rate for r in self.results) / total
         avg_ip_leakage = sum(r.ip_leakage_score for r in self.results) / total
+        avg_semantic_leakage = sum(r.semantic_leakage_score for r in self.results) / total
         avg_utility_sts = sum(r.utility_sts for r in self.results) / total
         avg_utility_llm = sum(r.utility_llm_judge for r in self.results) / total
         avg_sanitization_time = sum(r.sanitization_time_ms for r in self.results) / total
@@ -964,6 +1004,7 @@ class SemanticGeneralizationExperiment:
             "primary_metrics": {
                 "ip_protection_rate": avg_ip_protection,
                 "ip_leakage_rate": avg_ip_leakage,
+                "semantic_leakage_rate": avg_semantic_leakage,
                 "utility_sts": avg_utility_sts,
                 "utility_llm_judge": avg_utility_llm,
                 "zero_leakage_count": zero_leakage_count,
@@ -1030,6 +1071,7 @@ class SemanticGeneralizationExperiment:
         print(f"\n📊 PRIMARY METRICS (Sovereign Learner)")
         print(f"   IP Protection Rate:    {pm['ip_protection_rate']:.1%}")
         print(f"   IP Leakage Rate:       {pm['ip_leakage_rate']:.1%}")
+        print(f"   Semantic Leakage Rate: {pm['semantic_leakage_rate']:.3f} (STS-based)")
         print(f"   Utility (STS):         {pm['utility_sts']:.3f}")
         print(f"   Utility (LLM Judge):   {pm['utility_llm_judge']:.3f}")
         print(f"   Zero-Leakage Queries:  {pm['zero_leakage_count']}/{ds['total_samples']} "

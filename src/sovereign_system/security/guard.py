@@ -41,31 +41,45 @@ class SovereignGuard:
 
     def validate_input(self, query: str) -> Tuple[bool, str, List[str]]:
         """
-        Validates input against Jailbreaks and critical PII.
+        Validates input against Jailbreaks, toxicity, and critical PII.
         Returns: (is_safe, message, detected_threats)
         """
         threats = []
         is_safe = True
         
-        # 1. Jailbreak Detection (Enhanced regex patterns)
+        # 1. Jailbreak Detection
         for pattern in JAILBREAK_PATTERNS:
             match = re.search(pattern, query, re.IGNORECASE)
             if match:
                 threats.append(f"Jailbreak pattern detected: '{match.group()}'")
                 is_safe = False
         
-        # 2. High-risk PII patterns (SSN, Credit Cards)
+        # 2. Toxicity / Harmful Intent (New for EXP06)
+        from .patterns import TOXICITY_PATTERNS
+        for pattern in TOXICITY_PATTERNS:
+            match = re.search(pattern, query, re.IGNORECASE)
+            if match:
+                threats.append(f"Safety violation: '{match.group()}' detected.")
+                is_safe = False
+
+        # 3. High-risk PII patterns
         from .patterns import SENSITIVE_PATTERNS
         for pattern in SENSITIVE_PATTERNS:
             match = re.search(pattern, query)
             if match:
-                # Don't block, but warn (Zone 0/1 can handle PII)
                 threats.append(f"High-risk PII pattern detected: {match.group()[:4]}***")
         
         if not is_safe:
-            return False, "🚨 Input rejected: Potential jailbreak/manipulation attempt detected.", threats
+            return False, "🚨 Input rejected: Potential policy violation or manipulation detected.", threats
             
         return True, "✅ Input validation passed.", threats
+
+    def is_unsafe(self, query: str) -> Tuple[bool, str]:
+        """Simple deterministic safety check for agents to use."""
+        safe, msg, threats = self.validate_input(query)
+        if not safe:
+            return True, "; ".join(threats)
+        return False, "Clean"
 
     def validate_zone_classification(self, query: str, proposed_zone: int, ner_confidence: float = 1.0) -> Tuple[bool, str]:
         """

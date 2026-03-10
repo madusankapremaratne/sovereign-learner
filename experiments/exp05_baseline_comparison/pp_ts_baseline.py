@@ -67,6 +67,26 @@ MAX_REASONABILITY_RETRIES = 3     # Max while-loop iterations (Algorithm 1, line
 PRIVACY_TYPES_PII = ["Name", "Location", "Organization", "Email", "Phone"]
 PRIVACY_TYPES_EDUCATIONAL = ["Name", "Location", "Organization", "Research_Method", "Dataset", "Institution"]
 
+# Shadow Lexicon — same educational IP patterns as Sovereign Learner (Reviewer request A5)
+SHADOW_LEXICON = {
+    "INSTITUTIONAL_MARKER": [
+        r"\b[A-G]{3}\s+module\b", # OULAD coding (BBB, AAA, etc)
+        r"\bVLE\b", r"\bOUSE\b", r"\bOULAD\b", r"\bOpen University\b"
+    ],
+    "ASSESSMENT_TYPE": [
+        r"\bTMA\s*([0-9]*)\b", r"\biCMA\s*([0-9]*)\b", r"\bEMA\b",
+        r"\bend\s+of\s+module\s+assessment\b"
+    ],
+    "LEARNING_METRIC": [
+        r"\bV_Portfolio\b", r"\bcompetency\s+vector\b", 
+        r"\blearning\s+weight\b", r"\binteraction\s+type\b"
+    ],
+    "CURRICULUM_DOMAIN": [
+        r"\bSTEM\s+Foundation\b", r"\bComputing\s+&\s+IT\b",
+        r"\bSocial\s+Sciences\b", r"\bBusiness\s+&\s+Law\b"
+    ]
+}
+
 # ─────────────────────────────────────────────
 # Test Query Sets
 # ─────────────────────────────────────────────
@@ -452,7 +472,7 @@ Return only the fixed text, nothing else."""
 
         return self._call_llm(prompt) or text
 
-    def sanitize(self, query: str, privacy_types: List[str]) -> Tuple[str, List[PlaintextCiphertextRecord], int]:
+    def sanitize(self, query: str, privacy_types: List[str], use_shadow_lexicon: bool = False) -> Tuple[str, List[PlaintextCiphertextRecord], int]:
         """
         Full Algorithm 1 implementation.
         
@@ -462,9 +482,34 @@ Return only the fixed text, nothing else."""
         pcs = []               # Plaintext-Ciphertext Set
         total_retries = 0
 
-        # Line 2: for Aᵢ in A do
-        for privacy_type in privacy_types:
+        types_to_process = list(privacy_types)
+        if use_shadow_lexicon:
+            # Augment with shadow lexicon categories
+            types_to_process.extend(SHADOW_LEXICON.keys())
 
+        # Line 2: for Aᵢ in A do
+        for privacy_type in types_to_process:
+            # Special case for Shadow Lexicon patterns (direct replacement)
+            if privacy_type in SHADOW_LEXICON:
+                patterns = SHADOW_LEXICON[privacy_type]
+                replacements = []
+                for pattern in patterns:
+                    for match in re.finditer(pattern, X_hat, re.IGNORECASE):
+                        original = match.group()
+                        # Use same logic as Research_Method (generic placeholders)
+                        sanitized_val = f"{privacy_type.replace('_', '-')}-X"
+                        if original not in [r.get("original") for r in replacements]:
+                            replacements.append({"original": original, "sanitized": sanitized_val})
+                            X_hat = re.sub(re.escape(original), sanitized_val, X_hat, flags=re.IGNORECASE)
+                
+                pcs.append(PlaintextCiphertextRecord(
+                    privacy_type=privacy_type,
+                    original_values=[r["original"] for r in replacements],
+                    sanitized_values=[r["sanitized"] for r in replacements]
+                ))
+                continue
+
+            # Standard Algorithm 1 for other types
             # Lines 3-6: Construct prompt and sanitize
             X_hat, pcr = self._sanitize_for_type(X_hat, privacy_type)
 
@@ -756,8 +801,8 @@ class PPTSSystem:
         self.pp_ts = PPTS(model=model)
         self.privacy_types = PRIVACY_TYPES_EDUCATIONAL
 
-    def sanitize(self, text: str) -> str:
-        sanitized, _, _ = self.pp_ts.sanitize(text, self.privacy_types)
+    def sanitize(self, text: str, use_shadow_lexicon: bool = False) -> str:
+        sanitized, _, _ = self.pp_ts.sanitize(text, self.privacy_types, use_shadow_lexicon=use_shadow_lexicon)
         return sanitized
 
 
