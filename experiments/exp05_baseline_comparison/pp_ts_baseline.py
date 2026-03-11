@@ -252,7 +252,7 @@ class PPTS:
                 response = requests.post(
                     OLLAMA_URL,
                     json={"model": self.model, "prompt": prompt, "stream": False},
-                    timeout=60
+                    timeout=10
                 )
                 return response.json().get("response", "").strip()
             except Exception as e:

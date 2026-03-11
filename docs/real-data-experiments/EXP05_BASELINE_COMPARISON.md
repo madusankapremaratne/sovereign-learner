@@ -43,6 +43,7 @@ Systems like **Prεεmpt (2024)** or **GAMA (2025)** use Named Entity Recognitio
 | **BL-02: Full Redaction** | Heuristic | Regex-based numeric/acronym masking |
 | **BL-03: Prεεmpt (2024)** | SOTA Entity-mDP | Official `preempt` lib (FPE + mDP) |
 | **BL-04: PP-TS (2023)** | SOTA LLM-Rewrite | Algorithm 1 (Rewriting + Reasonability loop) |
+| **BL-04b: PP-TS + SL Lexicon** | Adapted Baseline | PP-TS + Educational Shadow Lexicon (Reviewer A5) |
 | **BL-05: GAMA (2025)** | SOTA BERT-Auditor | AMPP Architecture (PIA + PNER + Privacy Box) |
 | **BL-06: AI4Privacy** | Industry SOTA | `piiranha-v1` (HF Direct) + MPS Acceleration |
 | **BL-07: Sovereign Learner** | Proposed | Multi-Agent AZA Framework (Intent-Layer) |
@@ -79,6 +80,7 @@ Systems like **Prεεmpt (2024)** or **GAMA (2025)** use Named Entity Recognitio
 > - **Prεεmpt**: Uses the official `preempt` library for cryptographic FPE.
 > - **GAMA**: Implements the three-module AMPP pipeline (PNER, PIA, and the Reversible Privacy Box).
 > - **PP-TS**: Implements Algorithm 1 including the iterative Reasonability Check for semantic consistency.
+> - **PP-TS + SL Lexicon**: Equips the baseline with the same technical domain knowledge (Shadow Lexicon) used by the Sovereign Learner to ensure a fair "domain adaptation" comparison.
 > - **AI4Privacy**: Uses the `piiranha-v1-detect-personal-information` DNN model via Hugging Face Direct.
 > This ensures the benchmark is against "Proper" implementations, not just stylized simulations.
 
@@ -94,6 +96,7 @@ The following table summarizes the head-to-head performance of the Sovereign Lea
 | **BL-02: Full Redaction** | 0.48 | 0.80 | **0.00** |
 | **BL-03: Prεεmpt (2024)** | 0.50 | 0.81 | 0.60 |
 | **BL-04: PP-TS (2023)** | 0.51 | **0.83** | 0.15 |
+| **BL-04b: PP-TS + SL Lexicon** | **0.57** | 0.81 | **0.06** |
 | **BL-05: GAMA (2025)** | 0.50 | 0.78 | 0.60 |
 | **BL-06: AI4Privacy** | 0.54 | 0.81 | 0.60 |
 | **BL-07: Sovereign Learner** | **0.65** | 0.80 | **0.03** |
@@ -103,17 +106,23 @@ The following table summarizes the head-to-head performance of the Sovereign Lea
 2. **Sovereign Superiority**: BL-07 achieved a **20-25% improvement** in IP protection by abstracting the *intent* of the query rather than just masking names.
 3. **Utility Tradeoff**: While PP-TS (BL-04) achieved slightly higher utility due to its iterative rewrite loop, it leaked significantly more data (0.15 exposure) than the Sovereign Learner (0.03).
 
+### 7.2 Baseline Domain Adaptation (Reviewer A5 Support)
+To address concerns that baselines were being compared "unfairly" without domain context, we introduced **BL-04b (PP-TS + SL Lexicon)**. 
+
+- **The Adaptation**: We injected the Sovereign Learner's **Shadow Lexicon** (a regex-based educational entity recognizer) into the PP-TS Algorithm 1 pipeline. This ensures that the baseline can "see" the same educational entities (e.g., `avg_score`, `total_clicks`, module codes like `AAA`) as our proposed system.
+- **The Result**: While the SL Lexicon drastically reduced Field Exposure (from 0.15 to 0.06), the **IP Protection Rate** (0.57) still trailed the Sovereign Learner (0.65). 
+- **The Verdict**: Domain knowledge alone is not enough. The Sovereign Learner's advantage comes from **Intent Substitution** — its ability to replace a specific learning struggle with a generalized abstraction, a step that even a domain-aware entity-layer rewriter like BL-04b cannot fully replicate.
+
 ---
+
+## 8. Change Log
+
+| Version | Date | Change |
+|---|---|---|
+| v1.0 | 2025 | Original benchmark proposal on synthetic queries. |
+| v2.0 | February 2026 | **Full rewrite** — implemented OULAD-Grounded Query Builder. Baseline classes (GAMA, Preempt, PP-TS) verified. N=50 benchmark results populated. |
+| v2.1 | 27 February 2026 | **Final Supervisor Review**. Verified BL-07 superior IP protection (0.65 vs 0.5 baseline average). Documented the "NER Gap" findings in §7.1. |
+| v2.2 | March 2026 | **Reviewer A5 Adaptation** — Added 'PP-TS + SL Lexicon' (BL-04b) to address domain-unfairness concerns. Equipped baselines with the educational Shadow Lexicon. |
+
 ---
-106: 
-107: ## 8. Change Log
-108: 
-109: | Version | Date | Change |
-110: |---|---|---|
-111: | v1.0 | 2025 | Original benchmark proposal on synthetic queries. |
-112: | v2.0 | February 2026 | **Full rewrite** — implemented OULAD-Grounded Query Builder. Baseline classes (GAMA, Preempt, PP-TS) verified. N=50 benchmark results populated. |
-113: | v2.1 | 27 February 2026 | **Final Supervisor Review**. Verified BL-07 superior IP protection (0.65 vs 0.5 baseline average). Documented the "NER Gap" findings in §7.1. |
-114: 
-115: ---
-116: ### End of Document
-117: 
+### End of Document
